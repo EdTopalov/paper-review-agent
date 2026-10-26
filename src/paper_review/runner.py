@@ -20,6 +20,7 @@ from .citations import CHECKER_VERSION, check_quote
 from .prompts import AGENT_INSTRUCTIONS, PROMPT_VERSION, RUBRIC, RUBRIC_VERSION
 from .schema import REVIEW_SCHEMA, TOOLS
 from .trace import Trace
+from .reporting import render_run
 
 
 # Standard text-token USD / 1M, checked 2026-10-26 against official model pages.
@@ -249,6 +250,6 @@ def run_review(paper_path, out, config, task_id, variant="agent", client=None, m
         result.update(calls.stats)
         result["latency_seconds"] = time.perf_counter() - start
         trace.write("run_end", result=result)
-        (out / "result.json").write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         trace.close()
+        render_run(out / "trace.jsonl")
     return result

@@ -7,11 +7,17 @@ import json
 from pathlib import Path
 import statistics
 import subprocess
+from zipfile import ZipFile, ZIP_DEFLATED
+
+import jsonschema
 
 from .paper import Paper, file_hash
 from .runner import run_review
 from .citations import CHECKER_VERSION
 from .prompts import PROMPT_VERSION, RUBRIC_VERSION
+from .trace import read_events, read_result
+from .reporting import render_run, render_experiment
+from .schema import TOOLS
 
 
 def load_sample(path):
@@ -53,7 +59,10 @@ def mechanical_result(result):
 
 def summarize(out):
     out = Path(out)
-    results = [json.loads(p.read_text(encoding="utf-8")) for p in sorted(out.glob("*/*/result.json"))]
+    records = [(p, read_result(p)) for p in sorted(out.glob("*/*/trace.jsonl"))]
+    if not records or any(result is None for _, result in records):
+        raise ValueError("No completed trace set found; inspect incomplete runs before summarizing")
+    results = [result for _, result in records]
     summary = {}
     for variant in sorted({r["variant"] for r in results}):
         rows = [r for r in results if r["variant"] == variant]
@@ -83,20 +92,56 @@ def summarize(out):
             "total_cost_usd": sum(costs) if len(costs) == len(rows) else None,
             "billing_uncertain_runs": sum(r["billing_uncertain"] for r in rows),
         }
-    (out / "summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
-    (out / "mechanical.jsonl").write_text("".join(json.dumps(mechanical_result(r)) + "\n" for r in results), encoding="utf-8")
-    header = "| Variant | Completed | Strict quotes | Verified citations | Reads/task | API calls/task | USD/task | Seconds/task |\n|---|---:|---:|---:|---:|---:|---:|---:|\n"
-    for name, row in summary.items():
-        cost = f"{row['mean_cost_usd']:.6f}" if row["mean_cost_usd"] is not None else "unknown"
-        verified = f"{row['all_citations_verified']}/{row['runs']}" if row["all_citations_verified"] is not None else "not recorded"
-        header += (f"| {name} | {row['completed']}/{row['runs']} | {row['all_quotes_match']}/{row['runs']} | "
-                   f"{verified} | "
-                   f"{row['mean_reading_actions']:.2f} | {row['mean_model_calls']:.2f} | {cost} | "
-                   f"{row['mean_latency_seconds']:.2f} |\n")
-    (out / "summary.md").write_text(header, encoding="utf-8")
+    audits = {p: audit for p, _ in records if (audit := read_result(p, audit=True))}
+    for path, _ in records:
+        render_run(path)
+    render_experiment(out, summary, records, audits)
     return summary
 
 
+def check_experiment(root):
+    """Inspect trajectories without generating additional files."""
+    root = Path(root)
+    paths = [root / "trace.jsonl"] if (root / "trace.jsonl").exists() else sorted(root.glob("*/*/trace.jsonl"))
+    if not paths:
+        raise ValueError("No traces found")
+    schemas = {tool["name"]: tool["parameters"] for tool in TOOLS}
+    rows = []
+    for path in paths:
+        events = read_events(path)
+        result = read_result(path)
+        end = next((i for i, e in enumerate(events) if e["event"] == "run_end"), len(events) - 1)
+        run = events[:end + 1]
+        decisions = [e for e in run if e["event"] == "decision"]
+        reads = [e for e in run if e["event"] == "tool_call" and e["name"] in ("search_paper", "read_pages")]
+        valid_arguments = True
+        for decision in decisions:
+            if decision["action"] == "final_answer":
+                continue
+            try:
+                jsonschema.validate(json.loads(decision["arguments"]), schemas[decision["action"]])
+            except (KeyError, ValueError, jsonschema.ValidationError):
+                valid_arguments = False
+        flags = {
+            "sequence": [e["seq"] for e in events] == list(range(1, len(events) + 1)),
+            "terminal_result": result is not None,
+            "reading_budget": len(reads) <= events[0]["config"]["max_reads"],
+            "valid_arguments": valid_arguments,
+            "call_accounting": sum(e["event"] == "model_request" for e in run) == (result or {}).get("api_calls"),
+            "response_accounting": sum(e["event"] == "model_response" for e in run) == (result or {}).get("successful_model_calls"),
+            "stop_recorded": (bool(decisions) and decisions[-1]["action"] in ("submit_review", "final_answer"))
+                or bool(result and result.get("error")),
+        }
+        audit_starts = [i for i, e in enumerate(events) if e["event"] == "audit_start"]
+        if audit_starts:
+            audit_events = events[audit_starts[-1]:]
+            audit = read_result(path, audit=True)
+            flags["audit_terminal_result"] = audit is not None
+            flags["audit_call_accounting"] = sum(e["event"] == "model_request" for e in audit_events) == (audit or {}).get("api_calls")
+            flags["audit_response_accounting"] = sum(e["event"] == "model_response" for e in audit_events) == (audit or {}).get("successful_model_calls")
+        rows.append({"trace": str(path), "checks": flags, "all_checks_pass": all(flags.values())})
+    return {"runs": len(rows), "passed": sum(r["all_checks_pass"] for r in rows),
+            "failures": [r for r in rows if not r["all_checks_pass"]]}
 def evaluate(sample_path, out, config, variant="both", workers=2, repeats=1, limit=None):
     sample_path, out = Path(sample_path).resolve(), Path(out)
     tasks = load_sample(sample_path)
@@ -127,19 +172,21 @@ def evaluate(sample_path, out, config, variant="both", workers=2, repeats=1, lim
             raise ValueError("Existing experiment has different inputs/code/config; choose a new --out")
     else:
         experiment_path.write_text(json.dumps(experiment, indent=2) + "\n", encoding="utf-8")
-        source_dir = out / "source"
-        source_dir.mkdir()
-        for source in sorted(Path(__file__).parent.glob("*.py")):
-            (source_dir / source.name).write_bytes(source.read_bytes())
         project = Path(__file__).resolve().parents[2] / "pyproject.toml"
-        if project.exists():
-            (out / "pyproject-evaluated.toml").write_bytes(project.read_bytes())
+        with ZipFile(out / "source.zip", "x", compression=ZIP_DEFLATED) as archive:
+            for source in sorted(Path(__file__).parent.glob("*.py")):
+                archive.write(source, "src/paper_review/" + source.name)
+            if project.exists():
+                archive.write(project, project.name)
+            lockfile = project.with_name("requirements-m2.txt")
+            if lockfile.exists():
+                archive.write(lockfile, lockfile.name)
     jobs = []
     for repeat in range(1, repeats + 1):
         for task in tasks:
             for kind in variants:
                 folder = out / f"{kind}-r{repeat}" / task["id"]
-                if (folder / "result.json").exists():
+                if (folder / "trace.jsonl").exists() and read_result(folder / "trace.jsonl") is not None:
                     print(f"Retaining existing result {folder}", flush=True)
                     continue
                 if folder.exists():

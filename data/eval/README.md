@@ -1,8 +1,7 @@
 # Frozen M2 evaluation sample
 
 One task is one independent paper review against the common `m2-v1` rubric. The
-20 versioned papers were selected before model evaluation, separately from the
-five-paper reading-club development pilot. `data/selection.json` fixes the paper
+20 versioned papers were selected before model evaluation. `data/selection.json` fixes the paper
 identifiers. `tasks.jsonl` binds each task to the SHA-256 of its exact input.
 
 The environment is the committed JSON text snapshot in `papers/`, with the PDF

@@ -10,7 +10,7 @@
     10
   ],
   "certainty": "Interpretive failure; the transfer concern is plausible, but stated too categorically.",
-  "trace": "runs/m2-20261026/agent-r1/T02/trace.jsonl",
+  "trace": "runs/archive/failures/agent-r1/T02/trace.jsonl",
   "decision_step": 5,
   "decision_seq": 25,
   "model_request_seq": 23,

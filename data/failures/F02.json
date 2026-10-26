@@ -10,7 +10,7 @@
     6
   ],
   "certainty": "Directly checked against frozen page text; the claim itself is not disproved.",
-  "trace": "runs/m2-20261026/agent-r1/T06/trace.jsonl",
+  "trace": "runs/archive/failures/agent-r1/T06/trace.jsonl",
   "decision_step": 5,
   "decision_seq": 25,
   "model_request_seq": 23,

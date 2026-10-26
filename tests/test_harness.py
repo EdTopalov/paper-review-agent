@@ -17,6 +17,7 @@ from paper_review.evaluation import load_sample
 from paper_review.audit import normalize_indices
 from paper_review.paper import Paper, file_hash
 from paper_review.runner import Config, run_review
+from paper_review.trace import read_events, read_result
 
 
 FIXTURE = Path(__file__).resolve().parents[1] / "data/dev/toy.json"
@@ -145,7 +146,8 @@ def test_permanent_api_error_is_saved_without_echoing_message(tmp_path):
     result = run_review(FIXTURE, folder, Config(), "dev", client=Client([error]))
     assert result["status"] == "error" and result["api_calls"] == 1
     assert "sensitive credential" not in (folder / "trace.jsonl").read_text(encoding="utf-8")
-    assert (folder / "result.json").exists()
+    assert read_result(folder / "trace.jsonl")["status"] == "error"
+    assert (folder / "README.md").exists()
 
 
 def test_cost_includes_cache_reads_writes_and_output(tmp_path):
@@ -246,3 +248,74 @@ def test_repeated_bad_submissions_end_with_recorded_budget_failure(tmp_path):
     assert result["status"] == "error" and result["api_calls"] == 3
     assert result["error"]["code"] == "model_decision_budget_exhausted"
     assert result["rejected_submissions"] == 3
+
+
+def test_compact_trace_reconstructs_exact_requests_with_retry_and_tool_change(tmp_path, monkeypatch):
+    monkeypatch.setattr("paper_review.runner.time.sleep", lambda _: None)
+    error = APIStatusError("temporary", response=httpx.Response(503, request=httpx.Request("POST", "https://example.invalid")), body=None)
+    client = Client([error, Response([Action("read_pages", {"start": 2, "end": 3, "reason": "Check support."}, "read")]), finish(REVIEW)])
+    path = tmp_path / "run" / "trace.jsonl"
+    run_review(FIXTURE, path.parent, Config(max_reads=1), "dev", client=client)
+    replay = [e["request"] for e in read_events(path) if e["event"] == "model_request"]
+    assert replay == client.requests
+    raw = [e for e in events(path.parent) if e["event"] == "model_request"]
+    assert raw[1]["request"]["input"] == []  # Retry stores no repeated input.
+    assert raw[2]["input_prefix"] == 1
+    assert not (path.parent / "result.json").exists()
+
+
+def test_audit_shares_trace_and_preserves_review_and_accounting(tmp_path, monkeypatch):
+    from paper_review.audit import audit_one
+    from paper_review.evaluation import check_experiment
+    path = tmp_path / "run" / "trace.jsonl"
+    original = run_review(FIXTURE, path.parent, Config(), "dev", client=Client([finish()]))
+    verdicts = {"observations": [{"index": i, "verdict": "supported", "explanation": "Synthetic fixture supports this."} for i in (1, 2)]}
+    client = Client([Response(text=json.dumps(verdicts))])
+    monkeypatch.setattr("paper_review.audit.OpenAI", lambda **_: client)
+    task = {"id": "dev", "paper_path": "toy.json", "snapshot_sha256": file_hash(FIXTURE)}
+    record = audit_one(path, task, FIXTURE.parent / "tasks.jsonl", Config())
+    assert record["status"] == "ok"
+    assert read_result(path) == original
+    assert read_result(path, audit=True) == record
+    assert check_experiment(path.parent)["passed"] == 1
+    count = len(read_events(path))
+    assert audit_one(path, task, FIXTURE.parent / "tasks.jsonl", Config()) == record
+    assert len(read_events(path)) == count and len(client.requests) == 1
+    assert {p.name for p in path.parent.iterdir()} == {"trace.jsonl", "README.md"}
+
+
+def test_paired_evaluation_and_resume_need_no_duplicate_result_files(tmp_path, monkeypatch):
+    from zipfile import ZipFile
+    from paper_review.evaluation import evaluate, summarize, check_experiment
+    paper = json.loads(FIXTURE.read_text(encoding="utf-8"))
+    paper["arxiv_id"] = "synthetic-dev-v1"
+    snapshot = tmp_path / "paper.json"
+    snapshot.write_text(json.dumps(paper), encoding="utf-8")
+    sample = tmp_path / "tasks.jsonl"
+    sample.write_text(json.dumps({"id": "dev", "arxiv_id": paper["arxiv_id"], "paper_path": "paper.json",
+                                  "snapshot_sha256": file_hash(snapshot), "instructions_version": "m2-v1"}), encoding="utf-8")
+    clients = iter([Client([finish()]), Client([Response(text=json.dumps(OPENING_REVIEW))])])
+    monkeypatch.setattr("paper_review.runner.OpenAI", lambda **_: next(clients))
+    out = tmp_path / "comparison"
+    first = evaluate(sample, out, Config(), workers=1)
+    assert first["agent"]["completed"] == first["baseline"]["completed"] == 1
+    assert summarize(out) == first
+    assert evaluate(sample, out, Config(), workers=1) == first
+    assert check_experiment(out)["passed"] == 2
+    assert {p.name for p in out.iterdir() if p.is_file()} == {"experiment.json", "source.zip", "README.md"}
+    assert not list(out.rglob("result.json"))
+    with ZipFile(out / "source.zip") as archive:
+        assert "src/paper_review/runner.py" in archive.namelist()
+        assert "requirements-m2.txt" in archive.namelist()
+
+
+def test_checker_detects_incomplete_trace(tmp_path):
+    from paper_review.evaluation import check_experiment
+    folder = tmp_path / "run"
+    run_review(FIXTURE, folder, Config(), "dev", client=Client([finish()]))
+    with (folder / "trace.jsonl").open(encoding="utf-8") as stream:
+        rows = list(stream)
+    (folder / "trace.jsonl").write_text("".join(rows[:-1]), encoding="utf-8")
+    checked = check_experiment(folder)
+    assert checked["passed"] == 0
+    assert not checked["failures"][0]["checks"]["terminal_result"]

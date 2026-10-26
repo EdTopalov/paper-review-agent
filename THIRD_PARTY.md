@@ -30,5 +30,4 @@ mathematical notation, and ambiguous line-break hyphens. The shared package is
 Token pricing was checked on 26 October 2026 against the official
 [GPT-6 Luna](https://developers.openai.com/api/docs/models/gpt-6-luna) model page:
 standard text input $0.10/M, cached input $0.01/M, cache writes $0.125/M,
-output $0.50/M. The runner records these rates and usage in every trace. Rates are
-estimates for the specified service tier, not an invoice or a future price promise.
+output $0.50/M. The runner records these rates and usage in every trace.

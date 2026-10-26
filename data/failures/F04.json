@@ -10,7 +10,7 @@
     1
   ],
   "certainty": "The exact query and empty observation are in the trace. Similar empty searches occurred 23 times across all 20 agent runs.",
-  "trace": "runs/m2-20261026/agent-r1/T01/trace.jsonl",
+  "trace": "runs/archive/failures/agent-r1/T01/trace.jsonl",
   "decision_seq": 5,
   "model_request_seq": 3,
   "prefix_request": {

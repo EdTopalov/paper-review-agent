@@ -1,19 +1,54 @@
 """Append-only, flushed structured events. Never pass credentials to this logger."""
 
 from datetime import datetime, timezone
+from copy import deepcopy
 import json
 from pathlib import Path
 import time
 
 
+def read_events(path):
+    """Expand input prefixes to reconstruct each complete model request."""
+    previous = []
+    events = []
+    with Path(path).open(encoding="utf-8") as stream:
+        for line in stream:
+            row = json.loads(line)
+            if row["event"] == "model_request":
+                request = row["request"]
+                prefix = row.get("input_prefix", 0)
+                if not 0 <= prefix <= len(previous):
+                    raise ValueError("Invalid conversation prefix in trace")
+                request["input"] = previous[:prefix] + request["input"]
+                previous = request["input"]
+            events.append(row)
+    return events
+
+
+def read_result(path, *, audit=False):
+    endings = ("audit_end", "audit_repair") if audit else ("run_end",)
+    key = "record" if audit else "result"
+    return next((row[key] for row in reversed(read_events(path)) if row["event"] in endings), None)
+
+
 class Trace:
-    def __init__(self, path):
+    def __init__(self, path, *, append=False):
         Path(path).parent.mkdir(parents=True, exist_ok=True)
-        self.file = Path(path).open("x", encoding="utf-8")
-        self.started = time.perf_counter()
-        self.seq = 0
+        events = read_events(path) if append else []
+        self.file = Path(path).open("a" if append else "x", encoding="utf-8", newline="\n")
+        elapsed = (datetime.now(timezone.utc) - datetime.fromisoformat(events[0]["timestamp"])).total_seconds() if events else 0
+        self.started = time.perf_counter() - elapsed
+        self.seq = events[-1]["seq"] if events else 0
+        self.previous_input = []
 
     def write(self, event, **payload):
+        if event == "model_request":
+            request = deepcopy(payload["request"])
+            inputs = request["input"]
+            prefix = len(self.previous_input) if inputs[:len(self.previous_input)] == self.previous_input else 0
+            request["input"] = inputs[prefix:]
+            self.previous_input = inputs
+            payload = {**payload, "request": request, "input_prefix": prefix}
         self.seq += 1
         row = {"seq": self.seq, "timestamp": datetime.now(timezone.utc).isoformat(),
                "elapsed_seconds": round(time.perf_counter()-self.started, 6),

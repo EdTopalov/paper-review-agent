@@ -8,10 +8,12 @@ from pathlib import Path
 import jsonschema
 from openai import OpenAI
 
-from .evaluation import load_sample
-from .paper import Paper, file_hash
+from .evaluation import load_sample, summarize
+from .paper import Paper
+from hashlib import sha256
 from .runner import ModelCalls, safe_error
-from .trace import Trace
+from .trace import Trace, read_events, read_result
+from .reporting import render_run
 
 
 AUDIT_PROMPT = """Audit a paper assessment against the supplied frozen paper text.
@@ -55,18 +57,25 @@ def normalize_indices(audit, count):
     raise ValueError("Auditor did not assess every observation in order")
 
 
-def audit_one(result_path, task, sample_path, out, config):
-    result_path, out = Path(result_path), Path(out)
-    if (out / "audit.json").exists():
-        previous = json.loads((out / "audit.json").read_text(encoding="utf-8"))
-        if previous["review_sha256"] != file_hash(result_path) or previous["config"] != asdict(config):
+def review_hash(review):
+    return sha256(json.dumps(review, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+
+
+def audit_one(trace_path, task, sample_path, config):
+    trace_path = Path(trace_path)
+    source = read_result(trace_path)
+    fingerprint = review_hash(source["review"])
+    previous = read_result(trace_path, audit=True)
+    if previous:
+        if (previous["review_sha256"] != fingerprint or previous["config"] != asdict(config)
+                or previous["snapshot_sha256"] != task["snapshot_sha256"]):
             raise ValueError("Existing audit uses different input or configuration")
         return previous
-    out.mkdir(parents=True, exist_ok=False)
-    trace = Trace(out / "trace.jsonl")
-    source = json.loads(result_path.read_text(encoding="utf-8"))
+    if any(row["event"] == "audit_start" for row in read_events(trace_path)):
+        raise ValueError("Incomplete audit exists; preserve its trace before starting another attempt")
+    trace = Trace(trace_path, append=True)
     record = {"task_id": task["id"], "variant": source["variant"],
-              "review_sha256": file_hash(result_path), "snapshot_sha256": task["snapshot_sha256"],
+              "review_sha256": fingerprint, "snapshot_sha256": task["snapshot_sha256"],
               "config": asdict(config), "status": "error", "method": "provisional_llm_evidence_audit"}
     calls = ModelCalls(OpenAI(max_retries=0, timeout=config.timeout), config, trace)
     trace.write("audit_start", record=record, instructions=AUDIT_PROMPT)
@@ -90,8 +99,8 @@ def audit_one(result_path, task, sample_path, out, config):
     finally:
         record.update(calls.stats)
         trace.write("audit_end", record=record)
-        (out / "audit.json").write_text(json.dumps(record, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         trace.close()
+        render_run(trace_path)
     return record
 
 
@@ -99,32 +108,13 @@ def audit_experiment(sample_path, experiment_dir, config, workers=2):
     tasks = {task["id"]: task for task in load_sample(sample_path)}
     experiment_dir = Path(experiment_dir)
     jobs = []
-    for path in sorted(experiment_dir.glob("*/*/result.json")):
-        result = json.loads(path.read_text(encoding="utf-8"))
-        if result["status"] == "ok":
-            target = experiment_dir / "audits" / path.parent.parent.name / path.parent.name
-            jobs.append((path, tasks[result["task_id"]], target))
-    records = []
+    for path in sorted(experiment_dir.glob("*/*/trace.jsonl")):
+        result = read_result(path)
+        if result and result["status"] == "ok":
+            jobs.append((path, tasks[result["task_id"]]))
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        pending = [pool.submit(audit_one, path, task, sample_path, target, config)
-                   for path, task, target in jobs]
+        pending = [pool.submit(audit_one, path, task, sample_path, config) for path, task in jobs]
         for future in as_completed(pending):
             record = future.result()
-            records.append(record)
             print(f"Audit {record['task_id']} {record['variant']}: {record['status']}", flush=True)
-    summary = {}
-    for variant in sorted({r["variant"] for r in records}):
-        rows = [r for r in records if r["variant"] == variant]
-        completed = [r for r in rows if r["status"] == "ok"]
-        observations = [o for r in completed for o in r["audit"]["observations"]]
-        summary[variant] = {
-            "attempted_reviews": len(rows), "audited_reviews": len(completed),
-            "verdict_counts": {v: sum(o["verdict"] == v for o in observations)
-                               for v in ("supported", "overstated", "unsupported", "uncertain")},
-            "all_observations_supported": sum(all(o["verdict"] == "supported" for o in r["audit"]["observations"])
-                                              for r in completed),
-            "audit_cost_usd": sum(r["estimated_cost_usd"] or 0 for r in rows),
-            "warning": "Provisional LLM judgments; same-model bias possible; not human-adjudicated success.",
-        }
-    (experiment_dir / "audit_summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
-    return summary
+    return summarize(experiment_dir)
