@@ -1,0 +1,56 @@
+{
+  "task_id": "T18",
+  "variant": "agent",
+  "review_sha256": "85dc20444f0d6a0cb6b987c3e4bcfa3f2b3ee79fd3ebad3d050093d04e498d46",
+  "snapshot_sha256": "63d1aba0be296d84493aa8d819e20d49ebf9f5721caaebdef6a3b82bedc1f6b5",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "normalization": "one_based_indices_normalized",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The paper describes APIBench, AST-based evaluation, Gorilla fine-tuning, and a held-out test set (PDF pp. 2–6). The appendix also reports the data splits (p. 13)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "In the zero-shot results, Gorilla exceeds both listed GPT baselines on TorchHub, HuggingFace, and TensorFlow Hub. The paper explicitly notes that HuggingFace uses a different, less stringent check for comparison models (PDF p. 7)."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The paper states that, for HuggingFace, models other than Gorilla are checked only for correct domain names, whereas TorchHub and TensorHub use AST-tree accuracy for all models (PDF pp. 6–7)."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The paper reports 29.20% accuracy degradation with GPT-Index and 52.27% with BM25 when evaluating the retrieval-aware fine-tuned model, relative to the ground-truth retrieval setting (PDF pp. 7–8)."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 18153,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 18150,
+  "output_tokens": 464,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.0025010500000000003,
+  "billing_uncertain": false
+}

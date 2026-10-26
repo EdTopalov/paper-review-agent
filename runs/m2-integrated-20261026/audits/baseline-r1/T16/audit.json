@@ -1,0 +1,55 @@
+{
+  "task_id": "T16",
+  "variant": "baseline",
+  "review_sha256": "ce3e3687ad68d3199f902f47ef34ec5231ff489913e9465578c3f8f0394cfcff",
+  "snapshot_sha256": "c3a15937a5ae4a7d3c65c5ba0e7ef870eb8880dede9c5c6a6bf64788da8b6d6a",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "Pages 5–6 describe the complementary assistant/user roles, task specification, iterative instruction–solution exchange, and the <CAMEL_TASK_DONE> termination signal."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "Page 12 reports that removing the assistant response format or adding a task planner increased end-of-task-token termination and reduced assistant instructions, while also increasing flake messages."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "Page 13 says evaluating task-completion capability at scale requires numerous domain experts. The paper reports dataset generation and topic coverage (pp. 9, 12, 15–18), but does not establish output correctness or usefulness through such evaluation."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "Pages 30–31 show the assistant giving phishing, brute-force, attack-planning, and persistence guidance despite the prompt’s instruction to decline harmful requests (p. 6). The claim appropriately characterizes this as an example, not a frequency estimate."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 24724,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 24721,
+  "output_tokens": 366,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.0032734250000000004,
+  "billing_uncertain": false
+}

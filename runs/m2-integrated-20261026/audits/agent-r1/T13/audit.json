@@ -1,0 +1,55 @@
+{
+  "task_id": "T13",
+  "variant": "agent",
+  "review_sha256": "a0c42a33c1571795f71b8daeb5dd84ff5e526f03e80a1679ec806f8299f5b44d",
+  "snapshot_sha256": "40e15f8e80604c4c4b65791a74d6ef65f07408ae7091b64651e13270ac2ced33",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "Page 2 describes on-demand retrieval, reflection tokens for critique, and inference-time decoding that adjusts retrieval frequency and user-preference tradeoffs."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "Page 8 reports results across six tasks and shows ASQA citation precision and recall of 70.3 and 71.3 for Self-RAG 13B. The text says these exceed all listed models except ChatGPT, and Self-RAG exceeds ChatGPT on citation precision."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "Pages 9–10 describe training and inference ablations, including removing the retriever, critic, retrieval, or ISSUP, and using only the top passage. The paper reports performance drops for several of these comparisons, including top-1 retrieval on PopQA and ASQA."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "Page 7 states that results for some baselines are taken from their papers because implementations were unavailable, supporting the qualified comparability and independent-verification limitation."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 28210,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 28207,
+  "output_tokens": 397,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.003724675,
+  "billing_uncertain": false
+}

@@ -1,0 +1,55 @@
+{
+  "task_id": "T17",
+  "variant": "baseline",
+  "review_sha256": "7e3f1aee2c7b048463e4d837a0c20b3322e93b3fd323c593c0efd43395c54e8e",
+  "snapshot_sha256": "cc61ae9760452349796d93326b14f19f5fa2a92ff929e7eed36a8fe0b51bb278",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The paper evaluates ten datasets across arithmetic, commonsense, and symbolic reasoning (pp. 2, 4–5). It reports PS+ outperforming Zero-shot-CoT on all ten (pp. 5–6)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "Table 2 reports PS+ at a 76.7 average, above the listed Zero-shot-CoT (70.4), PoT (73.5), PS (72.9), and Auto-CoT (75.9) averages (p. 6)."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The limitations section explicitly says prompt design takes effort and GPT-3 models are sensitive to prompt expressions, requiring careful design (p. 9)."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The main-paper experiments report results using text-davinci-003 (p. 5). The paper does not establish transfer to other model families, so that remains unresolved."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 19134,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 19131,
+  "output_tokens": 430,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.002606675,
+  "billing_uncertain": false
+}

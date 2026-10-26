@@ -1,0 +1,55 @@
+{
+  "task_id": "T07",
+  "variant": "agent",
+  "review_sha256": "6f357d6f5bcfd0018abee1dc45841262e19da9a185507d74317015cfdfcfdfa0",
+  "snapshot_sha256": "fbefef3882cb746b1fc2a0d4f72c1b539a6dfe651fe3181484062a1bb81ac3ff",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The paper reports 101 multi-app workflow tasks among 369 Ubuntu tasks and describes substantial annotation effort, repeated cross-checking, and quality-control rounds (PDF pp. 6–8). The claim is appropriately scoped to the benchmark and its construction."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The human study reports 72.36% overall performance, compared with baseline agent success rates far below that level (PDF pp. 9–11). This supports a meaningful measured capability gap on this benchmark."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The authors explicitly state that further red-teaming could reduce false positives and negatives, leaving this for future work (PDF p. 8). This supports the qualified concern about residual evaluator error risk."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The paper identifies the 369-task main benchmark as defined and executed on Ubuntu and separately reports 43 Windows tasks (PDF p. 6). Calling the suite Ubuntu-centered and Windows supplementary is justified."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 40338,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 40335,
+  "output_tokens": 319,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.005201675,
+  "billing_uncertain": false
+}

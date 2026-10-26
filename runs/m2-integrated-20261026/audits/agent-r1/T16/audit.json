@@ -1,0 +1,50 @@
+{
+  "task_id": "T16",
+  "variant": "agent",
+  "review_sha256": "3791f51ce5f4b24d1122f14e16e25eadaa73571fcda52e496bfec52d458e8f39",
+  "snapshot_sha256": "c3a15937a5ae4a7d3c65c5ba0e7ef870eb8880dede9c5c6a6bf64788da8b6d6a",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "Page 9 reports 25,000 AI Society conversations and 50,000 Code conversations, supporting the claim that the framework generated sizeable datasets in both stated scenarios."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "Page 12 reports that both prompt modifications increased end-of-task termination and reduced assistant-instruction terminations, and also reports a significant increase in flake messages. The claim accurately captures these effects."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "Page 13 explicitly says that evaluating task-completion capabilities is challenging and requires numerous domain experts. This appropriately qualifies what the paper demonstrates about task success."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 24515,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 24512,
+  "output_tokens": 277,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.0032028,
+  "billing_uncertain": false
+}

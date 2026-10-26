@@ -15,9 +15,12 @@ Copy-Item .env.example .env
 .venv\Scripts\paper-review.exe eval --out runs/my-comparison --model gpt-6-luna
 ```
 
-The saved M2 experiment completed 20/20 tasks for both agent and baseline.
-Completion is separate from evidence quality: exact citations and provisional
-model audits are reported independently. See the [results](M2.md#results).
+The final integrated M2 experiment completed **19/20 agent tasks and 20/20
+baseline tasks**. All citations were verified in 19/20 agent attempts and 7/20
+baseline attempts; the agent uses a citation validation and repair loop. These
+numbers measure completion and text fidelity, not research-review accuracy.
+The bounded failure, costs, and provisional evidence audits are documented in the
+[results](M2.md#integrated-results) and [failure analysis](M2.md#five-annotated-failed-decisions-retained-for-m3).
 The API key is read from the local ignored `.env`, overriding inherited values.
 `paper-review models` lists models accessible to that key's project.
 

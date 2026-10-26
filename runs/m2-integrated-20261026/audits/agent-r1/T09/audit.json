@@ -1,0 +1,56 @@
+{
+  "task_id": "T09",
+  "variant": "agent",
+  "review_sha256": "ae35ba010ec2a3f3cd8a44b0a4eba82d5ad0c402c05368eafca5b7fc30eb7b80",
+  "snapshot_sha256": "780d2dd9905fe7e0c0ecf4f1844d897d778977f26a3907799a895412dcc26efe",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "normalization": "one_based_indices_normalized",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The paper describes a two-phase localization-and-repair pipeline, with hierarchical localization and patch generation, filtering, and voting; it contrasts this with agent-based tool-use planning (PDF pp. 2–5)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The paper reports 82/300 resolved (27.33%) and $0.34 average cost (PDF pp. 6–7). Its ablation reports 70 fixes with one sample, 78 with multiple samples and majority voting, and 82 after test filtering (PDF p. 8)."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The authors report a manual classification of SWE-bench Lite issues and define Lite-S as a 252-problem subset; Table 4 reports 71 resolved (28.17%) by AGENTLESS (PDF pp. 9–10)."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The paper explicitly says it could not run commercial tools on the modified problems and instead excluded problematic cases from their prior results for the Lite-S evaluation (PDF p. 10)."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 17507,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 17504,
+  "output_tokens": 373,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.0023748000000000003,
+  "billing_uncertain": false
+}

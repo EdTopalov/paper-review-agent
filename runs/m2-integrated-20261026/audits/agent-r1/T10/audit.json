@@ -1,0 +1,56 @@
+{
+  "task_id": "T10",
+  "variant": "agent",
+  "review_sha256": "9c2ecb1aa5033d5f58a4ff931a4e67320da16f52a0d42c7433694a6fb7e671c2",
+  "snapshot_sha256": "cd790c642773184d573187a2003b2c5c8561f47bf90926fb9b447f5920f0fe0e",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "normalization": "one_based_indices_normalized",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "Page 3 explicitly lays out the four principles—simple actions, efficient actions, informative feedback, and guardrails—and relates them to the interface design and ablations."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "Pages 5–7 report SWE-agent results against the tested baselines and Lite ablations; for example, page 6 shows 18.0% resolved versus 11.0% for the shell-only agent on SWE-bench Lite, with several ablations performing worse than the full interface."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "Page 5 says the results, ablations, and analysis use two models. The paper does report results with both GPT-4 Turbo and Claude 3 Opus (pages 2 and 6), but does not establish transfer to additional model families."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "Page 8 reports from manual inspection that agents rarely deviate from the repeated edit-and-test pattern and rarely recognize dead ends or reset their approach."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 25048,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 25045,
+  "output_tokens": 417,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.003339425,
+  "billing_uncertain": false
+}

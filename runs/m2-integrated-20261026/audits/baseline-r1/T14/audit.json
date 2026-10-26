@@ -1,0 +1,55 @@
+{
+  "task_id": "T14",
+  "variant": "baseline",
+  "review_sha256": "b299fc9c44b0b2bd6db31a57a53e932ff82972b5ab1357a671e291548e926874",
+  "snapshot_sha256": "36c2af1233d582153edebfb1d9c853a5dd5502f8b3676cc8bda92e24a4712da0",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The paper describes configurable retrieval tasks as well as multi-hop tracing and aggregation (PDF pp. 1–5), and identifies question answering as a fourth category (PDF pp. 2–3). This supports the claim that the benchmark goes beyond single-item retrieval."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The paper reports evaluating ten long-context models across task configurations and context lengths from 4K to 128K, with 500 generated examples per task and length (PDF p. 6). Its model list spans multiple model families (PDF pp. 6, 14)."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The paper defines effective length using the score of Llama2-7B at 4K as a fixed threshold and calls passing it satisfactory performance (PDF p. 6). Thus the designation is benchmark-relative, not a direct measurement of usable context."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The paper calls QA a real-world adaptation of NIAH but describes RULER as consisting solely of synthetic tasks (PDF pp. 2, 5). It does not establish that results on these extensions predict performance on realistic long-document applications, so the qualified open question is warranted."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 25294,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 25291,
+  "output_tokens": 416,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.0033696750000000004,
+  "billing_uncertain": false
+}

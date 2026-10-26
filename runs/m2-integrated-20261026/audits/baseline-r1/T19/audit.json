@@ -1,0 +1,55 @@
+{
+  "task_id": "T19",
+  "variant": "baseline",
+  "review_sha256": "f904dc6dc8c0dae5c0388886cd39be5ec3687b8dcb506eada3f111641c9530fd",
+  "snapshot_sha256": "f433dde72a05de0be3fd06cde9c8d82d830dcf363fe15c1ad33e55a5db79c43b",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "Pages 2–3 describe a unified four-module framework—profile, memory, planning, and action—and summarize learning strategies. The claim accurately captures how the survey connects these topics."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The survey covers applications and evaluation (pages 14–21), discusses bias and toxicity in social science (page 15), and addresses hallucination (page 23). Page 19 explicitly notes complementary strengths of subjective and objective evaluation. The cited quote supports the evaluation-tradeoff portion, though not the limitations examples."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The paper calls the field “still at its initial stage” (page 22) and presents its work as a systematic summary and taxonomy of prior research (pages 2 and 24). Characterizing it as a time-bound research map, rather than general empirical validation, is appropriately qualified."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "Page 22 says the authors compiled 100 relevant works but does not describe a reproducible search, screening, or classification procedure. The paper’s other sections likewise do not explain those selection steps, so the stated uncertainty is justified."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 34109,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 34106,
+  "output_tokens": 446,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.004486550000000001,
+  "billing_uncertain": false
+}

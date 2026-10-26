@@ -1,0 +1,55 @@
+{
+  "task_id": "T03",
+  "variant": "agent",
+  "review_sha256": "16dd3377b8049fd41ce38c2272eab56262768b6852e874987d8a50fad5de71c7",
+  "snapshot_sha256": "e61bdccefe742e09f53ac751ee6256d58257ca7f87e99eff88db33aa27393242",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The paper presents six diverse application examples and describes varied agent roles and conversation patterns (PDF pp. 2, 8–9)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The MiniWob++ comparison covers twelve clicking tasks, and reports success rates over ten instances for each task (PDF pp. 15–16)."
+      },
+      {
+        "index": 2,
+        "verdict": "overstated",
+        "explanation": "The initial comparison is indeed qualitative and limited to two MATH problems tested three times each (PDF pp. 10–11). But the paper also reports a follow-up quantitative evaluation on 12 level-5 problems, with one trial per problem, so describing the math comparison overall as very small and qualitative omits relevant evidence (PDF p. 11)."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The paper explicitly lists unresolved questions about which tasks benefit from multi-agent workflows and what workflow is optimal and cost-effective (PDF p. 23)."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 24839,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 24836,
+  "output_tokens": 380,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.0032948,
+  "billing_uncertain": false
+}

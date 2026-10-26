@@ -1,0 +1,166 @@
+{
+  "task_id": "T15",
+  "variant": "agent",
+  "model": "gpt-6-luna",
+  "prompt_version": "m2-v2",
+  "rubric_version": "m2-v1",
+  "checker_version": "m2-citations-v2",
+  "status": "ok",
+  "review": {
+    "score": 0.69,
+    "summary": "AlphaCodium presents a practical, test-driven multi-stage inference workflow for code generation: it builds problem reasoning and candidate tests, then iteratively runs and fixes code against public and generated tests. Reported gains across several models on CodeContests are substantial, though the evaluation is narrow and comparisons with prior systems are not fully controlled.",
+    "observations": [
+      {
+        "kind": "strength",
+        "claim": "The central workflow makes concrete use of executable feedback and generated tests, rather than relying only on a direct prompt; this is a useful and clearly described inference-time contribution.",
+        "page": 3,
+        "quote": "repeatedly run and fix the generated code against input-output tests"
+      },
+      {
+        "kind": "strength",
+        "claim": "The paper reports consistent gains on both validation and test splits across the listed models, including a large GPT-4 validation-set increase.",
+        "page": 7,
+        "quote": "For GPT-4 on the validation set, for example, the pass@5 score improves from 19% to 44% - x2.3 improvement."
+      },
+      {
+        "kind": "limitation",
+        "claim": "The direct evaluation is on a small set of CodeContests problems, limiting confidence in generalization beyond this benchmark.",
+        "page": 3,
+        "quote": "which contain 107 and 165 problems, respectively."
+      },
+      {
+        "kind": "uncertainty",
+        "claim": "The reported comparisons to prior work have reproducibility and protocol-matching caveats acknowledged by the paper; these make the headline cross-system superiority less secure than the within-paper direct-prompt comparisons.",
+        "page": 7,
+        "quote": "There are subtleties when evaluating results."
+      }
+    ],
+    "unresolved_questions": [
+      "How much of the improvement comes from individual components (generated tests, reflection, staged prompting, and iterative repair), versus their combination?",
+      "How robust are the gains on benchmarks outside CodeContests and on additional model families?",
+      "I inspected pages 1 and 3–8; detailed implementation/evaluation settings and appendices on failed methods were not fully examined, so some protocol and ablation details remain uncertain."
+    ]
+  },
+  "reading_actions": 3,
+  "tool_calls": 5,
+  "decision_steps": 5,
+  "evidence_observed": [
+    true,
+    true,
+    true,
+    true
+  ],
+  "citation_checks": [
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        3
+      ],
+      "candidate_pages": [],
+      "status": "whitespace"
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        7
+      ],
+      "candidate_pages": [],
+      "status": "whitespace"
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        3
+      ],
+      "candidate_pages": [],
+      "status": "whitespace"
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        7
+      ],
+      "candidate_pages": [],
+      "status": "exact"
+    }
+  ],
+  "api_calls": 5,
+  "successful_model_calls": 5,
+  "input_tokens": 29863,
+  "cached_input_tokens": 16740,
+  "cache_write_tokens": 12493,
+  "output_tokens": 1014,
+  "submission_attempts": 2,
+  "rejected_submissions": 1,
+  "first_submission_checks": [
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        3
+      ],
+      "candidate_pages": [],
+      "status": "whitespace",
+      "observed": true
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        7
+      ],
+      "candidate_pages": [],
+      "status": "whitespace",
+      "observed": true
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": false,
+      "citation_verified": false,
+      "matching_pages": [],
+      "candidate_pages": [],
+      "status": "not_found",
+      "observed": false
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        7
+      ],
+      "candidate_pages": [],
+      "status": "exact",
+      "observed": true
+    }
+  ],
+  "estimated_cost_usd": 0.0022990249999999997,
+  "billing_uncertain": false,
+  "latency_seconds": 15.349413000047207
+}

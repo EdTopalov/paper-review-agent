@@ -19,3 +19,4 @@ jobs:
       - run: python -m pytest -q
       - run: paper-review verify
       - run: python scripts/verify_traces.py runs/m2-20261026
+      - run: python scripts/verify_traces.py runs/m2-integrated-20261026

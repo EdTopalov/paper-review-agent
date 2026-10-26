@@ -1,0 +1,155 @@
+{
+  "task_id": "T09",
+  "variant": "baseline",
+  "model": "gpt-6-luna",
+  "prompt_version": "m2-v2",
+  "rubric_version": "m2-v1",
+  "checker_version": "m2-citations-v2",
+  "status": "ok",
+  "review": {
+    "score": 0.69,
+    "summary": "AGENTLESS presents a deliberately non-agentic pipeline for repository-level issue resolution: hierarchical code localization, sampled diff-based repair, regression-test filtering, and majority-vote selection. On SWE-bench Lite, the authors report 82/300 issues resolved at an average cost of $0.34, and introduce a manually filtered 252-issue variant. The work offers a useful, interpretable baseline and component analysis, though broad claims about comparative performance are constrained by reliance on reported results for other systems and a single model/benchmark setup.",
+    "observations": [
+      {
+        "kind": "strength",
+        "claim": "The paper gives a concrete and reproducible-in-principle pipeline, separating localization into file, code-element, and edit-location stages before repair.",
+        "page": 4,
+        "quote": "AGENTLESS addresses this by using a simple three-step hierarchical localization process: 1) localize to selected files; 2) localize each selected files into relevant classes, functions, and variables; 3) localize to code edit locations."
+      },
+      {
+        "kind": "strength",
+        "claim": "The component results offer evidence that sampling/voting and test filtering improve the reported solve count over a single greedy patch, while also showing associated cost.",
+        "page": 8,
+        "quote": "Starting with just generating a single sample (i.e., using greedy decoding), AGENTLESS can achieve 70 correct fixes while costing an average of$0.11 dollars per bug"
+      },
+      {
+        "kind": "limitation",
+        "claim": "Comparisons with prior systems are not uniformly controlled: several results are taken from external reports, and the paper notes that many systems' trajectories or source code are unavailable for verification.",
+        "page": 6,
+        "quote": "For baseline tools, we directly use the reported results either from the official leaderboard [29] or from the tool’s official paper/repository."
+      },
+      {
+        "kind": "uncertainty",
+        "claim": "The reported comparison does not establish how well the method generalizes beyond GPT-4o and SWE-bench Lite; the supplied evaluation specifies one implementation model and benchmark subset.",
+        "page": 6,
+        "quote": "We implement AGENTLESS using GPT-4o (gpt-4o-2024-05-13) [45]."
+      }
+    ],
+    "unresolved_questions": [
+      "How robust are AGENTLESS's performance and cost results across other LLMs, model versions, repositories, and benchmarks?",
+      "How reproducible are the comparisons when all systems are run under the same evaluation setup, and how sensitive are results to benchmark or environment versions?",
+      "How consistent is the manual classification used to construct SWE-bench Lite-S across independent annotators? The inspected pages describe manual classification but do not provide an agreement measure.",
+      "Inspection was limited to the supplied text/pages; implementation details beyond the described setup and any supplementary analyses not included here were not assessed."
+    ]
+  },
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 1,
+  "citation_checks": [
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        4
+      ],
+      "candidate_pages": [],
+      "status": "whitespace"
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": false,
+      "citation_verified": false,
+      "matching_pages": [],
+      "candidate_pages": [],
+      "status": "not_found"
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        6
+      ],
+      "candidate_pages": [],
+      "status": "whitespace"
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        6
+      ],
+      "candidate_pages": [],
+      "status": "exact"
+    }
+  ],
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 16572,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 16569,
+  "output_tokens": 574,
+  "submission_attempts": 1,
+  "rejected_submissions": 0,
+  "first_submission_checks": [
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        4
+      ],
+      "candidate_pages": [],
+      "status": "whitespace"
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": false,
+      "citation_verified": false,
+      "matching_pages": [],
+      "candidate_pages": [],
+      "status": "not_found"
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        6
+      ],
+      "candidate_pages": [],
+      "status": "whitespace"
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        6
+      ],
+      "candidate_pages": [],
+      "status": "exact"
+    }
+  ],
+  "estimated_cost_usd": 0.0023584250000000004,
+  "billing_uncertain": false,
+  "latency_seconds": 6.258261000039056
+}

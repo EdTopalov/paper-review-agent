@@ -1,0 +1,55 @@
+{
+  "task_id": "T13",
+  "variant": "baseline",
+  "review_sha256": "ff6708153469ed6328d296c50d2baa61dc549f538ef7e7edd7daebe810360c63",
+  "snapshot_sha256": "40e15f8e80604c4c4b65791a74d6ef65f07408ae7091b64651e13270ac2ced33",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The paper describes retrieval-on-demand, relevance/support/usefulness critique tokens, and inference-time control through segment-level beam search (pp. 3–6). Its evaluations span six tasks, including reasoning and long-form generation (pp. 7–8)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "Table 2 reports six task settings and varied metrics, and the authors state SELF-RAG has the best performance among non-proprietary LM-based models on all tasks, while noting proprietary-model exceptions on particular metrics (p. 8)."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The ablation results compare training and inference components, including removing the critic and using the top passage regardless of relevance (p. 9). The inference analyses vary support-token weights and retrieval thresholds, reporting effects on citation precision, MAUVE, retrieval frequency, and accuracy rather than claiming one setting is universally best (pp. 9–10)."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The authors explicitly acknowledge that outputs may not be fully supported by citations (p. 11). The human evaluation sampled 50 PopQA and biography-generation cases (p. 10), and the appendix includes examples where predictions are unsupported or only partially supported (p. 24)."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 28289,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 28286,
+  "output_tokens": 294,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.00368305,
+  "billing_uncertain": false
+}

@@ -1,0 +1,159 @@
+{
+  "task_id": "T12",
+  "variant": "baseline",
+  "model": "gpt-6-luna",
+  "prompt_version": "m2-v2",
+  "rubric_version": "m2-v1",
+  "checker_version": "m2-citations-v2",
+  "status": "ok",
+  "review": {
+    "score": 0.68,
+    "summary": "InterCode contributes an extensible framework for evaluating coding agents through iterative code execution and environment feedback, with Bash and SQL benchmarks adapted from existing datasets. Its experiments demonstrate that interaction and prompting strategies can improve success rates over single-turn generation, while exposing context-discovery and long-horizon reasoning challenges. This is useful benchmark infrastructure and an empirical demonstration, though the task coverage and evaluation setups are limited.",
+    "observations": [
+      {
+        "kind": "strength",
+        "claim": "The paper provides a modular task-construction interface and concrete Bash and SQL implementations, making its framework more than a conceptual proposal.",
+        "page": 4,
+        "quote": "This workflow allows for the safe execution of transition functions, flexible reward design, and convenient adaptation of existing instructions to an interactive setting."
+      },
+      {
+        "kind": "strength",
+        "claim": "The reported experiments show substantial gains for some models in the interactive setting; for example, GPT-4’s SQL success rate rises from 9.1% to 73.7%.",
+        "page": 6,
+        "quote": "with a notable multi-fold increase for GPT-4 (9.1% → 73.7%) on the InterCode-SQL task."
+      },
+      {
+        "kind": "limitation",
+        "claim": "The benchmark’s breadth is limited in this version: its implemented environments cover Bash and SQL, and the CTF demonstration has very few instances.",
+        "page": 9,
+        "quote": "the CTF dataset is limited to just four task instances due to our manual curation procedure."
+      },
+      {
+        "kind": "uncertainty",
+        "claim": "Reported reward and success depend on environment-specific grading choices, including exact ordering for SQL outputs and lexical similarity for Bash output. How these choices affect comparisons with alternative correct solutions remains an open question.",
+        "page": 5,
+        "quote": "only a correctly ordered list with the exact set of records found in the gold output receives a score of 1."
+      }
+    ],
+    "unresolved_questions": [
+      "How well do findings from these adapted Bash and SQL tasks generalize to other languages, environments, and interactive coding tasks?",
+      "How sensitive are model rankings and success rates to the custom reward definitions and to acceptable equivalent outputs?",
+      "Can the benchmark support reproducible comparisons across model/API changes and varied interaction budgets?",
+      "I inspected the supplied pages, including the main experiments and selected appendices, but did not independently verify the linked code or inspect every supplemental prompt, trajectory, and appendix analysis."
+    ]
+  },
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 1,
+  "citation_checks": [
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        4
+      ],
+      "candidate_pages": [],
+      "status": "whitespace"
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        6
+      ],
+      "candidate_pages": [],
+      "status": "whitespace"
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        9
+      ],
+      "candidate_pages": [],
+      "status": "whitespace"
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        5
+      ],
+      "candidate_pages": [],
+      "status": "whitespace"
+    }
+  ],
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 26994,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 26991,
+  "output_tokens": 484,
+  "submission_attempts": 1,
+  "rejected_submissions": 0,
+  "first_submission_checks": [
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        4
+      ],
+      "candidate_pages": [],
+      "status": "whitespace"
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        6
+      ],
+      "candidate_pages": [],
+      "status": "whitespace"
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        9
+      ],
+      "candidate_pages": [],
+      "status": "whitespace"
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        5
+      ],
+      "candidate_pages": [],
+      "status": "whitespace"
+    }
+  ],
+  "estimated_cost_usd": 0.003616175,
+  "billing_uncertain": false,
+  "latency_seconds": 5.545966900070198
+}

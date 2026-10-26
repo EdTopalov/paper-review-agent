@@ -1,0 +1,56 @@
+{
+  "task_id": "T08",
+  "variant": "baseline",
+  "review_sha256": "8afacc79a56425f1ccd8d38da2e226d968d36435c710960944b7702dc263fd89",
+  "snapshot_sha256": "fef709ec029e89123d4022d0a90e0338d2f4eccfaae07c73c956b646d0ff8cf4",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "normalization": "one_based_indices_normalized",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The benchmark is described as combining interaction with simulated users, API tools, and domain-specific policies, and its reward compares the final database state and user-facing responses with annotated outcomes. The paper also says dialogue wording may vary while reaching the same database outcome (PDF pp. 1–4)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The paper defines pass^k over repeated trials and reports that the best-performing gpt-4o function-calling agent has pass^8 below 25% in τ-retail (PDF pp. 4–5, 7)."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The authors explicitly state that reward r = 1 may be necessary but not sufficient for success, giving failure to obtain explicit user confirmation as an example of a policy violation the reward may not capture (PDF p. 4)."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The evaluation covers τ-retail and τ-airline; the authors describe medical, tax, and legal domains as possible future work. Thus, transfer to those broader settings is not evaluated in this paper (PDF pp. 2, 5–6)."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 40051,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 40048,
+  "output_tokens": 384,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.0051983,
+  "billing_uncertain": false
+}

@@ -1,0 +1,55 @@
+{
+  "task_id": "T07",
+  "variant": "baseline",
+  "review_sha256": "097346884a83c596c1b778b29d1c1d8024daf5525e95fa826bad1251525eb810",
+  "snapshot_sha256": "fbefef3882cb746b1fc2a0d4f72c1b539a6dfe651fe3181484062a1bb81ac3ff",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The paper says tasks have natural-language instructions, initial-state setup configurations, and manually crafted execution scripts (PDF pp. 7–8); it also describes intermediate states and execution-based checks (pp. 4–5)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "Human performance is reported as approximately 72.36%, alongside model results, and the paper explicitly contrasts this with much lower baseline performance (PDF pp. 9–11)."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The authors report further red-teaming could reduce false positives and negatives and defer that work, while describing multiple rounds of quality checks (PDF pp. 7–8). The claim appropriately presents this as a caveat rather than invalidating all scores."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The 369-task public benchmark is Ubuntu-based; the paper provides a smaller 43-task Windows set, and says macOS was not used for benchmark development due to copyright concerns (PDF pp. 6, 26–27). The stated generalization question is appropriately unresolved."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 40503,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 40500,
+  "output_tokens": 254,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.0051898000000000005,
+  "billing_uncertain": false
+}

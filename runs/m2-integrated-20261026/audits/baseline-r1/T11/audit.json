@@ -1,0 +1,55 @@
+{
+  "task_id": "T11",
+  "variant": "baseline",
+  "review_sha256": "7956f7a593510f0cd9ef1c5ed96e3cb2c98c87a809a5b902ac3901433e6995a5",
+  "snapshot_sha256": "aa03602b61d4d9f19d9086e3348257b8f24f984a1464a8f04733444e7a1e376b",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "On M3ToolEval, CodeAct has the highest success rate for 12 of 17 models and the lowest average turns for 12 of 17. For GPT-4-1106-preview, it improves success by 20.7 percentage points over text and uses 2.1 fewer turns (PDF p. 5)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The paper reports 7,139 trajectories across multiple domains and evaluates CodeActAgent on out-of-domain agent tasks and general-capability benchmarks. It also reports that the Llama-2 variant shows no M3ToolEval improvement (PDF pp. 7–9)."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "M3ToolEval comprises 82 human-curated instances (PDF p. 5). Its results differ markedly across model families, including a best open-source success rate of 13.4% versus 74.4% for the best closed-source model; the stated constraint on generalizing the headline advantage is a reasonable qualification (PDF p. 5)."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The evaluation describes specific benchmarks and interaction setups, not deployment safety or robustness beyond them (PDF pp. 5, 9). The authors explicitly flag the possibility of escaping sandbox restrictions and call for future safety mechanisms (PDF p. 10)."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 31650,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 31647,
+  "output_tokens": 527,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.004219675,
+  "billing_uncertain": false
+}

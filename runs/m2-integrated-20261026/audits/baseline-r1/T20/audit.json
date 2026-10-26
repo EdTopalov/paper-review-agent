@@ -1,0 +1,55 @@
+{
+  "task_id": "T20",
+  "variant": "baseline",
+  "review_sha256": "096f40cb5d5a691157a92eabc8dc5b04d18a55c6c6ab1290e5eef26511172636",
+  "snapshot_sha256": "b56caa8ab8de6e9fef4d3fdfb57e22ab96eb3e3c24c3c2e5205872ce3583040c",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "Page 3 describes training examples with an oracle document plus distractors for a portion of questions, and distractors only for the remainder. Page 4 adds reasoning-style answers with citations to source text. This supports the claim that the design addresses distractors and imperfect retrieval rather than using only question-answer pairs."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The results table on page 5 shows large RAFT gains over listed baselines on HotpotQA and HuggingFace—for example, 35.28 versus 6.38 on HotpotQA and 74.00 versus 61.06 on HuggingFace compared with DSF. The claim is appropriately limited to some tasks."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The paper explicitly says it studies testing on the same documents as training (page 9), and describes its focus as domain-specific open-book tasks in a known domain (page 2). That scope limits what the experiments establish about transfer to new collections or domains."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "Page 7 reports a lower RAFT-without-CoT score than RAFT on Torch Hub (86.56 versus 84.95 in the table, so this comparison is actually higher without CoT), while page 5 shows only a 0.01-point RAFT-over-DSF difference on Torch Hub. The small main-table gain supports the consistency concern, but the stated CoT comparison is reversed; overall, the observation is partly grounded but inaccurate as written."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 14409,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 14406,
+  "output_tokens": 522,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.00206205,
+  "billing_uncertain": false
+}

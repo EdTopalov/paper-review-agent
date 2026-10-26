@@ -1,0 +1,55 @@
+{
+  "task_id": "T04",
+  "variant": "baseline",
+  "review_sha256": "7cb162807c1064db0ddbdef544bace27b4c01d37a708fd56a44f7263b123f93b",
+  "snapshot_sha256": "36b3ff939218daeac45a67876a833ac77ec293e56200262dfbcdfc7d8a0b3199",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The paper describes eight distinct environments spanning settings such as operating systems, databases, games, household tasks, and web interaction, and reports environment-specific metrics (PDF pp. 2, 13). This supports the claim of breadth relative to a single-environment study."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The toolkit uses a standard chat API interface and packages complex environments in Docker images, and the paper says the datasets, environments, and evaluation package are released (PDF pp. 3, 13). The qualification “in principle” appropriately avoids asserting that every run is automatically reproducible."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The overall score weights each task by the reciprocal of its average score across the tested models (PDF p. 14). Because the weights are tied to that evaluated set, care is warranted when interpreting comparisons involving a different model set."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The appendix explicitly reports that automatic LTP evaluation can be more tolerant of agents than human evaluation, making SGA and QR appear better, especially for open-source models (PDF p. 30)."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 38005,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 38002,
+  "output_tokens": 364,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.00493255,
+  "billing_uncertain": false
+}

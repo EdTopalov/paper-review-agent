@@ -1,0 +1,55 @@
+{
+  "task_id": "T08",
+  "variant": "agent",
+  "review_sha256": "068314a3f82e685088bac343c1daa1d9aedaea089dce17e81dd25e35c03eaedf",
+  "snapshot_sha256": "fef709ec029e89123d4022d0a90e0338d2f4eccfaae07c73c956b646d0ff8cf4",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The benchmark evaluates tool-mediated conversations with a simulated user and compares the final database state with a ground-truth outcome; the reward also checks required information in user-facing responses (pp. 2, 4)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The paper reports that for the best-performing tested model, gpt-4o, pass^8 in retail drops below 25% (p. 7)."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The authors explicitly remove the domain policy from the function-calling agent’s system prompt and report the resulting pass^1 changes (p. 8)."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The paper states that the domains’ schemas, APIs, and rules are simplified relative to real-world domains, and presents this as a benchmark characteristic relevant to generalization (p. 6)."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 39991,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 39988,
+  "output_tokens": 329,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.0051633,
+  "billing_uncertain": false
+}

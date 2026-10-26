@@ -1,0 +1,55 @@
+{
+  "task_id": "T20",
+  "variant": "agent",
+  "review_sha256": "618391668cae797401149e7b85d754997301464f05b4dcd5ba3e538ad49496bb",
+  "snapshot_sha256": "b56caa8ab8de6e9fef4d3fdfb57e22ab96eb3e3c24c3c2e5205872ce3583040c",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The method uses oracle documents alongside distractors for a portion of examples, and only distractors for the remainder (PDF p. 3)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "Table 1 reports RAFT’s results against the listed baselines across five tasks, with gains on several metrics and exceptions such as Torch Hub, where DSF scores 84.94 versus RAFT’s 84.95, and PubMed, where DSF + RAG ties GPT-3.5 + RAG (PDF p. 5). The claim appropriately avoids saying every comparison is a substantial win."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The paper explicitly contrasts its setting with work testing on different domains or documents, stating that it focuses on the same set of documents (PDF p. 9)."
+      },
+      {
+        "index": 3,
+        "verdict": "overstated",
+        "explanation": "The cited statement on p. 4 asserts that RAFT significantly outperforms baselines, but the paper includes more than headline results: it describes datasets and baselines (PDF p. 4), provides benchmark results and a CoT ablation (PDF pp. 5–7), and examines training and test-time document variation (PDF pp. 6–8). Those reported details do not establish statistical variability, but saying the pages inspected do not provide enough detail to fully audit the protocol is broader than the evidence shown; this is an open question, not itself a demonstrated defect."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 14373,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 14370,
+  "output_tokens": 333,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.00196305,
+  "billing_uncertain": false
+}

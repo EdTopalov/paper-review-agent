@@ -1,0 +1,55 @@
+{
+  "task_id": "T15",
+  "variant": "agent",
+  "review_sha256": "ad6ad2cd7123f271e793a06253c57a333d9a97a8925a1152f8f9c1a651d81f2f",
+  "snapshot_sha256": "fe022cf4262daf63193dab4baffd2df9324e4fd12e676515f8befc6e38eb28a0",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The paper describes a multi-stage flow that repeatedly runs and fixes code against public and AI-generated tests, with problem reflection and test generation as part of preprocessing (PDF pp. 1, 3–4)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "Table 1 reports gains on both validation and test splits for DeepSeek-33B, GPT-3.5, and GPT-4; it also gives GPT-4 validation pass@5 as 19% versus 44% (PDF p. 7)."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The evaluation uses 107 validation problems and 165 test problems, and the paper’s reported experiments are on CodeContests. The stated concern about confidence in generalization beyond this benchmark is a reasonable limitation (PDF p. 3)."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The paper notes that prior systems did not release reproducible end-to-end solutions and identifies evaluation subtleties, including multiple solutions, tolerances, and timeouts. These caveats support qualifying cross-system comparisons, while the paper still reports superiority (PDF p. 7)."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 9548,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 9545,
+  "output_tokens": 409,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.001397925,
+  "billing_uncertain": false
+}

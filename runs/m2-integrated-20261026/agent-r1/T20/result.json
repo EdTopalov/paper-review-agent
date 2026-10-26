@@ -1,0 +1,168 @@
+{
+  "task_id": "T20",
+  "variant": "agent",
+  "model": "gpt-6-luna",
+  "prompt_version": "m2-v2",
+  "rubric_version": "m2-v1",
+  "checker_version": "m2-citations-v2",
+  "status": "ok",
+  "review": {
+    "score": 0.73,
+    "summary": "RAFT is a practical fine-tuning recipe for in-domain RAG: train with question/document/answer examples that include irrelevant retrieved documents, sometimes omit the oracle document, and produce quoted reasoning answers. The paper reports improvements over several fine-tuning and RAG baselines across biomedical QA, multi-hop QA, and API-document tasks. Its main value is the targeted training setup and broad task demonstrations, while claims are bounded to a same-domain/document setting and the inspected evidence leaves some evaluation details unresolved.",
+    "observations": [
+      {
+        "kind": "strength",
+        "claim": "The method directly trains for imperfect retrieval by mixing relevant evidence with distractors and withholding the oracle document on some examples.",
+        "page": 3,
+        "quote": "For (1 − P ) fraction of the questions (qi) in the dataset, we include no oracle document and only include distractor documents (dk)."
+      },
+      {
+        "kind": "strength",
+        "claim": "The reported benchmark table gives evidence of gains over the listed RAG and domain-specific fine-tuning baselines on several tasks, though not uniformly over every baseline and task.",
+        "page": 5,
+        "quote": "RAFT (LLaMA2-7B) 73.30 35.28 74.00 84.95 86.86"
+      },
+      {
+        "kind": "limitation",
+        "claim": "The work explicitly targets a restricted deployment setting rather than domain transfer to new documents at inference time.",
+        "page": 9,
+        "quote": "our paper studies a slightly opposite scenario where we only care about testing the LLM on the same set of documents."
+      },
+      {
+        "kind": "uncertainty",
+        "claim": "The pages inspected establish headline results but do not provide enough detail here to judge statistical variability or fully audit the evaluation protocol.",
+        "page": 4,
+        "quote": "We see that RAFT consistently and significantly outperforms the baselines."
+      }
+    ],
+    "unresolved_questions": [
+      "How sensitive are the headline gains to random seeds, data composition, and the exact retrieval pipeline?",
+      "How well does RAFT transfer to new documents or domains, outside the same-document setting?",
+      "How much of the gain depends on generated chain-of-thought quality versus the distractor-aware training construction?"
+    ]
+  },
+  "reading_actions": 5,
+  "tool_calls": 7,
+  "decision_steps": 7,
+  "evidence_observed": [
+    true,
+    true,
+    true,
+    true
+  ],
+  "citation_checks": [
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        3
+      ],
+      "candidate_pages": [],
+      "status": "whitespace"
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        5
+      ],
+      "candidate_pages": [],
+      "status": "exact"
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        9
+      ],
+      "candidate_pages": [],
+      "status": "whitespace"
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        4
+      ],
+      "candidate_pages": [],
+      "status": "whitespace"
+    }
+  ],
+  "api_calls": 7,
+  "successful_model_calls": 7,
+  "input_tokens": 43381,
+  "cached_input_tokens": 24465,
+  "cache_write_tokens": 18034,
+  "output_tokens": 1134,
+  "submission_attempts": 2,
+  "rejected_submissions": 1,
+  "first_submission_checks": [
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        3
+      ],
+      "candidate_pages": [],
+      "status": "whitespace",
+      "observed": true
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        5
+      ],
+      "candidate_pages": [],
+      "status": "exact",
+      "observed": true
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true,
+      "citation_verified": true,
+      "matching_pages": [
+        9
+      ],
+      "candidate_pages": [],
+      "status": "whitespace",
+      "observed": true
+    },
+    {
+      "checker_version": "m2-citations-v2",
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": false,
+      "citation_verified": false,
+      "matching_pages": [],
+      "candidate_pages": [
+        4
+      ],
+      "status": "hyphenation_ambiguous",
+      "observed": false
+    }
+  ],
+  "estimated_cost_usd": 0.0031541,
+  "billing_uncertain": false,
+  "latency_seconds": 19.59229990001768
+}

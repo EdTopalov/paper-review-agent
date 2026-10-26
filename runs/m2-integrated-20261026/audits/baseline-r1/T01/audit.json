@@ -1,0 +1,56 @@
+{
+  "task_id": "T01",
+  "variant": "baseline",
+  "review_sha256": "4583b42c6bae3fe297b40a2271e82ddc0a92dff907dc37d0dcf5d676eaf3f27d",
+  "snapshot_sha256": "f35c6e9cefe6d6e88081248d15605c793f711a7fe943263e6b6b638b1e557e54",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "normalization": "one_based_indices_normalized",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "Page 3 defines ReAct as augmenting the action space with language thoughts that update context and support later reasoning or action; pages 3–4 describe using observations and applying the method across reasoning and decision-making tasks."
+      },
+      {
+        "index": 1,
+        "verdict": "overstated",
+        "explanation": "The combined ReAct/CoT-SC methods exceed CoT-SC on both QA benchmarks (page 6, Table 1). But standalone ReAct does not improve success on WebShop over Act: WebShop success is 40.0% versus 30.1% (page 8, Table 4), while the ALFWorld comparison is reported across six trials and includes best-of-six figures. The claim incorrectly groups both interactive tasks as reported “trials” improvements."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The sampled HotpotQA error analysis reports a higher reasoning-error proportion for ReAct than CoT (47% vs. 16%) and says non-informative search results account for 23% of ReAct error cases and can derail reasoning (page 6, Table 2 and discussion). The stated trade-off is grounded in the paper."
+      },
+      {
+        "index": 3,
+        "verdict": "overstated",
+        "explanation": "Manual few-shot demonstrations are documented (pages 3–5), and ALFWorld evaluation covers 134 unseen games with six prompt permutations (page 7). However, “best-of-multiple-trial results” applies to some reported ALFWorld comparisons, not the reported WebShop result; the paper also reports ALFWorld averages and six controlled trials (pages 7–8). The caveat about broader annotator, model, and deployment coverage is a reasonable boundary on the evidence, not a demonstrated defect."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 35331,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 35328,
+  "output_tokens": 389,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.0046108,
+  "billing_uncertain": false
+}

@@ -1,0 +1,56 @@
+{
+  "task_id": "T12",
+  "variant": "agent",
+  "review_sha256": "ca43ee1a7ec01f58f69b48bacac23bae5cd82770979c35e9857ee74e7a6aabe2",
+  "snapshot_sha256": "c19d08b3874f610ac6c3c45f57a1dd3f8a380c7f4a99a022631d71369737d7f7",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "normalization": "one_based_indices_normalized",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The paper describes a modular construction pipeline and a reward-function endpoint that can use interaction history and container state, enabling custom reward designs (PDF p. 4). The interface and appendix also discuss customization and extension (PDF pp. 14–15)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The reported SQL results show Try Again outperforming Single Turn for every listed model, including GPT-4 rising from 9.1% to 73.7% overall; the paper also reports gains in Bash (PDF pp. 6–7). This supports the qualified claim about interaction and benchmark viability."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The paper explicitly states that its implemented environments are limited to Bash and SQL and that the CTF dataset has only four instances, limiting broad evaluation (PDF p. 9; see also PDF p. 26)."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The paper describes Docker containers as execution sandboxes, but warns that Bash and SQL impose no strict action-space limitations and that direct sim-to-real transfer may put real systems at risk (PDF pp. 3–4, 26). The claim accurately distinguishes sandboxed evaluation from unestablished deployment safety."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 28227,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 28224,
+  "output_tokens": 416,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "submission_attempts": 0,
+  "rejected_submissions": 0,
+  "first_submission_checks": null,
+  "estimated_cost_usd": 0.0037363,
+  "billing_uncertain": false
+}
