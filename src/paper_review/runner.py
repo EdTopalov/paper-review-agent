@@ -8,6 +8,7 @@
 from dataclasses import asdict, dataclass
 import importlib.metadata
 import json
+import math
 from pathlib import Path
 import time
 
@@ -15,7 +16,8 @@ import jsonschema
 from openai import OpenAI, APIConnectionError, APIStatusError, APITimeoutError
 
 from .paper import Paper, file_hash
-from .prompts import AGENT_INSTRUCTIONS, PROMPT_VERSION, RUBRIC
+from .citations import CHECKER_VERSION, check_quote
+from .prompts import AGENT_INSTRUCTIONS, PROMPT_VERSION, RUBRIC, RUBRIC_VERSION
 from .schema import REVIEW_SCHEMA, TOOLS
 from .trace import Trace
 
@@ -55,6 +57,8 @@ class ModelCalls:
         self.stats = {"api_calls": 0, "successful_model_calls": 0, "input_tokens": 0,
                       "cached_input_tokens": 0, "cache_write_tokens": 0, "output_tokens": 0,
                       "reading_actions": 0, "tool_calls": 0, "decision_steps": 0,
+                      "submission_attempts": 0, "rejected_submissions": 0,
+                      "first_submission_checks": None,
                       "estimated_cost_usd": 0.0 if config.model in PRICES else None,
                       "billing_uncertain": False}
 
@@ -109,12 +113,17 @@ class ModelCalls:
 
 def validate_review(review):
     jsonschema.validate(review, REVIEW_SCHEMA)
+    if not math.isfinite(review["score"]) or not review["summary"].strip() or any(
+        not observation["claim"].strip() for observation in review["observations"]
+    ):
+        raise ValueError("invalid_review_content")
 
 
 def agent(paper, calls, config, trace):
     history = [{"role": "user", "content": json.dumps(paper.introduction(), ensure_ascii=False)}]
     reads = 0
     tool_calls = 0
+    observed = {1: [paper.pages[0]]}
     instructions = AGENT_INSTRUCTIONS.format(max_reads=config.max_reads)
     for step in range(1, config.max_reads + 4):
         calls.stats["decision_steps"] = step
@@ -142,18 +151,39 @@ def agent(paper, calls, config, trace):
                 else:
                     jsonschema.validate(arguments, schema)
                     if action.name == "submit_review":
+                        validate_review(arguments["review"])
+                        calls.stats["submission_attempts"] += 1
+                        checks = paper.check_citations(arguments["review"])
+                        for observation, check in zip(arguments["review"]["observations"], checks):
+                            check["observed"] = any(
+                                check_quote([fragment], 1, observation["quote"])["citation_verified"]
+                                for fragment in observed.get(observation["page"], [])
+                            )
+                        if calls.stats["first_submission_checks"] is None:
+                            calls.stats["first_submission_checks"] = checks
                         trace.write("tool_call", step=step, name=action.name, arguments=arguments)
-                        trace.write("tool_observation", step=step, call_id=action.call_id,
-                                    observation={"accepted": True})
-                        return arguments["review"], {"reading_actions": reads, "tool_calls": tool_calls,
-                                                     "decision_steps": step}
-                    reads += 1  # Errors and empty searches still consume reading actions.
-                    calls.stats["reading_actions"] = reads
-                    trace.write("tool_call", step=step, name=action.name, arguments=arguments)
-                    if action.name == "search_paper":
-                        observation = paper.search(arguments["query"])
+                        if all(check["citation_verified"] and check["observed"] for check in checks):
+                            trace.write("tool_observation", step=step, call_id=action.call_id,
+                                        observation={"accepted": True, "citation_checks": checks})
+                            return arguments["review"], {"reading_actions": reads, "tool_calls": tool_calls,
+                                                         "decision_steps": step,
+                                                         "evidence_observed": [check["observed"] for check in checks]}
+                        calls.stats["rejected_submissions"] += 1
+                        observation = {"error": "citation_validation_failed", "citation_checks": checks,
+                                       "hint": "Copy exact quotes from observed pages, or read matching pages before resubmitting. Preserve case, mathematical notation, and ambiguous hyphens."}
                     else:
-                        observation = paper.read_pages(arguments["start"], arguments["end"])
+                        reads += 1  # Errors and empty searches still consume reading actions.
+                        calls.stats["reading_actions"] = reads
+                        trace.write("tool_call", step=step, name=action.name, arguments=arguments)
+                        if action.name == "search_paper":
+                            observation = paper.search(arguments["query"])
+                            fragments = observation.get("matches", [])
+                            for fragment in fragments:
+                                observed.setdefault(fragment["page"], []).append(fragment["snippet"])
+                        else:
+                            observation = paper.read_pages(arguments["start"], arguments["end"])
+                            for fragment in observation.get("pages", []):
+                                observed.setdefault(fragment["page"], []).append(fragment["text"])
             except (json.JSONDecodeError, jsonschema.ValidationError) as exc:
                 observation = {"error": "invalid_arguments", "type": type(exc).__name__}
             except Exception as exc:
@@ -172,6 +202,8 @@ def baseline(paper, calls, trace):
     trace.write("decision", step=1, action="final_answer", content=response.output_text)
     review = json.loads(response.output_text)
     validate_review(review)
+    calls.stats["submission_attempts"] = 1
+    calls.stats["first_submission_checks"] = paper.check_citations(review)
     return review, {"reading_actions": 0, "tool_calls": 0, "decision_steps": 1}
 
 
@@ -183,12 +215,14 @@ def run_review(paper_path, out, config, task_id, variant="agent", client=None, m
     versions = {package: importlib.metadata.version(package)
                 for package in ("openai", "pypdf", "jsonschema")}
     trace.write("run_start", task_id=task_id, variant=variant, config=asdict(config),
-                prompt_version=PROMPT_VERSION, paper_path=str(paper_path),
+                prompt_version=PROMPT_VERSION, rubric_version=RUBRIC_VERSION,
+                checker_version=CHECKER_VERSION, paper_path=str(paper_path),
                 dependencies=versions, pricing_usd_per_million=PRICES.get(config.model),
                 pricing_checked="2026-10-26", metadata=metadata or {})
     calls = ModelCalls(client or OpenAI(max_retries=0, timeout=config.timeout), config, trace)
     result = {"task_id": task_id, "variant": variant, "model": config.model,
-              "prompt_version": PROMPT_VERSION, "status": "error", "review": None,
+              "prompt_version": PROMPT_VERSION, "rubric_version": RUBRIC_VERSION,
+              "checker_version": CHECKER_VERSION, "status": "error", "review": None,
               "reading_actions": None, "tool_calls": None, "decision_steps": None}
     try:
         paper = Paper.load(paper_path)
@@ -207,6 +241,7 @@ def run_review(paper_path, out, config, task_id, variant="agent", client=None, m
         if type(exc) in (ValueError, RuntimeError) and str(exc) in {
             "paper_has_no_extractable_text", "paper_exceeds_documented_input_limit",
             "model_decision_budget_exhausted",
+            "invalid_review_content",
         }:
             result["error"]["code"] = str(exc)
         trace.write("run_error", error=result["error"])

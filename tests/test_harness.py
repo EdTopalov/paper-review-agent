@@ -29,6 +29,15 @@ REVIEW = {
          "quote": "We did not conduct a statistical significance test."},
     ], "unresolved_questions": ["Does the small difference persist across runs?"],
 }
+OPENING_REVIEW = {
+    "score": 0.25, "summary": "A clearly labeled synthetic development fixture.",
+    "observations": [
+        {"kind": "uncertainty", "claim": "This is not a real paper.", "page": 1,
+         "quote": "DEVELOPMENT FIXTURE, NOT A REAL PAPER."},
+        {"kind": "limitation", "claim": "The fixture reports a small question sample.", "page": 1,
+         "quote": "40 English questions."},
+    ], "unresolved_questions": [],
+}
 
 
 class Action:
@@ -69,18 +78,20 @@ class Client:
         return response
 
 
-def finish():
+def finish(review=None):
     return Response([Action("submit_review", {"reason": "Enough evidence; remaining questions recorded.",
-                                              "review": REVIEW}, "finish")])
+                                              "review": review or OPENING_REVIEW}, "finish")])
 
 
 def events(folder):
-    return [json.loads(line) for line in (folder / "trace.jsonl").read_text(encoding="utf-8").splitlines()]
+    with (folder / "trace.jsonl").open(encoding="utf-8") as stream:
+        return [json.loads(line) for line in stream]
 
 
 def test_reading_tools_return_recoverable_results():
     paper = Paper.load(FIXTURE)
-    assert paper.search("absent-query") == {"matches": [], "limit_reached": False}
+    assert paper.search("absent-query")["matches"] == []
+    assert "Literal phrase" in paper.search("absent-query")["hint"]
     assert paper.search(" ")["error"] == "empty_query"
     assert paper.read_pages(0, 2)["error"] == "invalid_page_range"
     assert paper.read_pages(1, 4)["error"] == "invalid_page_range"
@@ -198,3 +209,40 @@ def test_audit_accepts_unambiguous_zero_or_one_based_indices():
 def test_audit_rejects_missing_or_duplicate_observations():
     with pytest.raises(ValueError):
         normalize_indices({"observations": [{"index": 1}, {"index": 1}]}, 2)
+
+
+def test_citation_rejection_can_be_repaired_by_model(tmp_path):
+    invalid = deepcopy(OPENING_REVIEW)
+    invalid["observations"][0]["quote"] = "An invented sentence."
+    client = Client([finish(invalid), finish()])
+    result = run_review(FIXTURE, tmp_path / "run", Config(), "dev", client=client)
+    assert result["status"] == "ok"
+    assert result["rejected_submissions"] == 1 and result["submission_attempts"] == 2
+    assert result["first_submission_checks"][0]["status"] == "not_found"
+    assert "citation_validation_failed" in json.dumps(client.requests[1]["input"])
+
+
+def test_real_but_unobserved_quote_requires_reading(tmp_path):
+    client = Client([finish(REVIEW), Response([Action("read_pages", {
+        "start": 2, "end": 3, "reason": "Observe the cited evidence."}, "read")]), finish(REVIEW)])
+    result = run_review(FIXTURE, tmp_path / "run", Config(), "dev", client=client)
+    assert result["status"] == "ok" and result["rejected_submissions"] == 1
+    assert all(result["evidence_observed"])
+    assert not any(c["observed"] for c in result["first_submission_checks"])
+
+
+def test_structured_page_reads_keep_each_page_identity():
+    result = Paper.load(FIXTURE).read_pages(2, 3)
+    assert [page["page"] for page in result["pages"]] == [2, 3]
+    assert "Methods." in result["pages"][0]["text"]
+    assert "Limitations." in result["pages"][1]["text"]
+
+
+def test_repeated_bad_submissions_end_with_recorded_budget_failure(tmp_path):
+    bad = deepcopy(OPENING_REVIEW)
+    bad["observations"][0]["quote"] = "Invented quotation."
+    client = Client([finish(bad) for _ in range(3)])
+    result = run_review(FIXTURE, tmp_path / "run", Config(max_reads=0), "dev", client=client)
+    assert result["status"] == "error" and result["api_calls"] == 3
+    assert result["error"]["code"] == "model_decision_budget_exhausted"
+    assert result["rejected_submissions"] == 3

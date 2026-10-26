@@ -31,14 +31,14 @@ def function(name, description, properties):
 
 
 TOOLS = [
-    function("search_paper", "Search the paper text. Empty matches are a normal result.", {
+    function("search_paper", "Case-insensitive literal keyword/phrase search, not a web search. Use a short exact phrase such as 'limitations', not a bundle of keywords. Empty matches are a normal result.", {
         "query": {"type": "string"}, "reason": {"type": "string"},
     }),
-    function("read_pages", "Read 1 to 3 consecutive pages, using 1-based PDF page numbers.", {
+    function("read_pages", "Read 1 to 3 consecutive PDF pages. Each returned excerpt has its own 1-based page number. Preserve that number when citing it.", {
         "start": {"type": "integer"}, "end": {"type": "integer"},
         "reason": {"type": "string"},
     }),
-    function("submit_review", "Finish when the evidence suffices; report remaining uncertainty.", {
+    function("submit_review", "Finish when the evidence suffices; report uncertainty. Invalid or unobserved citations return a recoverable validation error, so copy quotes from observed pages.", {
         "reason": {"type": "string"}, "review": REVIEW_SCHEMA,
     }),
 ]

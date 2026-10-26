@@ -10,6 +10,8 @@ import subprocess
 
 from .paper import Paper, file_hash
 from .runner import run_review
+from .citations import CHECKER_VERSION
+from .prompts import PROMPT_VERSION, RUBRIC_VERSION
 
 
 def load_sample(path):
@@ -33,11 +35,20 @@ def load_sample(path):
 
 def mechanical_result(result):
     citations = result.get("citation_checks", [])
+    verified_available = "checker_version" in result
+    first = result.get("first_submission_checks") or []
     return {"task_id": result["task_id"], "variant": result["variant"],
             "completed": result["status"] == "ok",
             "all_citations_match": bool(citations) and all(c["quote_matches"] for c in citations),
             "observation_count": len(citations),
-            "matching_quotes": sum(c["quote_matches"] for c in citations)}
+            "matching_quotes": sum(c["quote_matches"] for c in citations),
+            "all_citations_verified": (bool(citations) and all(c["citation_verified"] for c in citations))
+                if verified_available else None,
+            "verified_citations": sum(c["citation_verified"] for c in citations) if verified_available else None,
+            "first_submission_verified": bool(first) and all(c["citation_verified"] for c in first)
+                if verified_available else None,
+            "first_submission_observed": bool(first) and all(c.get("observed", True) for c in first)
+                if verified_available else None}
 
 
 def summarize(out):
@@ -48,12 +59,22 @@ def summarize(out):
         rows = [r for r in results if r["variant"] == variant]
         checks = [mechanical_result(r) for r in rows]
         costs = [r["estimated_cost_usd"] for r in rows if r["estimated_cost_usd"] is not None]
+        verification_available = all(c["all_citations_verified"] is not None for c in checks)
         summary[variant] = {
             "runs": len(rows), "distinct_tasks": len({r["task_id"] for r in rows}),
             "completed": sum(c["completed"] for c in checks),
             "all_quotes_match": sum(c["all_citations_match"] for c in checks),
             "quote_match_rate": (sum(c["matching_quotes"] for c in checks)
                                  / max(1, sum(c["observation_count"] for c in checks))),
+            "all_citations_verified": sum(c["all_citations_verified"] for c in checks) if verification_available else None,
+            "citation_verification_rate": sum(c["verified_citations"] for c in checks)
+                / max(1, sum(c["observation_count"] for c in checks)) if verification_available else None,
+            "first_submission_verified": sum(c["first_submission_verified"] for c in checks) if verification_available else None,
+            "first_submission_observed": sum(c["first_submission_observed"] for c in checks) if verification_available else None,
+            "mean_rejected_submissions": statistics.mean(r.get("rejected_submissions", 0) for r in rows),
+            "recovered_citation_runs": sum(r.get("rejected_submissions", 0) > 0 and r["status"] == "ok" for r in rows),
+            "citation_status_counts": {status: sum(c.get("status") == status for r in rows for c in r.get("citation_checks", []))
+                                       for status in ("exact", "whitespace", "normalized", "wrong_page", "hyphenation_ambiguous", "not_found")},
             "mean_reading_actions": statistics.mean(r["reading_actions"] or 0 for r in rows),
             "mean_model_calls": statistics.mean(r["api_calls"] for r in rows),
             "mean_latency_seconds": statistics.mean(r["latency_seconds"] for r in rows),
@@ -64,10 +85,12 @@ def summarize(out):
         }
     (out / "summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
     (out / "mechanical.jsonl").write_text("".join(json.dumps(mechanical_result(r)) + "\n" for r in results), encoding="utf-8")
-    header = "| Variant | Completed | All quotes match | Reads/task | API calls/task | USD/task | Seconds/task |\n|---|---:|---:|---:|---:|---:|---:|\n"
+    header = "| Variant | Completed | Strict quotes | Verified citations | Reads/task | API calls/task | USD/task | Seconds/task |\n|---|---:|---:|---:|---:|---:|---:|---:|\n"
     for name, row in summary.items():
         cost = f"{row['mean_cost_usd']:.6f}" if row["mean_cost_usd"] is not None else "unknown"
+        verified = f"{row['all_citations_verified']}/{row['runs']}" if row["all_citations_verified"] is not None else "not recorded"
         header += (f"| {name} | {row['completed']}/{row['runs']} | {row['all_quotes_match']}/{row['runs']} | "
+                   f"{verified} | "
                    f"{row['mean_reading_actions']:.2f} | {row['mean_model_calls']:.2f} | {cost} | "
                    f"{row['mean_latency_seconds']:.2f} |\n")
     (out / "summary.md").write_text(header, encoding="utf-8")
@@ -77,6 +100,8 @@ def summarize(out):
 def evaluate(sample_path, out, config, variant="both", workers=2, repeats=1, limit=None):
     sample_path, out = Path(sample_path).resolve(), Path(out)
     tasks = load_sample(sample_path)
+    if any(task["instructions_version"] != RUBRIC_VERSION for task in tasks):
+        raise ValueError("Sample instructions do not match the frozen common rubric")
     if limit is not None:
         tasks = tasks[:limit]
     if not tasks:
@@ -92,6 +117,8 @@ def evaluate(sample_path, out, config, variant="both", workers=2, repeats=1, lim
     experiment = {"sample_sha256": file_hash(sample_path), "task_ids": [t["id"] for t in tasks],
                   "config": asdict(config), "variants": variants, "repeats": repeats,
                   "git_revision": revision, "source_sha256": source_hash.hexdigest(),
+                  "prompt_version": PROMPT_VERSION, "rubric_version": RUBRIC_VERSION,
+                  "checker_version": CHECKER_VERSION,
                   "sample_path": str(sample_path), "workers": workers}
     experiment_path = out / "experiment.json"
     if experiment_path.exists():
@@ -100,6 +127,13 @@ def evaluate(sample_path, out, config, variant="both", workers=2, repeats=1, lim
             raise ValueError("Existing experiment has different inputs/code/config; choose a new --out")
     else:
         experiment_path.write_text(json.dumps(experiment, indent=2) + "\n", encoding="utf-8")
+        source_dir = out / "source"
+        source_dir.mkdir()
+        for source in sorted(Path(__file__).parent.glob("*.py")):
+            (source_dir / source.name).write_bytes(source.read_bytes())
+        project = Path(__file__).resolve().parents[2] / "pyproject.toml"
+        if project.exists():
+            (out / "pyproject-evaluated.toml").write_bytes(project.read_bytes())
     jobs = []
     for repeat in range(1, repeats + 1):
         for task in tasks:

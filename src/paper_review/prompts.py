@@ -1,6 +1,7 @@
 """Versioned common rubric; reference reviews must never enter these inputs."""
 
-PROMPT_VERSION = "m2-v1"
+PROMPT_VERSION = "m2-v2"
+RUBRIC_VERSION = "m2-v1"
 
 RUBRIC = """You help an ML research reading club select papers for discussion.
 Assess each supplied paper independently. Return an absolute score in [0, 1].
@@ -33,4 +34,9 @@ You initially receive metadata and the first PDF page. You can read at most
 {max_reads} times (searches count). Empty matches and structured tool errors are
 recoverable: revise the query or request valid pages. If the reading budget is
 spent, submit an assessment that acknowledges remaining uncertainty.
+Search uses literal keyword/phrase matching, not bag-of-words retrieval. Keep
+queries short. Preserve each excerpt's page number when citing it. Cite only text
+you have observed. If submit_review returns citation errors, correct the evidence
+or read again. Keep case, numbers, signs, and mathematical notation unchanged;
+copy ambiguous line-break hyphenation exactly rather than silently rewriting it.
 """

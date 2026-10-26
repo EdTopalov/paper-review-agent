@@ -3,6 +3,13 @@
 The agent/harness code in this repository was written for this project. No agent
 framework implementation or paper-review dataset code was copied.
 
+The unified implementation incorporates the team's citation checker and page
+reading design from [commit 39d760f](https://github.com/EdTopalov/paper-review-agent/commit/39d760f2e47b66d074de34397101dcc66e53ead1).
+The original team commit remains in Git history. `citations.py` extends its
+exact/normalized/wrong-page categories with conservative handling of case,
+mathematical notation, and ambiguous line-break hyphens. The shared package is
+`src/paper_review`; the OpenAI Responses API is the default model backend.
+
 - ReAct supplies the architectural idea of alternating model decisions and tool
   observations: Yao et al., [ReAct](https://arxiv.org/abs/2210.03629), CC BY 4.0.
   It is cited in `src/paper_review/runner.py`; this is an independent implementation.

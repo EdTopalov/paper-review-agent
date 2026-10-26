@@ -5,13 +5,10 @@ import json
 from pathlib import Path
 import re
 
+from .citations import check_quote, normalize
 
 def file_hash(path):
     return sha256(Path(path).read_bytes()).hexdigest()
-
-
-def normalize(text):
-    return " ".join(text.split())
 
 
 class Paper:
@@ -41,13 +38,14 @@ class Paper:
                             for i, text in enumerate(self.pages, 1))
 
     def read_pages(self, start, end):
-        if not (1 <= start <= end <= len(self.pages)) or end - start > 2:
+        if type(start) is not int or type(end) is not int or not (1 <= start <= end <= len(self.pages)) or end - start > 2:
             return {"error": "invalid_page_range", "page_count": len(self.pages),
                     "hint": "Use 1-based pages and request at most 3 pages."}
-        text = "\n\n".join(f"=== PDF PAGE {i} ===\n{self.pages[i-1]}"
-                            for i in range(start, end + 1))
-        return {"start": start, "end": end, "text": text[:24000],
-                "truncated": len(text) > 24000}
+        # Each excerpt carries its own page identity, as in the team's read_page
+        # tool. Never concatenate multiple pages into one unstructured string.
+        return {"pages": [{"page": i, "text": self.pages[i-1][:8000],
+                           "truncated": len(self.pages[i-1]) > 8000}
+                          for i in range(start, end + 1)]}
 
     def search(self, query):
         if not query.strip():
@@ -61,14 +59,11 @@ class Paper:
                                 "snippet": text[max(0, match.start()-180):match.end()+400]})
                 if len(matches) == 8:
                     return {"matches": matches, "limit_reached": True}
-        return {"matches": matches, "limit_reached": False}
+        result = {"matches": matches, "limit_reached": False}
+        if not matches:
+            result["hint"] = "Literal phrase not found. Try one keyword or a shorter exact phrase, or read pages."
+        return result
 
     def check_citations(self, review):
-        checks = []
-        for observation in review["observations"]:
-            number, quote = observation["page"], normalize(observation["quote"])
-            valid_page = 1 <= number <= len(self.pages)
-            checks.append({"page_valid": valid_page, "quote_nonempty": bool(quote),
-                           "quote_matches": bool(quote) and valid_page
-                           and quote in normalize(self.pages[number-1])})
-        return checks
+        return [check_quote(self.pages, observation["page"], observation["quote"])
+                for observation in review["observations"]]
