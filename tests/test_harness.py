@@ -319,3 +319,31 @@ def test_checker_detects_incomplete_trace(tmp_path):
     checked = check_experiment(folder)
     assert checked["passed"] == 0
     assert not checked["failures"][0]["checks"]["terminal_result"]
+
+
+def test_trace_reconstructs_changed_and_removed_request_settings(tmp_path):
+    from paper_review.trace import Trace
+    path = tmp_path / "trace.jsonl"
+    first = {"model": "test", "input": [{"role": "user", "content": "Paper text"}],
+             "instructions": "Inspect evidence", "tools": [{"name": "read"}]}
+    second = {"model": "test", "input": first["input"] + [{"role": "user", "content": "Now stop"}],
+              "instructions": "Submit a review"}
+    trace = Trace(path)
+    for request in (first, second, second):
+        trace.write("model_request", request=request)
+    trace.close()
+    assert [e["request"] for e in read_events(path)] == [first, second, second]
+
+
+def test_readable_report_stays_short_after_seven_citation_rejections(tmp_path):
+    bad = deepcopy(OPENING_REVIEW)
+    bad["observations"][0]["quote"] = "Invented quotation."
+    client = Client([finish(bad) for _ in range(7)] + [finish()])
+    folder = tmp_path / "run"
+    result = run_review(FIXTURE, folder, Config(), "dev", client=client)
+    report = (folder / "README.md").read_text(encoding="utf-8")
+    assert result["status"] == "ok" and result["rejected_submissions"] == 7
+    assert len(report.splitlines()) <= 100
+    assert report.count(OPENING_REVIEW["summary"]) == 1
+    assert "citation_validation_failed" in report and "not_found" in report
+    assert [e["request"] for e in read_events(folder / "trace.jsonl") if e["event"] == "model_request"] == client.requests

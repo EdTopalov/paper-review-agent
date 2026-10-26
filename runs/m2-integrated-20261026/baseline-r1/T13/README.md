@@ -4,7 +4,7 @@
 
 1 model calls · 0 reads · 6.22 s · $0.003656
 
-[Structured trace](trace.jsonl). Model request inputs store only new messages; `paper_review.trace.read_events` reconstructs complete requests.
+[Structured trace](trace.jsonl) contains full arguments, model outputs, and observations. This page shows the review once and summarizes each decision.
 
 ## Review · score 0.78
 
@@ -43,21 +43,6 @@ Provisional model judgments, not human-validated accuracy.
 
 ## Decisions
 
-Expand a step for its arguments and observation. Long observations are previews; the structured trace retains complete text.
-
-### Step 1: final_answer
-
-Returned the final assessment.
-
-[Event 5](trace.jsonl#L5)
-
-<details><summary>Arguments and observation</summary>
-
-```json
-{
-  "arguments": "{\"score\":0.78,\"summary\":\"SELF-RAG trains a language model to decide when to retrieve, assess retrieved passages and generated claims with reflection tokens, and use those signals to select outputs at inference. Across six task settings, the reported results and ablations provide substantial evidence that this approach can improve factuality, task performance, and citation quality over several retrieval and non-retrieval baselines, while enabling inference-time trade-offs.\",\"observations\":[{\"kind\":\"strength\",\"claim\":\"The method combines adaptive retrieval, passage relevance and support judgments, and controllable segment-level decoding in one trained generator. The paper reports gains on multiple tasks, not only question answering.\",\"page\":4,\"quote\":\"These reflection tokens (Table 1) signal the need for retrieval or confirm the output’s relevance, support, or completeness.\"},{\"kind\":\"strength\",\"claim\":\"The reported comparison is broad, including six tasks, multiple model types, and diverse metrics; SELF-RAG leads among non-proprietary models in the presented table, though not on every metric against proprietary systems.\",\"page\":8,\"quote\":\"our SELF -RAG also outperforms existing RAG in many tasks, obtaining the best performance among non-proprietary LM-based models on all tasks.\"},{\"kind\":\"strength\",\"claim\":\"Ablations provide evidence that retrieval and critique components contribute to outcomes, and the inference analysis demonstrates a factuality–fluency trade-off rather than implying a universally optimal setting.\",\"page\":9,\"quote\":\"Using the top passages regardless of their relevance (Retrieve top 1) as in conventional RAG approaches causes a large drop in PopQA and ASQA\"},{\"kind\":\"limitation\",\"claim\":\"The authors acknowledge that citations can still fail to support generated text, so reflection-based assessment does not guarantee verifiability. The human evaluation is also small: 50 samples from two result sets, as described on page 10.\",\"page\":11,\"quote\":\"it can still generate outputs that are not fully supported by the citations.\"}],\"unresolved_questions\":[\"How robust are the gains across different retrievers, corpora, domains, languages, and deployment conditions beyond the evaluated settings? The paper identifies retriever adaptation as future work (page 20).\",\"How reliably do the learned reflection judgments track human assessments on a larger and more diverse evaluation, especially for usefulness and support? The reported human study samples 50 cases from PopQA and biography generation (page 10).\",\"What are the end-to-end latency and compute costs of parallel passage processing and segment-level beam search relative to conventional RAG? I inspected the supplied pages but did not find a quantitative runtime comparison.\"]}",
-  "observation": {}
-}
-```
-
-</details>
+| Step | Action and key arguments | Purpose | Outcome | Event |
+|---|---|---|---|---|
+| 1 | final_answer  |  | final response recorded | [event 5](trace.jsonl#L5) |

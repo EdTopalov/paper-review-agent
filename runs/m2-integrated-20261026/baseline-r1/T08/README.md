@@ -4,7 +4,7 @@
 
 1 model calls · 0 reads · 9.22 s · $0.004910
 
-[Structured trace](trace.jsonl). Model request inputs store only new messages; `paper_review.trace.read_events` reconstructs complete requests.
+[Structured trace](trace.jsonl) contains full arguments, model outputs, and observations. This page shows the review once and summarizes each decision.
 
 ## Review · score 0.74
 
@@ -43,21 +43,6 @@ Provisional model judgments, not human-validated accuracy.
 
 ## Decisions
 
-Expand a step for its arguments and observation. Long observations are previews; the structured trace retains complete text.
-
-### Step 1: final_answer
-
-Returned the final assessment.
-
-[Event 5](trace.jsonl#L5)
-
-<details><summary>Arguments and observation</summary>
-
-```json
-{
-  "arguments": "{\n  \"score\": 0.74,\n  \"summary\": \"τ-bench contributes a benchmark for evaluating agents across simulated user conversations, API use, domain rules, and repeated-trial consistency. Its two customer-service domains, annotated database outcomes, and pass^k metric make agent reliability testable at scale. Reported experiments show substantial failure rates for the tested agents, though the benchmark’s simulated users, narrow domain coverage, and outcome-based reward constrain how broadly those results transfer.\",\n  \"observations\": [\n    {\n      \"kind\": \"strength\",\n      \"claim\": \"The benchmark combines conversational interaction, tool use, and domain-policy adherence, while its database-state evaluation enables automated scoring across varied dialogue trajectories.\",\n      \"page\": 4,\n      \"quote\": \"This allows for objective measurement of the agent’s decision making\"\n    },\n    {\n      \"kind\": \"strength\",\n      \"claim\": \"The evaluation includes repeated trials to measure consistency, and the experiments show that success can decline notably across trials for the strongest tested agent.\",\n      \"page\": 7,\n      \"quote\": \"pass^8 drops to < 25%\"\n    },\n    {\n      \"kind\": \"limitation\",\n      \"claim\": \"The authors acknowledge that matching the expected database state does not fully establish policy compliance, so the automated reward can miss some rule violations.\",\n      \"page\": 4,\n      \"quote\": \"r = 1 might be a necessary but not sufficient condition for a successful episode\"\n    },\n    {\n      \"kind\": \"limitation\",\n      \"claim\": \"The reported evaluation is limited to two customer-service domains, and the authors describe broader, more complex domains as future work; transfer to those settings remains untested here.\",\n      \"page\": 5,\n      \"quote\": \"more advanced domains (e.g., medical, tax, or legal) with more complex data and rules can be studied\"\n    }\n  ],\n  \"unresolved_questions\": [\n    \"How closely do the LM-simulated users and synthetic tasks predict agent performance in interactions with real users?\",\n    \"How would the benchmark’s rankings or pass^k results change under additional domains, user simulators, or real-user evaluation?\",\n    \"Can systematic checks reliably detect policy violations that leave the expected database state unchanged?\"\n  ]\n}",
-  "observation": {}
-}
-```
-
-</details>
+| Step | Action and key arguments | Purpose | Outcome | Event |
+|---|---|---|---|---|
+| 1 | final_answer  |  | final response recorded | [event 5](trace.jsonl#L5) |

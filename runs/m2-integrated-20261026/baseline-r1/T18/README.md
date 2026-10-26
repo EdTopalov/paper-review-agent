@@ -4,7 +4,7 @@
 
 1 model calls · 0 reads · 8.24 s · $0.002545
 
-[Structured trace](trace.jsonl). Model request inputs store only new messages; `paper_review.trace.read_events` reconstructs complete requests.
+[Structured trace](trace.jsonl) contains full arguments, model outputs, and observations. This page shows the review once and summarizes each decision.
 
 ## Review · score 0.66
 
@@ -43,21 +43,6 @@ Provisional model judgments, not human-validated accuracy.
 
 ## Decisions
 
-Expand a step for its arguments and observation. Long observations are previews; the structured trace retains complete text.
-
-### Step 1: final_answer
-
-Returned the final assessment.
-
-[Event 5](trace.jsonl#L5)
-
-<details><summary>Arguments and observation</summary>
-
-```json
-{
-  "arguments": "{\n  \"score\": 0.66,\n  \"summary\": \"Gorilla combines API-focused instruction fine-tuning with retrieval-aware training and introduces APIBench to study model selection and API-call generation across three ML model hubs. Its results show strong performance on the benchmark, including reduced API hallucination in several settings, while highlighting that retrieval quality can materially affect outcomes. The contribution is useful and empirically supported within a narrow, mostly ML-API scope; the evaluation measures API identification more directly than whether generated calls work in practice.\",\n  \"observations\": [\n    {\n      \"kind\": \"strength\",\n      \"claim\": \"The benchmark spans multiple model hubs and includes documented collection and instruction-generation procedures, making the work a concrete resource as well as a model study.\",\n      \"page\": 4,\n      \"quote\": \"Dataset curation: 1,645 API calls.\"\n    },\n    {\n      \"kind\": \"strength\",\n      \"claim\": \"On the reported benchmark, Gorilla’s zero-shot accuracy is substantially higher than the compared models on HuggingFace and TensorFlow Hub; the results also show that retrieval outcomes vary with the retriever.\",\n      \"page\": 7,\n      \"quote\": \"Gorilla (0-shot) 59.13 6.98 33.87 71.68 10.95 17.36 83.79 5.40 10.80\"\n    },\n    {\n      \"kind\": \"limitation\",\n      \"claim\": \"The evaluation primarily checks API identity and selected arguments rather than whether the generated code executes successfully or achieves the requested task.\",\n      \"page\": 13,\n      \"quote\": \"We de-prioritize this as we haven’t tested the execution result of the code.\"\n    },\n    {\n      \"kind\": \"uncertainty\",\n      \"claim\": \"The paper reports a holdout split of instruction–API pairs, but it is unclear whether evaluation on unseen instructions for APIs also tests generalization to APIs absent from training. The HuggingFace comparison additionally uses a different success criterion for most baselines.\",\n      \"page\": 7,\n      \"quote\": \"The holdout test set was created by dividing the self-instruct dataset’s instruction, API pairs into training and testing sets.\"\n    }\n  ],\n  \"unresolved_questions\": [\n    \"How well does Gorilla generalize to APIs, documentation formats, and domains outside the selected ML hubs, particularly when APIs are not represented in fine-tuning data?\",\n    \"How often do the generated calls execute correctly and satisfy the user’s task, beyond matching the benchmark’s API and argument criteria?\",\n    \"How sensitive are the reported results to the instruction-generation process and to the differing HuggingFace evaluation criteria across Gorilla and the other models?\"\n  ]\n}",
-  "observation": {}
-}
-```
-
-</details>
+| Step | Action and key arguments | Purpose | Outcome | Event |
+|---|---|---|---|---|
+| 1 | final_answer  |  | final response recorded | [event 5](trace.jsonl#L5) |

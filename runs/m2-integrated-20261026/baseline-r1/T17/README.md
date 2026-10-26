@@ -4,7 +4,7 @@
 
 1 model calls · 0 reads · 7.22 s · $0.002584
 
-[Structured trace](trace.jsonl). Model request inputs store only new messages; `paper_review.trace.read_events` reconstructs complete requests.
+[Structured trace](trace.jsonl) contains full arguments, model outputs, and observations. This page shows the review once and summarizes each decision.
 
 ## Review · score 0.69
 
@@ -43,21 +43,6 @@ Provisional model judgments, not human-validated accuracy.
 
 ## Decisions
 
-Expand a step for its arguments and observation. Long observations are previews; the structured trace retains complete text.
-
-### Step 1: final_answer
-
-Returned the final assessment.
-
-[Event 5](trace.jsonl#L5)
-
-<details><summary>Arguments and observation</summary>
-
-```json
-{
-  "arguments": "{\n  \"score\": 0.69,\n  \"summary\": \"The paper proposes Plan-and-Solve prompting, a zero-shot prompting strategy that asks an LLM to devise and execute a plan, with PS+ adding instructions to extract variables and attend to intermediate calculations. Tests on ten datasets report consistent improvements over Zero-shot-CoT, with particularly strong arithmetic results. The contribution is practical and supported by broad benchmark comparisons, though the evidence is limited to one GPT-3 engine and does not establish how reliably the gains generalize.\",\n  \"observations\": [\n    {\n      \"kind\": \"strength\",\n      \"claim\": \"The evaluation spans arithmetic, commonsense, and symbolic reasoning, and reports gains over Zero-shot-CoT across the tested datasets.\",\n      \"page\": 2,\n      \"quote\": \"We evaluate our proposed prompting on six math reasoning datasets\"\n    },\n    {\n      \"kind\": \"strength\",\n      \"claim\": \"The math results show meaningful gains for PS+, including a higher average than the listed zero-shot baselines and Auto-CoT.\",\n      \"page\": 6,\n      \"quote\": \"PS+ (ours) 91.8 59.3 92.2 46.0 94.7 75.7 76.7\"\n    },\n    {\n      \"kind\": \"limitation\",\n      \"claim\": \"The authors explicitly identify prompt design and model sensitivity as a practical constraint on applying the method.\",\n      \"page\": 9,\n      \"quote\": \"The GPT-3 models are sensitive to the expressions in prompts, thus we need to carefully design the prompts.\"\n    },\n    {\n      \"kind\": \"uncertainty\",\n      \"claim\": \"The reported evidence is specific to text-davinci-003 in the main experiments; whether the gains transfer to other model families remains unresolved.\",\n      \"page\": 5,\n      \"quote\": \"We report the results using text-davinci-003 engine for GPT-3 in the main paper.\"\n    }\n  ],\n  \"unresolved_questions\": [\n    \"Do the observed gains persist across other model families, model sizes, and current prompting interfaces?\",\n    \"How sensitive are results to prompt wording and selection, particularly given the reported prompt sensitivity?\",\n    \"The inspected pages describe a 100-example error analysis but provide limited detail about annotation reliability; how stable are the reported error-category differences under independent annotation or repeated samples?\"\n  ]\n}",
-  "observation": {}
-}
-```
-
-</details>
+| Step | Action and key arguments | Purpose | Outcome | Event |
+|---|---|---|---|---|
+| 1 | final_answer  |  | final response recorded | [event 5](trace.jsonl#L5) |

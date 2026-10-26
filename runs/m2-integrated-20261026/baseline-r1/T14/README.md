@@ -4,7 +4,7 @@
 
 1 model calls · 0 reads · 5.09 s · $0.003242
 
-[Structured trace](trace.jsonl). Model request inputs store only new messages; `paper_review.trace.read_events` reconstructs complete requests.
+[Structured trace](trace.jsonl) contains full arguments, model outputs, and observations. This page shows the review once and summarizes each decision.
 
 ## Review · score 0.74
 
@@ -43,21 +43,6 @@ Provisional model judgments, not human-validated accuracy.
 
 ## Decisions
 
-Expand a step for its arguments and observation. Long observations are previews; the structured trace retains complete text.
-
-### Step 1: final_answer
-
-Returned the final assessment.
-
-[Event 5](trace.jsonl#L5)
-
-<details><summary>Arguments and observation</summary>
-
-```json
-{
-  "arguments": "{\"score\":0.74,\"summary\":\"RULER is a configurable synthetic benchmark intended to test long-context language models beyond simple needle retrieval, combining varied retrieval tasks with variable tracking, word-frequency aggregation, and QA. The authors evaluate ten models across 13 configurations and report that performance often degrades substantially with longer contexts or more complex tasks, despite near-perfect results on vanilla NIAH. The benchmark and its analyses offer useful tools and evidence, while conclusions are bounded by the synthetic task designs and chosen evaluation setup.\",\"observations\":[{\"kind\":\"strength\",\"claim\":\"The benchmark broadens evaluation beyond single-item retrieval with configurable tasks for tracing, aggregation, and QA.\",\"page\":1,\"quote\":\"RULER expands upon the vanilla NIAH test to encompass variations with diverse types and quantities of needles.\"},{\"kind\":\"strength\",\"claim\":\"The reported comparison spans multiple model families and context lengths, with 500 generated examples per task and length.\",\"page\":6,\"quote\":\"For each task, we evaluate each model with 500 examples generated for each length\"},{\"kind\":\"limitation\",\"claim\":\"The effective-length designation depends on a selected baseline threshold, so it is a benchmark-relative criterion rather than a direct measurement of usable context.\",\"page\":6,\"quote\":\"We use the performance of Llama2-7b model at the 4K context length as the threshold.\"},{\"kind\":\"uncertainty\",\"claim\":\"The authors describe QA as a real-world adaptation, but the inspected evidence does not establish how well these synthetic extensions generalize to realistic long-document use.\",\"page\":5,\"quote\":\"This category is a real-world adaptation (Ivgi et al., 2023) of NIAH\"}],\"unresolved_questions\":[\"How sensitive are model rankings and effective-length claims to alternative thresholds or task aggregation schemes?\",\"How well do results on RULER’s synthetic tasks predict performance on realistic long-context applications?\",\"The inspected pages include methods and aggregate results, but not per-task uncertainty estimates or confidence intervals; how stable are the reported differences across examples and repeated runs?\"]}",
-  "observation": {}
-}
-```
-
-</details>
+| Step | Action and key arguments | Purpose | Outcome | Event |
+|---|---|---|---|---|
+| 1 | final_answer  |  | final response recorded | [event 5](trace.jsonl#L5) |

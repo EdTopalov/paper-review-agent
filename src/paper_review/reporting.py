@@ -14,14 +14,40 @@ def paper_title(events):
     return next((e["paper_metadata"].get("title", "") for e in events if e["event"] == "environment"), "")
 
 
-def preview(value):
-    if isinstance(value, str) and len(value) > 600:
-        return value[:600] + " … [preview; full text in trace]"
-    if isinstance(value, dict):
-        return {key: preview(item) for key, item in value.items()}
-    if isinstance(value, list):
-        return [preview(item) for item in value]
-    return value
+def table_cell(text):
+    return " ".join(str(text).split()).replace("|", "\\|")
+
+
+def action_summary(arguments):
+    values = {key: value for key, value in arguments.items() if key != "reason"}
+    if isinstance(values.get("review"), dict):
+        review = values["review"]
+        observations = review.get("observations")
+        values["review"] = {"score": review.get("score"), "observations": len(observations) if isinstance(observations, list) else "invalid"}
+    text = json.dumps(values, ensure_ascii=False)
+    return text if len(text) <= 180 else text[:180] + " …"
+
+
+def observation_summary(observation):
+    if observation.get("error"):
+        details = []
+        for index, check in enumerate(observation.get("citation_checks", []), 1):
+            if check.get("citation_verified") and check.get("observed", True):
+                continue
+            label = check.get("status", "invalid") if not check.get("citation_verified") else "unobserved"
+            pages = check.get("matching_pages") or check.get("candidate_pages")
+            details.append(f"#{index}: {label}" + (f" (pages {pages})" if pages else ""))
+        return observation["error"] + ("; " + "; ".join(details) if details else "")
+    if observation.get("accepted"):
+        return "review accepted"
+    if "matches" in observation:
+        pages = sorted({match["page"] for match in observation["matches"]})
+        return f"{len(observation['matches'])} matches" + (f" on pages {pages}" if pages else "")
+    if "pages" in observation:
+        pages = [page["page"] for page in observation["pages"]]
+        truncated = any(page.get("truncated") for page in observation["pages"])
+        return f"read pages {pages}" + (" (text truncated by tool)" if truncated else "")
+    return "response recorded"
 
 
 def render_run(path):
@@ -35,8 +61,8 @@ def render_run(path):
              f"**{result['variant']} · {result['status']}**", "",
              f"{result['api_calls']} model calls · {result['reading_actions']} reads · "
              f"{result['latency_seconds']:.2f} s · {money(result['estimated_cost_usd'])}", "",
-             "[Structured trace](trace.jsonl). Model request inputs store only new messages; "
-             "`paper_review.trace.read_events` reconstructs complete requests.", ""]
+             "[Structured trace](trace.jsonl) contains full arguments, model outputs, and observations. "
+             "This page shows the review once and summarizes each decision.", ""]
     if review:
         lines += [f"## Review · score {review['score']}", "", review["summary"], ""]
         for observation, check in zip(review["observations"], result.get("citation_checks", [])):
@@ -57,25 +83,26 @@ def render_run(path):
         else:
             lines += [f"Audit error: `{json.dumps(audit.get('error'))}`"]
         lines += [""]
-    lines += ["## Decisions", "", "Expand a step for its arguments and observation. Long observations are previews; "
-              "the structured trace retains complete text.", ""]
+    lines += ["## Decisions", "",
+              "| Step | Action and key arguments | Purpose | Outcome | Event |",
+              "|---|---|---|---|---|"]
     # Audit decisions are displayed above, separately from the review trajectory.
     run_events = events[:next(i for i, e in enumerate(events) if e["event"] == "run_end") + 1]
-    observations = {e["call_id"]: e["observation"] for e in run_events if e["event"] == "tool_observation"}
     for event in run_events:
         if event["event"] in ("model_error", "retry", "run_error"):
-            lines += [f"- Event {event['seq']}: **{event['event']}** — {json.dumps(event.get('error', event.get('next_attempt')))}", ""]
+            detail = json.dumps(event.get('error', event.get('next_attempt')))
+            lines += [f"| — | {event['event']} | | {table_cell(detail)} | [event {event['seq']}](trace.jsonl#L{event['seq']}) |"]
         if event["event"] != "decision":
             continue
         arguments = json.loads(event.get("arguments", "{}"))
-        outcome = observations.get(event.get("call_id"), {})
-        label = outcome.get("error") or ("accepted" if outcome.get("accepted") else "")
-        lines += [f"### Step {event['step']}: {event['action']}" + (f" · {label}" if label else ""), "",
-                  arguments.get("reason", "Returned the final assessment."), "",
-                  f"[Event {event['seq']}](trace.jsonl#L{event['seq']})", "",
-                  "<details><summary>Arguments and observation</summary>", "", "```json",
-                  json.dumps({"arguments": arguments or event.get("content"), "observation": preview(outcome)},
-                             indent=2, ensure_ascii=False), "```", "", "</details>", ""]
+        outcome = next((e["observation"] for e in run_events if e["event"] == "tool_observation"
+                        and e["seq"] > event["seq"] and e["call_id"] == event.get("call_id")), {})
+        detail = f" `{action_summary(arguments)}`" if arguments else ""
+        purpose = table_cell(arguments.get("reason", ""))
+        outcome = table_cell(observation_summary(outcome) if arguments else "final response recorded")
+        lines += [f"| {event['step']} | {event['action']} {table_cell(detail)} | {purpose} | {outcome} | "
+                  f"[event {event['seq']}](trace.jsonl#L{event['seq']}) |"]
+    lines += [""]
     path.with_name("README.md").write_text("\n".join(lines), encoding="utf-8", newline="\n")
 
 

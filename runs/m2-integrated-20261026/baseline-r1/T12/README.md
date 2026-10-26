@@ -4,7 +4,7 @@
 
 1 model calls · 0 reads · 5.55 s · $0.003616
 
-[Structured trace](trace.jsonl). Model request inputs store only new messages; `paper_review.trace.read_events` reconstructs complete requests.
+[Structured trace](trace.jsonl) contains full arguments, model outputs, and observations. This page shows the review once and summarizes each decision.
 
 ## Review · score 0.68
 
@@ -44,21 +44,6 @@ Provisional model judgments, not human-validated accuracy.
 
 ## Decisions
 
-Expand a step for its arguments and observation. Long observations are previews; the structured trace retains complete text.
-
-### Step 1: final_answer
-
-Returned the final assessment.
-
-[Event 5](trace.jsonl#L5)
-
-<details><summary>Arguments and observation</summary>
-
-```json
-{
-  "arguments": "{\"score\":0.68,\"summary\":\"InterCode contributes an extensible framework for evaluating coding agents through iterative code execution and environment feedback, with Bash and SQL benchmarks adapted from existing datasets. Its experiments demonstrate that interaction and prompting strategies can improve success rates over single-turn generation, while exposing context-discovery and long-horizon reasoning challenges. This is useful benchmark infrastructure and an empirical demonstration, though the task coverage and evaluation setups are limited.\",\"observations\":[{\"kind\":\"strength\",\"claim\":\"The paper provides a modular task-construction interface and concrete Bash and SQL implementations, making its framework more than a conceptual proposal.\",\"page\":4,\"quote\":\"This workflow allows for the safe execution of transition functions, flexible reward design, and convenient adaptation of existing instructions to an interactive setting.\"},{\"kind\":\"strength\",\"claim\":\"The reported experiments show substantial gains for some models in the interactive setting; for example, GPT-4’s SQL success rate rises from 9.1% to 73.7%.\",\"page\":6,\"quote\":\"with a notable multi-fold increase for GPT-4 (9.1% → 73.7%) on the InterCode-SQL task.\"},{\"kind\":\"limitation\",\"claim\":\"The benchmark’s breadth is limited in this version: its implemented environments cover Bash and SQL, and the CTF demonstration has very few instances.\",\"page\":9,\"quote\":\"the CTF dataset is limited to just four task instances due to our manual curation procedure.\"},{\"kind\":\"uncertainty\",\"claim\":\"Reported reward and success depend on environment-specific grading choices, including exact ordering for SQL outputs and lexical similarity for Bash output. How these choices affect comparisons with alternative correct solutions remains an open question.\",\"page\":5,\"quote\":\"only a correctly ordered list with the exact set of records found in the gold output receives a score of 1.\"}],\"unresolved_questions\":[\"How well do findings from these adapted Bash and SQL tasks generalize to other languages, environments, and interactive coding tasks?\",\"How sensitive are model rankings and success rates to the custom reward definitions and to acceptable equivalent outputs?\",\"Can the benchmark support reproducible comparisons across model/API changes and varied interaction budgets?\",\"I inspected the supplied pages, including the main experiments and selected appendices, but did not independently verify the linked code or inspect every supplemental prompt, trajectory, and appendix analysis.\"]}",
-  "observation": {}
-}
-```
-
-</details>
+| Step | Action and key arguments | Purpose | Outcome | Event |
+|---|---|---|---|---|
+| 1 | final_answer  |  | final response recorded | [event 5](trace.jsonl#L5) |

@@ -4,7 +4,7 @@
 
 1 model calls · 0 reads · 9.16 s · $0.004051
 
-[Structured trace](trace.jsonl). Model request inputs store only new messages; `paper_review.trace.read_events` reconstructs complete requests.
+[Structured trace](trace.jsonl) contains full arguments, model outputs, and observations. This page shows the review once and summarizes each decision.
 
 ## Review · score 0.76
 
@@ -43,21 +43,6 @@ Provisional model judgments, not human-validated accuracy.
 
 ## Decisions
 
-Expand a step for its arguments and observation. Long observations are previews; the structured trace retains complete text.
-
-### Step 1: final_answer
-
-Returned the final assessment.
-
-[Event 5](trace.jsonl#L5)
-
-<details><summary>Arguments and observation</summary>
-
-```json
-{
-  "arguments": "{\n  \"score\": 0.76,\n  \"summary\": \"The paper proposes CodeAct, a general agent-action framework in which LLMs issue executable Python code and receive execution results as observations, and contributes a 7,139-trajectory instruction dataset plus fine-tuned open models. Its controlled comparisons and agent evaluations offer meaningful evidence that code actions can improve success and reduce interaction turns on complex tool-use tasks, while also exposing considerable variation across backbones and a narrow evaluation scope.\",\n  \"observations\": [\n    {\n      \"kind\": \"strength\",\n      \"claim\": \"The multi-tool benchmark provides a direct comparison across action formats, with CodeAct leading on success rate and average turns for most tested models; for GPT-4-1106-preview, the reported success gain over the next-best format is substantial.\",\n      \"page\": 5,\n      \"quote\": \"achieves a 20.7% absolute improvement compared to the next best action format (text) while requiring2.1 fewer interaction turns on average.\"\n    },\n    {\n      \"kind\": \"strength\",\n      \"claim\": \"The paper contributes both a multi-domain interaction dataset and an open-model evaluation, including out-of-domain tasks and general-capability measures. The results are not uniformly positive, which the authors acknowledge rather than masking.\",\n      \"page\": 9,\n      \"quote\": \"Surprisingly, no improvement is observed for the Llama-2 variant.\"\n    },\n    {\n      \"kind\": \"limitation\",\n      \"claim\": \"The key complex-task benchmark is small and manually curated, and its reported success rates vary sharply by model family. This limits how broadly the headline advantage can be generalized from the presented evidence.\",\n      \"page\": 5,\n      \"quote\": \"It contains 82 human-curated instances\"\n    },\n    {\n      \"kind\": \"uncertainty\",\n      \"claim\": \"The study evaluates executable code in an interactive Python setting but does not establish deployment safety or robustness beyond that setup; the authors themselves identify sandbox escape as a concern. I inspected the supplied main text, tables, and appendices, but did not inspect external code or supplementary artifacts.\",\n      \"page\": 10,\n      \"quote\": \"in the worst scenario (e.g., in Sci-Fi movies), such an agent may potentially break free of the sandbox restriction\"\n    }\n  ],\n  \"unresolved_questions\": [\n    \"How stable are the M3ToolEval results across repeated runs, alternative task samples, and different tool environments?\",\n    \"Which execution restrictions and monitoring mechanisms are necessary to safely grant agents access to general-purpose Python packages and code execution?\",\n    \"How much of CodeActAgent’s improvement is attributable to CodeActInstruct versus the larger general-conversation mixture and other training choices?\"\n  ]\n}",
-  "observation": {}
-}
-```
-
-</details>
+| Step | Action and key arguments | Purpose | Outcome | Event |
+|---|---|---|---|---|
+| 1 | final_answer  |  | final response recorded | [event 5](trace.jsonl#L5) |

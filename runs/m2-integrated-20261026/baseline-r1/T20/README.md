@@ -4,7 +4,7 @@
 
 1 model calls · 0 reads · 8.01 s · $0.002103
 
-[Structured trace](trace.jsonl). Model request inputs store only new messages; `paper_review.trace.read_events` reconstructs complete requests.
+[Structured trace](trace.jsonl) contains full arguments, model outputs, and observations. This page shows the review once and summarizes each decision.
 
 ## Review · score 0.69
 
@@ -43,21 +43,6 @@ Provisional model judgments, not human-validated accuracy.
 
 ## Decisions
 
-Expand a step for its arguments and observation. Long observations are previews; the structured trace retains complete text.
-
-### Step 1: final_answer
-
-Returned the final assessment.
-
-[Event 5](trace.jsonl#L5)
-
-<details><summary>Arguments and observation</summary>
-
-```json
-{
-  "arguments": "{\n  \"score\": 0.69,\n  \"summary\": \"RAFT is a supervised fine-tuning recipe for domain-specific RAG: training examples mix answer-bearing documents with distractors, sometimes omit the answer-bearing document, and use quoted evidence in reasoning-style answers. Results across medical QA, HotpotQA, and API-documentation tasks suggest that this approach can improve a 7B model’s use of retrieved context, though the evidence is strongest within the paper’s fixed-domain setting.\",\n  \"observations\": [\n    {\n      \"kind\": \"strength\",\n      \"claim\": \"The paper gives a concrete training design that addresses distractors and imperfect retrieval rather than training only on question-answer pairs.\",\n      \"page\": 3,\n      \"quote\": \"For P fraction of the questions (qi) in the dataset, we retain the oracle document (d∗i) along with distractor documents (dk−1).\"\n    },\n    {\n      \"kind\": \"strength\",\n      \"claim\": \"The reported results show substantial gains on some tasks, particularly HotpotQA and HuggingFace, against the listed baselines.\",\n      \"page\": 5,\n      \"quote\": \"RAFT (LLaMA2-7B) 73.30 35.28 74.00 84.95 86.86\"\n    },\n    {\n      \"kind\": \"limitation\",\n      \"claim\": \"The paper explicitly scopes its contribution to testing on the same documents used during training, limiting what these experiments establish about transfer to new domains or document collections.\",\n      \"page\": 9,\n      \"quote\": \"our paper studies a slightly opposite scenario where we only care about testing the LLM on the same set of documents.\"\n    },\n    {\n      \"kind\": \"uncertainty\",\n      \"claim\": \"The results are not uniformly better in every reported comparison: the CoT ablation is lower than RAFT on Torch Hub, and the main table’s Torch Hub gain over DSF is very small. The practical consistency and robustness of gains therefore remain unclear from these results.\",\n      \"page\": 7,\n      \"quote\": \"RAFT w.o CoT 68.30 25.62 59.07 86.56 83.21\"\n    }\n  ],\n  \"unresolved_questions\": [\n    \"How well does RAFT transfer to new document collections or domains, rather than the same documents used during training?\",\n    \"How sensitive are the reported gains to training-data construction, retrieval quality, and evaluation variability?\",\n    \"When does adding reasoning-style answers help or hurt, given the lower Torch Hub result in the CoT ablation?\"\n  ]\n}",
-  "observation": {}
-}
-```
-
-</details>
+| Step | Action and key arguments | Purpose | Outcome | Event |
+|---|---|---|---|---|
+| 1 | final_answer  |  | final response recorded | [event 5](trace.jsonl#L5) |
