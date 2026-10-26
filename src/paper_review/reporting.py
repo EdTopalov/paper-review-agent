@@ -94,12 +94,20 @@ def render_run(path):
             lines += [f"| — | {event['event']} | | {table_cell(detail)} | [event {event['seq']}](trace.jsonl#L{event['seq']}) |"]
         if event["event"] != "decision":
             continue
-        arguments = json.loads(event.get("arguments", "{}"))
+        raw_arguments = event.get("arguments", "{}")
+        try:
+            arguments = json.loads(raw_arguments)
+        except (json.JSONDecodeError, TypeError):
+            arguments = None
         outcome = next((e["observation"] for e in run_events if e["event"] == "tool_observation"
                         and e["seq"] > event["seq"] and e["call_id"] == event.get("call_id")), {})
-        detail = f" `{action_summary(arguments)}`" if arguments else ""
-        purpose = table_cell(arguments.get("reason", ""))
-        outcome = table_cell(observation_summary(outcome) if arguments else "final response recorded")
+        if isinstance(arguments, dict):
+            detail = f" `{action_summary(arguments)}`" if arguments else ""
+            purpose = table_cell(arguments.get("reason", ""))
+        else:
+            detail = f" invalid arguments: `{str(raw_arguments)[:180]}`"
+            purpose = ""
+        outcome = table_cell(observation_summary(outcome) if "arguments" in event else "final response recorded")
         lines += [f"| {event['step']} | {event['action']} {table_cell(detail)} | {purpose} | {outcome} | "
                   f"[event {event['seq']}](trace.jsonl#L{event['seq']}) |"]
     lines += [""]

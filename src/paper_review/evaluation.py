@@ -57,9 +57,31 @@ def mechanical_result(result):
                 if verified_available else None}
 
 
+def validate_experiment_runs(root, records):
+    """Require every planned run and keep result identities bound to their folders."""
+    settings_path = root / "experiment.json"
+    if not settings_path.exists():
+        return  # Standalone traces and selected archived failures have no plan.
+    settings = json.loads(settings_path.read_text(encoding="utf-8"))
+    expected = {root / f"{variant}-r{repeat}" / task_id / "trace.jsonl"
+                for variant in settings["variants"]
+                for repeat in range(1, settings["repeats"] + 1)
+                for task_id in settings["task_ids"]}
+    actual = {path for path, _ in records}
+    missing = sorted(path.relative_to(root).as_posix() for path in expected - actual)
+    unexpected = sorted(path.relative_to(root).as_posix() for path in actual - expected)
+    if missing or unexpected:
+        raise ValueError(f"Experiment run set mismatch: missing={missing}; unexpected={unexpected}")
+    for path, result in records:
+        if result is not None and (result["task_id"] != path.parent.name
+                                   or result["variant"] != path.parent.parent.name.rsplit("-r", 1)[0]):
+            raise ValueError(f"Run identity mismatch: {path.relative_to(root).as_posix()}")
+
+
 def summarize(out):
     out = Path(out)
     records = [(p, read_result(p)) for p in sorted(out.glob("*/*/trace.jsonl"))]
+    validate_experiment_runs(out, records)
     if not records or any(result is None for _, result in records):
         raise ValueError("No completed trace set found; inspect incomplete runs before summarizing")
     results = [result for _, result in records]
@@ -105,11 +127,12 @@ def check_experiment(root):
     paths = [root / "trace.jsonl"] if (root / "trace.jsonl").exists() else sorted(root.glob("*/*/trace.jsonl"))
     if not paths:
         raise ValueError("No traces found")
+    records = [(path, read_result(path)) for path in paths]
+    validate_experiment_runs(root, records)
     schemas = {tool["name"]: tool["parameters"] for tool in TOOLS}
     rows = []
-    for path in paths:
+    for path, result in records:
         events = read_events(path)
-        result = read_result(path)
         end = next((i for i, e in enumerate(events) if e["event"] == "run_end"), len(events) - 1)
         run = events[:end + 1]
         decisions = [e for e in run if e["event"] == "decision"]

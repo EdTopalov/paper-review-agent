@@ -250,6 +250,10 @@ def run_review(paper_path, out, config, task_id, variant="agent", client=None, m
         result.update(calls.stats)
         result["latency_seconds"] = time.perf_counter() - start
         trace.write("run_end", result=result)
-        trace.close()
-        render_run(out / "trace.jsonl")
+        try:
+            render_run(out / "trace.jsonl")
+        except Exception as exc:
+            trace.write("report_error", error=safe_error(exc))
+        finally:
+            trace.close()
     return result

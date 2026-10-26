@@ -9,7 +9,7 @@ import jsonschema
 from openai import OpenAI
 
 from .evaluation import load_sample, summarize
-from .paper import Paper
+from .paper import Paper, file_hash
 from hashlib import sha256
 from .runner import ModelCalls, safe_error
 from .trace import Trace, read_events, read_result
@@ -64,6 +64,14 @@ def review_hash(review):
 def audit_one(trace_path, task, sample_path, config):
     trace_path = Path(trace_path)
     source = read_result(trace_path)
+    events = read_events(trace_path)
+    environment = next((row for row in events if row["event"] == "environment"), None)
+    if (source["task_id"] != task["id"] or environment is None
+            or environment["snapshot_sha256"] != task["snapshot_sha256"]):
+        raise ValueError("Audit sample does not match the reviewed snapshot")
+    paper_path = Path(sample_path).resolve().parent / task["paper_path"]
+    if file_hash(paper_path) != task["snapshot_sha256"]:
+        raise ValueError("Audit snapshot hash mismatch")
     fingerprint = review_hash(source["review"])
     previous = read_result(trace_path, audit=True)
     if previous:
@@ -71,7 +79,7 @@ def audit_one(trace_path, task, sample_path, config):
                 or previous["snapshot_sha256"] != task["snapshot_sha256"]):
             raise ValueError("Existing audit uses different input or configuration")
         return previous
-    if any(row["event"] == "audit_start" for row in read_events(trace_path)):
+    if any(row["event"] == "audit_start" for row in events):
         raise ValueError("Incomplete audit exists; preserve its trace before starting another attempt")
     trace = Trace(trace_path, append=True)
     record = {"task_id": task["id"], "variant": source["variant"],
@@ -80,7 +88,7 @@ def audit_one(trace_path, task, sample_path, config):
     calls = ModelCalls(OpenAI(max_retries=0, timeout=config.timeout), config, trace)
     trace.write("audit_start", record=record, instructions=AUDIT_PROMPT)
     try:
-        paper = Paper.load(Path(sample_path).resolve().parent / task["paper_path"])
+        paper = Paper.load(paper_path)
         response = calls.call(instructions=AUDIT_PROMPT, input=[{"role": "user", "content":
                               json.dumps({"assessment": source["review"], "paper": paper.full_text()}, ensure_ascii=False)}],
                               text={"format": {"type": "json_schema", "name": "evidence_audit",
@@ -99,8 +107,12 @@ def audit_one(trace_path, task, sample_path, config):
     finally:
         record.update(calls.stats)
         trace.write("audit_end", record=record)
-        trace.close()
-        render_run(trace_path)
+        try:
+            render_run(trace_path)
+        except Exception as exc:
+            trace.write("report_error", error=safe_error(exc))
+        finally:
+            trace.close()
     return record
 
 

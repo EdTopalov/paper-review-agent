@@ -347,3 +347,107 @@ def test_readable_report_stays_short_after_seven_citation_rejections(tmp_path):
     assert report.count(OPENING_REVIEW["summary"]) == 1
     assert "citation_validation_failed" in report and "not_found" in report
     assert [e["request"] for e in read_events(folder / "trace.jsonl") if e["event"] == "model_request"] == client.requests
+
+
+@pytest.mark.parametrize("raw_arguments", ["{", "[]", "null", "1", '"text"'])
+def test_invalid_tool_arguments_remain_readable_after_recovery(tmp_path, raw_arguments):
+    action = Action("read_pages", {}, "invalid")
+    action.arguments = raw_arguments
+    client = Client([Response([action]), finish()])
+    folder = tmp_path / "run"
+    result = run_review(FIXTURE, folder, Config(), "dev", client=client)
+    assert result["status"] == "ok"
+    assert read_result(folder / "trace.jsonl") == result
+    report = (folder / "README.md").read_text(encoding="utf-8")
+    assert "invalid arguments" in report and "invalid_arguments" in report
+    assert "review accepted" in report
+
+
+def test_report_failure_does_not_override_review_result(tmp_path, monkeypatch):
+    def broken_report(_):
+        raise OSError("A report cannot be written")
+
+    monkeypatch.setattr("paper_review.runner.render_run", broken_report)
+    folder = tmp_path / "run"
+    result = run_review(FIXTURE, folder, Config(), "dev", client=Client([finish()]))
+    assert result["status"] == "ok"
+    assert read_result(folder / "trace.jsonl") == result
+    assert events(folder)[-1]["event"] == "report_error"
+
+
+@pytest.mark.parametrize("problem", ["missing_task", "missing_variant", "missing_repeat", "unexpected", "identity"])
+def test_checker_and_summary_reject_incomplete_or_misidentified_experiments(tmp_path, problem):
+    from shutil import copyfile
+    from paper_review.evaluation import check_experiment, summarize
+
+    folder = tmp_path / "agent-r1/dev"
+    run_review(FIXTURE, folder, Config(), "dev", client=Client([finish()]))
+    settings = {"task_ids": ["dev"], "variants": ["agent"], "repeats": 1}
+    message = "run set mismatch"
+    if problem == "missing_task":
+        settings["task_ids"].append("other")
+    elif problem == "missing_variant":
+        settings["variants"].append("baseline")
+    elif problem == "missing_repeat":
+        settings["repeats"] = 2
+    elif problem == "unexpected":
+        extra = tmp_path / "agent-r2/dev"
+        extra.mkdir(parents=True)
+        copyfile(folder / "trace.jsonl", extra / "trace.jsonl")
+    else:
+        settings["task_ids"].append("other")
+        duplicate = tmp_path / "agent-r1/other"
+        duplicate.mkdir(parents=True)
+        copyfile(folder / "trace.jsonl", duplicate / "trace.jsonl")
+        message = "identity mismatch"
+    (tmp_path / "experiment.json").write_text(json.dumps(settings), encoding="utf-8")
+    for inspect in (check_experiment, summarize):
+        with pytest.raises(ValueError, match=message):
+            inspect(tmp_path)
+    assert not (tmp_path / "README.md").exists()
+
+
+@pytest.mark.parametrize("problem", ["different_paper", "changed_file", "wrong_task"])
+def test_audit_rejects_mismatched_environment_before_calling_model(tmp_path, monkeypatch, problem):
+    from paper_review.audit import audit_one
+
+    snapshot = tmp_path / "paper.json"
+    snapshot.write_bytes(FIXTURE.read_bytes())
+    path = tmp_path / "run/trace.jsonl"
+    run_review(snapshot, path.parent, Config(), "dev", client=Client([finish()]))
+    task = {"id": "dev", "paper_path": snapshot.name, "snapshot_sha256": file_hash(snapshot)}
+    original_trace = path.read_bytes()
+    if problem == "different_paper":
+        other = tmp_path / "other.json"
+        other.write_text(json.dumps({"pages": ["An unrelated paper."]}), encoding="utf-8")
+        task.update(paper_path=other.name, snapshot_sha256=file_hash(other))
+    elif problem == "changed_file":
+        snapshot.write_text(json.dumps({"pages": ["Changed text."]}), encoding="utf-8")
+    else:
+        task["id"] = "other"
+    client = Client([])
+    monkeypatch.setattr("paper_review.audit.OpenAI", lambda **_: client)
+    with pytest.raises(ValueError, match="Audit"):
+        audit_one(path, task, tmp_path / "tasks.jsonl", Config())
+    assert client.requests == []
+    assert path.read_bytes() == original_trace
+
+
+def test_report_failure_does_not_override_audit_result(tmp_path, monkeypatch):
+    from paper_review.audit import audit_one
+
+    path = tmp_path / "run/trace.jsonl"
+    run_review(FIXTURE, path.parent, Config(), "dev", client=Client([finish()]))
+    verdicts = {"observations": [{"index": i, "verdict": "supported", "explanation": "Fixture evidence."}
+                                  for i in (0, 1)]}
+    monkeypatch.setattr("paper_review.audit.OpenAI", lambda **_: Client([Response(text=json.dumps(verdicts))]))
+
+    def broken_report(_):
+        raise OSError("A report cannot be written")
+
+    monkeypatch.setattr("paper_review.audit.render_run", broken_report)
+    task = {"id": "dev", "paper_path": FIXTURE.name, "snapshot_sha256": file_hash(FIXTURE)}
+    record = audit_one(path, task, FIXTURE.parent / "tasks.jsonl", Config())
+    assert record["status"] == "ok"
+    assert read_result(path, audit=True) == record
+    assert events(path.parent)[-1]["event"] == "report_error"
