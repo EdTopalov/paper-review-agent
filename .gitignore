@@ -1,27 +1,19 @@
-# Python environment
-venv/
 .venv/
+venv/
 __pycache__/
 *.py[cod]
-
-# Environment variables and secrets
-.env
-.env.*
-!.env.example
-
-# Jupyter
-.ipynb_checkpoints/
-
-# Tests and caches
+*.egg-info/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
-
-# Generated traces
-traces/
-
-# Local PDF dataset
-data/papers/
-
-# System files
+.ipynb_checkpoints/
 .DS_Store
+.idea/
+.env
+.env.*
+!.env.example
+data/pilot/
+data/downloads/
+data/papers/
+traces/
+runs/scratch/

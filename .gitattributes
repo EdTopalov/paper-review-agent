@@ -1,0 +1,6 @@
+* text=auto eol=lf
+# Hashes identify exact frozen bytes, including their original line endings.
+*.json -text whitespace=cr-at-eol
+*.jsonl -text whitespace=cr-at-eol
+runs/** -text -whitespace
+data/failures/** -text

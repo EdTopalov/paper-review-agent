@@ -1,0 +1,22 @@
+name: Offline harness checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-m2.txt
+      - run: python -m pip install -r requirements-m2.txt
+      - run: python -m pip install --no-deps -e .
+      - run: python -m pytest -q
+      - run: paper-review verify
+      - run: paper-review check runs/m2-integrated-20261026
+      - run: paper-review check runs/archive/failures

@@ -1,0 +1,10 @@
+{
+  "title": "Development fixture: a hypothetical retrieval experiment",
+  "source_url": null,
+  "license": "Original synthetic development fixture; not an evaluation paper",
+  "pages": [
+    "DEVELOPMENT FIXTURE, NOT A REAL PAPER. A hypothetical retrieval method is tested on 40 English questions. We report 75% answer accuracy. This fixture exists only to test the software loop and citation format. The paper has three pages; methods are on page 2 and limitations are on page 3.",
+    "Methods. We compare a fixed retriever with a query-expansion retriever on the same 40 English questions. Query expansion answered 30 questions correctly; the fixed retriever answered 28 correctly. Each method was run once. We did not conduct a statistical significance test.",
+    "Limitations. The experiment covers English questions only and uses a small convenience sample. Results do not establish effectiveness in other languages or domains. Latency and monetary cost were not measured. The reported accuracy difference should be tested with repeated runs and a larger sample."
+  ]
+}
