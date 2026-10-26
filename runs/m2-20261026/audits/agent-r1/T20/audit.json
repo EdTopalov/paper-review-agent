@@ -1,0 +1,55 @@
+{
+  "task_id": "T20",
+  "variant": "agent",
+  "review_sha256": "d3b08eac87323e50c133f2dfd12db3734fc933aa5c1cc92ea422a8e207d6822c",
+  "snapshot_sha256": "b56caa8ab8de6e9fef4d3fdfb57e22ab96eb3e3c24c3c2e5205872ce3583040c",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 14402,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 14399,
+  "output_tokens": 411,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "estimated_cost_usd": 0.002005675,
+  "billing_uncertain": false,
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "Page 3 describes training with oracle and distractor documents for some examples and distractors without the oracle for others; it also frames this as preparing the model for in-domain RAG and robustness to imperfect retrieval. The claim accurately summarizes that design."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "Page 5, Table 1, reports RAFT outperforming multiple fine-tuning and RAG baselines on several benchmarks, while not improving every setting (for example, Torch Hub is nearly tied with DSF and lower than DSF without RAG). The qualification that gains are not uniform is warranted."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "Pages 5 and 7 describe and report a CoT ablation. Table 2 shows gains on PubMed, HotpotQA, HuggingFace, and TensorFlow Hub, but a lower score on Torch Hub, matching the claim that gains occur on some but not all benchmarks."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "Pages 2–3 characterize the study as domain-specific and in-domain; page 9 explicitly contrasts prior work with RAFT by saying the paper tests on the same set of documents. The stated limit on demonstrated transfer is accurate."
+      }
+    ]
+  },
+  "normalization": "one_based_indices_normalized",
+  "initial_status": "error",
+  "repair_source_model_response_seq": 3
+}

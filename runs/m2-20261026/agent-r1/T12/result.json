@@ -1,0 +1,76 @@
+{
+  "task_id": "T12",
+  "variant": "agent",
+  "model": "gpt-6-luna",
+  "prompt_version": "m2-v1",
+  "status": "ok",
+  "review": {
+    "score": 0.75,
+    "summary": "InterCode contributes a practical, modular benchmark framework that turns static coding tasks into interactive environments with execution feedback, demonstrated through Bash and SQL implementations. The evaluated models show substantial gains from interaction on several tasks, making the work useful both as infrastructure and as an initial empirical study. The evidence is promising but scoped to two domains and selected prompting/model evaluations; its CTF example is explicitly only a four-instance demonstration.",
+    "observations": [
+      {
+        "kind": "strength",
+        "claim": "The paper gives a concrete, extensible task formulation and implementation rather than only advocating interactive coding; environments expose stateful execution and configurable rewards.",
+        "page": 4,
+        "quote": "Each environment is defined in under 200 lines of code total."
+      },
+      {
+        "kind": "strength",
+        "claim": "Evaluations show that interaction can substantially improve success, especially on SQL, while also measuring multiple models and file systems.",
+        "page": 7,
+        "quote": "gpt-4 19.8 7.2 4.6 3.0 9.1 87.5 76.7 66.7 52.4 73.7"
+      },
+      {
+        "kind": "limitation",
+        "claim": "The task coverage is narrow, and the CTF result is a feasibility illustration rather than a broad benchmark evaluation.",
+        "page": 9,
+        "quote": "the CTF dataset is limited to just four task instances due to our manual curation procedure."
+      },
+      {
+        "kind": "limitation",
+        "claim": "The paper itself cautions that sandbox isolation does not make unrestricted actions safe for direct real-system deployment.",
+        "page": 26,
+        "quote": "a direct sim-to-real transfer of an InterCode-trained agent to a real system may put the system at risk."
+      }
+    ],
+    "unresolved_questions": [
+      "How robust are the reported comparisons to alternative task datasets, reward definitions, and evaluation protocols?",
+      "How well does the framework scale to additional languages and task families beyond Bash and SQL?",
+      "I inspected the main framework description, evaluation tables/discussion, and stated limitations, but not the full appendix, code, or every prompt and trajectory; implementation details and reproducibility therefore remain uncertain."
+    ]
+  },
+  "reading_actions": 5,
+  "tool_calls": 6,
+  "decision_steps": 6,
+  "citation_checks": [
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    }
+  ],
+  "api_calls": 6,
+  "successful_model_calls": 6,
+  "input_tokens": 30546,
+  "cached_input_tokens": 11294,
+  "cache_write_tokens": 18496,
+  "output_tokens": 655,
+  "estimated_cost_usd": 0.00282804,
+  "billing_uncertain": false,
+  "latency_seconds": 14.019824999966659
+}

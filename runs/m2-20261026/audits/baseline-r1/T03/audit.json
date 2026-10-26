@@ -1,0 +1,52 @@
+{
+  "task_id": "T03",
+  "variant": "baseline",
+  "review_sha256": "2baf7fd387bc645b8775e11ca3237f991b53a1915b168bb15c885f566ec43a07",
+  "snapshot_sha256": "e61bdccefe742e09f53ac751ee6256d58257ca7f87e99eff88db33aa27393242",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The paper describes unified send/receive and generate-reply interfaces, and says agents automatically invoke generate reply after receiving a message (PDF p. 5). It also explains that registered auto-replies can support dynamic workflows, including bringing another agent into a conversation (PDF pp. 6–7)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The paper presents six applications, including multi-agent coding, browser-based online decision making, retrieval-augmented chat, and dynamic group chat; it also describes human participation in several applications (PDF pp. 8–9, 15, 19–21). These examples make the stated scope legible."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The initial math evaluation uses two level-5 problems tested three times each (PDF pp. 10–11). The follow-up samples 12 level-5 problems and uses one trial (PDF p. 11). The observation accurately limits what those results can support."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The paper’s future-work section asks which tasks benefit most from multi-agent workflows and what workflow is optimal and cost-effective (PDF p. 23). The observation appropriately frames the absence of answers as an open question rather than a demonstrated defect."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 24865,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 24862,
+  "output_tokens": 436,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "estimated_cost_usd": 0.00332605,
+  "billing_uncertain": false
+}

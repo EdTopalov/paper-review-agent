@@ -1,0 +1,52 @@
+{
+  "task_id": "T16",
+  "variant": "agent",
+  "review_sha256": "d39fce8b85a5a3fca6123ed350383ce885fb3e91a920b987ea28969bba4f78e5",
+  "snapshot_sha256": "c3a15937a5ae4a7d3c65c5ba0e7ef870eb8880dede9c5c6a6bf64788da8b6d6a",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The framework assigns the AI user to give instructions and direct the conversation, continuing until it determines the task is done (PDF pp. 4–6). The paper also provides prompt templates and termination rules, supporting the qualified claim that the setup is reproducible in principle (PDF pp. 7, 12)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The paper reports 25,000 AI Society conversations (and 50,000 Code conversations) (PDF p. 9). It also compares prompt variants and reports changes in end-of-task termination and assistant-instruction outcomes (PDF p. 12; Fig. 8, PDF p. 13)."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The user’s task-done token is an agent-declared termination signal, not an independent verification of correctness (PDF pp. 6, 12). The authors explicitly say that evaluating task-completion capabilities is challenging and would require numerous domain experts (PDF p. 13)."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The paper identifies several interaction failures and gives examples, including flake replies and infinite conversation (PDF pp. 9–11). It reports that the ablations increase end-of-task-token termination while also significantly increasing flake messages relative to the original prompt (PDF p. 12; Fig. 9, PDF p. 14)."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 24649,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 24646,
+  "output_tokens": 485,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "estimated_cost_usd": 0.00332355,
+  "billing_uncertain": false
+}

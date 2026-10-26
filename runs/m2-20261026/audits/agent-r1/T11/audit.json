@@ -1,0 +1,52 @@
+{
+  "task_id": "T11",
+  "variant": "agent",
+  "review_sha256": "0ac21770d164066779d63de5d247737240d913f7fa60c5c3c8c051f679d8c06e",
+  "snapshot_sha256": "aa03602b61d4d9f19d9086e3348257b8f24f984a1464a8f04733444e7a1e376b",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "On M3ToolEval, CodeAct has the highest success rate for 12 of 17 models and uses fewer average turns for 12 of 17. The results include especially strong gains for several closed-source models, though not all (PDF pp. 5)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The paper reports 7,139 CodeActInstruct trajectories and evaluates CodeActAgent on agent tasks as well as general tasks such as MMLU, HumanEval, GSM8K, and MT-Bench (PDF pp. 8–9)."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The paper states that M3ToolEval contains 82 human-curated instances across several domains (PDF p. 5). Treating the benchmark’s coverage and stability as uncertain is a qualified limitation, not a claim that the paper demonstrated a defect."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The results are not uniform: for example, claude-instant-1 performs better with JSON than CodeAct on M3ToolEval, while some API-Bank results also favor JSON or text. The paper’s overall format advantage is therefore conditional (PDF pp. 5–6)."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 31578,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 31575,
+  "output_tokens": 449,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "estimated_cost_usd": 0.0041716750000000006,
+  "billing_uncertain": false
+}

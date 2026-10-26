@@ -1,0 +1,52 @@
+{
+  "task_id": "T20",
+  "variant": "baseline",
+  "review_sha256": "f44af804af2cba28f94ce64ead16a2f20c6ecb554bec315989e5b29a0df7628f",
+  "snapshot_sha256": "b56caa8ab8de6e9fef4d3fdfb57e22ab96eb3e3c24c3c2e5205872ce3583040c",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "Table 1 reports RAFT scores above the domain-specific fine-tuning baselines on HotpotQA and HuggingFace, among other results. It also includes GPT-3.5 + RAG as a reference (PDF p. 5)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "Table 2 shows higher RAFT scores than RAFT without CoT on HotpotQA and HuggingFace, but a lower score on Torch Hub, supporting the qualified claim that CoT helps on some benchmarks but is not uniformly better (PDF p. 7)."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The paper explicitly says it studies testing on the same set of documents and contrasts this with work where test documents or domains can differ. The stated results therefore do not establish transfer to unseen collections or domains (PDF p. 9)."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The paper reports benchmark results and describes gains as significant, but the supplied text does not report run-to-run variation, random-seed results, or statistical uncertainty. The observation appropriately frames this as a limit on assessing stability (PDF pp. 5–8)."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 14399,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 14396,
+  "output_tokens": 481,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "estimated_cost_usd": 0.0020403,
+  "billing_uncertain": false
+}

@@ -1,0 +1,52 @@
+{
+  "task_id": "T16",
+  "variant": "baseline",
+  "review_sha256": "7985c208b8ceb8204c35f1af8f96434685affe3bd100809738c8ddaba223e7f9",
+  "snapshot_sha256": "c3a15937a5ae4a7d3c65c5ba0e7ef870eb8880dede9c5c6a6bf64788da8b6d6a",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "Pages 5–7 describe the role assignment, turn-by-turn instruction/solution exchange, prompt rules, and task-done token; page 12 lists additional termination conditions. This supports a concrete protocol that is reproducible in principle."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "Page 9 reports 25,000 AI Society conversations and 50,000 Code conversations, and describes the role, task, language, and domain generation steps. The resource-oriented characterization is warranted."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "Pages 9–11 identify recurring issues including role flipping, repeated instructions, flake replies, and looping. Pages 12–14 report prompt ablations and the accompanying increase in flake messages, supporting the stated tradeoff."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "Pages 12–13 report termination analyses and explicitly state that evaluating task-completion capabilities requires numerous domain experts. The observation appropriately distinguishes token-based termination from demonstrated task quality and limits the claim to conclusions about competence."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 24707,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 24704,
+  "output_tokens": 369,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "estimated_cost_usd": 0.0032728,
+  "billing_uncertain": false
+}

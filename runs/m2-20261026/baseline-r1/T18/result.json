@@ -1,0 +1,76 @@
+{
+  "task_id": "T18",
+  "variant": "baseline",
+  "model": "gpt-6-luna",
+  "prompt_version": "m2-v1",
+  "status": "ok",
+  "review": {
+    "score": 0.68,
+    "summary": "Gorilla combines instruction fine-tuning of a LLaMA-7B model with API-document retrieval, and introduces APIBench for evaluating API-call selection across three ML model hubs. The results show strong performance on the benchmark, reduced measured hallucination in several settings, and examples of adapting outputs to documentation changes. Evidence is useful but primarily establishes API matching on a curated, synthetic-prompt benchmark rather than real execution or broad API use.",
+    "observations": [
+      {
+        "kind": "strength",
+        "claim": "The paper contributes both a multi-hub API benchmark and a retrieval-aware fine-tuning approach, with results reporting performance across zero-shot and retrieval settings.",
+        "page": 2,
+        "quote": "We construct, APIBench, a large corpus of APIs with complex and often overlapping functionality"
+      },
+      {
+        "kind": "limitation",
+        "claim": "The primary accuracy measure matches API-call structure against the curated dataset; the paper does not establish that generated calls execute successfully or are semantically correct in use.",
+        "page": 13,
+        "quote": "We de-prioritize this as we haven’t tested the execution result of the code."
+      },
+      {
+        "kind": "limitation",
+        "claim": "The held-out evaluation splits instruction/API pairs, so it remains unclear whether test APIs are unseen during training; this affects how strongly the results establish generalization to new APIs.",
+        "page": 6,
+        "quote": "The holdout test set was created by dividing the self-instruct dataset’s instruction, API pairs into training and testing sets."
+      },
+      {
+        "kind": "uncertainty",
+        "claim": "The headline comparison is not fully uniform across model hubs: for HuggingFace, most baselines are checked only for domain names, while Gorilla is evaluated differently. The impact on cross-model comparison is unclear.",
+        "page": 7,
+        "quote": "for all the models except Gorilla, we only check if they can provide the correct domain names."
+      }
+    ],
+    "unresolved_questions": [
+      "How well does Gorilla perform when evaluation requires executing generated calls and checking their outputs, rather than matching an API call in the collected dataset?",
+      "What performance remains when test APIs—not only instruction/API pairs—are held out, and how does it vary for APIs added after training?",
+      "How representative are the synthetic instructions and selected ML-hub APIs of real user requests and API ecosystems outside this benchmark?"
+    ]
+  },
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 1,
+  "citation_checks": [
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    }
+  ],
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 17424,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 17421,
+  "output_tokens": 559,
+  "estimated_cost_usd": 0.002457425,
+  "billing_uncertain": false,
+  "latency_seconds": 6.653226599912159
+}

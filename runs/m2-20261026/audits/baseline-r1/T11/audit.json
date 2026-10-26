@@ -1,0 +1,52 @@
+{
+  "task_id": "T11",
+  "variant": "baseline",
+  "review_sha256": "934aa0975125d10fb691000d9146ffe9f72bc4f4ce6b3d2b400296f4b27c8c46",
+  "snapshot_sha256": "aa03602b61d4d9f19d9086e3348257b8f24f984a1464a8f04733444e7a1e376b",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The M3ToolEval results report higher success rates and fewer average turns for CodeAct for 12 of 17 evaluated LLMs (PDF p. 5). The paper also says gains widen with model capability and gives GPT-4-1106-preview as an example of a particularly strong result (PDF pp. 2, 5)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The paper reports a 7,139-trajectory CodeActInstruct dataset and states that the code, data, and models are available (PDF pp. 1, 8). It evaluates out-of-domain agent tasks, including text-action evaluations on MiniWob++ and ScienceWorld (PDF pp. 8–9)."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "M3ToolEval has 82 human-curated instances, and the paper describes manually crafted tools for its domains (PDF p. 5). The claim carefully limits the implication to generalization breadth rather than asserting the benchmark is invalid."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The paper notes that the agent can freely execute code in a sandbox and identifies the need for future work on better safety mechanisms; it does not report a sandbox-robustness evaluation or established mitigation in the supplied text (PDF p. 10)."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 31553,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 31550,
+  "output_tokens": 452,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "estimated_cost_usd": 0.00417005,
+  "billing_uncertain": false
+}

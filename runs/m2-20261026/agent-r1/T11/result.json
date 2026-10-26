@@ -1,0 +1,76 @@
+{
+  "task_id": "T11",
+  "variant": "agent",
+  "model": "gpt-6-luna",
+  "prompt_version": "m2-v1",
+  "status": "ok",
+  "review": {
+    "score": 0.75,
+    "summary": "The paper presents CodeAct, using executable Python as a unified action format for LLM agents, and supports it with controlled comparisons across 17 models, a curated multi-tool benchmark, and an instruction-tuned dataset/model. Results show meaningful gains in many settings, especially multi-step tool composition, though benefits are not universal and the new benchmark is small.",
+    "observations": [
+      {
+        "kind": "strength",
+        "claim": "The multi-tool evaluation reports CodeAct as the strongest format for many models, with fewer interaction turns; gains are especially clear for some closed-source systems.",
+        "page": 5,
+        "quote": "CodeAct generally has a higher task success rate (12 out of 17 evaluated LLMs), similar to the trend in §2.2."
+      },
+      {
+        "kind": "strength",
+        "claim": "The authors extend the proposal beyond a prompting comparison by building a 7k-trajectory dataset and evaluating finetuned open models across agent and general tasks.",
+        "page": 8,
+        "quote": "CodeActInstruct(Ours)"
+      },
+      {
+        "kind": "limitation",
+        "claim": "M3ToolEval consists of only 82 hand-curated instances, so its domain coverage and stability as a general estimate of complex tool-use ability remain uncertain.",
+        "page": 5,
+        "quote": "It contains 82 human-curated instances"
+      },
+      {
+        "kind": "uncertainty",
+        "claim": "CodeAct does not dominate consistently: some models and settings favor JSON or text, and the evidence for a general format advantage is therefore conditional.",
+        "page": 5,
+        "quote": "claude-instant-1 20.7 31.7 24.4"
+      }
+    ],
+    "unresolved_questions": [
+      "How robust are M3ToolEval comparisons to alternative task sets, prompt variants, and repeated sampling, given the 82-instance benchmark?",
+      "How do execution sandboxing, permissions, and failure containment affect the safety and practical deployment of executable-code actions?",
+      "I inspected pages 1 and 3–8; I did not inspect the remaining pages, appendices, or full statistical and implementation details, so additional caveats or evidence may be present."
+    ]
+  },
+  "reading_actions": 3,
+  "tool_calls": 4,
+  "decision_steps": 4,
+  "citation_checks": [
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    }
+  ],
+  "api_calls": 4,
+  "successful_model_calls": 4,
+  "input_tokens": 25148,
+  "cached_input_tokens": 11309,
+  "cache_write_tokens": 13335,
+  "output_tokens": 589,
+  "estimated_cost_usd": 0.002124865,
+  "billing_uncertain": false,
+  "latency_seconds": 9.233751900028437
+}

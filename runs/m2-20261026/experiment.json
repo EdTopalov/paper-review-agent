@@ -1,0 +1,43 @@
+{
+  "sample_sha256": "6b592e24024a5cca0722c8546cd01fc8fffab7cfeae6482dc0875c015b7caa1c",
+  "task_ids": [
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T06",
+    "T07",
+    "T08",
+    "T09",
+    "T10",
+    "T11",
+    "T12",
+    "T13",
+    "T14",
+    "T15",
+    "T16",
+    "T17",
+    "T18",
+    "T19",
+    "T20"
+  ],
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "variants": [
+    "agent",
+    "baseline"
+  ],
+  "repeats": 1,
+  "git_revision": "bd4cb1d58d08a960560e7a1c8fc33b0c9fed4c89",
+  "source_sha256": "28fcc33bbc66214d711a3f3d58d7d9fcfe4603bd864961c2df10c7e0e6460d40",
+  "sample_path": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\data\\eval\\tasks.jsonl",
+  "workers": 3
+}

@@ -1,0 +1,76 @@
+{
+  "task_id": "T13",
+  "variant": "baseline",
+  "model": "gpt-6-luna",
+  "prompt_version": "m2-v1",
+  "status": "ok",
+  "review": {
+    "score": 0.78,
+    "summary": "SELF-RAG trains a language model to decide when to retrieve, assess passage relevance and support, and score response usefulness using learned reflection tokens. Its segment-level decoding uses these signals to select outputs and permits inference-time trade-offs. Results across six tasks, ablations, and limited human checks support the framework’s value, especially for factuality and citation quality, while leaving questions about evaluator reliability and broader generalization.",
+    "observations": [
+      {
+        "kind": "strength",
+        "claim": "The method combines on-demand retrieval with fine-grained evaluation of retrieved evidence and generated segments, rather than blindly supplying a fixed set of passages.",
+        "page": 4,
+        "quote": "SELF -RAG processes multiple passages in parallel and uses its own generated reflection tokens to enforce soft constraints"
+      },
+      {
+        "kind": "strength",
+        "claim": "The reported results show strong performance across varied tasks, including notably higher ASQA citation precision and recall than most listed baselines.",
+        "page": 8,
+        "quote": "70.3 71.3"
+      },
+      {
+        "kind": "strength",
+        "claim": "Ablations provide evidence that retrieval selection and support-based scoring contribute to performance, particularly on PopQA and ASQA.",
+        "page": 9,
+        "quote": "Using the top passages regardless of their relevance (Retrieve top 1) as in conventional RAG approaches causes a large drop in PopQA and ASQA"
+      },
+      {
+        "kind": "limitation",
+        "claim": "The manual evaluation is small, and its reported agreement does not establish reflection-token reliability across broader settings; the authors also acknowledge that outputs may remain unsupported by their citations.",
+        "page": 11,
+        "quote": "it can still generate outputs that are not fully supported by the citations."
+      }
+    ],
+    "unresolved_questions": [
+      "How well do reflection-token judgments transfer beyond the tested datasets, prompts, and retrieval corpora, particularly when the critic’s training labels are distilled from GPT-4?",
+      "Do the reported task and citation gains persist under larger, more representative human evaluations and independently varied retrieval systems?",
+      "I inspected the supplied pages, including the main experiments and appendix excerpts, but not the complete appendix tables and all underlying evaluation details; what additional evidence there bears on reproducibility and robustness?"
+    ]
+  },
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 1,
+  "citation_checks": [
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": false
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    }
+  ],
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 27075,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 27072,
+  "output_tokens": 437,
+  "estimated_cost_usd": 0.0036028,
+  "billing_uncertain": false,
+  "latency_seconds": 5.046001399983652
+}

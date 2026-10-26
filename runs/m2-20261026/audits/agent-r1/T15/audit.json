@@ -1,0 +1,52 @@
+{
+  "task_id": "T15",
+  "variant": "agent",
+  "review_sha256": "15d94be9127484119837b420670b14676887d7dcd43ec768abb17f51f3dd4169",
+  "snapshot_sha256": "fe022cf4262daf63193dab4baffd2df9324e4fd12e676515f8befc6e38eb28a0",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The paper describes a multi-stage flow with preprocessing and iterative runs against public and AI-generated tests (pp. 2–4). It also explains test anchors as a safeguard against incorrect AI-generated tests and fixes (p. 6), supporting both the test-driven characterization and the stated design choice."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "Table 1 reports higher pass@5 for AlphaCodium than direct prompting for DeepSeek, GPT-3.5, and GPT-4 on both validation and test splits; GPT-4 validation rises from 19% to 44% (p. 7)."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The evaluation focuses on CodeContests and reports 107 validation problems and 165 test problems (p. 3). The paper’s results therefore do not establish transfer to general software tasks, though it presents broader applicability as a belief rather than a demonstrated result (pp. 2–3)."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The paper notes differences in methodology and evaluation, lack of released reproducible end-to-end systems for the prior works, and explicitly says it compares against numbers reported in those papers (p. 7). This supports the qualification that these comparisons are not fully controlled common reruns."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 9564,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 9561,
+  "output_tokens": 389,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "estimated_cost_usd": 0.001389925,
+  "billing_uncertain": false
+}

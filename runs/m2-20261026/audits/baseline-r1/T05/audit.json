@@ -1,0 +1,52 @@
+{
+  "task_id": "T05",
+  "variant": "baseline",
+  "review_sha256": "ac76c8df4f5980ef7afe050ff34499a10ec6826797ea824db21b3e931dec272d",
+  "snapshot_sha256": "4dd40b57a6a9f11764602d3e17cd52c02b0d83ee2bb61f49b1be34935c69315c",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The paper describes four self-hosted applications populated with sampled real-world data, multiple observation modes, utility tools, and knowledge resources (PDF pp. 2–5). It also states that standalone hosting avoids reliance on live websites for reproducibility (PDF p. 3)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The paper says its functional-correctness evaluation checks whether the result achieves the goal and accommodates multiple valid paths, rather than comparing action sequences (PDF p. 2)."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The benchmark uses selected applications and sampled content, and the appendix explicitly says the map is confined to the northeastern United States because of data-storage constraints (PDF pp. 3, 16)."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The reported baselines are text-based LLM agents using accessibility-tree observations and element-ID actions, with GPT-3.5 and GPT-4 (PDF p. 9). The authors identify image-based observations and pixel-based actions as future work, so these results do not establish performance for other model classes or modalities (PDF p. 9)."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 17643,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 17640,
+  "output_tokens": 396,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "estimated_cost_usd": 0.0024033,
+  "billing_uncertain": false
+}

@@ -1,0 +1,52 @@
+{
+  "task_id": "T12",
+  "variant": "baseline",
+  "review_sha256": "4fbf80d88de27b700531b238374fe0f7e59cc7926d862a173aa74ca9b480d51b",
+  "snapshot_sha256": "c19d08b3874f610ac6c3c45f57a1dd3f8a380c7f4a99a022631d71369737d7f7",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "Page 4 explicitly says InterCode decomposes task construction into environment construction, data collection, and reward design, and describes these as modular parts."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "Pages 6–7 report higher success rates with Try Again than Single Turn across the listed Bash and SQL baselines. Page 20 adds the schema-controlled SQL comparison: Single Turn improves, but Try Again retains a non-trivial advantage, addressing the information-access explanation."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "Pages 9 and 26 state that the implemented environments use Bash and SQL and that the CTF toy dataset has only four task instances; page 26 explicitly identifies these as limitations and describes plans for broader coverage."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "Page 16 states that the Bash reward’s scalar component weights are arbitrarily assigned. The paper provides no reported sensitivity analysis of alternative Bash reward designs, so the qualified statement that this sensitivity is not established is justified."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 28236,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 28233,
+  "output_tokens": 399,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "estimated_cost_usd": 0.003728925,
+  "billing_uncertain": false
+}

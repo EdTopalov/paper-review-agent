@@ -1,0 +1,22 @@
+[
+  {"id":"T01","arxiv_id":"2210.03629v1","category":"agent_method"},
+  {"id":"T02","arxiv_id":"2303.11366v1","category":"agent_method"},
+  {"id":"T03","arxiv_id":"2308.08155v1","category":"agent_method"},
+  {"id":"T04","arxiv_id":"2308.03688v1","category":"agent_benchmark"},
+  {"id":"T05","arxiv_id":"2307.13854v1","category":"web_benchmark"},
+  {"id":"T06","arxiv_id":"2310.06770v1","category":"coding_benchmark"},
+  {"id":"T07","arxiv_id":"2404.07972v1","category":"computer_benchmark"},
+  {"id":"T08","arxiv_id":"2406.12045v1","category":"tool_benchmark"},
+  {"id":"T09","arxiv_id":"2407.01489v1","category":"coding_method"},
+  {"id":"T10","arxiv_id":"2405.15793v1","category":"coding_method"},
+  {"id":"T11","arxiv_id":"2402.01030v1","category":"tool_method"},
+  {"id":"T12","arxiv_id":"2306.14898v1","category":"coding_benchmark"},
+  {"id":"T13","arxiv_id":"2310.11511v1","category":"retrieval_method"},
+  {"id":"T14","arxiv_id":"2404.06654v1","category":"context_benchmark"},
+  {"id":"T15","arxiv_id":"2401.08500v1","category":"coding_method"},
+  {"id":"T16","arxiv_id":"2303.17760v1","category":"agent_method"},
+  {"id":"T17","arxiv_id":"2305.04091v1","category":"reasoning_method"},
+  {"id":"T18","arxiv_id":"2305.15334v1","category":"tool_method"},
+  {"id":"T19","arxiv_id":"2308.11432v1","category":"agent_survey"},
+  {"id":"T20","arxiv_id":"2403.10131v1","category":"retrieval_method"}
+]

@@ -1,0 +1,52 @@
+{
+  "task_id": "T19",
+  "variant": "agent",
+  "review_sha256": "fb1c03a3f101333b733aeb957f31827efa20a1d119b17ac002a10f4edffdc8da",
+  "snapshot_sha256": "f433dde72a05de0be3fd06cde9c8d82d830dcf363fe15c1ad33e55a5db79c43b",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The survey explicitly says its four-module framework can represent the majority of previous studies, and it maps representative agents to the taxonomy in Table 1 (PDF pp. 2, 12)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The challenges section identifies cross-module prompt influence and calls development of a unified, robust prompt framework unresolved (PDF p. 23)."
+      },
+      {
+        "index": 2,
+        "verdict": "overstated",
+        "explanation": "The paper calls the field early-stage (PDF pp. 2, 22), but does not establish that this makes its categories or prescriptions unsettled; that is a plausible interpretation rather than a demonstrated consequence."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The paper describes application and evaluation coverage and presents their taxonomies (PDF pp. 14–21), but those descriptions alone do not establish how complete or balanced the coverage is. The observation is appropriately framed as uncertainty."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 34122,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 34119,
+  "output_tokens": 529,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "estimated_cost_usd": 0.004529675,
+  "billing_uncertain": false
+}

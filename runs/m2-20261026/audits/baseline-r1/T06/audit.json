@@ -1,0 +1,55 @@
+{
+  "task_id": "T06",
+  "variant": "baseline",
+  "review_sha256": "473c42f4eaed8b5b244c528916dae33f8ada4aa3957420ce82a115842e08771a",
+  "snapshot_sha256": "a75895ad809505d4d9b9ef8c05cc8d5f485c8ad4b627ffe352d33d4c47d243ba",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 36755,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 36752,
+  "output_tokens": 280,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "estimated_cost_usd": 0.0047343,
+  "billing_uncertain": false,
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The paper describes filtering roughly 90,000 PRs through issue/test-related attribute checks and execution validation, yielding 2,294 task instances (PDF pp. 2, 15, 19)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The paper reports Claude 2's 4.8% resolution rate with oracle retrieval and identifies it as the best-performing model (PDF p. 5; results table on p. 6)."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The paper explicitly states that all SWE-bench task instances are in Python and presents expansion to other languages and domains as future work (PDF p. 9)."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The paper explicitly cautions that execution-based testing alone cannot guarantee reliable model generations, also noting limitations in comprehensiveness, efficiency, or readability (PDF p. 9)."
+      }
+    ]
+  },
+  "normalization": "one_based_indices_normalized",
+  "initial_status": "error",
+  "repair_source_model_response_seq": 3
+}

@@ -1,0 +1,52 @@
+{
+  "task_id": "T03",
+  "variant": "agent",
+  "review_sha256": "a9a96f47afe7b57bb3e3dd53308f9f15c7dfdc141fdbb5fde282725dac90e692",
+  "snapshot_sha256": "e61bdccefe742e09f53ac751ee6256d58257ca7f87e99eff88db33aa27393242",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The paper explicitly describes customizable agents integrating LLMs, humans, and tools, a unified conversation interface, and workflows represented as inter-agent message passing and actions (PDF pp. 2–5)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The paper reports the selected MiniWoB++ comparison on twelve clicking tasks and says MiniWobChat did better on four and tied on three; it also describes the set as selected and reports ten instances per task (PDF pp. 15–16). Calling the result limited and competitive is appropriately qualified."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The paper says the QA results are for the first 500 questions and identifies comparison conditions: FiD and Flan-T5 checkpoints were trained on NQ, unlike the other listed methods (PDF pp. 17–18). The stated limitation on conclusions about general superiority follows from these qualifications."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The paper illustrates applications across several domains and task types (PDF pp. 2, 8–9), while describing prompts and model configurations as adjustable and acknowledging future questions about how multi-agent workflows help and what workflow is optimal for a task (PDF pp. 4, 23). The claim is carefully framed as an unresolved attribution question, not a demonstrated defect."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 24876,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 24873,
+  "output_tokens": 302,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "estimated_cost_usd": 0.0032604250000000004,
+  "billing_uncertain": false
+}

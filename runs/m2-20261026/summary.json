@@ -1,0 +1,30 @@
+{
+  "agent": {
+    "runs": 20,
+    "distinct_tasks": 20,
+    "completed": 20,
+    "all_quotes_match": 12,
+    "quote_match_rate": 0.825,
+    "mean_reading_actions": 4,
+    "mean_model_calls": 5,
+    "mean_latency_seconds": 11.186268665012904,
+    "median_latency_seconds": 10.971549250069074,
+    "mean_cost_usd": 0.00179108575,
+    "total_cost_usd": 0.035821715,
+    "billing_uncertain_runs": 0
+  },
+  "baseline": {
+    "runs": 20,
+    "distinct_tasks": 20,
+    "completed": 20,
+    "all_quotes_match": 8,
+    "quote_match_rate": 0.7375,
+    "mean_reading_actions": 0,
+    "mean_model_calls": 1,
+    "mean_latency_seconds": 6.382328345009592,
+    "median_latency_seconds": 6.218904799956363,
+    "mean_cost_usd": 0.0033638937500000002,
+    "total_cost_usd": 0.067277875,
+    "billing_uncertain_runs": 0
+  }
+}

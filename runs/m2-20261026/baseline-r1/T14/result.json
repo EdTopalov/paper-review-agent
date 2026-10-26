@@ -1,0 +1,76 @@
+{
+  "task_id": "T14",
+  "variant": "baseline",
+  "model": "gpt-6-luna",
+  "prompt_version": "m2-v1",
+  "status": "ok",
+  "review": {
+    "score": 0.76,
+    "summary": "RULER extends long-context evaluation beyond single-needle retrieval with configurable synthetic tasks for distractor-resistant and multi-item retrieval, variable tracking, frequency aggregation, and QA. The authors evaluate ten aligned models across 13 tasks and multiple context lengths, finding that strong vanilla NIAH performance often fails to predict performance on more complex tasks. The benchmark and empirical comparisons are useful, though conclusions are bounded by synthetic task design, the selected models and configurations, and a threshold-based definition of effective context length.",
+    "observations": [
+      {
+        "kind": "strength",
+        "claim": "The benchmark addresses an important measurement gap by testing multiple kinds of behavior and varying task complexity and context length; the paper also reports a task-correlation analysis to guide its representative task selection.",
+        "page": 3,
+        "quote": "RULER comprises tasks across four categories: retrieval, multi-hop tracing, aggregation, and question answering with all tasks configurable for varying length and complexity"
+      },
+      {
+        "kind": "strength",
+        "claim": "The evaluation gives concrete evidence that success on vanilla retrieval does not establish broad long-context capability: the reported 13-task averages decline with length even when simple NIAH results are near-perfect.",
+        "page": 7,
+        "quote": "Despite achieving nearly perfect performance on the passkey retrieval and the vanilla NIAH task (shown in Appendix E), all models exhibit large degradation in RULER as sequence length increases."
+      },
+      {
+        "kind": "limitation",
+        "claim": "The empirical scope is primarily synthetic and the authors themselves describe several tasks as proxies; thus the results support claims about these constructed behaviors, but do not alone establish performance on realistic long-document understanding.",
+        "page": 5,
+        "quote": "we introduce a new category as a proxy for summarization tasks"
+      },
+      {
+        "kind": "uncertainty",
+        "claim": "The effective-length comparison depends on a chosen baseline threshold. The paper states the rule, but the inspected results do not establish how robust its effective-length conclusions are to alternative baselines or thresholds.",
+        "page": 6,
+        "quote": "We use the performance of Llama2-7b model at the 4K context length as the threshold."
+      }
+    ],
+    "unresolved_questions": [
+      "How well do RULER task scores predict performance on realistic long-context applications, especially beyond the QA adaptations described here?",
+      "Would model rankings and effective context lengths remain similar under alternative baselines, thresholds, task mixes, or weighting schemes?",
+      "How much do the findings generalize to model releases and context-extension methods outside the selected evaluation set?"
+    ]
+  },
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 1,
+  "citation_checks": [
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    }
+  ],
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 24226,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 24223,
+  "output_tokens": 552,
+  "estimated_cost_usd": 0.0033041750000000003,
+  "billing_uncertain": false,
+  "latency_seconds": 6.526310099987313
+}

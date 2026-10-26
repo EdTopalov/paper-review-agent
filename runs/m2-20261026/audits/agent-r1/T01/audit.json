@@ -1,0 +1,52 @@
+{
+  "task_id": "T01",
+  "variant": "agent",
+  "review_sha256": "c08f7d12b2d53095c2ea97cd9e9756b9e8a6904f65ebaf4de1c58d9cf2514146",
+  "snapshot_sha256": "f35c6e9cefe6d6e88081248d15605c793f711a7fe943263e6b6b638b1e557e54",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "Page 3 defines the augmented action space as language thoughts plus environment actions, explaining that thoughts update context while actions produce observations. The bridge-to-interaction characterization is consistent with this account."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "Pages 7–8 report evaluation on 134 ALFWorld games and 500 WebShop instructions, and compare ReAct against action-only and learned baselines. The paper reports a 10-point WebShop success-rate improvement over the prior best; on ALFWorld the best ReAct result also exceeds Act and BUTLER. The claim accurately describes the reported findings."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "Page 6 reports more reasoning errors for ReAct than CoT and says non-informative search results account for 23% of ReAct error cases and can derail its trajectory. The observation appropriately frames these as reliability tradeoffs, not uniform failure."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "Page 3 says the main prompting setup uses frozen PaLM-540B and few-shot examples; pages 7–8 describe evaluation-specific environments and trials. The assessment carefully presents transfer beyond these conditions as an open evidence gap rather than a demonstrated failure."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 35269,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 35266,
+  "output_tokens": 281,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "estimated_cost_usd": 0.00454905,
+  "billing_uncertain": false
+}

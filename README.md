@@ -1,5 +1,29 @@
 # Paper Review Agent
 
+The M2 implementation, frozen 20-paper sample, measured comparison, and failure
+analysis are documented in **[M2.md](M2.md)**. Source code is in
+[`src/paper_review`](src/paper_review), with one entry point: `paper-review`.
+
+```powershell
+python -m venv .venv
+.venv\Scripts\python.exe -m pip install -r requirements-m2.txt
+.venv\Scripts\python.exe -m pip install --no-deps -e .
+Copy-Item .env.example .env
+# Fill OPENAI_API_KEY in .env locally. Never commit it.
+.venv\Scripts\paper-review.exe verify
+.venv\Scripts\paper-review.exe review data/eval/papers/T01.json --out runs/scratch/example --model gpt-6-luna
+.venv\Scripts\paper-review.exe eval --out runs/my-comparison --model gpt-6-luna
+```
+
+The saved M2 experiment completed 20/20 tasks for both agent and baseline.
+Completion is separate from evidence quality: exact citations and provisional
+model audits are reported independently. See the [results](M2.md#results).
+The API key is read from the local ignored `.env`, overriding inherited values.
+`paper-review models` lists models accessible to that key's project.
+
+The remainder of this README preserves the original **M1 design proposal**.
+Implemented scope and deviations are stated in M2.md.
+
 Paper Review Agent will help ML research teams, including JetBrains reading clubs, choose papers for discussion. Given several PDFs or paper URLs, it will return a ranking with an absolute score in `[0, 1]` for each paper and a short, evidence-backed assessment. Candidates can cover unrelated topics; a team profile or shared research question is optional future work.
 
 This document describes the planned Python implementation.

@@ -1,0 +1,32 @@
+{
+  "task_id": "T08",
+  "variant": "agent",
+  "review_sha256": "fbc411c8525553f7d7234dcd48dd6f241f5e55a270d18f96094e023e61d3335c",
+  "snapshot_sha256": "fef709ec029e89123d4022d0a90e0338d2f4eccfaae07c73c956b646d0ff8cf4",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "error",
+  "method": "provisional_llm_evidence_audit",
+  "error": {
+    "type": "ValueError",
+    "status_code": null
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 40149,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 40146,
+  "output_tokens": 359,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "estimated_cost_usd": 0.00519805,
+  "billing_uncertain": false
+}

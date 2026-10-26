@@ -1,0 +1,76 @@
+{
+  "task_id": "T08",
+  "variant": "agent",
+  "model": "gpt-6-luna",
+  "prompt_version": "m2-v1",
+  "status": "ok",
+  "review": {
+    "score": 0.78,
+    "summary": "τ-bench contributes a modular benchmark for evaluating tool-using agents in multi-turn interactions with simulated users, domain policies, and stateful APIs. Its database-state evaluation and pass^k reliability metric make repeated-trial consistency measurable; experiments expose substantial weaknesses in current agents. The benchmark is useful and well-motivated, but its evidence is bounded by two simplified domains, modest task counts, and known simulator and curation limitations.",
+    "observations": [
+      {
+        "kind": "strength",
+        "claim": "The task formulation integrates user interaction, API actions, policy constraints, and objective end-state checking; pass^k explicitly measures repeatability rather than only one-shot success.",
+        "page": 4,
+        "quote": "we propose a new metric – pass^k (pass hat k), defined as the chance that all k i.i.d. task trials are successful, averaged across tasks."
+      },
+      {
+        "kind": "strength",
+        "claim": "The benchmark has a concrete, repeatable scale and the authors report systematic testing across model families and agent methods; results reveal clear performance headroom.",
+        "page": 5,
+        "quote": "Tasks 115 50"
+      },
+      {
+        "kind": "limitation",
+        "claim": "The authors explicitly scope the domains as simplified and leave broader, more consequential domains for future work, limiting generalization to real deployments.",
+        "page": 5,
+        "quote": "We choose these two domains as they are relatively easy to synthesize data (e.g., products, prices, flights) and craft policies (e.g., product return, baggage allowance) based on common sense"
+      },
+      {
+        "kind": "limitation",
+        "claim": "The authors acknowledge simulator imperfections and possible curation bias, including tuning user prompts with a particular function-calling agent; these are caveats to interpreting benchmark scores, not proof the evaluation fails.",
+        "page": 9,
+        "quote": "there is also some element of implicit bias during the task curation process since we use the gpt-4-turbo FC agent to tune the user’s system prompt."
+      }
+    ],
+    "unresolved_questions": [
+      "How robust are rankings and pass^k estimates across substantially more tasks, independent annotators, and alternative user simulators?",
+      "Do benchmark results predict performance with real users and production systems, where policies, APIs, and acceptable outcomes may be less simplified?",
+      "I inspected the benchmark formulation, construction, selected experiments, and discussion, but not the full result tables or all appendices; model-by-model quantitative comparisons and annotation validation details remain unassessed."
+    ]
+  },
+  "reading_actions": 4,
+  "tool_calls": 5,
+  "decision_steps": 5,
+  "citation_checks": [
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": false
+    }
+  ],
+  "api_calls": 5,
+  "successful_model_calls": 5,
+  "input_tokens": 25503,
+  "cached_input_tokens": 15277,
+  "cache_write_tokens": 9596,
+  "output_tokens": 688,
+  "estimated_cost_usd": 0.0017592699999999998,
+  "billing_uncertain": false,
+  "latency_seconds": 11.847476600087248
+}

@@ -1,0 +1,76 @@
+{
+  "task_id": "T20",
+  "variant": "agent",
+  "model": "gpt-6-luna",
+  "prompt_version": "m2-v1",
+  "status": "ok",
+  "review": {
+    "score": 0.7,
+    "summary": "RAFT is a practical fine-tuning recipe for domain-specific, open-book QA: train on questions with retrieved evidence and distractors, sometimes omit the oracle document, and teach answers with quotations and reasoning. Reported results are strong across several benchmarks and include useful ablations, but the demonstrated scope is principally same-domain/same-document-set evaluation, and the inspected evidence leaves important methodological and statistical details unclear.",
+    "observations": [
+      {
+        "kind": "strength",
+        "claim": "The training recipe explicitly combines relevant and irrelevant retrieved documents and mixes examples with and without oracle context, directly targeting context use and distractor resistance.",
+        "page": 3,
+        "quote": "For (1 − P ) fraction of the questions (qi) in the dataset, we include no oracle document and only include distractor documents (dk)."
+      },
+      {
+        "kind": "strength",
+        "claim": "The reported benchmark comparison shows substantial gains over several fine-tuning/RAG baselines, though gains are not uniform across every setting.",
+        "page": 5,
+        "quote": "RAFT (LLaMA2-7B) 73.30 35.28 74.00 84.95 86.86"
+      },
+      {
+        "kind": "strength",
+        "claim": "The paper includes an ablation separating the contribution of chain-of-thought training, with gains on some but not all benchmarks.",
+        "page": 7,
+        "quote": "With a gain of 9.66% and 14.93% on the Hotpot QA and HuggingFace datasets respectively."
+      },
+      {
+        "kind": "limitation",
+        "claim": "The authors explicitly frame the evaluation as in-domain; transfer to a different domain or document collection is outside the demonstrated scope. The inspected pages do not establish generalization beyond it.",
+        "page": 9,
+        "quote": "we only care about testing the LLM on the same set of documents."
+      }
+    ],
+    "unresolved_questions": [
+      "How stable are the reported gains across random seeds, training-data samples, and retrieval configurations? The inspected results provide no uncertainty estimates.",
+      "How do training-data generation costs, compute requirements, and performance under different retrievers or genuinely changing document collections affect practical utility?",
+      "I inspected pages 3–9, including results and ablation passages, but not the complete experimental setup or appendix; details such as dataset splits, tuning protocol, and evaluation implementation remain uncertain."
+    ]
+  },
+  "reading_actions": 4,
+  "tool_calls": 5,
+  "decision_steps": 5,
+  "citation_checks": [
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    }
+  ],
+  "api_calls": 5,
+  "successful_model_calls": 5,
+  "input_tokens": 30571,
+  "cached_input_tokens": 16569,
+  "cache_write_tokens": 13372,
+  "output_tokens": 653,
+  "estimated_cost_usd": 0.00222669,
+  "billing_uncertain": false,
+  "latency_seconds": 10.955973300035112
+}

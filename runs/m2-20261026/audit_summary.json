@@ -1,0 +1,28 @@
+{
+  "agent": {
+    "attempted_reviews": 20,
+    "audited_reviews": 20,
+    "verdict_counts": {
+      "supported": 77,
+      "overstated": 3,
+      "unsupported": 0,
+      "uncertain": 0
+    },
+    "all_observations_supported": 17,
+    "audit_cost_usd": 0.069496625,
+    "warning": "Provisional LLM judgments; same-model bias possible; not human-adjudicated success."
+  },
+  "baseline": {
+    "attempted_reviews": 20,
+    "audited_reviews": 20,
+    "verdict_counts": {
+      "supported": 78,
+      "overstated": 2,
+      "unsupported": 0,
+      "uncertain": 0
+    },
+    "all_observations_supported": 18,
+    "audit_cost_usd": 0.069844125,
+    "warning": "Provisional LLM judgments; same-model bias possible; not human-adjudicated success."
+  }
+}

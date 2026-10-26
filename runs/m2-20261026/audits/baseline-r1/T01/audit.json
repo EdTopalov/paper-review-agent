@@ -1,0 +1,55 @@
+{
+  "task_id": "T01",
+  "variant": "baseline",
+  "review_sha256": "6ecdb0c05f6f1f27628dc8ad3ab873e7275a83cc5cd99f4110561022fd938e6d",
+  "snapshot_sha256": "f35c6e9cefe6d6e88081248d15605c793f711a7fe943263e6b6b638b1e557e54",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 35263,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 35260,
+  "output_tokens": 499,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "estimated_cost_usd": 0.0046573000000000005,
+  "billing_uncertain": false,
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The paper evaluates HotpotQA, Fever, ALFWorld, and WebShop (PDF pp. 3, 7–8). On both knowledge tasks, the combined methods beat standalone CoT-SC and ReAct in the reported results (p. 6)."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "For ALFWorld, the paper says Act prompts use the same annotated trajectories without thoughts and that six prompt permutations provide a controlled comparison (p. 7). The best ReAct trial scores 71% versus 45% for the best Act trial (pp. 7–8)."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The paper reports reasoning errors for ReAct and says non-informative search results account for 23% of error cases and can derail its trajectory (PDF p. 6)."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The conclusion notes that complex tasks with large action spaces need more demonstrations, which can exceed in-context input limits, and describes fine-tuning as having initial promising results (PDF p. 10)."
+      }
+    ]
+  },
+  "normalization": "one_based_indices_normalized",
+  "initial_status": "error",
+  "repair_source_model_response_seq": 3
+}

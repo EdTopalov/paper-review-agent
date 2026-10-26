@@ -1,0 +1,76 @@
+{
+  "task_id": "T20",
+  "variant": "baseline",
+  "model": "gpt-6-luna",
+  "prompt_version": "m2-v1",
+  "status": "ok",
+  "review": {
+    "score": 0.68,
+    "summary": "RAFT proposes fine-tuning language models for in-domain RAG using relevant and distractor documents, with some training examples lacking the relevant document and answers that quote supporting passages. Reported results across medical, QA, and API-document tasks, plus ablations on reasoning and distractors, support the recipe’s usefulness in the paper’s stated setting. The contribution is practically relevant, though evidence is limited to the described benchmarks and same-domain use case.",
+    "observations": [
+      {
+        "kind": "strength",
+        "claim": "The reported comparison shows gains over domain-specific fine-tuning baselines on several tasks, including HotpotQA and HuggingFace; the paper also compares against a larger model as a reference.",
+        "page": 5,
+        "quote": "RAFT (LLaMA2-7B) 73.30 35.28 74.00 84.95 86.86"
+      },
+      {
+        "kind": "strength",
+        "claim": "The CoT ablation provides evidence that the reasoning-style answer format helps on some reported benchmarks, while also showing it is not uniformly better across all listed tasks.",
+        "page": 7,
+        "quote": "With a gain of 9.66% and 14.93% on the Hotpot QA and HuggingFace datasets respectively."
+      },
+      {
+        "kind": "limitation",
+        "claim": "The authors explicitly scope the work to testing on the same document set used during training, so the results do not establish transfer to previously unseen domains or document collections.",
+        "page": 9,
+        "quote": "we only care about testing the LLM on the same set of documents."
+      },
+      {
+        "kind": "uncertainty",
+        "claim": "The supplied pages report benchmark scores and qualitative findings, but do not provide enough detail here to assess run-to-run variation or statistical uncertainty. This limits confidence in the stability of the measured differences.",
+        "page": 5,
+        "quote": "We see that RAFT consistently and significantly outperforms the baselines."
+      }
+    ],
+    "unresolved_questions": [
+      "How stable are the reported gains across random seeds, training-data samples, and alternative evaluation runs?",
+      "How does RAFT perform when the test documents or domain differ from those used for fine-tuning?",
+      "What are the effects of the data-generation process and answer-style alignment on the measured gains, separately from the proposed distractor-document training recipe?"
+    ]
+  },
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 1,
+  "citation_checks": [
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": false
+    }
+  ],
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 13497,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 13494,
+  "output_tokens": 776,
+  "estimated_cost_usd": 0.00207505,
+  "billing_uncertain": false,
+  "latency_seconds": 9.121224300004542
+}

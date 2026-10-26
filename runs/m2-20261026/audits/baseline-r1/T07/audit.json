@@ -1,0 +1,52 @@
+{
+  "task_id": "T07",
+  "variant": "baseline",
+  "review_sha256": "cb79c2d3b26cd5d7851675bde392e711530bafaf3bab84589c21967a25d401fa",
+  "snapshot_sha256": "fbefef3882cb746b1fc2a0d4f72c1b539a6dfe651fe3181484062a1bb81ac3ff",
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "status": "ok",
+  "method": "provisional_llm_evidence_audit",
+  "audit": {
+    "observations": [
+      {
+        "index": 0,
+        "verdict": "supported",
+        "explanation": "The paper describes the 369-task Ubuntu benchmark, task-specific initial-state configurations and execution-based evaluation, covering web and desktop apps, OS file I/O, and multi-app workflows (pp. 1–2, 6–8). The stated usefulness is a reasonable characterization of that scope."
+      },
+      {
+        "index": 1,
+        "verdict": "supported",
+        "explanation": "The paper reports human performance of 72.36% and baseline model results, with the best reported result of 12.24%; it explicitly describes a significant gap (pp. 1, 10–11)."
+      },
+      {
+        "index": 2,
+        "verdict": "supported",
+        "explanation": "The authors report four rounds of quality checks and say further time and red teaming could reduce false positives and negatives, explicitly leaving more work for the future (p. 8). This supports the qualified claim that evaluation errors remain an acknowledged concern."
+      },
+      {
+        "index": 3,
+        "verdict": "supported",
+        "explanation": "The paper says evaluation functions mainly assess task completion and pay little attention to unnecessary damaging actions, and that the authors lack an efficient way to detect latent side effects; it identifies safety assessment as further research (p. 18)."
+      }
+    ]
+  },
+  "api_calls": 1,
+  "successful_model_calls": 1,
+  "input_tokens": 40373,
+  "cached_input_tokens": 0,
+  "cache_write_tokens": 40370,
+  "output_tokens": 265,
+  "reading_actions": 0,
+  "tool_calls": 0,
+  "decision_steps": 0,
+  "estimated_cost_usd": 0.00517905,
+  "billing_uncertain": false
+}

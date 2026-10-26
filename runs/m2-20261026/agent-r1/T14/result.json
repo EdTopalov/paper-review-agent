@@ -1,0 +1,76 @@
+{
+  "task_id": "T14",
+  "variant": "agent",
+  "model": "gpt-6-luna",
+  "prompt_version": "m2-v1",
+  "status": "ok",
+  "review": {
+    "score": 0.76,
+    "summary": "RULER broadens long-context evaluation beyond single-needle retrieval with configurable retrieval, multi-hop tracing, aggregation, and QA tasks. Its systematic evaluation of ten models exposes substantial gaps between advertised context windows and performance across task types and lengths, while error analyses illustrate several failure modes. The synthetic benchmark is useful and flexible, but its proxy tasks and selected model/configuration set limit how directly results generalize to natural long-context use.",
+    "observations": [
+      {
+        "kind": "strength",
+        "claim": "The benchmark adds configurable task families that probe more than exact retrieval, including tracing and aggregation.",
+        "page": 3,
+        "quote": "RULER comprises tasks across four categories: retrieval, multi-hop tracing, aggregation, and question answering with all tasks configurable for varying length and complexity"
+      },
+      {
+        "kind": "strength",
+        "claim": "The evaluation uses substantial generated test sets across multiple context lengths and a common inference setup.",
+        "page": 6,
+        "quote": "For each task, we evaluate each model with 500 examples generated for each length from the series (4k, 8k, 16k, 32k, 64k, 128k)"
+      },
+      {
+        "kind": "limitation",
+        "claim": "The effective-context headline depends on a chosen baseline threshold rather than an independently established universal adequacy criterion.",
+        "page": 6,
+        "quote": "We use the performance of Llama2-7b model at the 4K context length as the threshold."
+      },
+      {
+        "kind": "limitation",
+        "claim": "The authors frame aggregation tasks as synthetic proxies for summarization, so these results do not establish performance on realistic summarization itself.",
+        "page": 5,
+        "quote": "we introduce a new category as a proxy for summarization tasks"
+      }
+    ],
+    "unresolved_questions": [
+      "How well do the synthetic tasks and the reported rankings predict performance on diverse real-world long-document tasks?",
+      "Would model rankings or effective lengths change under alternative answer scoring, prompts, sampling, or effective-length thresholds?",
+      "I did not inspect the appendices containing detailed task configurations, correlation study, model templates, and per-task breakdowns, so those design choices remain unevaluated."
+    ]
+  },
+  "reading_actions": 4,
+  "tool_calls": 5,
+  "decision_steps": 5,
+  "citation_checks": [
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    },
+    {
+      "page_valid": true,
+      "quote_nonempty": true,
+      "quote_matches": true
+    }
+  ],
+  "api_calls": 5,
+  "successful_model_calls": 5,
+  "input_tokens": 26565,
+  "cached_input_tokens": 15593,
+  "cache_write_tokens": 10342,
+  "output_tokens": 612,
+  "estimated_cost_usd": 0.00181768,
+  "billing_uncertain": false,
+  "latency_seconds": 9.979394800029695
+}
