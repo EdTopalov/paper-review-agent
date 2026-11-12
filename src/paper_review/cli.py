@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 
 from .audit import audit_experiment
 from .evaluation import evaluate, load_sample, summarize, check_experiment
-from .runner import Config, run_review, safe_error
+from .runner import VARIANTS, Config, run_review, safe_error
 
 
 def model_options(parser):
@@ -32,12 +32,16 @@ def main():
     review.add_argument("paper", type=Path)
     review.add_argument("--out", type=Path, required=True)
     review.add_argument("--task-id", default="single-paper")
-    review.add_argument("--variant", choices=["agent", "baseline"], default="agent")
+    review.add_argument("--variant", choices=VARIANTS, default="agent")
     model_options(review)
     evaluation = commands.add_parser("eval", help="Run a paired frozen-sample comparison")
     evaluation.add_argument("--sample", type=Path, default=Path("data/eval/tasks.jsonl"))
     evaluation.add_argument("--out", type=Path, required=True)
-    evaluation.add_argument("--variant", choices=["agent", "baseline", "both"], default="both")
+    selection = evaluation.add_mutually_exclusive_group()
+    selection.add_argument("--variant", choices=[*VARIANTS, "both"], default="both",
+                           help="One variant; 'both' retains the M2 agent/baseline pair")
+    selection.add_argument("--variants", nargs="+", choices=VARIANTS,
+                           help="Explicit variants to compare in the same experiment")
     evaluation.add_argument("--workers", type=int, default=2)
     evaluation.add_argument("--repeats", type=int, default=1)
     evaluation.add_argument("--limit", type=int)
@@ -88,7 +92,8 @@ def main():
             print(json.dumps({"status": result["status"], "report": str(args.out / "README.md")}))
             return 0 if result["status"] == "ok" else 1
         if args.command == "eval":
-            result = evaluate(args.sample, args.out, config, args.variant, args.workers, args.repeats, args.limit)
+            result = evaluate(args.sample, args.out, config, args.variant, args.workers,
+                              args.repeats, args.limit, variants=args.variants)
         else:
             result = audit_experiment(args.sample, args.experiment, config, args.workers)
         out = args.out if args.command == "eval" else args.experiment

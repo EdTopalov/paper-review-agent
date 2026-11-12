@@ -16,8 +16,9 @@ import jsonschema
 from openai import OpenAI, APIConnectionError, APIStatusError, APITimeoutError
 
 from .paper import Paper, file_hash
-from .citations import CHECKER_VERSION, check_quote
-from .prompts import AGENT_INSTRUCTIONS, PROMPT_VERSION, RUBRIC, RUBRIC_VERSION
+from .citations import CHECKER_VERSION
+from .agent_tools import PaperEvidence
+from .prompts import AGENT_INSTRUCTIONS, PROMPT_VERSION, PYAGENT_PROMPT_VERSION, RUBRIC, RUBRIC_VERSION
 from .schema import REVIEW_SCHEMA, TOOLS
 from .trace import Trace
 from .reporting import render_run
@@ -34,6 +35,25 @@ PRICES = {
     "gpt-4.1-mini-2025-04-14": (0.4, 0.1, 1.6, 0.4),
     "gpt-4.1-mini": (0.4, 0.1, 1.6, 0.4),
 }
+
+VARIANTS = ("agent", "pyagent_react", "baseline")
+
+
+def variant_metadata(variant):
+    if variant not in VARIANTS:
+        raise ValueError(f"Unknown variant: {variant}")
+    details = {"prompt_version": PROMPT_VERSION, "harness": "project-native"}
+    if variant == "pyagent_react":
+        try:
+            version = importlib.metadata.version("pyagent-patterns")
+        except importlib.metadata.PackageNotFoundError:
+            version = None
+        details.update(prompt_version=PYAGENT_PROMPT_VERSION,
+                       harness="pyagent-patterns.ReAct", harness_version=version,
+                       protocol="pyagent-text-action-v1")
+    elif variant == "baseline":
+        details["harness"] = "one-shot"
+    return details
 
 
 @dataclass
@@ -124,7 +144,7 @@ def agent(paper, calls, config, trace):
     history = [{"role": "user", "content": json.dumps(paper.introduction(), ensure_ascii=False)}]
     reads = 0
     tool_calls = 0
-    observed = {1: [paper.pages[0]]}
+    evidence = PaperEvidence(paper)
     instructions = AGENT_INSTRUCTIONS.format(max_reads=config.max_reads)
     for step in range(1, config.max_reads + 4):
         calls.stats["decision_steps"] = step
@@ -154,12 +174,7 @@ def agent(paper, calls, config, trace):
                     if action.name == "submit_review":
                         validate_review(arguments["review"])
                         calls.stats["submission_attempts"] += 1
-                        checks = paper.check_citations(arguments["review"])
-                        for observation, check in zip(arguments["review"]["observations"], checks):
-                            check["observed"] = any(
-                                check_quote([fragment], 1, observation["quote"])["citation_verified"]
-                                for fragment in observed.get(observation["page"], [])
-                            )
+                        checks = evidence.check(arguments["review"])
                         if calls.stats["first_submission_checks"] is None:
                             calls.stats["first_submission_checks"] = checks
                         trace.write("tool_call", step=step, name=action.name, arguments=arguments)
@@ -178,13 +193,9 @@ def agent(paper, calls, config, trace):
                         trace.write("tool_call", step=step, name=action.name, arguments=arguments)
                         if action.name == "search_paper":
                             observation = paper.search(arguments["query"])
-                            fragments = observation.get("matches", [])
-                            for fragment in fragments:
-                                observed.setdefault(fragment["page"], []).append(fragment["snippet"])
                         else:
                             observation = paper.read_pages(arguments["start"], arguments["end"])
-                            for fragment in observation.get("pages", []):
-                                observed.setdefault(fragment["page"], []).append(fragment["text"])
+                        evidence.remember(action.name, observation)
             except (json.JSONDecodeError, jsonschema.ValidationError) as exc:
                 observation = {"error": "invalid_arguments", "type": type(exc).__name__}
             except Exception as exc:
@@ -209,20 +220,23 @@ def baseline(paper, calls, trace):
 
 
 def run_review(paper_path, out, config, task_id, variant="agent", client=None, metadata=None):
+    details = variant_metadata(variant)
     out = Path(out)
     out.mkdir(parents=True, exist_ok=False)
-    trace = Trace(out / "trace.jsonl")
+    trace = Trace(out / "trace.jsonl", context={"task_id": task_id, "variant": variant})
     start = time.perf_counter()
     versions = {package: importlib.metadata.version(package)
                 for package in ("openai", "pypdf", "jsonschema")}
     trace.write("run_start", task_id=task_id, variant=variant, config=asdict(config),
-                prompt_version=PROMPT_VERSION, rubric_version=RUBRIC_VERSION,
+                prompt_version=details["prompt_version"], rubric_version=RUBRIC_VERSION,
                 checker_version=CHECKER_VERSION, paper_path=str(paper_path),
                 dependencies=versions, pricing_usd_per_million=PRICES.get(config.model),
-                pricing_checked="2026-10-26", metadata=metadata or {})
+                pricing_checked="2026-10-26", metadata=metadata or {}, harness=details,
+                trace_version=2)
     calls = ModelCalls(client or OpenAI(max_retries=0, timeout=config.timeout), config, trace)
     result = {"task_id": task_id, "variant": variant, "model": config.model,
-              "prompt_version": PROMPT_VERSION, "rubric_version": RUBRIC_VERSION,
+              "prompt_version": details["prompt_version"], "rubric_version": RUBRIC_VERSION,
+              "harness": details,
               "checker_version": CHECKER_VERSION, "status": "error", "review": None,
               "reading_actions": None, "tool_calls": None, "decision_steps": None}
     try:
@@ -231,8 +245,18 @@ def run_review(paper_path, out, config, task_id, variant="agent", client=None, m
                     paper_metadata={k: v for k, v in paper.snapshot.items() if k != "pages"})
         if len(paper.full_text()) > config.max_paper_chars:
             raise ValueError("paper_exceeds_documented_input_limit")
-        review, trajectory = (agent(paper, calls, config, trace) if variant == "agent"
-                              else baseline(paper, calls, trace))
+        if variant == "agent":
+            review, trajectory = agent(paper, calls, config, trace)
+        elif variant == "baseline":
+            review, trajectory = baseline(paper, calls, trace)
+        else:
+            try:
+                from .pyagent_runner import run_pyagent
+            except ModuleNotFoundError as exc:
+                if exc.name and exc.name.startswith("pyagent_patterns"):
+                    raise RuntimeError("pyagent_dependency_missing") from exc
+                raise
+            review, trajectory = run_pyagent(paper, calls, config, trace)
         validate_review(review)
         result.update(status="ok", review=review, **trajectory)
         result["citation_checks"] = paper.check_citations(review)
@@ -243,6 +267,7 @@ def run_review(paper_path, out, config, task_id, variant="agent", client=None, m
             "paper_has_no_extractable_text", "paper_exceeds_documented_input_limit",
             "model_decision_budget_exhausted",
             "invalid_review_content",
+            "pyagent_dependency_missing", "pyagent_finished_without_accepted_review",
         }:
             result["error"]["code"] = str(exc)
         trace.write("run_error", error=result["error"])

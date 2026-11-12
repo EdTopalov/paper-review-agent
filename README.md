@@ -66,12 +66,35 @@ These commands inspect the code and saved results without API calls. `summarize`
 rebuilds the readable pages from traces; `check` writes no additional files. Use
 `paper-review --help` or `paper-review <command> --help` for options.
 
+## Agent variants (M3)
+
+V1 is the M2 `agent`; V2 is `pyagent_react`, using the ReAct harness from
+[pyagent.org](https://pyagent.org/). The one-call `baseline` remains a separate
+comparison. See the [V2 README](variants/pyagent_react/README.md) for its mechanism,
+pre-evaluation hypothesis, installation, exact commands, and output format.
+The [comparison index](milestones/M3.md) links variants and the shared execution protocol.
+Select each implementation through the same `paper-review` entry point.
+
+Install V2 in the activated environment, then select it with `--variant`:
+
+```shell
+python -m pip install -r requirements-m3.txt
+python -m pip install --no-deps -e .
+paper-review review data/dev/toy.json --variant pyagent_react --out runs/scratch/v2-dev
+paper-review eval --variants agent pyagent_react baseline --workers 3 --out runs/m3-pyagent-comparison
+```
+
+The original `eval --variant both` still compares only M2 and baseline. Each
+variant's README contains its hypothesis and design. Experiment reports include
+per-task traces and API usage for the selected variants.
+
 | Location | Contents |
 |---|---|
 | [Source](src/paper_review), [tests](tests) | Agent, tools, evaluation, and offline checks. |
 | [Dataset freezer](scripts/freeze_sample.py) | Optional source download and snapshot preparation; existing evaluation inputs are already frozen. |
 | [M1](milestones/M1.md) | Original task, architecture, failure map, and evaluation plan. |
 | [M2](milestones/M2.md) | Implementation, plan changes, measured results, and failure analysis. |
+| [M3](milestones/M3.md), [V2: PyAgent](variants/pyagent_react/README.md) | Variant definitions, hypothesis, implementation contract, and comparison protocol. |
 | [Evaluation data](data/eval/README.md) | Frozen paper versions, provenance, licenses, and sampling limits. |
 | [Saved runs](runs/README.md), [failure cases](data/failures) | Readable results, model/tool traces, and annotated decisions. |
 | [Sources and licenses](THIRD_PARTY.md) | Attribution and dependency licenses. |

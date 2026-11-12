@@ -12,7 +12,7 @@ from zipfile import ZipFile, ZIP_DEFLATED
 import jsonschema
 
 from .paper import Paper, file_hash
-from .runner import run_review
+from .runner import run_review, variant_metadata
 from .citations import CHECKER_VERSION
 from .prompts import PROMPT_VERSION, RUBRIC_VERSION
 from .trace import read_events, read_result
@@ -94,6 +94,7 @@ def summarize(out):
         summary[variant] = {
             "runs": len(rows), "distinct_tasks": len({r["task_id"] for r in rows}),
             "completed": sum(c["completed"] for c in checks),
+            "completion_rate": sum(c["completed"] for c in checks) / len(rows),
             "all_quotes_match": sum(c["all_citations_match"] for c in checks),
             "quote_match_rate": (sum(c["matching_quotes"] for c in checks)
                                  / max(1, sum(c["observation_count"] for c in checks))),
@@ -107,7 +108,12 @@ def summarize(out):
             "citation_status_counts": {status: sum(c.get("status") == status for r in rows for c in r.get("citation_checks", []))
                                        for status in ("exact", "whitespace", "normalized", "wrong_page", "hyphenation_ambiguous", "not_found")},
             "mean_reading_actions": statistics.mean(r["reading_actions"] or 0 for r in rows),
+            "mean_decision_steps": statistics.mean(r.get("decision_steps") or 0 for r in rows),
+            "mean_tool_calls": statistics.mean(r.get("tool_calls") or 0 for r in rows),
             "mean_model_calls": statistics.mean(r["api_calls"] for r in rows),
+            "mean_input_tokens": statistics.mean(r.get("input_tokens", 0) for r in rows),
+            "mean_output_tokens": statistics.mean(r.get("output_tokens", 0) for r in rows),
+            "mean_cached_input_tokens": statistics.mean(r.get("cached_input_tokens", 0) for r in rows),
             "mean_latency_seconds": statistics.mean(r["latency_seconds"] for r in rows),
             "median_latency_seconds": statistics.median(r["latency_seconds"] for r in rows),
             "mean_cost_usd": statistics.mean(costs) if len(costs) == len(rows) else None,
@@ -155,6 +161,21 @@ def check_experiment(root):
             "stop_recorded": (bool(decisions) and decisions[-1]["action"] in ("submit_review", "final_answer"))
                 or bool(result and result.get("error")),
         }
+        if events[0].get("trace_version", 1) >= 2:
+            flags["variant_labels"] = all(
+                e.get("variant") == events[0]["variant"]
+                and e.get("task_id") == events[0]["task_id"] for e in events)
+        if result and result["variant"] == "pyagent_react":
+            accepted = [e for e in run if e["event"] == "tool_observation"
+                        and e["observation"].get("accepted")]
+            submissions = [e for e in run if e["event"] == "tool_call"
+                           and e["name"] == "submit_review"]
+            flags["pyagent_accepted_review"] = result["status"] != "ok" or (
+                bool(accepted) and bool(submissions)
+                and submissions[-1]["arguments"]["review"] == result["review"]
+                and all(c["citation_verified"] and c.get("observed", False)
+                        for c in accepted[-1]["observation"]["citation_checks"]))
+            flags["pyagent_decision_budget"] = result["decision_steps"] <= events[0]["config"]["max_reads"] + 3
         audit_starts = [i for i, e in enumerate(events) if e["event"] == "audit_start"]
         if audit_starts:
             audit_events = events[audit_starts[-1]:]
@@ -165,8 +186,12 @@ def check_experiment(root):
         rows.append({"trace": str(path), "checks": flags, "all_checks_pass": all(flags.values())})
     return {"runs": len(rows), "passed": sum(r["all_checks_pass"] for r in rows),
             "failures": [r for r in rows if not r["all_checks_pass"]]}
-def evaluate(sample_path, out, config, variant="both", workers=2, repeats=1, limit=None):
+def evaluate(sample_path, out, config, variant="both", workers=2, repeats=1, limit=None, *, variants=None):
     sample_path, out = Path(sample_path).resolve(), Path(out)
+    variants = list(variants) if variants is not None else (["agent", "baseline"] if variant == "both" else [variant])
+    if not variants or len(variants) != len(set(variants)):
+        raise ValueError("Choose a nonempty list of distinct variants")
+    variant_details = {kind: variant_metadata(kind) for kind in variants}
     tasks = load_sample(sample_path)
     if any(task["instructions_version"] != RUBRIC_VERSION for task in tasks):
         raise ValueError("Sample instructions do not match the frozen common rubric")
@@ -175,15 +200,22 @@ def evaluate(sample_path, out, config, variant="both", workers=2, repeats=1, lim
     if not tasks:
         raise ValueError("Empty sample")
     out.mkdir(parents=True, exist_ok=True)
-    variants = ["agent", "baseline"] if variant == "both" else [variant]
     revision = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=False).stdout.strip()
     # Include a digest of the actual working source, even before changes are committed.
     source_hash = sha256()
     for source in sorted(Path(__file__).parent.glob("*.py")):
         source_hash.update(source.name.encode())
         source_hash.update(source.read_bytes())
+    project = Path(__file__).resolve().parents[2] / "pyproject.toml"
+    build_files = [project, project.with_name("requirements-m2.txt"),
+                   project.with_name("requirements-m3.txt")]
+    for source in build_files:
+        if source.exists():
+            source_hash.update(source.name.encode())
+            source_hash.update(source.read_bytes())
     experiment = {"sample_sha256": file_hash(sample_path), "task_ids": [t["id"] for t in tasks],
                   "config": asdict(config), "variants": variants, "repeats": repeats,
+                  "variant_metadata": variant_details,
                   "git_revision": revision, "source_sha256": source_hash.hexdigest(),
                   "prompt_version": PROMPT_VERSION, "rubric_version": RUBRIC_VERSION,
                   "checker_version": CHECKER_VERSION,
@@ -195,15 +227,16 @@ def evaluate(sample_path, out, config, variant="both", workers=2, repeats=1, lim
             raise ValueError("Existing experiment has different inputs/code/config; choose a new --out")
     else:
         experiment_path.write_text(json.dumps(experiment, indent=2) + "\n", encoding="utf-8")
-        project = Path(__file__).resolve().parents[2] / "pyproject.toml"
         with ZipFile(out / "source.zip", "x", compression=ZIP_DEFLATED) as archive:
             for source in sorted(Path(__file__).parent.glob("*.py")):
                 archive.write(source, "src/paper_review/" + source.name)
-            if project.exists():
-                archive.write(project, project.name)
-            lockfile = project.with_name("requirements-m2.txt")
-            if lockfile.exists():
-                archive.write(lockfile, lockfile.name)
+            for source in build_files:
+                if source.exists():
+                    archive.write(source, source.name)
+            for name in ("milestones/M3.md", "variants/pyagent_react/README.md"):
+                source = project.parent / name
+                if source.exists():
+                    archive.write(source, name)
     jobs = []
     for repeat in range(1, repeats + 1):
         for task in tasks:

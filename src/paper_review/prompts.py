@@ -2,6 +2,7 @@
 
 PROMPT_VERSION = "m2-v2"
 RUBRIC_VERSION = "m2-v1"
+PYAGENT_PROMPT_VERSION = "m3-v2-pyagent-react-v1"
 
 RUBRIC = """You help an ML research reading club select papers for discussion.
 Assess each supplied paper independently. Return an absolute score in [0, 1].
@@ -39,4 +40,18 @@ queries short. Preserve each excerpt's page number when citing it. Cite only tex
 you have observed. If submit_review returns citation errors, correct the evidence
 or read again. Keep case, numbers, signs, and mathematical notation unchanged;
 copy ambiguous line-break hyphenation exactly rather than silently rewriting it.
+"""
+
+PYAGENT_PROTOCOL = """
+This variant uses PyAgent's text-action protocol rather than API function calls.
+Return exactly one single-line action per response:
+Action: tool_name(<JSON object>)
+For example:
+Action: read_pages({"start": 2, "end": 3, "reason": "Inspect the experimental setup."})
+All tool arguments must satisfy the supplied contracts, including reason. Put
+only a brief observable purpose in reason; do not output a Thought section or
+private chain-of-thought. JSON strings must escape embedded newlines and quotes.
+Finish only by calling submit_review with the complete review object. Do not
+emit FINISH or other completion markers. Tool errors are observations: correct
+the next action. An accepted submission ends the run without another model call.
 """

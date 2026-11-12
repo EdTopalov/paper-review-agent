@@ -41,9 +41,12 @@ def read_result(path, *, audit=False):
 
 
 class Trace:
-    def __init__(self, path, *, append=False):
+    def __init__(self, path, *, append=False, context=None):
         Path(path).parent.mkdir(parents=True, exist_ok=True)
         events = read_events(path) if append else []
+        self.context = ({key: events[0][key] for key in ("task_id", "variant")
+                         if key in events[0]} if events else {})
+        self.context.update(context or {})
         self.file = Path(path).open("a" if append else "x", encoding="utf-8", newline="\n")
         elapsed = (datetime.now(timezone.utc) - datetime.fromisoformat(events[0]["timestamp"])).total_seconds() if events else 0
         self.started = time.perf_counter() - elapsed
@@ -70,7 +73,7 @@ class Trace:
             payload = {**payload, "response": {key: value for key, value in payload["response"].items()
                                                if key in RESPONSE_FIELDS}}
         self.seq += 1
-        row = {"seq": self.seq, "timestamp": datetime.now(timezone.utc).isoformat(),
+        row = {**self.context, "seq": self.seq, "timestamp": datetime.now(timezone.utc).isoformat(),
                "elapsed_seconds": round(time.perf_counter()-self.started, 6),
                "event": event, **payload}
         self.file.write(json.dumps(row, ensure_ascii=False) + "\n")

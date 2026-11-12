@@ -61,6 +61,9 @@ def render_run(path):
              f"**{result['variant']} · {result['status']}**", "",
              f"{result['api_calls']} model calls · {result['reading_actions']} reads · "
              f"{result['latency_seconds']:.2f} s · {money(result['estimated_cost_usd'])}", "",
+             f"{result.get('decision_steps') or 0} decisions · {result.get('tool_calls') or 0} tool calls · "
+             f"{result.get('input_tokens', 0)} input tokens "
+             f"({result.get('cached_input_tokens', 0)} cached) · {result.get('output_tokens', 0)} output tokens", "",
              "[Structured trace](trace.jsonl) contains full arguments, model outputs, and observations. "
              "This page shows the review once and summarizes each decision.", ""]
     if review:
@@ -124,19 +127,21 @@ def render_experiment(root, summary, records, audits):
              "the meaning of a claim. Summary rates include failed attempts.", "",
              "An evidence audit is a separate model judgment of claim support; supported counts are "
              "provisional verdicts. A first submission is the review proposed before citation repair.", "",
-             "| Method | Completed | All citations verified | Reads/task | Calls/task | USD/task | Seconds/task |",
-             "|---|---:|---:|---:|---:|---:|---:|"]
+             "| Method | Completed | All citations verified | Steps/task | Tools/task | Reads/task | Calls/task | Input tokens/task | Output tokens/task | USD/task | Seconds/task |",
+             "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|"]
     for name, row in summary.items():
         verified = row['all_citations_verified']
         lines += [f"| {name} | {row['completed']}/{row['runs']} | "
                   f"{verified if verified is not None else 'unavailable'}/{row['runs']} | "
+                  f"{row['mean_decision_steps']:.2f} | {row['mean_tool_calls']:.2f} | "
                   f"{row['mean_reading_actions']:.2f} | {row['mean_model_calls']:.2f} | "
+                  f"{row['mean_input_tokens']:.1f} | {row['mean_output_tokens']:.1f} | "
                   f"{money(row['mean_cost_usd'])} | {row['mean_latency_seconds']:.2f} |"]
     for variant in sorted({r['variant'] for _, r in records}):
         lines += ["", f"## {variant}", "",
                   "Completed papers are ordered by absolute score, then task ID; errors follow.", "",
-                  "| Task | Status | Score | Rejected submissions | First submission verified | Evidence audit |",
-                  "|---|---|---:|---:|---|---|"]
+                  "| Task | Status | Score | Rejected submissions | First submission verified | Evidence audit | Calls | Tokens (in/out) | USD | Seconds |",
+                  "|---|---|---:|---:|---|---|---:|---|---:|---:|"]
         subset = [(p, r) for p, r in records if r['variant'] == variant]
         subset.sort(key=lambda item: (item[1]['status'] != 'ok', -(item[1].get('review') or {}).get('score', 0), item[1]['task_id'], str(item[0])))
         for path, result in subset:
@@ -153,7 +158,9 @@ def render_experiment(root, summary, records, audits):
             link = path.parent.relative_to(root).as_posix() + '/README.md'
             title = paper_title(read_events(path)).replace('|', '\\|').replace('\n', ' ')
             lines += [f"| [{path.parent.parent.name}/{result['task_id']}: {title}]({link}) | {result['status']} | "
-                      f"{review.get('score', '—')} | {result.get('rejected_submissions', 0)} | {first_ok} | {verdict} |"]
+                      f"{review.get('score', '—')} | {result.get('rejected_submissions', 0)} | {first_ok} | {verdict} | "
+                      f"{result['api_calls']} | {result.get('input_tokens', 0)}/{result.get('output_tokens', 0)} | "
+                      f"{money(result['estimated_cost_usd'])} | {result['latency_seconds']:.2f} |"]
     if audits:
         costs = [a['estimated_cost_usd'] for a in audits.values()]
         cost = sum(costs) if all(c is not None for c in costs) and not any(a.get('billing_uncertain') for a in audits.values()) else None

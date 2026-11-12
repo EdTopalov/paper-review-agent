@@ -1,7 +1,8 @@
 # Sources, dependencies, and licenses
 
-The agent/harness code in this repository was written for this project. No agent
-framework implementation or paper-review dataset code was copied.
+The M2 agent/harness code in this repository was written for this project. V2
+imports the PyAgent ReAct implementation as a dependency; no framework source or
+paper-review dataset code is vendored.
 
 The unified implementation incorporates the team's citation checker and page
 reading design from [commit 39d760f](https://github.com/EdTopalov/paper-review-agent/commit/39d760f2e47b66d074de34397101dcc66e53ead1).
@@ -13,6 +14,12 @@ mathematical notation, and ambiguous line-break hyphens. The shared package is
 - ReAct supplies the architectural idea of alternating model decisions and tool
   observations: Yao et al., [ReAct](https://arxiv.org/abs/2210.03629), CC BY 4.0.
   It is cited in `src/paper_review/runner.py`; this is an independent implementation.
+- V2 uses `pyagent-patterns==0.3.0` from
+  [pyagent-core/pyagent](https://github.com/pyagent-core/pyagent), MIT licensed.
+  Its `ReAct` loop is imported in `src/paper_review/pyagent_runner.py`; the project
+  adapter handles evidence validation, accepted-review stopping and API accounting.
+  This is the [pyagent.org](https://pyagent.org/) project, distinct from the
+  unrelated `pyagent-harness` package.
 - API integration follows the official [OpenAI function-calling documentation](https://developers.openai.com/api/docs/guides/function-calling).
 - The OpenAI Python SDK is Apache-2.0 licensed; `pypdf` is BSD-3-Clause;
   `python-dotenv` is BSD-3-Clause; `requests` is Apache-2.0;
