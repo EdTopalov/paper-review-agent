@@ -8,13 +8,14 @@ of this variant. Only the project adapter determines whether a review is accepte
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 import json
+import re
 
 import jsonschema
 from pyagent_patterns.advanced import ReAct
 from pyagent_patterns.base import Agent, Role
 
 from .agent_tools import PaperEvidence
-from .prompts import AGENT_INSTRUCTIONS, PYAGENT_PROTOCOL
+from .prompts import AGENT_INSTRUCTIONS, PYAGENT_PROTOCOL, PYAGENT_PROTOCOL_VERSION
 from .schema import TOOLS
 
 
@@ -24,6 +25,38 @@ ENGINE_FINISH_TOKEN = "__PAPER_REVIEW_STOP_AFTER_ACCEPTANCE__"
 
 class _ReviewAccepted(Exception):
     """Stop before the next API request, outside ReAct's tool exception handler."""
+
+
+class PaperReviewReAct(ReAct):
+    """Keep PyAgent's loop; extract just the first JSON action from its output."""
+
+    @staticmethod
+    def _parse_action(content):
+        # A model may prefix the action with prose, wrap it in a code fence,
+        # pretty-print JSON, or concatenate several actions without newlines.
+        # Commit to the first marker: never skip an invalid first action in
+        # favor of a later read or submission that has not seen its observation.
+        marker = re.search(r"\bAction:\s*", content, re.IGNORECASE)
+        if marker is None:
+            return None, ""
+        action = content[marker.end():]
+        call = re.match(r"([A-Za-z_][A-Za-z0-9_]*)\s*\(", action)
+        if call is None:
+            return action.strip(), ""
+        name = call[1]
+        payload = action[call.end():].lstrip()
+        try:
+            _, end = json.JSONDecoder().raw_decode(payload)
+        except json.JSONDecodeError:
+            # Preserve malformed arguments for the shared validation/feedback
+            # path. Do not guess missing quotes, fields, or evidence content.
+            return name, payload
+        if not payload[end:].lstrip().startswith(")"):
+            # A valid JSON value alone is not a complete text action.
+            return name, ""
+        # raw_decode respects nested objects, escaped quotes, and parentheses
+        # or Action: strings inside JSON. Trailing actions are never executed.
+        return name, payload[:end]
 
 
 class ReviewSession:
@@ -66,13 +99,13 @@ class ReviewSession:
                   for message in messages if message.role != Role.SYSTEM]
         response = self.calls.call(instructions=instructions, input=inputs)
         content = response.output_text
-        name, arguments = ReAct._parse_action(content)
+        name, arguments = PaperReviewReAct._parse_action(content)
         engine_finish = ENGINE_FINISH_TOKEN in content
         if engine_finish:
             name, arguments = "premature_finish", "{}"
         self.trace.write("decision", step=self.step, action=name or "no_tool_call",
                          call_id=self.call_id, arguments=arguments,
-                         protocol="pyagent-text-action-v1")
+                         protocol=PYAGENT_PROTOCOL_VERSION)
         if name and not engine_finish:
             self.calls.stats["tool_calls"] += 1
         if name not in self.schemas and not engine_finish:
@@ -116,19 +149,22 @@ class ReviewSession:
             self.evidence.remember(name, value)
             return self.observation(value)
         except (json.JSONDecodeError, jsonschema.ValidationError) as exc:
-            return self.observation({"error": "invalid_arguments", "type": type(exc).__name__})
+            return self.observation({
+                "error": "invalid_arguments", "type": type(exc).__name__,
+                "hint": "Return one complete Action: tool_name(<JSON object>) matching the tool contract. Use double-quoted JSON keys and strings; do not concatenate actions.",
+            })
         except Exception as exc:
             return self.observation({"error": "tool_exception", **safe_error(exc)})
 
     async def run(self):
         tools = {name: (lambda payload, tool_name=name: self.invoke(tool_name, payload))
                  for name in self.schemas}
-        pattern = ReAct(agent=Agent("paper-review-v2", self.model), tools=tools,
-                        max_steps=self.config.max_reads + 3,
-                        finish_token=ENGINE_FINISH_TOKEN)
+        pattern = PaperReviewReAct(agent=Agent("paper-review-v2", self.model), tools=tools,
+                                  max_steps=self.config.max_reads + 3,
+                                  finish_token=ENGINE_FINISH_TOKEN)
         self.trace.write("harness_start", harness="pyagent-patterns.ReAct",
                          max_steps=self.config.max_reads + 3,
-                         protocol="pyagent-text-action-v1")
+                         protocol=PYAGENT_PROTOCOL_VERSION)
         stop = "step_limit_or_engine_finish"
         try:
             await pattern.run(json.dumps(self.paper.introduction(), ensure_ascii=False))

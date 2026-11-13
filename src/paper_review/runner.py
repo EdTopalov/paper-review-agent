@@ -18,7 +18,8 @@ from openai import OpenAI, APIConnectionError, APIStatusError, APITimeoutError
 from .paper import Paper, file_hash
 from .citations import CHECKER_VERSION
 from .agent_tools import PaperEvidence
-from .prompts import AGENT_INSTRUCTIONS, PROMPT_VERSION, PYAGENT_PROMPT_VERSION, RUBRIC, RUBRIC_VERSION
+from .prompts import (AGENT_INSTRUCTIONS, PROMPT_VERSION, PYAGENT_PROMPT_VERSION,
+                      PYAGENT_PROTOCOL_VERSION, RUBRIC, RUBRIC_VERSION)
 from .schema import REVIEW_SCHEMA, TOOLS
 from .trace import Trace
 from .reporting import render_run
@@ -50,7 +51,7 @@ def variant_metadata(variant):
             version = None
         details.update(prompt_version=PYAGENT_PROMPT_VERSION,
                        harness="pyagent-patterns.ReAct", harness_version=version,
-                       protocol="pyagent-text-action-v1")
+                       protocol=PYAGENT_PROTOCOL_VERSION)
     elif variant == "baseline":
         details["harness"] = "one-shot"
     return details

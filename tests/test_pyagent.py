@@ -15,7 +15,7 @@ pytest.importorskip("pyagent_patterns")
 
 from paper_review.evaluation import check_experiment, evaluate, summarize
 from paper_review.paper import file_hash
-from paper_review.pyagent_runner import ENGINE_FINISH_TOKEN
+from paper_review.pyagent_runner import ENGINE_FINISH_TOKEN, PaperReviewReAct
 from paper_review.runner import Config, run_review
 from paper_review.trace import read_events
 from test_harness import Client, FIXTURE, OPENING_REVIEW, REVIEW, Response, finish
@@ -43,19 +43,21 @@ def test_real_harness_accepts_without_an_extra_provider_call(tmp_path, monkeypat
 
     entered = []
     execute = ReAct._execute
+    assert PaperReviewReAct._execute is execute
 
     async def observe(self, context):
-        entered.append(type(self).__module__)
+        entered.append(isinstance(self, ReAct))
         return await execute(self, context)
 
     monkeypatch.setattr(ReAct, "_execute", observe)
     result, client, events = run(tmp_path, [submit()])
-    assert entered == ["pyagent_patterns.advanced.react"]
+    assert entered == [True]
     assert result["status"] == "ok"
     assert result["api_calls"] == result["decision_steps"] == result["tool_calls"] == 1
     assert result["reading_actions"] == 0
     assert result["harness"]["harness_version"] == "0.3.0"
-    assert result["prompt_version"] == "m3-v2-pyagent-react-v1"
+    assert result["prompt_version"] == "m3-v2-pyagent-react-v2"
+    assert result["harness"]["protocol"] == "pyagent-text-action-v2"
     assert all(e["variant"] == "pyagent_react" and e["task_id"] == "dev" for e in events)
     assert len(client.requests) == 1 and client.requests[0]["store"] is False
     assert "tools" not in client.requests[0]
@@ -79,6 +81,66 @@ def test_page_tools_keep_observed_evidence_and_identity(tmp_path):
     assert [p["page"] for p in pages] == [2, 3]
     assert "Observation:" in client.requests[1]["input"][-1]["content"]
     assert check_experiment(tmp_path / "dev")["passed"] == 1
+
+
+@pytest.mark.parametrize("template", [
+    "We need use tools only action.Action: read_pages({payload})",
+    "```json\nAction: read_pages(\n{payload}\n)\n```",
+    "  action: read_pages ( {payload} )  ",
+])
+def test_text_action_wrappers_and_multiline_json_keep_exact_arguments(tmp_path, template):
+    arguments = {"start": 2, "end": 3,
+                 "reason": 'Inspect (results), "quotes", and Action: strings.\nKeep page identity.'}
+    content = template.format(payload=json.dumps(arguments, indent=2))
+    result, client, events = run(tmp_path, [Response(text=content), submit(REVIEW)])
+    assert result["status"] == "ok" and result["reading_actions"] == 1
+    assert result["api_calls"] == result["decision_steps"] == 2
+    call = next(e for e in events if e["event"] == "tool_call")
+    assert call["name"] == "read_pages" and call["arguments"] == arguments
+    # The adapter parses the response; it does not rewrite provider output or
+    # replace PyAgent's conversation history with a fabricated action.
+    assert client.requests[1]["input"][-2]["content"] == content
+    assert check_experiment(tmp_path / "dev")["passed"] == 1
+
+
+@pytest.mark.parametrize("separator", ["", "\n", "\n\n"])
+def test_concatenated_actions_execute_only_the_first_and_wait_for_observation(tmp_path, separator):
+    first = action("read_pages", {"start": 2, "end": 3, "reason": "Inspect evidence."}).output_text
+    extra = action("read_pages", {"start": 1, "end": 1, "reason": "Duplicate read."}).output_text
+    content = separator.join([first, extra, submit().output_text])
+    result, client, events = run(tmp_path, [Response(text=content), submit(REVIEW)])
+    assert result["status"] == "ok"
+    assert result["api_calls"] == result["decision_steps"] == result["tool_calls"] == 2
+    assert result["reading_actions"] == result["submission_attempts"] == 1
+    calls = [e for e in events if e["event"] == "tool_call"]
+    assert [(e["name"], e["step"]) for e in calls] == [("read_pages", 1), ("submit_review", 2)]
+    assert result["review"] == REVIEW
+    assert "Observation:" in client.requests[1]["input"][-1]["content"]
+    assert check_experiment(tmp_path / "dev")["passed"] == 1
+
+
+def test_multiline_review_is_validated_without_stripping_json_string_content(tmp_path):
+    arguments = {"reason": "Submit inspected evidence.", "review": OPENING_REVIEW}
+    result, _, events = run(tmp_path, [Response(text="Action: submit_review(\n"
+                                               + json.dumps(arguments, indent=2) + "\n)")])
+    assert result["status"] == "ok" and result["review"] == OPENING_REVIEW
+    assert result["api_calls"] == result["submission_attempts"] == 1
+    assert next(e for e in events if e["event"] == "tool_call")["arguments"] == arguments
+
+
+@pytest.mark.parametrize("first,expected_error", [
+    ('Action: read_pages({"start":": 2, "end": 4, "reason":"Inspect evidence."})', "invalid_arguments"),
+    ('Action: read_pages({"start":2,"end":3,"reason":"Missing closing parenthesis."}', "invalid_arguments"),
+    ('Action: missing_tool({})', "unknown_tool"),
+])
+def test_invalid_first_action_is_not_skipped_or_repaired_to_execute_a_later_action(tmp_path, first, expected_error):
+    result, client, events = run(tmp_path, [Response(text=first + submit().output_text), submit()])
+    assert result["status"] == "ok" and result["reading_actions"] == 0
+    assert result["api_calls"] == result["decision_steps"] == 2
+    feedback = "Unknown tool:" if expected_error == "unknown_tool" else expected_error
+    assert feedback in client.requests[1]["input"][-1]["content"]
+    assert next(e for e in events if e["event"] == "tool_observation")["observation"]["error"] == expected_error
+    assert [(e["step"], e["name"]) for e in events if e["event"] == "tool_call"] == [(2, "submit_review")]
 
 
 def test_search_fragments_can_be_used_as_evidence(tmp_path):

@@ -2,7 +2,8 @@
 
 PROMPT_VERSION = "m2-v2"
 RUBRIC_VERSION = "m2-v1"
-PYAGENT_PROMPT_VERSION = "m3-v2-pyagent-react-v1"
+PYAGENT_PROMPT_VERSION = "m3-v2-pyagent-react-v2"
+PYAGENT_PROTOCOL_VERSION = "pyagent-text-action-v2"
 
 RUBRIC = """You help an ML research reading club select papers for discussion.
 Assess each supplied paper independently. Return an absolute score in [0, 1].
@@ -46,6 +47,9 @@ PYAGENT_PROTOCOL = """
 This variant uses PyAgent's text-action protocol rather than API function calls.
 Return exactly one single-line action per response:
 Action: tool_name(<JSON object>)
+Start directly with Action:, without prose or Markdown fences. Do not repeat the
+action or add a second action: only the first action will execute. Wait for its
+observation before choosing the next action.
 For example:
 Action: read_pages({"start": 2, "end": 3, "reason": "Inspect the experimental setup."})
 All tool arguments must satisfy the supplied contracts, including reason. Put

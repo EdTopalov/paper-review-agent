@@ -15,7 +15,8 @@ retains JSON validation, reading limits, citation checks, tracing, and accountin
 for actual API requests.
 
 The experiment jointly changes the execution engine and action serialization:
-PyAgent parses `Action: tool_name(<JSON>)` text, whereas M2 uses API tool schemas.
+PyAgent executes `Action: tool_name(<JSON>)` text parsed by the project adapter,
+whereas M2 uses API tool schemas.
 The model, assessment rubric, evidence tools, and acceptance rules stay the same,
 so measured differences reflect the harness and protocol together.
 
@@ -99,6 +100,42 @@ Example text action:
 ```text
 Action: read_pages({"start": 2, "end": 3, "reason": "Inspect the experimental setup"})
 ```
+
+### Text-action parser revision
+
+The current prompt is `m3-v2-pyagent-react-v2` and the protocol is
+`pyagent-text-action-v2`. A small `ReAct` subclass overrides only action parsing;
+the installed PyAgent library still runs the conversation and executes tools.
+The parser locates the first `Action:` marker, reads one complete JSON value
+with Python's JSON decoder, and requires its closing parenthesis. This supports
+an inline prose prefix, Markdown fences, multiline JSON, and parentheses or
+escaped quotes inside strings.
+
+If a response contains multiple actions, only the first is eligible to execute.
+The next action must come from a new model decision after the observation.
+Malformed JSON and schema errors are returned to the model with a correction
+hint; the parser does not invent missing arguments or skip to a later valid
+action. Empty or prose-only responses still require another decision. Original
+provider responses remain in the trace and in PyAgent's conversation history.
+Reading and decision budgets, API accounting, and citation acceptance are shared
+with the previous revision.
+
+The earlier `runs/m3-comparison-pyagent-20/` experiment records the v1 protocol.
+Keep those results intact. For a fresh comparison with the same model and limits
+(20 papers, three variants, one repeat), commit the parser changes, then run:
+
+```shell
+paper-review eval --variants baseline agent pyagent_react \
+  --model gpt-6-luna --max-reads 2 --max-output-tokens 1500 \
+  --timeout 90 --retries 0 --reasoning-effort low \
+  --workers 3 --repeats 1 --limit 20 \
+  --out runs/m3-comparison-pyagent-parser-v2-20
+
+paper-review check runs/m3-comparison-pyagent-parser-v2-20
+```
+
+This is a new paid evaluation; parser tests and replaying saved responses are
+offline checks and do not establish a new completion rate or API cost.
 
 Default settings allow five reading actions and eight model decisions
 (`max_reads + 3`). Empty searches and invalid page ranges consume a reading
