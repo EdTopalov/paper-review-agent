@@ -1,0 +1,63 @@
+{
+  "sample_sha256": "6b592e24024a5cca0722c8546cd01fc8fffab7cfeae6482dc0875c015b7caa1c",
+  "task_ids": [
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T06",
+    "T07",
+    "T08",
+    "T09",
+    "T10",
+    "T11",
+    "T12",
+    "T13",
+    "T14",
+    "T15",
+    "T16",
+    "T17",
+    "T18",
+    "T19",
+    "T20"
+  ],
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 2,
+    "max_output_tokens": 1500,
+    "timeout": 90,
+    "retries": 0,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "variants": [
+    "baseline",
+    "agent",
+    "pyagent_react"
+  ],
+  "repeats": 1,
+  "variant_metadata": {
+    "baseline": {
+      "prompt_version": "m2-v2",
+      "harness": "one-shot"
+    },
+    "agent": {
+      "prompt_version": "m2-v2",
+      "harness": "project-native"
+    },
+    "pyagent_react": {
+      "prompt_version": "m3-v2-pyagent-react-v1",
+      "harness": "pyagent-patterns.ReAct",
+      "harness_version": "0.3.0",
+      "protocol": "pyagent-text-action-v1"
+    }
+  },
+  "git_revision": "abf02fc7b2c568c784dd2a481d712918a2ca6f9d",
+  "source_sha256": "1dff5d05297a393bf4b3131b5dc6a1c002ce27648233ac2485217b0335c67899",
+  "prompt_version": "m2-v2",
+  "rubric_version": "m2-v1",
+  "checker_version": "m2-citations-v2",
+  "sample_path": "/home/ed/constructor/develompent/data/eval/tasks.jsonl",
+  "workers": 3
+}
