@@ -1,5 +1,10 @@
 # Repeated paper-review comparison protocol
 
+The [benchmark-design proposal](benchmark-design.md) adds an externally labelled
+quality track that assumes no new human annotation. It supplements this frozen
+M2 comparison and should be validated before launching a large experiment matrix.
+The human assessment section below remains an optional, stronger evaluation path.
+
 Status: registered experiment plan. Full comparative runs and human annotation
 have not been performed for the evidence-memory variant. Development smoke tests
 verify execution and are excluded from benchmark results. Commit this protocol
