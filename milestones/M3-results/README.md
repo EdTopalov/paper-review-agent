@@ -1,6 +1,6 @@
 # M3 comparison results
 
-Complete repetitions shared by all methods within each model: `gpt-6-luna`: pending.
+Complete repetitions shared by all methods within each model: `gpt-6-luna`: [1].
 
 ![Accuracy and cost](accuracy-cost.svg)
 
@@ -14,10 +14,10 @@ Models remain separate; attempts per method equal 76 × included repetitions.
 
 | Method | gpt-6-luna: accuracy (%) | gpt-6-luna: USD/task |
 |---|---:|---:|
-| Native ReAct | pending | pending |
-| PyAgent | pending | pending |
-| Deliberative | pending | pending |
-| Full-text baseline | pending | pending |
+| Native ReAct | 65.79 | 0.000955 |
+| PyAgent | 67.11 | 0.001318 |
+| Deliberative | 53.95 | 0.004878 |
+| Full-text baseline | 67.11 | 0.000204 |
 
 Brackets/error bars are untruncated 95% Student-t intervals across complete repetition means; n=1 has none. Costs include failures and retries; unknowns stay unknown. Incomplete rounds are excluded. Intervals describe run variation on these fixed tasks.
 

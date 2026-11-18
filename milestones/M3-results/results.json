@@ -1,6 +1,6 @@
 {
   "schema_version": "m3-result-report-v2",
-  "generated_at": "2026-11-18T22:19:05.621653+00:00",
+  "generated_at": "2026-11-18T22:20:29.553705+00:00",
   "variants": [
     "agent",
     "pyagent_react",
@@ -18,9 +18,148 @@
         "baseline"
       ],
       "pooled": {
-        "rounds": [],
+        "rounds": [
+          1
+        ],
         "tasks_per_repetition": 76,
-        "methods": {}
+        "methods": {
+          "agent": {
+            "attempts": 76,
+            "completed": 69,
+            "failed": 7,
+            "correct": 50,
+            "pass_power_k": {
+              "1": 0.6578947368421053
+            },
+            "accuracy_percent": {
+              "repetitions": 1,
+              "known_repetitions": 1,
+              "mean": 65.78947368421053,
+              "ci95": null
+            },
+            "usd_per_attempt": {
+              "repetitions": 1,
+              "known_repetitions": 1,
+              "mean": 0.0009554686842105264,
+              "ci95": null
+            },
+            "unknown_cost_attempts": 0,
+            "billing_uncertain_attempts": 0,
+            "repetition_values": [
+              {
+                "round": 1,
+                "attempts": 76,
+                "correct": 50,
+                "accuracy_percent": 65.78947368421053,
+                "usd_per_attempt": 0.0009554686842105264,
+                "unknown_cost_attempts": 0,
+                "billing_uncertain_attempts": 0
+              }
+            ]
+          },
+          "pyagent_react": {
+            "attempts": 76,
+            "completed": 76,
+            "failed": 0,
+            "correct": 51,
+            "pass_power_k": {
+              "1": 0.6710526315789473
+            },
+            "accuracy_percent": {
+              "repetitions": 1,
+              "known_repetitions": 1,
+              "mean": 67.10526315789474,
+              "ci95": null
+            },
+            "usd_per_attempt": {
+              "repetitions": 1,
+              "known_repetitions": 1,
+              "mean": 0.0013183432236842105,
+              "ci95": null
+            },
+            "unknown_cost_attempts": 0,
+            "billing_uncertain_attempts": 0,
+            "repetition_values": [
+              {
+                "round": 1,
+                "attempts": 76,
+                "correct": 51,
+                "accuracy_percent": 67.10526315789474,
+                "usd_per_attempt": 0.0013183432236842105,
+                "unknown_cost_attempts": 0,
+                "billing_uncertain_attempts": 0
+              }
+            ]
+          },
+          "deliberative_review": {
+            "attempts": 76,
+            "completed": 76,
+            "failed": 0,
+            "correct": 41,
+            "pass_power_k": {
+              "1": 0.5394736842105263
+            },
+            "accuracy_percent": {
+              "repetitions": 1,
+              "known_repetitions": 1,
+              "mean": 53.94736842105263,
+              "ci95": null
+            },
+            "usd_per_attempt": {
+              "repetitions": 1,
+              "known_repetitions": 1,
+              "mean": 0.0048776326973684215,
+              "ci95": null
+            },
+            "unknown_cost_attempts": 0,
+            "billing_uncertain_attempts": 0,
+            "repetition_values": [
+              {
+                "round": 1,
+                "attempts": 76,
+                "correct": 41,
+                "accuracy_percent": 53.94736842105263,
+                "usd_per_attempt": 0.0048776326973684215,
+                "unknown_cost_attempts": 0,
+                "billing_uncertain_attempts": 0
+              }
+            ]
+          },
+          "baseline": {
+            "attempts": 76,
+            "completed": 75,
+            "failed": 1,
+            "correct": 51,
+            "pass_power_k": {
+              "1": 0.6710526315789473
+            },
+            "accuracy_percent": {
+              "repetitions": 1,
+              "known_repetitions": 1,
+              "mean": 67.10526315789474,
+              "ci95": null
+            },
+            "usd_per_attempt": {
+              "repetitions": 1,
+              "known_repetitions": 1,
+              "mean": 0.00020428144736842107,
+              "ci95": null
+            },
+            "unknown_cost_attempts": 0,
+            "billing_uncertain_attempts": 0,
+            "repetition_values": [
+              {
+                "round": 1,
+                "attempts": 76,
+                "correct": 51,
+                "accuracy_percent": 67.10526315789474,
+                "usd_per_attempt": 0.00020428144736842107,
+                "unknown_cost_attempts": 0,
+                "billing_uncertain_attempts": 0
+              }
+            ]
+          }
+        }
       },
       "core": {
         "rounds": [
@@ -470,8 +609,163 @@
         }
       },
       "selection": {
-        "rounds": [],
-        "methods": {}
+        "rounds": [
+          1
+        ],
+        "methods": {
+          "agent": {
+            "selection": {
+              "attempts": 12,
+              "completed": 10,
+              "rounds": [
+                1
+              ],
+              "accuracy_percent": {
+                "repetitions": 1,
+                "known_repetitions": 1,
+                "mean": 83.33333333333334,
+                "ci95": null
+              },
+              "primary_metric": "Acceptable-choice accuracy",
+              "primary_percent": {
+                "repetitions": 1,
+                "known_repetitions": 1,
+                "mean": 83.33333333333334,
+                "ci95": null
+              },
+              "usd_per_attempt": {
+                "repetitions": 1,
+                "known_repetitions": 1,
+                "mean": 0.0022518825,
+                "ci95": null
+              },
+              "unknown_cost_attempts": 0,
+              "billing_uncertain_attempts": 0,
+              "repetition_values": [
+                {
+                  "round": 1,
+                  "accuracy_percent": 83.33333333333334,
+                  "primary_percent": 83.33333333333334,
+                  "usd_per_attempt": 0.0022518825
+                }
+              ]
+            }
+          },
+          "pyagent_react": {
+            "selection": {
+              "attempts": 12,
+              "completed": 12,
+              "rounds": [
+                1
+              ],
+              "accuracy_percent": {
+                "repetitions": 1,
+                "known_repetitions": 1,
+                "mean": 100,
+                "ci95": null
+              },
+              "primary_metric": "Acceptable-choice accuracy",
+              "primary_percent": {
+                "repetitions": 1,
+                "known_repetitions": 1,
+                "mean": 100,
+                "ci95": null
+              },
+              "usd_per_attempt": {
+                "repetitions": 1,
+                "known_repetitions": 1,
+                "mean": 0.002306914583333333,
+                "ci95": null
+              },
+              "unknown_cost_attempts": 0,
+              "billing_uncertain_attempts": 0,
+              "repetition_values": [
+                {
+                  "round": 1,
+                  "accuracy_percent": 100,
+                  "primary_percent": 100,
+                  "usd_per_attempt": 0.002306914583333333
+                }
+              ]
+            }
+          },
+          "deliberative_review": {
+            "selection": {
+              "attempts": 12,
+              "completed": 12,
+              "rounds": [
+                1
+              ],
+              "accuracy_percent": {
+                "repetitions": 1,
+                "known_repetitions": 1,
+                "mean": 33.33333333333333,
+                "ci95": null
+              },
+              "primary_metric": "Acceptable-choice accuracy",
+              "primary_percent": {
+                "repetitions": 1,
+                "known_repetitions": 1,
+                "mean": 33.33333333333333,
+                "ci95": null
+              },
+              "usd_per_attempt": {
+                "repetitions": 1,
+                "known_repetitions": 1,
+                "mean": 0.012259764583333334,
+                "ci95": null
+              },
+              "unknown_cost_attempts": 0,
+              "billing_uncertain_attempts": 0,
+              "repetition_values": [
+                {
+                  "round": 1,
+                  "accuracy_percent": 33.33333333333333,
+                  "primary_percent": 33.33333333333333,
+                  "usd_per_attempt": 0.012259764583333334
+                }
+              ]
+            }
+          },
+          "baseline": {
+            "selection": {
+              "attempts": 12,
+              "completed": 11,
+              "rounds": [
+                1
+              ],
+              "accuracy_percent": {
+                "repetitions": 1,
+                "known_repetitions": 1,
+                "mean": 83.33333333333334,
+                "ci95": null
+              },
+              "primary_metric": "Acceptable-choice accuracy",
+              "primary_percent": {
+                "repetitions": 1,
+                "known_repetitions": 1,
+                "mean": 83.33333333333334,
+                "ci95": null
+              },
+              "usd_per_attempt": {
+                "repetitions": 1,
+                "known_repetitions": 1,
+                "mean": 0.0003024566666666667,
+                "ci95": null
+              },
+              "unknown_cost_attempts": 0,
+              "billing_uncertain_attempts": 0,
+              "repetition_values": [
+                {
+                  "round": 1,
+                  "accuracy_percent": 83.33333333333334,
+                  "primary_percent": 83.33333333333334,
+                  "usd_per_attempt": 0.0003024566666666667
+                }
+              ]
+            }
+          }
+        }
       },
       "m2": {
         "rounds": [
@@ -626,7 +920,7 @@
           "seed": 20261121,
           "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-agent-20261118-luna6\\r3\\core\\records.jsonl",
           "started_at": "2026-11-18T22:18:07.119536+00:00",
-          "updated_at": "2026-11-18T22:19:00.052271+00:00"
+          "updated_at": "2026-11-18T22:19:04.226129+00:00"
         },
         {
           "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-agent-20261118-luna6",
@@ -671,6 +965,27 @@
           "updated_at": "2026-11-18T22:17:23.077422+00:00"
         },
         {
+          "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-agent-20261118-luna6",
+          "stage": "selection",
+          "round": 3,
+          "source_sha256": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",
+          "manifest_sha256": "04d75e5b653230fb462a9832cc95861c5ba446bb4251c759cfa168363afee739",
+          "config": {
+            "model": "gpt-6-luna",
+            "max_reads": 20,
+            "max_output_tokens": 4000,
+            "timeout": 90,
+            "retries": 1,
+            "reasoning_effort": "low",
+            "max_paper_chars": 600000
+          },
+          "workers": 8,
+          "seed": 20261121,
+          "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-agent-20261118-luna6\\r3\\selection\\records.jsonl",
+          "started_at": "2026-11-18T22:19:04.707039+00:00",
+          "updated_at": "2026-11-18T22:19:45.659566+00:00"
+        },
+        {
           "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-pyagent_react-20261118-luna6",
           "stage": "core",
           "round": 1,
@@ -710,7 +1025,7 @@
           "seed": 20261120,
           "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-pyagent_react-20261118-luna6\\r2\\core\\records.jsonl",
           "started_at": "2026-11-18T22:17:55.260369+00:00",
-          "updated_at": "2026-11-18T22:19:00.968646+00:00"
+          "updated_at": "2026-11-18T22:19:56.716149+00:00"
         },
         {
           "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-pyagent_react-20261118-luna6",
@@ -732,6 +1047,27 @@
           "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-pyagent_react-20261118-luna6\\r1\\selection\\records.jsonl",
           "started_at": "2026-11-18T22:15:27.825161+00:00",
           "updated_at": "2026-11-18T22:16:43.875831+00:00"
+        },
+        {
+          "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-pyagent_react-20261118-luna6",
+          "stage": "selection",
+          "round": 2,
+          "source_sha256": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",
+          "manifest_sha256": "04d75e5b653230fb462a9832cc95861c5ba446bb4251c759cfa168363afee739",
+          "config": {
+            "model": "gpt-6-luna",
+            "max_reads": 20,
+            "max_output_tokens": 4000,
+            "timeout": 90,
+            "retries": 1,
+            "reasoning_effort": "low",
+            "max_paper_chars": 600000
+          },
+          "workers": 8,
+          "seed": 20261120,
+          "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-pyagent_react-20261118-luna6\\r2\\selection\\records.jsonl",
+          "started_at": "2026-11-18T22:19:57.139364+00:00",
+          "updated_at": "2026-11-18T22:20:19.373454+00:00"
         },
         {
           "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-deliberative_review-20261118-luna6",
@@ -773,7 +1109,7 @@
           "seed": 20261119,
           "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-deliberative_review-20261118-luna6\\r1\\selection\\records.jsonl",
           "started_at": "2026-11-18T22:18:17.119466+00:00",
-          "updated_at": "2026-11-18T22:18:17.119466+00:00"
+          "updated_at": "2026-11-18T22:20:02.692727+00:00"
         },
         {
           "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-baseline-20261118-luna6",
@@ -857,7 +1193,7 @@
           "seed": 20261122,
           "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-extra-r4-20261118-luna6\\r4\\core\\records.jsonl",
           "started_at": "2026-11-18T22:15:22.353315+00:00",
-          "updated_at": "2026-11-18T22:19:02.835404+00:00"
+          "updated_at": "2026-11-18T22:20:24.648708+00:00"
         },
         {
           "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-extra-r5-20261118-luna6",
@@ -878,22 +1214,20 @@
           "seed": 20261123,
           "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-extra-r5-20261118-luna6\\r5\\core\\records.jsonl",
           "started_at": "2026-11-18T22:15:22.496038+00:00",
-          "updated_at": "2026-11-18T22:19:02.883902+00:00"
+          "updated_at": "2026-11-18T22:20:24.750709+00:00"
         }
       ],
       "notes": [
-        "Excluded incomplete core round 3 for agent: 61/64 terminal attempts.",
-        "Excluded incomplete core round 2 for pyagent_react: 38/64 terminal attempts.",
-        "Excluded incomplete selection round 1 for deliberative_review: 0/12 terminal attempts.",
+        "Excluded incomplete selection round 2 for pyagent_react: 2/12 terminal attempts.",
         "Excluded incomplete core round 2 for baseline: 60/64 terminal attempts.",
-        "Excluded incomplete core round 4 for agent: 36/64 terminal attempts.",
-        "Excluded incomplete core round 4 for pyagent_react: 33/64 terminal attempts.",
-        "Excluded incomplete core round 4 for deliberative_review: 37/64 terminal attempts.",
-        "Excluded incomplete core round 4 for baseline: 31/64 terminal attempts.",
-        "Excluded incomplete core round 5 for agent: 31/64 terminal attempts.",
-        "Excluded incomplete core round 5 for pyagent_react: 38/64 terminal attempts.",
-        "Excluded incomplete core round 5 for deliberative_review: 33/64 terminal attempts.",
-        "Excluded incomplete core round 5 for baseline: 35/64 terminal attempts."
+        "Excluded incomplete core round 4 for agent: 51/64 terminal attempts.",
+        "Excluded incomplete core round 4 for pyagent_react: 47/64 terminal attempts.",
+        "Excluded incomplete core round 4 for deliberative_review: 49/64 terminal attempts.",
+        "Excluded incomplete core round 4 for baseline: 51/64 terminal attempts.",
+        "Excluded incomplete core round 5 for agent: 46/64 terminal attempts.",
+        "Excluded incomplete core round 5 for pyagent_react: 52/64 terminal attempts.",
+        "Excluded incomplete core round 5 for deliberative_review: 47/64 terminal attempts.",
+        "Excluded incomplete core round 5 for baseline: 51/64 terminal attempts."
       ],
       "source_sha256_by_method": {
         "agent": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",

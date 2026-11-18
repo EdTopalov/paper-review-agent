@@ -1,6 +1,6 @@
 {
   "schema_version": "m3-original-m2-results-v1",
-  "generated_at": "2026-11-18T22:19:02.277255+00:00",
+  "generated_at": "2026-11-18T22:20:24.681708+00:00",
   "sample_sha256": "6b592e24024a5cca0722c8546cd01fc8fffab7cfeae6482dc0875c015b7caa1c",
   "task_ids": [
     "T01",
@@ -253,6 +253,39 @@
           "updated_at": "2026-11-18T22:15:02.067034+00:00"
         },
         {
+          "experiment": "runs/m3-final-deliberative_review-20261118-luna6",
+          "global_round": 2,
+          "plan_path": "runs/m3-final-deliberative_review-20261118-luna6/r2/m2/experiment.json",
+          "source_archive": "runs/m3-final-deliberative_review-20261118-luna6/r2/m2/source.zip",
+          "source_sha256": "c2a6326456da4792f50790a1f32d5b2bb6e7aa5638f6ff0d25432dd7b90c5ca2",
+          "git_revision": "53a79af9bf94deac58ac16081c86fdce1e9bf318",
+          "sample_sha256": "6b592e24024a5cca0722c8546cd01fc8fffab7cfeae6482dc0875c015b7caa1c",
+          "config": {
+            "model": "gpt-6-luna",
+            "max_reads": 5,
+            "max_output_tokens": 4000,
+            "timeout": 90,
+            "retries": 1,
+            "reasoning_effort": "low",
+            "max_paper_chars": 600000
+          },
+          "variants": [
+            "deliberative_review"
+          ],
+          "variant_metadata": {
+            "deliberative_review": {
+              "prompt_version": "m3-deliberative-review-v2",
+              "harness": "project-deliberative",
+              "context_policy": "plan-investigate-draft-critic-resolve-doubled-cap-final-v2",
+              "budget_policy": "double-decisions-forced-final-v1"
+            }
+          },
+          "workers": 8,
+          "order_seed": 20261120,
+          "started_at": "2026-11-18T22:20:03.073488+00:00",
+          "updated_at": "2026-11-18T22:20:03.074820+00:00"
+        },
+        {
           "experiment": "runs/m3-final-baseline-20261118-luna6",
           "global_round": 1,
           "plan_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/experiment.json",
@@ -315,7 +348,9 @@
           "updated_at": "2026-11-18T22:14:45.448032+00:00"
         }
       ],
-      "notes": [],
+      "notes": [
+        "Excluded incomplete deliberative_review round 2: 0/20 terminal attempts."
+      ],
       "source_sha256_by_method": {
         "agent": "c2a6326456da4792f50790a1f32d5b2bb6e7aa5638f6ff0d25432dd7b90c5ca2",
         "pyagent_react": "c2a6326456da4792f50790a1f32d5b2bb6e7aa5638f6ff0d25432dd7b90c5ca2",

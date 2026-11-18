@@ -8,9 +8,9 @@ are not human quality labels.
 | M1 risk | Evidence and current status | Response and next measurement |
 |---|---|---|
 | Abstract hype hides weak support. | Not directly measured. [F06](../data/failures/F06.json) demonstrates the related problem of turning partial evidence into a paper-wide conclusion. | Check central claims against methods/results and counterevidence; human coverage labels must inspect the full snapshot. |
-| Parsing corrupts tables, formulas, or results. | Known text-only limitation. The T17 diagnostic below reproduces failed quotation repair in 3/10 native attempts; it does not demonstrate incorrect scientific conclusions. | Keep snapshots frozen; mark missing visual evidence as uncertainty and separate extraction failures from reasoning errors. |
+| Parsing corrupts tables, formulas, or results. | Known text-only limitation. The earlier eight-decision T17 diagnostic below reproduces failed quotation repair in 3/10 native attempts; the final-policy diagnostic verifies all ten reviews. Neither establishes scientific correctness. | Keep snapshots frozen; mark missing visual evidence as uncertainty and separate extraction failures from reasoning errors. |
 | Rubric favors a topic or paper type. | Unmeasured. The M2 convenience sample and selected M3 assessment tasks cannot establish fairness across fields or types. | Keep task tracks separate and retain source-paper groupings. Broader human labels by field and paper type are still needed to evaluate rubric bias. |
-| Scores fluctuate or inflate in weak batches. | M3 repeats agent and baseline attempts on frozen inputs and separates model identities. The T17 completed-score range alone is 0.68–0.72 across seven completions; failed attempts are excluded only from that score spread. | Report repetition variation before method gaps in the [M3 results](M3-results/README.md). Fixed-task repetitions do not resolve future provider drift or validate rating accuracy. |
+| Scores fluctuate or inflate in weak batches. | M3 repeats agent and baseline attempts on frozen inputs and separates model identities. The earlier T17 completed-score range is 0.68–0.72 across seven completions; failed attempts are excluded only from that score spread. | Report repetition variation before method gaps in the [M3 results](M3-results/README.md). Fixed-task repetitions do not resolve future provider drift or validate rating accuracy. |
 | Close-score review forces changes or wastes reads. | The planned batch-level close-score review was not implemented in M2. M3 adds a selection pilot with explicit ties and abstention, but its rule-derived acceptable choices do not validate reading-club preference. | Report acceptable-choice and tie-set agreement separately; human preference labels and a controlled memory ablation remain future work. |
 | Plausible assessment cites unsupported evidence. | [F01](../data/failures/F01.json) expands an interface requirement into a transfer restriction; [F06](../data/failures/F06.json) misses a quantitative follow-up. M3 adds scope and already-reported-ablation errors below, including outputs with valid quotations. | Evaluate claim scope, evidence coverage, and defect-versus-uncertainty calibration separately from citation matching. Compare the deliberative variant's planned investigation and critic with both ReAct harnesses. |
 | Reference scores reproduce model biases. | M2 has no human gold scores; [F07](../data/failures/F07.json) contains a judge arithmetic contradiction. M3 uses preserved human ReviewCritique labels and QASPER answers, plus programmatic controlled/selection references; these cover narrower judgments than overall review quality. | Report expert-label agreement and controlled correctness by track. Preserve disagreements for inspection; do not treat model judgments or reading-club preference proxies as human ground truth. |
@@ -112,6 +112,12 @@ that the underlying scientific observations are false. The 3/10 rate describes
 this native diagnostic only, not the other methods or a stable future rate.
 Replays of a fixed decision prefix test conditional recovery, not end-to-end
 failure frequency.
+
+The separate [final-policy T17 diagnostic](../runs/m3-t17-final-r10/README.md)
+completes 10/10 attempts with every citation verified. None uses forced
+finalization; seven use more than eight decisions, with 6–15 decisions across
+all attempts. This supports extra repair capacity as an operational remedy on
+this case, while leaving assessment quality to the content benchmark.
 
 The earlier [M3 development smoke](../runs/m3-smoke-20261118/README.md) also contains
 a native T17 repair-budget exhaustion, while PyAgent and baseline return reviews.
