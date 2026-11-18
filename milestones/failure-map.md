@@ -57,5 +57,10 @@ fixed decision prefix test recovery conditional on that prefix; they do not
 estimate the end-to-end failure rate. A successful rerun does not erase the
 original failure, and one failure does not establish a stable failure rate.
 
+The [M3 development smoke](../runs/m3-smoke-20261118/README.md) adds one T17 attempt
+per method: native and evidence-memory runs again exhaust their citation-repair
+budgets, while PyAgent and baseline return reviews. This recurrence is retained
+as diagnostic evidence; it does not replace the planned repeated measurements.
+
 The [human quality protocol](../data/quality/README.md) defines independent labels
 for the substantive failures. It does not supply or imply completed annotation.

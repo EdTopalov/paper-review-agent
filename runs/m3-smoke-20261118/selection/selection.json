@@ -1,0 +1,61 @@
+{
+  "protocol": "reading-club-selection-v1",
+  "variant": "evidence_memory",
+  "model": "gpt-6-luna",
+  "brief": "Discuss experimental design, uncertainty, and useful follow-up studies",
+  "status": "ok",
+  "choice": {
+    "selected_id": "toy",
+    "reason": "The brief emphasizes experimental design, uncertainty, and useful follow-ups. Of the two options, this review describes a direct comparison with reported outcomes, giving the group some result to scrutinize alongside clear design weaknesses: a small convenience sample, one run per method, and no significance test. Those limitations lead naturally to follow-ups on replication, sampling, generalizability, and cost. The review also calls it a hypothetical fixture, however, so it should not be treated as evidence from a real empirical study.",
+    "comparisons": [
+      {
+        "candidate_id": "selection-negative-result",
+        "trade_off": "Its repeated-run, controlled comparison and explicit caution about interpreting a nonsignificant result make it especially relevant to uncertainty and design. But the review says it is not a real paper and supplies no actual empirical evidence; toy is preferable for having reported outcomes to discuss, though those too are described as hypothetical."
+      }
+    ],
+    "tied_alternatives": [],
+    "uncertainties": [
+      "Both reviews describe their candidate as a hypothetical fixture, limiting their value as empirical research for a reading club.",
+      "The toy review's reported comparison is only a single run on a small convenience sample, so the result's robustness is unclear.",
+      "The selection-negative-result review describes a more informative repeated-run design, but its hypothetical status means that design and interval cannot be treated as real study evidence."
+    ]
+  },
+  "candidate_results": [
+    {
+      "id": "toy",
+      "status": "ok",
+      "review_path": "reviews/toy/README.md"
+    },
+    {
+      "id": "selection-negative-result",
+      "status": "ok",
+      "review_path": "reviews/selection-negative-result/README.md"
+    }
+  ],
+  "selection_usage": {
+    "api_calls": 1,
+    "successful_model_calls": 1,
+    "input_tokens": 1539,
+    "cached_input_tokens": 0,
+    "cache_write_tokens": 1536,
+    "output_tokens": 449,
+    "reading_actions": 0,
+    "tool_calls": 0,
+    "decision_steps": 1,
+    "submission_attempts": 0,
+    "rejected_submissions": 0,
+    "first_submission_checks": null,
+    "estimated_cost_usd": 0.0004168,
+    "billing_uncertain": false
+  },
+  "candidate_count": 2,
+  "completed_candidates": 2,
+  "total_api_calls": 5,
+  "total_input_tokens": 6007,
+  "total_output_tokens": 1357,
+  "total_cached_input_tokens": 0,
+  "total_cache_write_tokens": 3733,
+  "total_estimated_cost_usd": 0.001372525,
+  "billing_uncertain": false,
+  "latency_seconds": 21.53779349999968
+}

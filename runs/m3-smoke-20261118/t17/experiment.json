@@ -1,0 +1,52 @@
+{
+  "sample_sha256": "6b592e24024a5cca0722c8546cd01fc8fffab7cfeae6482dc0875c015b7caa1c",
+  "task_ids": [
+    "T17"
+  ],
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "variants": [
+    "agent",
+    "pyagent_react",
+    "evidence_memory",
+    "baseline"
+  ],
+  "repeats": 1,
+  "variant_metadata": {
+    "agent": {
+      "prompt_version": "m2-v2",
+      "harness": "project-native"
+    },
+    "pyagent_react": {
+      "prompt_version": "m3-v2-pyagent-react-v2",
+      "harness": "pyagent-patterns.ReAct",
+      "harness_version": "0.3.0",
+      "protocol": "pyagent-text-action-v2"
+    },
+    "evidence_memory": {
+      "prompt_version": "m3-evidence-memory-v1",
+      "harness": "project-native",
+      "context_policy": "deduplicated-evidence-and-latest-feedback-v1"
+    },
+    "baseline": {
+      "prompt_version": "m2-v2",
+      "harness": "one-shot"
+    }
+  },
+  "git_revision": "09bf303e9d6009b1b9f53263af19f16b43677da6",
+  "source_sha256": "3968689a968f7a220ad7de7bbbf31254be7b6729a8fb209c8499ad89bae7dc9b",
+  "prompt_version": "m2-v2",
+  "rubric_version": "m2-v1",
+  "checker_version": "m2-citations-v2",
+  "sample_path": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\data\\eval\\tasks.jsonl",
+  "workers": 3,
+  "order_seed": 20261118,
+  "job_order": "seeded_shuffle"
+}
