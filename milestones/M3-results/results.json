@@ -1,6 +1,6 @@
 {
   "schema_version": "m3-result-report-v2",
-  "generated_at": "2026-11-18T22:20:29.553705+00:00",
+  "generated_at": "2026-11-18T22:26:45.060257+00:00",
   "variants": [
     "agent",
     "pyagent_react",
@@ -19,29 +19,39 @@
       ],
       "pooled": {
         "rounds": [
-          1
+          1,
+          4,
+          5
         ],
         "tasks_per_repetition": 76,
         "methods": {
           "agent": {
-            "attempts": 76,
-            "completed": 69,
-            "failed": 7,
-            "correct": 50,
+            "attempts": 228,
+            "completed": 197,
+            "failed": 31,
+            "correct": 134,
             "pass_power_k": {
-              "1": 0.6578947368421053
+              "1": 0.587719298245614,
+              "2": 0.4956140350877193,
+              "3": 0.42105263157894735
             },
             "accuracy_percent": {
-              "repetitions": 1,
-              "known_repetitions": 1,
-              "mean": 65.78947368421053,
-              "ci95": null
+              "repetitions": 3,
+              "known_repetitions": 3,
+              "mean": 58.77192982456141,
+              "ci95": [
+                43.674902702633474,
+                73.86895694648935
+              ]
             },
             "usd_per_attempt": {
-              "repetitions": 1,
-              "known_repetitions": 1,
-              "mean": 0.0009554686842105264,
-              "ci95": null
+              "repetitions": 3,
+              "known_repetitions": 3,
+              "mean": 0.0008357283114035088,
+              "ci95": [
+                0.0005742545058052079,
+                0.0010972021170018095
+              ]
             },
             "unknown_cost_attempts": 0,
             "billing_uncertain_attempts": 0,
@@ -54,28 +64,54 @@
                 "usd_per_attempt": 0.0009554686842105264,
                 "unknown_cost_attempts": 0,
                 "billing_uncertain_attempts": 0
+              },
+              {
+                "round": 4,
+                "attempts": 76,
+                "correct": 42,
+                "accuracy_percent": 55.26315789473685,
+                "usd_per_attempt": 0.0007578082894736842,
+                "unknown_cost_attempts": 0,
+                "billing_uncertain_attempts": 0
+              },
+              {
+                "round": 5,
+                "attempts": 76,
+                "correct": 42,
+                "accuracy_percent": 55.26315789473685,
+                "usd_per_attempt": 0.0007939079605263158,
+                "unknown_cost_attempts": 0,
+                "billing_uncertain_attempts": 0
               }
             ]
           },
           "pyagent_react": {
-            "attempts": 76,
-            "completed": 76,
+            "attempts": 228,
+            "completed": 228,
             "failed": 0,
-            "correct": 51,
+            "correct": 150,
             "pass_power_k": {
-              "1": 0.6710526315789473
+              "1": 0.6578947368421053,
+              "2": 0.6052631578947368,
+              "3": 0.5657894736842105
             },
             "accuracy_percent": {
-              "repetitions": 1,
-              "known_repetitions": 1,
-              "mean": 67.10526315789474,
-              "ci95": null
+              "repetitions": 3,
+              "known_repetitions": 3,
+              "mean": 65.78947368421052,
+              "ci95": [
+                60.12808851348753,
+                71.4508588549335
+              ]
             },
             "usd_per_attempt": {
-              "repetitions": 1,
-              "known_repetitions": 1,
-              "mean": 0.0013183432236842105,
-              "ci95": null
+              "repetitions": 3,
+              "known_repetitions": 3,
+              "mean": 0.0012248893640350877,
+              "ci95": [
+                0.0010197396224363546,
+                0.0014300391056338208
+              ]
             },
             "unknown_cost_attempts": 0,
             "billing_uncertain_attempts": 0,
@@ -88,28 +124,54 @@
                 "usd_per_attempt": 0.0013183432236842105,
                 "unknown_cost_attempts": 0,
                 "billing_uncertain_attempts": 0
+              },
+              {
+                "round": 4,
+                "attempts": 76,
+                "correct": 51,
+                "accuracy_percent": 67.10526315789474,
+                "usd_per_attempt": 0.0011617344078947369,
+                "unknown_cost_attempts": 0,
+                "billing_uncertain_attempts": 0
+              },
+              {
+                "round": 5,
+                "attempts": 76,
+                "correct": 48,
+                "accuracy_percent": 63.1578947368421,
+                "usd_per_attempt": 0.0011945904605263158,
+                "unknown_cost_attempts": 0,
+                "billing_uncertain_attempts": 0
               }
             ]
           },
           "deliberative_review": {
-            "attempts": 76,
-            "completed": 76,
+            "attempts": 228,
+            "completed": 228,
             "failed": 0,
-            "correct": 41,
+            "correct": 121,
             "pass_power_k": {
-              "1": 0.5394736842105263
+              "1": 0.5307017543859649,
+              "2": 0.4692982456140351,
+              "3": 0.4342105263157895
             },
             "accuracy_percent": {
-              "repetitions": 1,
-              "known_repetitions": 1,
-              "mean": 53.94736842105263,
-              "ci95": null
+              "repetitions": 3,
+              "known_repetitions": 3,
+              "mean": 53.070175438596486,
+              "ci95": [
+                51.18304704835549,
+                54.95730382883748
+              ]
             },
             "usd_per_attempt": {
-              "repetitions": 1,
-              "known_repetitions": 1,
-              "mean": 0.0048776326973684215,
-              "ci95": null
+              "repetitions": 3,
+              "known_repetitions": 3,
+              "mean": 0.005095479561403509,
+              "ci95": [
+                0.0045108392930145996,
+                0.005680119829792418
+              ]
             },
             "unknown_cost_attempts": 0,
             "billing_uncertain_attempts": 0,
@@ -122,28 +184,54 @@
                 "usd_per_attempt": 0.0048776326973684215,
                 "unknown_cost_attempts": 0,
                 "billing_uncertain_attempts": 0
+              },
+              {
+                "round": 4,
+                "attempts": 76,
+                "correct": 40,
+                "accuracy_percent": 52.63157894736842,
+                "usd_per_attempt": 0.005345102631578947,
+                "unknown_cost_attempts": 0,
+                "billing_uncertain_attempts": 0
+              },
+              {
+                "round": 5,
+                "attempts": 76,
+                "correct": 40,
+                "accuracy_percent": 52.63157894736842,
+                "usd_per_attempt": 0.0050637033552631576,
+                "unknown_cost_attempts": 0,
+                "billing_uncertain_attempts": 0
               }
             ]
           },
           "baseline": {
-            "attempts": 76,
-            "completed": 75,
-            "failed": 1,
-            "correct": 51,
+            "attempts": 228,
+            "completed": 228,
+            "failed": 0,
+            "correct": 160,
             "pass_power_k": {
-              "1": 0.6710526315789473
+              "1": 0.7017543859649122,
+              "2": 0.6754385964912281,
+              "3": 0.6578947368421053
             },
             "accuracy_percent": {
-              "repetitions": 1,
-              "known_repetitions": 1,
-              "mean": 67.10526315789474,
-              "ci95": null
+              "repetitions": 3,
+              "known_repetitions": 3,
+              "mean": 70.17543859649122,
+              "ci95": [
+                65.1825661838639,
+                75.16831100911854
+              ]
             },
             "usd_per_attempt": {
-              "repetitions": 1,
-              "known_repetitions": 1,
-              "mean": 0.00020428144736842107,
-              "ci95": null
+              "repetitions": 3,
+              "known_repetitions": 3,
+              "mean": 0.00020362793859649123,
+              "ci95": [
+                0.00020143758890605785,
+                0.0002058182882869246
+              ]
             },
             "unknown_cost_attempts": 0,
             "billing_uncertain_attempts": 0,
@@ -151,9 +239,27 @@
               {
                 "round": 1,
                 "attempts": 76,
-                "correct": 51,
-                "accuracy_percent": 67.10526315789474,
-                "usd_per_attempt": 0.00020428144736842107,
+                "correct": 52,
+                "accuracy_percent": 68.42105263157895,
+                "usd_per_attempt": 0.0002027946052631579,
+                "unknown_cost_attempts": 0,
+                "billing_uncertain_attempts": 0
+              },
+              {
+                "round": 4,
+                "attempts": 76,
+                "correct": 55,
+                "accuracy_percent": 72.36842105263158,
+                "usd_per_attempt": 0.0002035380263157895,
+                "unknown_cost_attempts": 0,
+                "billing_uncertain_attempts": 0
+              },
+              {
+                "round": 5,
+                "attempts": 76,
+                "correct": 53,
+                "accuracy_percent": 69.73684210526315,
+                "usd_per_attempt": 0.0002045511842105263,
                 "unknown_cost_attempts": 0,
                 "billing_uncertain_attempts": 0
               }
@@ -163,34 +269,49 @@
       },
       "core": {
         "rounds": [
-          1
+          1,
+          2,
+          4,
+          5
         ],
         "methods": {
           "agent": {
             "controlled": {
-              "attempts": 24,
-              "completed": 24,
+              "attempts": 96,
+              "completed": 92,
               "rounds": [
-                1
+                1,
+                2,
+                4,
+                5
               ],
               "accuracy_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 95.83333333333334,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 93.75,
+                "ci95": [
+                  89.92211201867273,
+                  97.57788798132727
+                ]
               },
               "primary_metric": "Pair accuracy",
               "primary_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 91.66666666666666,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 87.5,
+                "ci95": [
+                  79.84422403734553,
+                  95.15577596265447
+                ]
               },
               "usd_per_attempt": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 0.000494160625,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 0.0004655941666666667,
+                "ci95": [
+                  0.00043120281064134013,
+                  0.0004999855226919933
+                ]
               },
               "unknown_cost_attempts": 0,
               "billing_uncertain_attempts": 0,
@@ -200,33 +321,63 @@
                   "accuracy_percent": 95.83333333333334,
                   "primary_percent": 91.66666666666666,
                   "usd_per_attempt": 0.000494160625
+                },
+                {
+                  "round": 2,
+                  "accuracy_percent": 91.66666666666666,
+                  "primary_percent": 83.33333333333334,
+                  "usd_per_attempt": 0.00044793145833333335
+                },
+                {
+                  "round": 4,
+                  "accuracy_percent": 95.83333333333334,
+                  "primary_percent": 91.66666666666666,
+                  "usd_per_attempt": 0.0004498
+                },
+                {
+                  "round": 5,
+                  "accuracy_percent": 91.66666666666666,
+                  "primary_percent": 83.33333333333334,
+                  "usd_per_attempt": 0.00047048458333333337
                 }
               ]
             },
             "qasper": {
-              "attempts": 20,
-              "completed": 19,
+              "attempts": 80,
+              "completed": 74,
               "rounds": [
-                1
+                1,
+                2,
+                4,
+                5
               ],
               "accuracy_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 25.0,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 18.75,
+                "ci95": [
+                  11.132599095855939,
+                  26.367400904144063
+                ]
               },
               "primary_metric": "Answer F1",
               "primary_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 43.27553998689878,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 37.94253239511078,
+                "ci95": [
+                  30.901332025720805,
+                  44.98373276450076
+                ]
               },
               "usd_per_attempt": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 0.0006594225000000001,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 0.0004914974375,
+                "ci95": [
+                  0.0003075922041192835,
+                  0.0006754026708807165
+                ]
               },
               "unknown_cost_attempts": 0,
               "billing_uncertain_attempts": 0,
@@ -236,33 +387,63 @@
                   "accuracy_percent": 25.0,
                   "primary_percent": 43.27553998689878,
                   "usd_per_attempt": 0.0006594225000000001
+                },
+                {
+                  "round": 2,
+                  "accuracy_percent": 15.0,
+                  "primary_percent": 34.68365975056822,
+                  "usd_per_attempt": 0.00046463525
+                },
+                {
+                  "round": 4,
+                  "accuracy_percent": 20.0,
+                  "primary_percent": 39.86606189784246,
+                  "usd_per_attempt": 0.0003964425
+                },
+                {
+                  "round": 5,
+                  "accuracy_percent": 15.0,
+                  "primary_percent": 33.944867945133666,
+                  "usd_per_attempt": 0.00044548950000000004
                 }
               ]
             },
             "reviewcritique": {
-              "attempts": 20,
-              "completed": 16,
+              "attempts": 80,
+              "completed": 52,
               "rounds": [
-                1
+                1,
+                2,
+                4,
+                5
               ],
               "accuracy_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 60.0,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 45.0,
+                "ci95": [
+                  27.81282559070846,
+                  62.18717440929154
+                ]
               },
               "primary_metric": "Binary macro-F1",
               "primary_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 62.20735785953176,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 51.35255921297111,
+                "ci95": [
+                  38.13032797488865,
+                  64.57479045105357
+                ]
               },
               "usd_per_attempt": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 0.00102723625,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 0.0008423195,
+                "ci95": [
+                  0.0006304912607659119,
+                  0.001054147739234088
+                ]
               },
               "unknown_cost_attempts": 0,
               "billing_uncertain_attempts": 0,
@@ -272,35 +453,65 @@
                   "accuracy_percent": 60.0,
                   "primary_percent": 62.20735785953176,
                   "usd_per_attempt": 0.00102723625
+                },
+                {
+                  "round": 2,
+                  "accuracy_percent": 45.0,
+                  "primary_percent": 53.07692307692308,
+                  "usd_per_attempt": 0.000844213
+                },
+                {
+                  "round": 4,
+                  "accuracy_percent": 35.0,
+                  "primary_percent": 43.162393162393165,
+                  "usd_per_attempt": 0.00072136175
+                },
+                {
+                  "round": 5,
+                  "accuracy_percent": 40.0,
+                  "primary_percent": 46.963562753036435,
+                  "usd_per_attempt": 0.000776467
                 }
               ]
             }
           },
           "pyagent_react": {
             "controlled": {
-              "attempts": 24,
-              "completed": 24,
+              "attempts": 96,
+              "completed": 96,
               "rounds": [
-                1
+                1,
+                2,
+                4,
+                5
               ],
               "accuracy_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 95.83333333333334,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 91.66666666666667,
+                "ci95": [
+                  82.29029431988258,
+                  101.04303901345077
+                ]
               },
               "primary_metric": "Pair accuracy",
               "primary_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 91.66666666666666,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 83.33333333333333,
+                "ci95": [
+                  64.58058863976512,
+                  102.08607802690153
+                ]
               },
               "usd_per_attempt": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 0.0006940308333333333,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 0.0006495230729166667,
+                "ci95": [
+                  0.0004825177753422703,
+                  0.0008165283704910631
+                ]
               },
               "unknown_cost_attempts": 0,
               "billing_uncertain_attempts": 0,
@@ -310,33 +521,63 @@
                   "accuracy_percent": 95.83333333333334,
                   "primary_percent": 91.66666666666666,
                   "usd_per_attempt": 0.0006940308333333333
+                },
+                {
+                  "round": 2,
+                  "accuracy_percent": 95.83333333333334,
+                  "primary_percent": 91.66666666666666,
+                  "usd_per_attempt": 0.0005264077083333333
+                },
+                {
+                  "round": 4,
+                  "accuracy_percent": 91.66666666666666,
+                  "primary_percent": 83.33333333333334,
+                  "usd_per_attempt": 0.0006087702083333333
+                },
+                {
+                  "round": 5,
+                  "accuracy_percent": 83.33333333333334,
+                  "primary_percent": 66.66666666666666,
+                  "usd_per_attempt": 0.0007688835416666666
                 }
               ]
             },
             "qasper": {
-              "attempts": 20,
-              "completed": 20,
+              "attempts": 80,
+              "completed": 80,
               "rounds": [
-                1
+                1,
+                2,
+                4,
+                5
               ],
               "accuracy_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 20.0,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 17.5,
+                "ci95": [
+                  12.906534422407304,
+                  22.093465577592696
+                ]
               },
               "primary_metric": "Answer F1",
               "primary_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 40.56511187490053,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 38.39709007758712,
+                "ci95": [
+                  33.466408518172244,
+                  43.327771637002
+                ]
               },
               "usd_per_attempt": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 0.00113098325,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 0.0008814254374999999,
+                "ci95": [
+                  0.0006151543885403756,
+                  0.0011476964864596242
+                ]
               },
               "unknown_cost_attempts": 0,
               "billing_uncertain_attempts": 0,
@@ -346,33 +587,63 @@
                   "accuracy_percent": 20.0,
                   "primary_percent": 40.56511187490053,
                   "usd_per_attempt": 0.00113098325
+                },
+                {
+                  "round": 2,
+                  "accuracy_percent": 20.0,
+                  "primary_percent": 41.26771496125261,
+                  "usd_per_attempt": 0.00080963625
+                },
+                {
+                  "round": 4,
+                  "accuracy_percent": 15.0,
+                  "primary_percent": 34.61868913669312,
+                  "usd_per_attempt": 0.00077289775
+                },
+                {
+                  "round": 5,
+                  "accuracy_percent": 15.0,
+                  "primary_percent": 37.13684433750223,
+                  "usd_per_attempt": 0.0008121844999999999
                 }
               ]
             },
             "reviewcritique": {
-              "attempts": 20,
-              "completed": 20,
+              "attempts": 80,
+              "completed": 80,
               "rounds": [
-                1
+                1,
+                2,
+                4,
+                5
               ],
               "accuracy_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 60.0,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 67.5,
+                "ci95": [
+                  57.2286987161974,
+                  77.7713012838026
+                ]
               },
               "primary_metric": "Binary macro-F1",
               "primary_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 59.5959595959596,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 66.7412213567904,
+                "ci95": [
+                  56.651897485774825,
+                  76.83054522780598
+                ]
               },
               "usd_per_attempt": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 0.00166173525,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 0.0014478264375,
+                "ci95": [
+                  0.0012169826859239502,
+                  0.0016786701890760497
+                ]
               },
               "unknown_cost_attempts": 0,
               "billing_uncertain_attempts": 0,
@@ -382,35 +653,65 @@
                   "accuracy_percent": 60.0,
                   "primary_percent": 59.5959595959596,
                   "usd_per_attempt": 0.00166173525
+                },
+                {
+                  "round": 2,
+                  "accuracy_percent": 65.0,
+                  "primary_percent": 64.19437340153452,
+                  "usd_per_attempt": 0.00137465925
+                },
+                {
+                  "round": 4,
+                  "accuracy_percent": 75.0,
+                  "primary_percent": 74.42455242966751,
+                  "usd_per_attempt": 0.00134486625
+                },
+                {
+                  "round": 5,
+                  "accuracy_percent": 70.0,
+                  "primary_percent": 68.75,
+                  "usd_per_attempt": 0.001410045
                 }
               ]
             }
           },
           "deliberative_review": {
             "controlled": {
-              "attempts": 24,
-              "completed": 24,
+              "attempts": 96,
+              "completed": 96,
               "rounds": [
-                1
+                1,
+                2,
+                4,
+                5
               ],
               "accuracy_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 91.66666666666666,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 89.58333333333334,
+                "ci95": [
+                  73.80054686328873,
+                  105.36611980337796
+                ]
               },
               "primary_metric": "Pair accuracy",
               "primary_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 83.33333333333334,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 81.25,
+                "ci95": [
+                  56.1488598845321,
+                  106.3511401154679
+                ]
               },
               "usd_per_attempt": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 0.00205374375,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 0.0022885067708333334,
+                "ci95": [
+                  0.0019402907425373982,
+                  0.0026367227991292686
+                ]
               },
               "unknown_cost_attempts": 0,
               "billing_uncertain_attempts": 0,
@@ -420,33 +721,63 @@
                   "accuracy_percent": 91.66666666666666,
                   "primary_percent": 83.33333333333334,
                   "usd_per_attempt": 0.00205374375
+                },
+                {
+                  "round": 2,
+                  "accuracy_percent": 95.83333333333334,
+                  "primary_percent": 91.66666666666666,
+                  "usd_per_attempt": 0.002321184375
+                },
+                {
+                  "round": 4,
+                  "accuracy_percent": 75.0,
+                  "primary_percent": 58.333333333333336,
+                  "usd_per_attempt": 0.0025726697916666668
+                },
+                {
+                  "round": 5,
+                  "accuracy_percent": 95.83333333333334,
+                  "primary_percent": 91.66666666666666,
+                  "usd_per_attempt": 0.0022064291666666668
                 }
               ]
             },
             "qasper": {
-              "attempts": 20,
-              "completed": 20,
+              "attempts": 80,
+              "completed": 80,
               "rounds": [
-                1
+                1,
+                2,
+                4,
+                5
               ],
               "accuracy_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
+                "repetitions": 4,
+                "known_repetitions": 4,
                 "mean": 20.0,
-                "ci95": null
+                "ci95": [
+                  20.0,
+                  20.0
+                ]
               },
               "primary_metric": "Answer F1",
               "primary_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 38.02080661875438,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 38.59064225315704,
+                "ci95": [
+                  34.958744871985985,
+                  42.2225396343281
+                ]
               },
               "usd_per_attempt": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 0.00373393625,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 0.004117555,
+                "ci95": [
+                  0.0032683473577698363,
+                  0.004966762642230164
+                ]
               },
               "unknown_cost_attempts": 0,
               "billing_uncertain_attempts": 0,
@@ -456,33 +787,63 @@
                   "accuracy_percent": 20.0,
                   "primary_percent": 38.02080661875438,
                   "usd_per_attempt": 0.00373393625
+                },
+                {
+                  "round": 2,
+                  "accuracy_percent": 20.0,
+                  "primary_percent": 41.43549960967994,
+                  "usd_per_attempt": 0.00406067725
+                },
+                {
+                  "round": 4,
+                  "accuracy_percent": 20.0,
+                  "primary_percent": 38.973498609943626,
+                  "usd_per_attempt": 0.00488872675
+                },
+                {
+                  "round": 5,
+                  "accuracy_percent": 20.0,
+                  "primary_percent": 35.932764174250245,
+                  "usd_per_attempt": 0.00378687975
                 }
               ]
             },
             "reviewcritique": {
-              "attempts": 20,
-              "completed": 20,
+              "attempts": 80,
+              "completed": 80,
               "rounds": [
-                1
+                1,
+                2,
+                4,
+                5
               ],
               "accuracy_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 55.00000000000001,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 55.0,
+                "ci95": [
+                  48.50385868187445,
+                  61.49614131812555
+                ]
               },
               "primary_metric": "Binary macro-F1",
               "primary_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 52.0,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 48.3937728937729,
+                "ci95": [
+                  39.59656431626181,
+                  57.19098147128398
+                ]
               },
               "usd_per_attempt": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 0.00498071675,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 0.0049577654375,
+                "ci95": [
+                  0.00446561693292192,
+                  0.00544991394207808
+                ]
               },
               "unknown_cost_attempts": 0,
               "billing_uncertain_attempts": 0,
@@ -492,71 +853,131 @@
                   "accuracy_percent": 55.00000000000001,
                   "primary_percent": 52.0,
                   "usd_per_attempt": 0.00498071675
+                },
+                {
+                  "round": 2,
+                  "accuracy_percent": 55.00000000000001,
+                  "primary_percent": 48.71794871794872,
+                  "usd_per_attempt": 0.0049867835
+                },
+                {
+                  "round": 4,
+                  "accuracy_percent": 60.0,
+                  "primary_percent": 52.38095238095239,
+                  "usd_per_attempt": 0.004554779
+                },
+                {
+                  "round": 5,
+                  "accuracy_percent": 50.0,
+                  "primary_percent": 40.476190476190474,
+                  "usd_per_attempt": 0.0053087824999999995
                 }
               ]
             }
           },
           "baseline": {
             "controlled": {
-              "attempts": 24,
-              "completed": 24,
+              "attempts": 96,
+              "completed": 96,
               "rounds": [
-                1
+                1,
+                2,
+                4,
+                5
               ],
               "accuracy_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 95.83333333333334,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 97.91666666666666,
+                "ci95": [
+                  91.28657019732559,
+                  104.54676313600773
+                ]
               },
               "primary_metric": "Pair accuracy",
               "primary_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 91.66666666666666,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 95.83333333333334,
+                "ci95": [
+                  82.57314039465123,
+                  109.09352627201545
+                ]
               },
               "usd_per_attempt": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 0.00013403458333333335,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 0.0001366804166666667,
+                "ci95": [
+                  0.00013330970100842868,
+                  0.0001400511323249047
+                ]
               },
               "unknown_cost_attempts": 0,
               "billing_uncertain_attempts": 0,
               "repetition_values": [
                 {
                   "round": 1,
-                  "accuracy_percent": 95.83333333333334,
-                  "primary_percent": 91.66666666666666,
-                  "usd_per_attempt": 0.00013403458333333335
+                  "accuracy_percent": 91.66666666666666,
+                  "primary_percent": 83.33333333333334,
+                  "usd_per_attempt": 0.00013638875
+                },
+                {
+                  "round": 2,
+                  "accuracy_percent": 100,
+                  "primary_percent": 100,
+                  "usd_per_attempt": 0.00013680541666666668
+                },
+                {
+                  "round": 4,
+                  "accuracy_percent": 100,
+                  "primary_percent": 100,
+                  "usd_per_attempt": 0.00013418041666666668
+                },
+                {
+                  "round": 5,
+                  "accuracy_percent": 100,
+                  "primary_percent": 100,
+                  "usd_per_attempt": 0.00013934708333333335
                 }
               ]
             },
             "qasper": {
-              "attempts": 20,
-              "completed": 20,
+              "attempts": 80,
+              "completed": 80,
               "rounds": [
-                1
+                1,
+                2,
+                4,
+                5
               ],
               "accuracy_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
+                "repetitions": 4,
+                "known_repetitions": 4,
                 "mean": 20.0,
-                "ci95": null
+                "ci95": [
+                  20.0,
+                  20.0
+                ]
               },
               "primary_metric": "Answer F1",
               "primary_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 44.005827984888086,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 42.84514049693526,
+                "ci95": [
+                  40.734526040892995,
+                  44.95575495297752
+                ]
               },
               "usd_per_attempt": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 0.000150107,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 0.00015525075,
+                "ci95": [
+                  0.00014986283075119435,
+                  0.00016063866924880563
+                ]
               },
               "unknown_cost_attempts": 0,
               "billing_uncertain_attempts": 0,
@@ -564,35 +985,65 @@
                 {
                   "round": 1,
                   "accuracy_percent": 20.0,
-                  "primary_percent": 44.005827984888086,
-                  "usd_per_attempt": 0.000150107
+                  "primary_percent": 42.70996076229306,
+                  "usd_per_attempt": 0.000155807
+                },
+                {
+                  "round": 2,
+                  "accuracy_percent": 20.0,
+                  "primary_percent": 44.74837687199564,
+                  "usd_per_attempt": 0.000151832
+                },
+                {
+                  "round": 4,
+                  "accuracy_percent": 20.0,
+                  "primary_percent": 42.15411066556187,
+                  "usd_per_attempt": 0.000153657
+                },
+                {
+                  "round": 5,
+                  "accuracy_percent": 20.0,
+                  "primary_percent": 41.76811368789047,
+                  "usd_per_attempt": 0.000159707
                 }
               ]
             },
             "reviewcritique": {
-              "attempts": 20,
-              "completed": 20,
+              "attempts": 80,
+              "completed": 80,
               "rounds": [
-                1
+                1,
+                2,
+                4,
+                5
               ],
               "accuracy_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
+                "repetitions": 4,
+                "known_repetitions": 4,
                 "mean": 70.0,
-                "ci95": null
+                "ci95": [
+                  63.50385868187445,
+                  76.49614131812555
+                ]
               },
               "primary_metric": "Binary macro-F1",
               "primary_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 67.03296703296704,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 67.94574175824177,
+                "ci95": [
+                  60.926615773271024,
+                  74.96486774321251
+                ]
               },
               "usd_per_attempt": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 0.000283847,
-                "ci95": null
+                "repetitions": 4,
+                "known_repetitions": 4,
+                "mean": 0.000271747,
+                "ci95": [
+                  0.00026808675437686827,
+                  0.0002754072456231318
+                ]
               },
               "unknown_cost_attempts": 0,
               "billing_uncertain_attempts": 0,
@@ -600,8 +1051,26 @@
                 {
                   "round": 1,
                   "accuracy_percent": 70.0,
+                  "primary_percent": 68.75,
+                  "usd_per_attempt": 0.000272572
+                },
+                {
+                  "round": 2,
+                  "accuracy_percent": 65.0,
+                  "primary_percent": 62.66666666666667,
+                  "usd_per_attempt": 0.000270747
+                },
+                {
+                  "round": 4,
+                  "accuracy_percent": 75.0,
+                  "primary_percent": 73.33333333333334,
+                  "usd_per_attempt": 0.000274497
+                },
+                {
+                  "round": 5,
+                  "accuracy_percent": 70.0,
                   "primary_percent": 67.03296703296704,
-                  "usd_per_attempt": 0.000283847
+                  "usd_per_attempt": 0.00026917200000000003
                 }
               ]
             }
@@ -610,34 +1079,47 @@
       },
       "selection": {
         "rounds": [
-          1
+          1,
+          4,
+          5
         ],
         "methods": {
           "agent": {
             "selection": {
-              "attempts": 12,
-              "completed": 10,
+              "attempts": 36,
+              "completed": 33,
               "rounds": [
-                1
+                1,
+                4,
+                5
               ],
               "accuracy_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 83.33333333333334,
-                "ci95": null
+                "repetitions": 3,
+                "known_repetitions": 3,
+                "mean": 75.0,
+                "ci95": [
+                  54.298852402080556,
+                  95.70114759791944
+                ]
               },
               "primary_metric": "Acceptable-choice accuracy",
               "primary_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 83.33333333333334,
-                "ci95": null
+                "repetitions": 3,
+                "known_repetitions": 3,
+                "mean": 75.0,
+                "ci95": [
+                  54.298852402080556,
+                  95.70114759791944
+                ]
               },
               "usd_per_attempt": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 0.0022518825,
-                "ci95": null
+                "repetitions": 3,
+                "known_repetitions": 3,
+                "mean": 0.0021130827777777776,
+                "ci95": [
+                  0.0018139965837628727,
+                  0.0024121689717926825
+                ]
               },
               "unknown_cost_attempts": 0,
               "billing_uncertain_attempts": 0,
@@ -647,35 +1129,58 @@
                   "accuracy_percent": 83.33333333333334,
                   "primary_percent": 83.33333333333334,
                   "usd_per_attempt": 0.0022518825
+                },
+                {
+                  "round": 4,
+                  "accuracy_percent": 66.66666666666666,
+                  "primary_percent": 66.66666666666666,
+                  "usd_per_attempt": 0.0020368454166666667
+                },
+                {
+                  "round": 5,
+                  "accuracy_percent": 75.0,
+                  "primary_percent": 75.0,
+                  "usd_per_attempt": 0.0020505204166666666
                 }
               ]
             }
           },
           "pyagent_react": {
             "selection": {
-              "attempts": 12,
-              "completed": 12,
+              "attempts": 36,
+              "completed": 36,
               "rounds": [
-                1
+                1,
+                4,
+                5
               ],
               "accuracy_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 100,
-                "ci95": null
+                "repetitions": 3,
+                "known_repetitions": 3,
+                "mean": 94.44444444444444,
+                "ci95": [
+                  82.49263130625148,
+                  106.3962575826374
+                ]
               },
               "primary_metric": "Acceptable-choice accuracy",
               "primary_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 100,
-                "ci95": null
+                "repetitions": 3,
+                "known_repetitions": 3,
+                "mean": 94.44444444444444,
+                "ci95": [
+                  82.49263130625148,
+                  106.3962575826374
+                ]
               },
               "usd_per_attempt": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 0.002306914583333333,
-                "ci95": null
+                "repetitions": 3,
+                "known_repetitions": 3,
+                "mean": 0.0024138918055555555,
+                "ci95": [
+                  0.0019903663422797292,
+                  0.0028374172688313817
+                ]
               },
               "unknown_cost_attempts": 0,
               "billing_uncertain_attempts": 0,
@@ -685,35 +1190,58 @@
                   "accuracy_percent": 100,
                   "primary_percent": 100,
                   "usd_per_attempt": 0.002306914583333333
+                },
+                {
+                  "round": 4,
+                  "accuracy_percent": 91.66666666666666,
+                  "primary_percent": 91.66666666666666,
+                  "usd_per_attempt": 0.0026105041666666666
+                },
+                {
+                  "round": 5,
+                  "accuracy_percent": 91.66666666666666,
+                  "primary_percent": 91.66666666666666,
+                  "usd_per_attempt": 0.0023242566666666666
                 }
               ]
             }
           },
           "deliberative_review": {
             "selection": {
-              "attempts": 12,
-              "completed": 12,
+              "attempts": 36,
+              "completed": 36,
               "rounds": [
-                1
+                1,
+                4,
+                5
               ],
               "accuracy_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 33.33333333333333,
-                "ci95": null
+                "repetitions": 3,
+                "known_repetitions": 3,
+                "mean": 36.11111111111111,
+                "ci95": [
+                  4.489585831138108,
+                  67.7326363910841
+                ]
               },
               "primary_metric": "Acceptable-choice accuracy",
               "primary_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 33.33333333333333,
-                "ci95": null
+                "repetitions": 3,
+                "known_repetitions": 3,
+                "mean": 36.11111111111111,
+                "ci95": [
+                  4.489585831138108,
+                  67.7326363910841
+                ]
               },
               "usd_per_attempt": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 0.012259764583333334,
-                "ci95": null
+                "repetitions": 3,
+                "known_repetitions": 3,
+                "mean": 0.012575130416666667,
+                "ci95": [
+                  0.011680113726059569,
+                  0.013470147107273765
+                ]
               },
               "unknown_cost_attempts": 0,
               "billing_uncertain_attempts": 0,
@@ -723,44 +1251,79 @@
                   "accuracy_percent": 33.33333333333333,
                   "primary_percent": 33.33333333333333,
                   "usd_per_attempt": 0.012259764583333334
+                },
+                {
+                  "round": 4,
+                  "accuracy_percent": 50.0,
+                  "primary_percent": 50.0,
+                  "usd_per_attempt": 0.012967800833333333
+                },
+                {
+                  "round": 5,
+                  "accuracy_percent": 25.0,
+                  "primary_percent": 25.0,
+                  "usd_per_attempt": 0.012497825833333333
                 }
               ]
             }
           },
           "baseline": {
             "selection": {
-              "attempts": 12,
-              "completed": 11,
+              "attempts": 36,
+              "completed": 36,
               "rounds": [
-                1
+                1,
+                4,
+                5
               ],
               "accuracy_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 83.33333333333334,
-                "ci95": null
+                "repetitions": 3,
+                "known_repetitions": 3,
+                "mean": 97.22222222222221,
+                "ci95": [
+                  85.27040908402925,
+                  109.17403536041517
+                ]
               },
               "primary_metric": "Acceptable-choice accuracy",
               "primary_percent": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 83.33333333333334,
-                "ci95": null
+                "repetitions": 3,
+                "known_repetitions": 3,
+                "mean": 97.22222222222221,
+                "ci95": [
+                  85.27040908402925,
+                  109.17403536041517
+                ]
               },
               "usd_per_attempt": {
-                "repetitions": 1,
-                "known_repetitions": 1,
-                "mean": 0.0003024566666666667,
-                "ci95": null
+                "repetitions": 3,
+                "known_repetitions": 3,
+                "mean": 0.00030224833333333334,
+                "ci95": [
+                  0.00029043642830377307,
+                  0.0003140602383628936
+                ]
               },
               "unknown_cost_attempts": 0,
               "billing_uncertain_attempts": 0,
               "repetition_values": [
                 {
                   "round": 1,
-                  "accuracy_percent": 83.33333333333334,
-                  "primary_percent": 83.33333333333334,
-                  "usd_per_attempt": 0.0003024566666666667
+                  "accuracy_percent": 100,
+                  "primary_percent": 100,
+                  "usd_per_attempt": 0.0002976233333333333
+                },
+                {
+                  "round": 4,
+                  "accuracy_percent": 100,
+                  "primary_percent": 100,
+                  "usd_per_attempt": 0.00030712333333333334
+                },
+                {
+                  "round": 5,
+                  "accuracy_percent": 91.66666666666666,
+                  "primary_percent": 91.66666666666666,
+                  "usd_per_attempt": 0.0003019983333333333
                 }
               ]
             }
@@ -769,91 +1332,128 @@
       },
       "m2": {
         "rounds": [
-          1
+          1,
+          2
         ],
         "methods": {
           "agent": {
-            "attempts": 20,
+            "attempts": 40,
             "completion_percent": {
-              "repetitions": 1,
-              "known_repetitions": 1,
-              "mean": 90.0,
-              "ci95": null
+              "repetitions": 2,
+              "known_repetitions": 2,
+              "mean": 95.0,
+              "ci95": [
+                31.468976319126533,
+                158.53102368087346
+              ]
             },
             "all_citations_verified_percent": {
-              "repetitions": 1,
-              "known_repetitions": 1,
-              "mean": 90.0,
-              "ci95": null
+              "repetitions": 2,
+              "known_repetitions": 2,
+              "mean": 95.0,
+              "ci95": [
+                31.468976319126533,
+                158.53102368087346
+              ]
             },
             "usd_per_attempt": {
-              "repetitions": 1,
-              "known_repetitions": 1,
-              "mean": 0.002174328,
-              "ci95": null
+              "repetitions": 2,
+              "known_repetitions": 2,
+              "mean": 0.0022261141250000003,
+              "ci95": [
+                0.0015681090182568657,
+                0.002884119231743135
+              ]
             }
           },
           "pyagent_react": {
-            "attempts": 20,
+            "attempts": 40,
             "completion_percent": {
-              "repetitions": 1,
-              "known_repetitions": 1,
+              "repetitions": 2,
+              "known_repetitions": 2,
               "mean": 100.0,
-              "ci95": null
+              "ci95": [
+                100.0,
+                100.0
+              ]
             },
             "all_citations_verified_percent": {
-              "repetitions": 1,
-              "known_repetitions": 1,
+              "repetitions": 2,
+              "known_repetitions": 2,
               "mean": 100.0,
-              "ci95": null
+              "ci95": [
+                100.0,
+                100.0
+              ]
             },
             "usd_per_attempt": {
-              "repetitions": 1,
-              "known_repetitions": 1,
-              "mean": 0.0022934965,
-              "ci95": null
+              "repetitions": 2,
+              "known_repetitions": 2,
+              "mean": 0.002328543875,
+              "ci95": [
+                0.0018832247527845085,
+                0.002773862997215492
+              ]
             }
           },
           "deliberative_review": {
-            "attempts": 20,
+            "attempts": 40,
             "completion_percent": {
-              "repetitions": 1,
-              "known_repetitions": 1,
+              "repetitions": 2,
+              "known_repetitions": 2,
               "mean": 100.0,
-              "ci95": null
+              "ci95": [
+                100.0,
+                100.0
+              ]
             },
             "all_citations_verified_percent": {
-              "repetitions": 1,
-              "known_repetitions": 1,
+              "repetitions": 2,
+              "known_repetitions": 2,
               "mean": 100.0,
-              "ci95": null
+              "ci95": [
+                100.0,
+                100.0
+              ]
             },
             "usd_per_attempt": {
-              "repetitions": 1,
-              "known_repetitions": 1,
-              "mean": 0.007603853749999999,
-              "ci95": null
+              "repetitions": 2,
+              "known_repetitions": 2,
+              "mean": 0.007201657125,
+              "ci95": [
+                0.002091264463551527,
+                0.012312049786448474
+              ]
             }
           },
           "baseline": {
-            "attempts": 20,
+            "attempts": 40,
             "completion_percent": {
-              "repetitions": 1,
-              "known_repetitions": 1,
+              "repetitions": 2,
+              "known_repetitions": 2,
               "mean": 100.0,
-              "ci95": null
+              "ci95": [
+                100.0,
+                100.0
+              ]
             },
             "all_citations_verified_percent": {
-              "repetitions": 1,
-              "known_repetitions": 1,
-              "mean": 55.00000000000001,
-              "ci95": null
+              "repetitions": 2,
+              "known_repetitions": 2,
+              "mean": 45.0,
+              "ci95": [
+                -18.531023680873467,
+                108.53102368087346
+              ]
             },
             "usd_per_attempt": {
-              "repetitions": 1,
-              "known_repetitions": 1,
-              "mean": 0.0005543055,
-              "ci95": null
+              "repetitions": 2,
+              "known_repetitions": 2,
+              "mean": 0.0005389430000000001,
+              "ci95": [
+                0.0004371345345514009,
+                0.0006407514654485992
+              ]
             }
           }
         }
@@ -1029,6 +1629,27 @@
         },
         {
           "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-pyagent_react-20261118-luna6",
+          "stage": "core",
+          "round": 3,
+          "source_sha256": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",
+          "manifest_sha256": "04d75e5b653230fb462a9832cc95861c5ba446bb4251c759cfa168363afee739",
+          "config": {
+            "model": "gpt-6-luna",
+            "max_reads": 5,
+            "max_output_tokens": 4000,
+            "timeout": 90,
+            "retries": 1,
+            "reasoning_effort": "low",
+            "max_paper_chars": 600000
+          },
+          "workers": 8,
+          "seed": 20261121,
+          "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-pyagent_react-20261118-luna6\\r3\\core\\records.jsonl",
+          "started_at": "2026-11-18T22:23:15.363424+00:00",
+          "updated_at": "2026-11-18T22:25:22.426677+00:00"
+        },
+        {
+          "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-pyagent_react-20261118-luna6",
           "stage": "selection",
           "round": 1,
           "source_sha256": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",
@@ -1067,7 +1688,28 @@
           "seed": 20261120,
           "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-pyagent_react-20261118-luna6\\r2\\selection\\records.jsonl",
           "started_at": "2026-11-18T22:19:57.139364+00:00",
-          "updated_at": "2026-11-18T22:20:19.373454+00:00"
+          "updated_at": "2026-11-18T22:22:16.004344+00:00"
+        },
+        {
+          "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-pyagent_react-20261118-luna6",
+          "stage": "selection",
+          "round": 3,
+          "source_sha256": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",
+          "manifest_sha256": "04d75e5b653230fb462a9832cc95861c5ba446bb4251c759cfa168363afee739",
+          "config": {
+            "model": "gpt-6-luna",
+            "max_reads": 20,
+            "max_output_tokens": 4000,
+            "timeout": 90,
+            "retries": 1,
+            "reasoning_effort": "low",
+            "max_paper_chars": 600000
+          },
+          "workers": 8,
+          "seed": 20261121,
+          "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-pyagent_react-20261118-luna6\\r3\\selection\\records.jsonl",
+          "started_at": "2026-11-18T22:25:22.834339+00:00",
+          "updated_at": "2026-11-18T22:26:27.911987+00:00"
         },
         {
           "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-deliberative_review-20261118-luna6",
@@ -1092,6 +1734,27 @@
         },
         {
           "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-deliberative_review-20261118-luna6",
+          "stage": "core",
+          "round": 2,
+          "source_sha256": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",
+          "manifest_sha256": "04d75e5b653230fb462a9832cc95861c5ba446bb4251c759cfa168363afee739",
+          "config": {
+            "model": "gpt-6-luna",
+            "max_reads": 5,
+            "max_output_tokens": 4000,
+            "timeout": 90,
+            "retries": 1,
+            "reasoning_effort": "low",
+            "max_paper_chars": 600000
+          },
+          "workers": 8,
+          "seed": 20261120,
+          "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-deliberative_review-20261118-luna6\\r2\\core\\records.jsonl",
+          "started_at": "2026-11-18T22:22:06.830103+00:00",
+          "updated_at": "2026-11-18T22:26:14.048039+00:00"
+        },
+        {
+          "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-deliberative_review-20261118-luna6",
           "stage": "selection",
           "round": 1,
           "source_sha256": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",
@@ -1112,7 +1775,28 @@
           "updated_at": "2026-11-18T22:20:02.692727+00:00"
         },
         {
-          "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-baseline-20261118-luna6",
+          "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-deliberative_review-20261118-luna6",
+          "stage": "selection",
+          "round": 2,
+          "source_sha256": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",
+          "manifest_sha256": "04d75e5b653230fb462a9832cc95861c5ba446bb4251c759cfa168363afee739",
+          "config": {
+            "model": "gpt-6-luna",
+            "max_reads": 20,
+            "max_output_tokens": 4000,
+            "timeout": 90,
+            "retries": 1,
+            "reasoning_effort": "low",
+            "max_paper_chars": 600000
+          },
+          "workers": 8,
+          "seed": 20261120,
+          "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-deliberative_review-20261118-luna6\\r2\\selection\\records.jsonl",
+          "started_at": "2026-11-18T22:26:14.405201+00:00",
+          "updated_at": "2026-11-18T22:26:14.405201+00:00"
+        },
+        {
+          "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-baseline-recovery-20261118-luna6",
           "stage": "core",
           "round": 1,
           "source_sha256": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",
@@ -1128,12 +1812,12 @@
           },
           "workers": 4,
           "seed": 20261119,
-          "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-baseline-20261118-luna6\\r1\\core\\records.jsonl",
-          "started_at": "2026-11-18T22:12:57.602921+00:00",
-          "updated_at": "2026-11-18T22:13:49.799136+00:00"
+          "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-baseline-recovery-20261118-luna6\\r1\\core\\records.jsonl",
+          "started_at": "2026-11-18T22:21:48.123843+00:00",
+          "updated_at": "2026-11-18T22:22:43.249425+00:00"
         },
         {
-          "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-baseline-20261118-luna6",
+          "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-baseline-recovery-20261118-luna6",
           "stage": "core",
           "round": 2,
           "source_sha256": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",
@@ -1149,12 +1833,33 @@
           },
           "workers": 4,
           "seed": 20261120,
-          "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-baseline-20261118-luna6\\r2\\core\\records.jsonl",
-          "started_at": "2026-11-18T22:14:45.767890+00:00",
-          "updated_at": "2026-11-18T22:15:38.906369+00:00"
+          "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-baseline-recovery-20261118-luna6\\r2\\core\\records.jsonl",
+          "started_at": "2026-11-18T22:23:50.168526+00:00",
+          "updated_at": "2026-11-18T22:24:49.541452+00:00"
         },
         {
-          "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-baseline-20261118-luna6",
+          "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-baseline-recovery-20261118-luna6",
+          "stage": "core",
+          "round": 3,
+          "source_sha256": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",
+          "manifest_sha256": "04d75e5b653230fb462a9832cc95861c5ba446bb4251c759cfa168363afee739",
+          "config": {
+            "model": "gpt-6-luna",
+            "max_reads": 5,
+            "max_output_tokens": 4000,
+            "timeout": 90,
+            "retries": 1,
+            "reasoning_effort": "low",
+            "max_paper_chars": 600000
+          },
+          "workers": 4,
+          "seed": 20261121,
+          "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-baseline-recovery-20261118-luna6\\r3\\core\\records.jsonl",
+          "started_at": "2026-11-18T22:25:53.880415+00:00",
+          "updated_at": "2026-11-18T22:26:34.110277+00:00"
+        },
+        {
+          "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-baseline-recovery-20261118-luna6",
           "stage": "selection",
           "round": 1,
           "source_sha256": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",
@@ -1170,9 +1875,30 @@
           },
           "workers": 4,
           "seed": 20261119,
-          "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-baseline-20261118-luna6\\r1\\selection\\records.jsonl",
-          "started_at": "2026-11-18T22:13:50.163629+00:00",
-          "updated_at": "2026-11-18T22:14:08.414298+00:00"
+          "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-baseline-recovery-20261118-luna6\\r1\\selection\\records.jsonl",
+          "started_at": "2026-11-18T22:22:43.728424+00:00",
+          "updated_at": "2026-11-18T22:23:05.433918+00:00"
+        },
+        {
+          "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-baseline-recovery-20261118-luna6",
+          "stage": "selection",
+          "round": 2,
+          "source_sha256": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",
+          "manifest_sha256": "04d75e5b653230fb462a9832cc95861c5ba446bb4251c759cfa168363afee739",
+          "config": {
+            "model": "gpt-6-luna",
+            "max_reads": 20,
+            "max_output_tokens": 4000,
+            "timeout": 90,
+            "retries": 1,
+            "reasoning_effort": "low",
+            "max_paper_chars": 600000
+          },
+          "workers": 4,
+          "seed": 20261120,
+          "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-baseline-recovery-20261118-luna6\\r2\\selection\\records.jsonl",
+          "started_at": "2026-11-18T22:24:50.049455+00:00",
+          "updated_at": "2026-11-18T22:25:12.700375+00:00"
         },
         {
           "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-extra-r4-20261118-luna6",
@@ -1193,7 +1919,28 @@
           "seed": 20261122,
           "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-extra-r4-20261118-luna6\\r4\\core\\records.jsonl",
           "started_at": "2026-11-18T22:15:22.353315+00:00",
-          "updated_at": "2026-11-18T22:20:24.648708+00:00"
+          "updated_at": "2026-11-18T22:22:49.445313+00:00"
+        },
+        {
+          "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-extra-r4-20261118-luna6",
+          "stage": "selection",
+          "round": 4,
+          "source_sha256": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",
+          "manifest_sha256": "04d75e5b653230fb462a9832cc95861c5ba446bb4251c759cfa168363afee739",
+          "config": {
+            "model": "gpt-6-luna",
+            "max_reads": 20,
+            "max_output_tokens": 4000,
+            "timeout": 90,
+            "retries": 1,
+            "reasoning_effort": "low",
+            "max_paper_chars": 600000
+          },
+          "workers": 8,
+          "seed": 20261122,
+          "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-extra-r4-20261118-luna6\\r4\\selection\\records.jsonl",
+          "started_at": "2026-11-18T22:22:49.970644+00:00",
+          "updated_at": "2026-11-18T22:25:58.977452+00:00"
         },
         {
           "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-extra-r5-20261118-luna6",
@@ -1214,20 +1961,33 @@
           "seed": 20261123,
           "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-extra-r5-20261118-luna6\\r5\\core\\records.jsonl",
           "started_at": "2026-11-18T22:15:22.496038+00:00",
-          "updated_at": "2026-11-18T22:20:24.750709+00:00"
+          "updated_at": "2026-11-18T22:22:02.849471+00:00"
+        },
+        {
+          "experiment": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-extra-r5-20261118-luna6",
+          "stage": "selection",
+          "round": 5,
+          "source_sha256": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",
+          "manifest_sha256": "04d75e5b653230fb462a9832cc95861c5ba446bb4251c759cfa168363afee739",
+          "config": {
+            "model": "gpt-6-luna",
+            "max_reads": 20,
+            "max_output_tokens": 4000,
+            "timeout": 90,
+            "retries": 1,
+            "reasoning_effort": "low",
+            "max_paper_chars": 600000
+          },
+          "workers": 8,
+          "seed": 20261123,
+          "records": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-extra-r5-20261118-luna6\\r5\\selection\\records.jsonl",
+          "started_at": "2026-11-18T22:22:03.586003+00:00",
+          "updated_at": "2026-11-18T22:25:09.283615+00:00"
         }
       ],
       "notes": [
-        "Excluded incomplete selection round 2 for pyagent_react: 2/12 terminal attempts.",
-        "Excluded incomplete core round 2 for baseline: 60/64 terminal attempts.",
-        "Excluded incomplete core round 4 for agent: 51/64 terminal attempts.",
-        "Excluded incomplete core round 4 for pyagent_react: 47/64 terminal attempts.",
-        "Excluded incomplete core round 4 for deliberative_review: 49/64 terminal attempts.",
-        "Excluded incomplete core round 4 for baseline: 51/64 terminal attempts.",
-        "Excluded incomplete core round 5 for agent: 46/64 terminal attempts.",
-        "Excluded incomplete core round 5 for pyagent_react: 52/64 terminal attempts.",
-        "Excluded incomplete core round 5 for deliberative_review: 47/64 terminal attempts.",
-        "Excluded incomplete core round 5 for baseline: 51/64 terminal attempts."
+        "Excluded incomplete selection round 2 for deliberative_review: 0/12 terminal attempts.",
+        "Excluded incomplete core round 3 for baseline: 49/64 terminal attempts."
       ],
       "source_sha256_by_method": {
         "agent": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",
@@ -1241,7 +2001,7 @@
     "runs/m3-final-agent-20261118-luna6",
     "runs/m3-final-pyagent_react-20261118-luna6",
     "runs/m3-final-deliberative_review-20261118-luna6",
-    "runs/m3-final-baseline-20261118-luna6",
+    "runs/m3-final-baseline-recovery-20261118-luna6",
     "runs/m3-final-extra-r4-20261118-luna6",
     "runs/m3-final-extra-r5-20261118-luna6"
   ]

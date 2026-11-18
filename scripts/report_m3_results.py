@@ -25,7 +25,9 @@ METHODS = {"agent": ("Native ReAct", "#0072B2"),
 DEFAULT_EXPERIMENTS = [Path("runs/m3-final-agent-20261118-luna6"),
                        Path("runs/m3-final-pyagent_react-20261118-luna6"),
                        Path("runs/m3-final-deliberative_review-20261118-luna6"),
-                       Path("runs/m3-final-baseline-20261118-luna6")]
+                       Path("runs/m3-final-baseline-recovery-20261118-luna6"),
+                       Path("runs/m3-final-extra-r4-20261118-luna6"),
+                       Path("runs/m3-final-extra-r5-20261118-luna6")]
 TRACKS = {"qasper": ("QASPER", "Exact-answer accuracy (%)", "Answer F1"),
           "reviewcritique": ("ReviewCritique", "Label accuracy (%)", "Binary macro-F1"),
           "controlled": ("Controlled appraisal", "Verdict accuracy (%)", "Pair accuracy"),

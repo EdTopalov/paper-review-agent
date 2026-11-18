@@ -49,9 +49,10 @@ The critic sees observed sources only. Selection has up to 54 blocks.
 The [real-paper selection pilot](selection-pilot.md) is separate.
 
 The [saved plans](benchmark-plans/) contain one-repeat smoke and three-repeat test examples.
-Final collection uses three repetitions and separate eight-worker blocks per agent;
-baseline uses four workers. Each round runs M2, core, then selection. Three rounds
-across four methods plan 912 benchmark attempts plus 240 M2 attempts. Traces retain
+Final collection targets three repetitions in separate eight-worker blocks per agent;
+baseline uses four workers. Each round runs M2, core, then selection. Two extra
+benchmark-only repetitions each share eight workers across all four methods.
+Only complete repetitions shared by all methods enter the report. Traces retain
 local repeat 1; aggregates identify global rounds and original source provenance.
 Separate worker pools and start times prevent a controlled latency comparison.
 
@@ -66,7 +67,9 @@ paper-review benchmark-run --plan runs/scratch/fresh-benchmark-plans/dev-core-sm
 python scripts/run_existing_benchmark.py --model gpt-6-luna --variants agent --repeats 3 --workers 8 --out runs/m3-final-agent-20261118-luna6
 python scripts/run_existing_benchmark.py --model gpt-6-luna --variants pyagent_react --repeats 3 --workers 8 --out runs/m3-final-pyagent_react-20261118-luna6
 python scripts/run_existing_benchmark.py --model gpt-6-luna --variants deliberative_review --repeats 3 --workers 8 --out runs/m3-final-deliberative_review-20261118-luna6
-python scripts/run_existing_benchmark.py --model gpt-6-luna --variants baseline --repeats 3 --workers 4 --out runs/m3-final-baseline-20261118-luna6
+python scripts/run_existing_benchmark.py --model gpt-6-luna --variants baseline --repeats 3 --workers 4 --out runs/m3-final-baseline-recovery-20261118-luna6
+python scripts/run_existing_benchmark.py --model gpt-6-luna --variants agent pyagent_react deliberative_review baseline --repeats 1 --start-round 4 --skip-m2 --workers 8 --out runs/m3-final-extra-r4-20261118-luna6
+python scripts/run_existing_benchmark.py --model gpt-6-luna --variants agent pyagent_react deliberative_review baseline --repeats 1 --start-round 5 --skip-m2 --workers 8 --out runs/m3-final-extra-r5-20261118-luna6
 ```
 
 These commands make no model calls; append `--execute` to a runner to collect predictions.
@@ -96,7 +99,7 @@ outcomes are descriptive; track metrics remain separate. Rebuild offline:
 ```shell
 paper-review benchmark-score --tracks qasper reviewcritique controlled --records runs/m3-final-agent-20261118-luna6/r1/core/records.jsonl --plan runs/m3-final-agent-20261118-luna6/r1/core/plan.json
 python -m pip install -r requirements-report.txt
-python scripts/report_m3_results.py runs/m3-final-agent-20261118-luna6 runs/m3-final-pyagent_react-20261118-luna6 runs/m3-final-deliberative_review-20261118-luna6 runs/m3-final-baseline-20261118-luna6 --out milestones/M3-results
+python scripts/report_m3_results.py
 python scripts/report_m3_m2_results.py
 ```
 

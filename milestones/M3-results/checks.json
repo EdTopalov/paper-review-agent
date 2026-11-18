@@ -1,327 +1,1055 @@
 {
-  "runs/m3-existing-20261118-luna6/r1/core": {
-    "runs": 192,
-    "passed": 192,
-    "failures": []
+  "schema_version": "m3-final-trace-checks-v1",
+  "generated_at": "2026-11-18T22:27:06.160858+00:00",
+  "scope": "Completed final-policy stages only; original failed baseline block and earlier-policy runs excluded.",
+  "roots": [
+    "runs/m3-final-agent-20261118-luna6",
+    "runs/m3-final-pyagent_react-20261118-luna6",
+    "runs/m3-final-deliberative_review-20261118-luna6",
+    "runs/m3-final-baseline-recovery-20261118-luna6",
+    "runs/m3-final-extra-r4-20261118-luna6",
+    "runs/m3-final-extra-r5-20261118-luna6"
+  ],
+  "summary": {
+    "runs": 1652,
+    "passed": 1618,
+    "intermediate_argument_only_flags": 34,
+    "other_failures": 0
   },
-  "runs/m3-existing-20261118-luna6/r1/m2": {
-    "runs": 60,
-    "passed": 52,
-    "failures": [
-      {
-        "trace": "runs\\m3-existing-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T05\\trace.jsonl",
-        "checks": {
-          "sequence": true,
-          "terminal_result": true,
-          "reading_budget": true,
-          "valid_arguments": false,
-          "call_accounting": true,
-          "response_accounting": true,
-          "stop_recorded": true,
-          "variant_labels": true,
-          "pyagent_accepted_review": true,
-          "pyagent_decision_budget": true
-        },
-        "all_checks_pass": false
-      },
-      {
-        "trace": "runs\\m3-existing-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T06\\trace.jsonl",
-        "checks": {
-          "sequence": true,
-          "terminal_result": true,
-          "reading_budget": true,
-          "valid_arguments": false,
-          "call_accounting": true,
-          "response_accounting": true,
-          "stop_recorded": true,
-          "variant_labels": true,
-          "pyagent_accepted_review": true,
-          "pyagent_decision_budget": true
-        },
-        "all_checks_pass": false
-      },
-      {
-        "trace": "runs\\m3-existing-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T10\\trace.jsonl",
-        "checks": {
-          "sequence": true,
-          "terminal_result": true,
-          "reading_budget": true,
-          "valid_arguments": false,
-          "call_accounting": true,
-          "response_accounting": true,
-          "stop_recorded": true,
-          "variant_labels": true,
-          "pyagent_accepted_review": true,
-          "pyagent_decision_budget": true
-        },
-        "all_checks_pass": false
-      },
-      {
-        "trace": "runs\\m3-existing-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T11\\trace.jsonl",
-        "checks": {
-          "sequence": true,
-          "terminal_result": true,
-          "reading_budget": true,
-          "valid_arguments": false,
-          "call_accounting": true,
-          "response_accounting": true,
-          "stop_recorded": true,
-          "variant_labels": true,
-          "pyagent_accepted_review": true,
-          "pyagent_decision_budget": true
-        },
-        "all_checks_pass": false
-      },
-      {
-        "trace": "runs\\m3-existing-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T14\\trace.jsonl",
-        "checks": {
-          "sequence": true,
-          "terminal_result": true,
-          "reading_budget": true,
-          "valid_arguments": false,
-          "call_accounting": true,
-          "response_accounting": true,
-          "stop_recorded": true,
-          "variant_labels": true,
-          "pyagent_accepted_review": true,
-          "pyagent_decision_budget": true
-        },
-        "all_checks_pass": false
-      },
-      {
-        "trace": "runs\\m3-existing-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T15\\trace.jsonl",
-        "checks": {
-          "sequence": true,
-          "terminal_result": true,
-          "reading_budget": true,
-          "valid_arguments": false,
-          "call_accounting": true,
-          "response_accounting": true,
-          "stop_recorded": true,
-          "variant_labels": true,
-          "pyagent_accepted_review": true,
-          "pyagent_decision_budget": true
-        },
-        "all_checks_pass": false
-      },
-      {
-        "trace": "runs\\m3-existing-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T17\\trace.jsonl",
-        "checks": {
-          "sequence": true,
-          "terminal_result": true,
-          "reading_budget": true,
-          "valid_arguments": false,
-          "call_accounting": true,
-          "response_accounting": true,
-          "stop_recorded": true,
-          "variant_labels": true,
-          "pyagent_accepted_review": true,
-          "pyagent_decision_budget": true
-        },
-        "all_checks_pass": false
-      },
-      {
-        "trace": "runs\\m3-existing-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T20\\trace.jsonl",
-        "checks": {
-          "sequence": true,
-          "terminal_result": true,
-          "reading_budget": true,
-          "valid_arguments": false,
-          "call_accounting": true,
-          "response_accounting": true,
-          "stop_recorded": true,
-          "variant_labels": true,
-          "pyagent_accepted_review": true,
-          "pyagent_decision_budget": true
-        },
-        "all_checks_pass": false
+  "stages": {
+    "runs/m3-final-agent-20261118-luna6/r1/m2": {
+      "kind": "m2",
+      "checked_at": "2026-11-18T22:24:01.461659+00:00",
+      "runs": 20,
+      "passed": 20,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 20,
+        "passed": 20,
+        "failures": []
       }
-    ]
-  },
-  "runs/m3-existing-20261118-luna6/r1/selection": {
-    "runs": 36,
-    "passed": 36,
-    "failures": []
-  },
-  "runs/m3-existing-20261118-luna6/r2/core": {
-    "runs": 192,
-    "passed": 192,
-    "failures": []
-  },
-  "runs/m3-existing-20261118-luna6/r2/m2": {
-    "runs": 60,
-    "passed": 50,
-    "failures": [
-      {
-        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T04\\trace.jsonl",
-        "checks": {
-          "sequence": true,
-          "terminal_result": true,
-          "reading_budget": true,
-          "valid_arguments": false,
-          "call_accounting": true,
-          "response_accounting": true,
-          "stop_recorded": true,
-          "variant_labels": true,
-          "pyagent_accepted_review": true,
-          "pyagent_decision_budget": true
-        },
-        "all_checks_pass": false
-      },
-      {
-        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T07\\trace.jsonl",
-        "checks": {
-          "sequence": true,
-          "terminal_result": true,
-          "reading_budget": true,
-          "valid_arguments": false,
-          "call_accounting": true,
-          "response_accounting": true,
-          "stop_recorded": true,
-          "variant_labels": true,
-          "pyagent_accepted_review": true,
-          "pyagent_decision_budget": true
-        },
-        "all_checks_pass": false
-      },
-      {
-        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T08\\trace.jsonl",
-        "checks": {
-          "sequence": true,
-          "terminal_result": true,
-          "reading_budget": true,
-          "valid_arguments": false,
-          "call_accounting": true,
-          "response_accounting": true,
-          "stop_recorded": true,
-          "variant_labels": true,
-          "pyagent_accepted_review": true,
-          "pyagent_decision_budget": true
-        },
-        "all_checks_pass": false
-      },
-      {
-        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T09\\trace.jsonl",
-        "checks": {
-          "sequence": true,
-          "terminal_result": true,
-          "reading_budget": true,
-          "valid_arguments": false,
-          "call_accounting": true,
-          "response_accounting": true,
-          "stop_recorded": true,
-          "variant_labels": true,
-          "pyagent_accepted_review": true,
-          "pyagent_decision_budget": true
-        },
-        "all_checks_pass": false
-      },
-      {
-        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T13\\trace.jsonl",
-        "checks": {
-          "sequence": true,
-          "terminal_result": true,
-          "reading_budget": true,
-          "valid_arguments": false,
-          "call_accounting": true,
-          "response_accounting": true,
-          "stop_recorded": true,
-          "variant_labels": true,
-          "pyagent_accepted_review": true,
-          "pyagent_decision_budget": true
-        },
-        "all_checks_pass": false
-      },
-      {
-        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T14\\trace.jsonl",
-        "checks": {
-          "sequence": true,
-          "terminal_result": true,
-          "reading_budget": true,
-          "valid_arguments": false,
-          "call_accounting": true,
-          "response_accounting": true,
-          "stop_recorded": true,
-          "variant_labels": true,
-          "pyagent_accepted_review": true,
-          "pyagent_decision_budget": true
-        },
-        "all_checks_pass": false
-      },
-      {
-        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T15\\trace.jsonl",
-        "checks": {
-          "sequence": true,
-          "terminal_result": true,
-          "reading_budget": true,
-          "valid_arguments": false,
-          "call_accounting": true,
-          "response_accounting": true,
-          "stop_recorded": true,
-          "variant_labels": true,
-          "pyagent_accepted_review": true,
-          "pyagent_decision_budget": true
-        },
-        "all_checks_pass": false
-      },
-      {
-        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T16\\trace.jsonl",
-        "checks": {
-          "sequence": true,
-          "terminal_result": true,
-          "reading_budget": true,
-          "valid_arguments": false,
-          "call_accounting": true,
-          "response_accounting": true,
-          "stop_recorded": true,
-          "variant_labels": true,
-          "pyagent_accepted_review": true,
-          "pyagent_decision_budget": true
-        },
-        "all_checks_pass": false
-      },
-      {
-        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T17\\trace.jsonl",
-        "checks": {
-          "sequence": true,
-          "terminal_result": true,
-          "reading_budget": true,
-          "valid_arguments": false,
-          "call_accounting": true,
-          "response_accounting": true,
-          "stop_recorded": true,
-          "variant_labels": true,
-          "pyagent_accepted_review": true,
-          "pyagent_decision_budget": true
-        },
-        "all_checks_pass": false
-      },
-      {
-        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T20\\trace.jsonl",
-        "checks": {
-          "sequence": true,
-          "terminal_result": true,
-          "reading_budget": true,
-          "valid_arguments": false,
-          "call_accounting": true,
-          "response_accounting": true,
-          "stop_recorded": true,
-          "variant_labels": true,
-          "pyagent_accepted_review": true,
-          "pyagent_decision_budget": true
-        },
-        "all_checks_pass": false
+    },
+    "runs/m3-final-agent-20261118-luna6/r1/core": {
+      "kind": "core",
+      "checked_at": "2026-11-18T22:24:01.555554+00:00",
+      "runs": 64,
+      "passed": 64,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 64,
+        "passed": 64,
+        "failures": []
       }
-    ]
+    },
+    "runs/m3-final-agent-20261118-luna6/r1/selection": {
+      "kind": "selection",
+      "checked_at": "2026-11-18T22:24:01.592559+00:00",
+      "runs": 12,
+      "passed": 12,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 12,
+        "passed": 12,
+        "failures": []
+      }
+    },
+    "runs/m3-final-agent-20261118-luna6/r2/m2": {
+      "kind": "m2",
+      "checked_at": "2026-11-18T22:24:02.628810+00:00",
+      "runs": 20,
+      "passed": 20,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 20,
+        "passed": 20,
+        "failures": []
+      }
+    },
+    "runs/m3-final-agent-20261118-luna6/r2/core": {
+      "kind": "core",
+      "checked_at": "2026-11-18T22:24:02.876733+00:00",
+      "runs": 64,
+      "passed": 64,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 64,
+        "passed": 64,
+        "failures": []
+      }
+    },
+    "runs/m3-final-agent-20261118-luna6/r2/selection": {
+      "kind": "selection",
+      "checked_at": "2026-11-18T22:24:02.942929+00:00",
+      "runs": 12,
+      "passed": 12,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 12,
+        "passed": 12,
+        "failures": []
+      }
+    },
+    "runs/m3-final-agent-20261118-luna6/r3/m2": {
+      "kind": "m2",
+      "checked_at": "2026-11-18T22:24:03.450707+00:00",
+      "runs": 20,
+      "passed": 20,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 20,
+        "passed": 20,
+        "failures": []
+      }
+    },
+    "runs/m3-final-agent-20261118-luna6/r3/core": {
+      "kind": "core",
+      "checked_at": "2026-11-18T22:24:03.574587+00:00",
+      "runs": 64,
+      "passed": 64,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 64,
+        "passed": 64,
+        "failures": []
+      }
+    },
+    "runs/m3-final-agent-20261118-luna6/r3/selection": {
+      "kind": "selection",
+      "checked_at": "2026-11-18T22:24:03.693584+00:00",
+      "runs": 12,
+      "passed": 12,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 12,
+        "passed": 12,
+        "failures": []
+      }
+    },
+    "runs/m3-final-pyagent_react-20261118-luna6/r1/m2": {
+      "kind": "m2",
+      "checked_at": "2026-11-18T22:24:04.488042+00:00",
+      "runs": 20,
+      "passed": 11,
+      "intermediate_argument_only_flags": 9,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 20,
+        "passed": 11,
+        "failures": [
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T01\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T04\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T09\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T10\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T14\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T15\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T16\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T18\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T20\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          }
+        ]
+      }
+    },
+    "runs/m3-final-pyagent_react-20261118-luna6/r1/core": {
+      "kind": "core",
+      "checked_at": "2026-11-18T22:24:04.686172+00:00",
+      "runs": 64,
+      "passed": 64,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 64,
+        "passed": 64,
+        "failures": []
+      }
+    },
+    "runs/m3-final-pyagent_react-20261118-luna6/r1/selection": {
+      "kind": "selection",
+      "checked_at": "2026-11-18T22:24:04.799169+00:00",
+      "runs": 12,
+      "passed": 12,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 12,
+        "passed": 12,
+        "failures": []
+      }
+    },
+    "runs/m3-final-pyagent_react-20261118-luna6/r2/m2": {
+      "kind": "m2",
+      "checked_at": "2026-11-18T22:24:05.358002+00:00",
+      "runs": 20,
+      "passed": 6,
+      "intermediate_argument_only_flags": 14,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 20,
+        "passed": 6,
+        "failures": [
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T01\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T03\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T04\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T05\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T07\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T08\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T09\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T10\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T11\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T13\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T15\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T16\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T19\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T20\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          }
+        ]
+      }
+    },
+    "runs/m3-final-pyagent_react-20261118-luna6/r2/core": {
+      "kind": "core",
+      "checked_at": "2026-11-18T22:24:05.525000+00:00",
+      "runs": 64,
+      "passed": 64,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 64,
+        "passed": 64,
+        "failures": []
+      }
+    },
+    "runs/m3-final-pyagent_react-20261118-luna6/r2/selection": {
+      "kind": "selection",
+      "checked_at": "2026-11-18T22:24:05.604997+00:00",
+      "runs": 12,
+      "passed": 12,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 12,
+        "passed": 12,
+        "failures": []
+      }
+    },
+    "runs/m3-final-pyagent_react-20261118-luna6/r3/m2": {
+      "kind": "m2",
+      "checked_at": "2026-11-18T22:24:06.154490+00:00",
+      "runs": 20,
+      "passed": 9,
+      "intermediate_argument_only_flags": 11,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 20,
+        "passed": 9,
+        "failures": [
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r3\\m2\\pyagent_react-r1\\T02\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r3\\m2\\pyagent_react-r1\\T04\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r3\\m2\\pyagent_react-r1\\T06\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r3\\m2\\pyagent_react-r1\\T08\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r3\\m2\\pyagent_react-r1\\T09\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r3\\m2\\pyagent_react-r1\\T10\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r3\\m2\\pyagent_react-r1\\T11\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r3\\m2\\pyagent_react-r1\\T13\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r3\\m2\\pyagent_react-r1\\T14\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r3\\m2\\pyagent_react-r1\\T15\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          },
+          {
+            "trace": "runs\\m3-final-pyagent_react-20261118-luna6\\r3\\m2\\pyagent_react-r1\\T20\\trace.jsonl",
+            "checks": {
+              "sequence": true,
+              "terminal_result": true,
+              "reading_budget": true,
+              "valid_arguments": false,
+              "call_accounting": true,
+              "response_accounting": true,
+              "stop_recorded": true,
+              "variant_labels": true,
+              "pyagent_accepted_review": true,
+              "pyagent_decision_budget": true
+            },
+            "all_checks_pass": false
+          }
+        ]
+      }
+    },
+    "runs/m3-final-deliberative_review-20261118-luna6/r1/m2": {
+      "kind": "m2",
+      "checked_at": "2026-11-18T22:24:06.550856+00:00",
+      "runs": 20,
+      "passed": 20,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 20,
+        "passed": 20,
+        "failures": []
+      }
+    },
+    "runs/m3-final-deliberative_review-20261118-luna6/r1/core": {
+      "kind": "core",
+      "checked_at": "2026-11-18T22:24:06.785771+00:00",
+      "runs": 64,
+      "passed": 64,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 64,
+        "passed": 64,
+        "failures": []
+      }
+    },
+    "runs/m3-final-deliberative_review-20261118-luna6/r1/selection": {
+      "kind": "selection",
+      "checked_at": "2026-11-18T22:24:06.981786+00:00",
+      "runs": 12,
+      "passed": 12,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 12,
+        "passed": 12,
+        "failures": []
+      }
+    },
+    "runs/m3-final-deliberative_review-20261118-luna6/r2/m2": {
+      "kind": "m2",
+      "checked_at": "2026-11-18T22:24:07.496299+00:00",
+      "runs": 20,
+      "passed": 20,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 20,
+        "passed": 20,
+        "failures": []
+      }
+    },
+    "runs/m3-final-baseline-recovery-20261118-luna6/r1/m2": {
+      "kind": "m2",
+      "checked_at": "2026-11-18T22:24:07.587642+00:00",
+      "runs": 20,
+      "passed": 20,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 20,
+        "passed": 20,
+        "failures": []
+      }
+    },
+    "runs/m3-final-baseline-recovery-20261118-luna6/r1/core": {
+      "kind": "core",
+      "checked_at": "2026-11-18T22:24:07.707127+00:00",
+      "runs": 64,
+      "passed": 64,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 64,
+        "passed": 64,
+        "failures": []
+      }
+    },
+    "runs/m3-final-baseline-recovery-20261118-luna6/r1/selection": {
+      "kind": "selection",
+      "checked_at": "2026-11-18T22:24:07.740130+00:00",
+      "runs": 12,
+      "passed": 12,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 12,
+        "passed": 12,
+        "failures": []
+      }
+    },
+    "runs/m3-final-baseline-recovery-20261118-luna6/r2/m2": {
+      "kind": "m2",
+      "checked_at": "2026-11-18T22:24:07.790133+00:00",
+      "runs": 20,
+      "passed": 20,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 20,
+        "passed": 20,
+        "failures": []
+      }
+    },
+    "runs/m3-final-extra-r4-20261118-luna6/r4/core": {
+      "kind": "core",
+      "checked_at": "2026-11-18T22:24:08.569434+00:00",
+      "runs": 256,
+      "passed": 256,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 256,
+        "passed": 256,
+        "failures": []
+      }
+    },
+    "runs/m3-final-extra-r5-20261118-luna6/r5/core": {
+      "kind": "core",
+      "checked_at": "2026-11-18T22:24:09.162794+00:00",
+      "runs": 256,
+      "passed": 256,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 256,
+        "passed": 256,
+        "failures": []
+      }
+    },
+    "runs/m3-final-pyagent_react-20261118-luna6/r3/core": {
+      "kind": "core",
+      "checked_at": "2026-11-18T22:25:33.177756+00:00",
+      "runs": 64,
+      "passed": 64,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 64,
+        "passed": 64,
+        "failures": []
+      }
+    },
+    "runs/m3-final-baseline-recovery-20261118-luna6/r2/core": {
+      "kind": "core",
+      "checked_at": "2026-11-18T22:25:33.265081+00:00",
+      "runs": 64,
+      "passed": 64,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 64,
+        "passed": 64,
+        "failures": []
+      }
+    },
+    "runs/m3-final-baseline-recovery-20261118-luna6/r2/selection": {
+      "kind": "selection",
+      "checked_at": "2026-11-18T22:25:33.272330+00:00",
+      "runs": 12,
+      "passed": 12,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 12,
+        "passed": 12,
+        "failures": []
+      }
+    },
+    "runs/m3-final-extra-r5-20261118-luna6/r5/selection": {
+      "kind": "selection",
+      "checked_at": "2026-11-18T22:25:33.431780+00:00",
+      "runs": 48,
+      "passed": 48,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 48,
+        "passed": 48,
+        "failures": []
+      }
+    },
+    "runs/m3-final-pyagent_react-20261118-luna6/r3/selection": {
+      "kind": "selection",
+      "checked_at": "2026-11-18T22:27:05.658286+00:00",
+      "runs": 12,
+      "passed": 12,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 12,
+        "passed": 12,
+        "failures": []
+      }
+    },
+    "runs/m3-final-deliberative_review-20261118-luna6/r2/core": {
+      "kind": "core",
+      "checked_at": "2026-11-18T22:27:05.841385+00:00",
+      "runs": 64,
+      "passed": 64,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 64,
+        "passed": 64,
+        "failures": []
+      }
+    },
+    "runs/m3-final-baseline-recovery-20261118-luna6/r3/m2": {
+      "kind": "m2",
+      "checked_at": "2026-11-18T22:27:05.902671+00:00",
+      "runs": 20,
+      "passed": 20,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 20,
+        "passed": 20,
+        "failures": []
+      }
+    },
+    "runs/m3-final-baseline-recovery-20261118-luna6/r3/core": {
+      "kind": "core",
+      "checked_at": "2026-11-18T22:27:05.979859+00:00",
+      "runs": 64,
+      "passed": 64,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 64,
+        "passed": 64,
+        "failures": []
+      }
+    },
+    "runs/m3-final-baseline-recovery-20261118-luna6/r3/selection": {
+      "kind": "selection",
+      "checked_at": "2026-11-18T22:27:06.014857+00:00",
+      "runs": 12,
+      "passed": 12,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 12,
+        "passed": 12,
+        "failures": []
+      }
+    },
+    "runs/m3-final-extra-r4-20261118-luna6/r4/selection": {
+      "kind": "selection",
+      "checked_at": "2026-11-18T22:27:06.159859+00:00",
+      "runs": 48,
+      "passed": 48,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 48,
+        "passed": 48,
+        "failures": []
+      }
+    }
   },
-  "runs/m3-deliberative-20261118-luna6/r1/m2": {
-    "runs": 20,
-    "passed": 20,
-    "failures": []
-  },
-  "runs/m3-t17-native-r10": {
-    "runs": 10,
-    "passed": 10,
-    "failures": []
-  }
+  "pending_stages": [
+    {
+      "stage": "runs/m3-final-deliberative_review-20261118-luna6/r2/selection",
+      "reason": "full terminal attempt grid not available"
+    },
+    {
+      "stage": "runs/m3-final-deliberative_review-20261118-luna6/r3/m2",
+      "reason": "full terminal attempt grid not available"
+    },
+    {
+      "stage": "runs/m3-final-deliberative_review-20261118-luna6/r3/core",
+      "reason": "full terminal attempt grid not available"
+    },
+    {
+      "stage": "runs/m3-final-deliberative_review-20261118-luna6/r3/selection",
+      "reason": "full terminal attempt grid not available"
+    }
+  ],
+  "validation_errors": []
 }
