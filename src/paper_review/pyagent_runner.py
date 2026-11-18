@@ -15,6 +15,7 @@ from pyagent_patterns.advanced import ReAct
 from pyagent_patterns.base import Agent, Role
 
 from .agent_tools import PaperEvidence
+from .finalization import decision_cap, force_submit
 from .prompts import AGENT_INSTRUCTIONS, PYAGENT_PROTOCOL, PYAGENT_PROTOCOL_VERSION
 from .schema import TOOLS
 
@@ -161,13 +162,14 @@ class ReviewSession:
             return self.observation({"error": "tool_exception", **safe_error(exc)})
 
     async def run(self):
+        max_steps = decision_cap(self.config)
         tools = {name: (lambda payload, tool_name=name: self.invoke(tool_name, payload))
                  for name in self.schemas}
         pattern = PaperReviewReAct(agent=Agent("paper-review-v2", self.model), tools=tools,
-                                  max_steps=self.config.max_reads + 3,
+                                  max_steps=max_steps,
                                   finish_token=ENGINE_FINISH_TOKEN)
         self.trace.write("harness_start", harness="pyagent-patterns.ReAct",
-                         max_steps=self.config.max_reads + 3,
+                         max_steps=max_steps,
                          protocol=PYAGENT_PROTOCOL_VERSION)
         stop = "step_limit_or_engine_finish"
         try:
@@ -175,9 +177,14 @@ class ReviewSession:
         except _ReviewAccepted:
             stop = "accepted_before_next_model_request"
         if self.accepted_review is None:
+            if self.step >= max_steps:
+                review, trajectory = force_submit(self.paper, self.calls, self.config,
+                                                  self.trace, self.evidence,
+                                                  contract=self.contract)
+                self.trace.write("harness_stop", reason="forced_finalization",
+                                 accepted=review is not None)
+                return review, trajectory
             self.trace.write("harness_stop", reason=stop, accepted=False)
-            if self.step >= self.config.max_reads + 3:
-                raise RuntimeError("model_decision_budget_exhausted")
             raise RuntimeError("pyagent_finished_without_accepted_review")
         self.trace.write("harness_stop", reason=(stop if stop != "step_limit_or_engine_finish"
                                                  else "accepted_on_last_step"), accepted=True)

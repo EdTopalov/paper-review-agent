@@ -75,8 +75,18 @@ criticism, and revision). Scripted checks cover phase order, budget limits,
 source provenance, and recovery through the shared entry point.
 The full-paper one-call `baseline` is a fourth comparison method.
 The [M3 report](milestones/M3.md) and [experiment protocol](milestones/M3-protocol.md)
-define hypotheses, repetitions, model blocks, human quality assessment, and limits.
+define hypotheses, repetitions, human quality assessment, and limits.
+The [short results report and accuracy/cost plot](milestones/M3-results/README.md)
+summarize the repeated comparison; the [M2 appendix](milestones/M3-results/M2.md)
+keeps full review metrics and per-paper evidence separate.
 Select each implementation through the same `paper-review` entry point.
+
+Reading agents have `2 * (max_reads + 3)` ordinary decisions: 16 with the default
+five reading actions, or 46 with the benchmark selection cap of 20. Reading caps
+are unchanged. Ordinary submissions require matching, observed quotations. At
+the decision cap, one final call uses only observed fragments, without tools or
+retries: a non-null public-schema answer is accepted with citation diagnostics;
+null is a failure. This gives at most 17 or 47 decisions including finalization.
 
 Install V2 in the activated environment, then select it with `--variant`:
 
@@ -113,8 +123,8 @@ paper-review benchmark-run --plan runs/scratch/benchmark-plan.json --out runs/be
 `benchmark-run` validates only unless `--execute` is explicitly supplied. The
 [benchmark protocol](milestones/benchmark-protocol.md) defines separate reading
 budgets, repetitions, statistics, and saved plans. This suite supplements the
-unchanged M2 comparison. Repeated comparisons are being collected in separate
-model blocks. These targets do not provide gold ratings for overall paper merit
+unchanged M2 comparison. The final comparison uses `gpt-6-luna`, three repetitions,
+and eight workers per method. These targets do not provide gold ratings for overall paper merit
 or human reading-club preference.
 
 ## Human assessment and paper selection

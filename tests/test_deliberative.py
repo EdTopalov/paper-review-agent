@@ -128,7 +128,7 @@ def test_source_archive_upgrades_identical_partial_fragment_without_changing_id(
 
 def test_every_role_context_reports_budget_remaining_after_its_own_decision(tmp_path):
     _, stats, client, _ = run(tmp_path, [output(PLAN), done_reading(), output(draft()), output(critic())])
-    budget = Config().max_reads + 3
+    budget = 2 * (Config().max_reads + 3)
     assert stats["decision_steps"] == len(client.requests) == 4
     assert [context(client, index)["decisions_remaining"] for index in range(len(client.requests))] == [
         budget - step for step in range(1, len(client.requests) + 1)]
@@ -165,6 +165,8 @@ def test_larger_reading_budget_expands_exploration_and_preserves_reservations(tm
     archive = context(client, 22)["observed_sources"]
     assert [(row["source_id"], row["page"]) for row in archive] == [("E1", 1), ("E2", 2), ("E3", 3)]
     assert len(archive) == 3  # Repeated identical reads do not invent new sources.
+    session = DeliberativeSession(Paper.load(FIXTURE), None, config, None, None)
+    assert session.max_decisions == 46
 
 
 @pytest.mark.parametrize("tool", ["read_pages", "search_paper"])
@@ -291,23 +293,67 @@ def test_invalid_plan_uses_disclosed_unknown_check_without_extra_planning_call(t
     assert any(event.get("code") == "invalid_plan_checks" for event in events)
 
 
-def test_budget_exhaustion_preserves_all_failed_attempts_and_stops(tmp_path):
+def test_doubled_cap_adds_one_final_call_accepting_nonmatching_quotes(tmp_path):
     bad = deepcopy(OPENING_REVIEW)
     bad["observations"][0]["quote"] = "Not in the fixture"
     paper = Paper.load(FIXTURE)
     config = Config(max_reads=1)
-    client = Client([output(PLAN), output(draft(bad)), output(critic()), output(draft(bad))])
+    client = Client([output(PLAN), output(draft(bad)), output(critic())]
+                    + [output(draft(bad)) for _ in range(5)] + [output({"answer": bad})])
     trace = Trace(tmp_path / "trace.jsonl")
     calls = ModelCalls(client, config, trace)
     try:
-        with pytest.raises(RuntimeError, match="model_decision_budget_exhausted"):
-            run_deliberative(paper, calls, config, trace)
+        review, trajectory = run_deliberative(paper, calls, config, trace)
     finally:
         trace.close()
-    assert calls.stats["api_calls"] == calls.stats["decision_steps"] == config.max_reads + 3 == 4
-    assert calls.stats["rejected_submissions"] == 2
+    assert review == bad
+    assert calls.stats["api_calls"] == calls.stats["decision_steps"] == 2 * (config.max_reads + 3) + 1 == 9
+    assert trajectory["forced_final_submission"] is True
+    assert calls.stats["rejected_submissions"] == 6
     assert calls.stats["reading_actions"] == 0
-    assert read_events(tmp_path / "trace.jsonl")[-1]["accepted"] is False
+    events = read_events(tmp_path / "trace.jsonl")
+    assert events[-1]["accepted"] is True and events[-1]["forced"] is True
+    assert len([event for event in events if event["event"] == "forced_finalization"]) == 1
+    assert len(client.requests) == 9
+
+
+def test_invalid_internal_ledger_does_not_gate_forced_public_answer(tmp_path):
+    invalid = draft(sources=("UNOBSERVED_LEDGER_SOURCE",))
+    responses = [output(PLAN), output(invalid), output(critic("revise"))]
+    responses += [output(invalid) for _ in range(5)]
+    responses += [output({"answer": OPENING_REVIEW})]
+    (review, trajectory), stats, client, events = run(tmp_path, responses, config=Config(max_reads=1))
+    assert review == OPENING_REVIEW
+    assert trajectory["forced_final_submission"] is True
+    assert stats["api_calls"] == stats["decision_steps"] == 9
+    assert sum(event.get("code") == "unobserved_ledger_reference" for event in events) == 6
+    schema = client.requests[-1]["text"]["format"]["schema"]
+    assert set(schema["properties"]) == {"answer"}
+    assert "ledger" not in schema["properties"]
+
+
+def test_public_entry_point_keeps_forced_completion_separate_from_citations(tmp_path):
+    bad = deepcopy(OPENING_REVIEW)
+    bad["observations"][0]["quote"] = "Not in the fixture"
+    client = Client([output(PLAN), output(draft(bad)), output(critic())]
+                    + [output(draft(bad)) for _ in range(5)] + [output({"answer": bad})])
+    result = run_review(FIXTURE, tmp_path / "forced-review", Config(max_reads=1),
+                        "fixture", variant="deliberative_review", client=client)
+    assert result["status"] == "ok" and result["review"] == bad
+    assert result["forced_final_submission"] is True
+    assert result["decision_steps"] == result["api_calls"] == 9
+    assert result["citation_checks"][0]["citation_verified"] is False
+
+
+def test_null_forced_answer_remains_failure_after_one_final_call(tmp_path):
+    invalid = draft(sources=("UNOBSERVED_LEDGER_SOURCE",))
+    client = Client([output(PLAN), output(invalid), output(critic("revise"))]
+                    + [output(invalid) for _ in range(5)] + [output({"answer": None})])
+    result = run_review(FIXTURE, tmp_path / "null-final", Config(max_reads=1),
+                        "fixture", variant="deliberative_review", client=client)
+    assert result["status"] == "error" and result.get("review") is None
+    assert result["error"]["code"] == "final_answer_none"
+    assert result["api_calls"] == result["decision_steps"] == len(client.requests) == 9
 
 
 def test_infeasible_budget_is_rejected_before_provider_calls(tmp_path):

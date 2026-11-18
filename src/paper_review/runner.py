@@ -23,6 +23,7 @@ from .prompts import (AGENT_INSTRUCTIONS, PROMPT_VERSION, PYAGENT_PROMPT_VERSION
 from .schema import REVIEW_SCHEMA, TOOLS
 from .trace import Trace
 from .reporting import render_run
+from .finalization import BUDGET_POLICY, decision_cap, force_submit
 
 
 # Standard text-token USD / 1M; current Luna rates checked 2026-11-18,
@@ -46,7 +47,7 @@ VARIANTS = ("agent", "pyagent_react", "deliberative_review", "baseline")
 def variant_metadata(variant):
     if variant not in VARIANTS:
         raise ValueError(f"Unknown variant: {variant}")
-    details = {"prompt_version": PROMPT_VERSION, "harness": "project-native"}
+    details = {"prompt_version": "m3-native-forced-final-v1", "harness": "project-native"}
     if variant == "pyagent_react":
         try:
             version = importlib.metadata.version("pyagent-patterns")
@@ -60,7 +61,9 @@ def variant_metadata(variant):
         details.update(prompt_version=DELIBERATIVE_PROMPT_VERSION, harness="project-deliberative",
                        context_policy=DELIBERATIVE_POLICY)
     elif variant == "baseline":
-        details["harness"] = "one-shot"
+        details.update(prompt_version=PROMPT_VERSION, harness="one-shot")
+    if variant != "baseline":
+        details["budget_policy"] = BUDGET_POLICY
     return details
 
 
@@ -91,13 +94,14 @@ class ModelCalls:
                       "estimated_cost_usd": 0.0 if config.model in PRICES else None,
                       "billing_uncertain": False}
 
-    def call(self, **request):
+    def call(self, *, retries=None, **request):
         config = self.config
+        retry_limit = config.retries if retries is None else retries
         request = {"model": config.model, "store": False, "service_tier": "default",
                    "max_output_tokens": config.max_output_tokens, **request}
         if config.model.startswith(("gpt-5", "gpt-6")):
             request["reasoning"] = {"effort": config.reasoning_effort}
-        for attempt in range(config.retries + 1):
+        for attempt in range(retry_limit + 1):
             self.stats["api_calls"] += 1
             self.trace.write("model_request", attempt=attempt + 1, request=request)
             start = time.perf_counter()
@@ -111,7 +115,7 @@ class ModelCalls:
                     self.stats["billing_uncertain"] = True
                 retryable = error["status_code"] in (408, 409, 429, 500, 502, 503, 504) \
                     or isinstance(exc, APIConnectionError)
-                if not retryable or attempt == config.retries:
+                if not retryable or attempt == retry_limit:
                     raise
                 self.trace.write("retry", next_attempt=attempt + 2, delay_seconds=attempt + 1)
                 time.sleep(attempt + 1)
@@ -155,7 +159,9 @@ def agent(paper, calls, config, trace, *, contract=None):
     evidence = PaperEvidence(paper)
     instructions = contract.instructions if contract else AGENT_INSTRUCTIONS.format(max_reads=config.max_reads)
     task_tools = contract.tools if contract else TOOLS
-    for step in range(1, config.max_reads + 4):
+    instructions += (f"\nThe active decision policy permits {decision_cap(config)} ordinary model "
+                     "decisions, followed by one mandatory final-answer request if needed.")
+    for step in range(1, decision_cap(config) + 1):
         calls.stats["decision_steps"] = step
         available = task_tools if reads < config.max_reads else [task_tools[-1]]
         if reads == config.max_reads:
@@ -214,7 +220,7 @@ def agent(paper, calls, config, trace, *, contract=None):
             trace.write("tool_observation", step=step, call_id=action.call_id, observation=observation)
             history.append({"type": "function_call_output", "call_id": action.call_id,
                             "output": json.dumps(observation, ensure_ascii=False)})
-    raise RuntimeError("model_decision_budget_exhausted")
+    return force_submit(paper, calls, config, trace, evidence, contract=contract)
 
 
 def baseline(paper, calls, trace, *, contract=None):
@@ -281,7 +287,7 @@ def run_review(paper_path, out, config, task_id, variant="agent", client=None, m
         # Only our own fixed error codes are safe to include verbatim.
         if type(exc) in (ValueError, RuntimeError) and str(exc) in {
             "paper_has_no_extractable_text", "paper_exceeds_documented_input_limit",
-            "model_decision_budget_exhausted",
+            "model_decision_budget_exhausted", "final_answer_none",
             "invalid_review_content",
             "deliberative_infeasible_budget",
             "pyagent_dependency_missing", "pyagent_finished_without_accepted_review",

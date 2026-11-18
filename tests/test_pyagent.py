@@ -207,18 +207,25 @@ def test_reading_budget_is_enforced_even_if_the_model_ignores_it(tmp_path):
 def test_acceptance_on_the_last_step_does_not_require_a_finish_turn(tmp_path):
     bad = deepcopy(OPENING_REVIEW)
     bad["observations"][0]["quote"] = "Invented quotation."
-    result, _, events = run(tmp_path, [submit(bad), submit(bad), submit()], Config(max_reads=0))
-    assert result["status"] == "ok" and result["api_calls"] == 3
+    result, _, events = run(tmp_path, [submit(bad)] * 5 + [submit()], Config(max_reads=0))
+    assert result["status"] == "ok" and result["api_calls"] == 6
     assert next(e for e in events if e["event"] == "harness_stop")["reason"] == "accepted_on_last_step"
 
 
-def test_harness_step_exhaustion_is_not_a_success(tmp_path):
+@pytest.mark.parametrize("max_reads,cap", [(0, 6), (5, 16), (20, 46)])
+def test_harness_cap_forces_exactly_one_final_call_with_diagnostic_citations(tmp_path, max_reads, cap):
     bad = deepcopy(OPENING_REVIEW)
     bad["observations"][0]["quote"] = "Invented quotation."
-    result, _, _ = run(tmp_path, [submit(bad)] * 8)
-    assert result["status"] == "error" and result["review"] is None
-    assert result["error"]["code"] == "model_decision_budget_exhausted"
-    assert result["api_calls"] == result["rejected_submissions"] == 8
+    result, client, events = run(tmp_path, [submit(bad)] * cap
+                                 + [Response(text=json.dumps({"answer": bad}))], Config(max_reads=max_reads))
+    assert result["status"] == "ok" and result["review"] == bad
+    assert result["api_calls"] == result["decision_steps"] == cap + 1
+    assert result["rejected_submissions"] == cap
+    assert result["forced_final_submission"] is True
+    assert result["citation_checks"][0]["citation_verified"] is False
+    assert len(client.requests) == cap + 1
+    assert next(e for e in events if e["event"] == "harness_start")["max_steps"] == cap
+    assert next(e for e in events if e["event"] == "harness_stop")["reason"] == "forced_finalization"
     assert check_experiment(tmp_path / "dev")["passed"] == 1
 
 
@@ -227,6 +234,14 @@ def test_engine_finish_marker_cannot_bypass_submit_review(tmp_path):
     assert result["status"] == "error" and result["review"] is None
     assert result["error"]["code"] == "pyagent_finished_without_accepted_review"
     assert result["submission_attempts"] == 0
+
+
+@pytest.mark.parametrize("final_text", ["", '{"answer": null}'])
+def test_missing_forced_answer_fails_without_another_request(tmp_path, final_text):
+    result, client, _ = run(tmp_path, [Response(text="No action.")] * 6
+                             + [Response(text=final_text)], Config(max_reads=0))
+    assert result["status"] == "error" and result["review"] is None
+    assert result["api_calls"] == result["decision_steps"] == len(client.requests) == 7
 
 
 @pytest.mark.parametrize("content", ["FINISH: a review", "Here is my answer", "Action: missing_tool({})"])
@@ -261,16 +276,17 @@ def test_sync_entry_point_also_works_inside_a_notebook_event_loop(tmp_path):
 
 
 def test_concurrent_tasks_do_not_share_observed_evidence(tmp_path):
-    clients = [Client([submit()]), Client([submit(REVIEW)] * 8)]
+    clients = [Client([submit()]), Client([submit(REVIEW)] * 16
+                                         + [Response(text=json.dumps({"answer": REVIEW}))])]
     with ThreadPoolExecutor(max_workers=2) as pool:
         futures = [pool.submit(run_review, FIXTURE, tmp_path / f"run-{i}",
                                Config(), f"dev-{i}", "pyagent_react", client)
                    for i, client in enumerate(clients)]
         results = [future.result() for future in futures]
     assert results[0]["status"] == "ok"
-    assert results[1]["status"] == "error"
-    assert results[1]["error"]["code"] == "model_decision_budget_exhausted"
+    assert results[1]["status"] == "ok" and results[1]["forced_final_submission"]
     assert all(not c["observed"] for c in results[1]["first_submission_checks"])
+    assert results[1]["evidence_observed"] == [False, False]
 
 
 def test_three_variant_evaluation_archive_reports_and_resume(tmp_path, monkeypatch):

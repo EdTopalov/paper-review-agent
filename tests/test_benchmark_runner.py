@@ -140,11 +140,13 @@ def test_failed_model_attempts_are_retained_and_costed(tmp_path):
     root, _ = frozen_fixture(tmp_path)
     plan = make_plan(root, "dev", variants=["agent"], repeats=1, config=Config(max_reads=0), workers=1)
     out = tmp_path / "scripted-failure"
-    result = run_plan(plan, out, execute=True, client_factory=lambda: Client([Response(), Response(), Response()]))
+    result = run_plan(plan, out, execute=True,
+                      client_factory=lambda: Client([Response() for _ in range(6)]
+                                                    + [Response(text='{"answer": null}')]))
     assert result["runs"] == 1 and result["completed"] == 0
     record = json.loads((out / "records.jsonl").read_text(encoding="utf-8"))
-    assert record["error"]["code"] == "model_decision_budget_exhausted"
-    assert record["api_calls"] == 3 and record["estimated_cost_usd"] > 0
+    assert record["error"]["code"] == "final_answer_none"
+    assert record["api_calls"] == 7 and record["estimated_cost_usd"] > 0
     progress = json.loads((out / "progress.json").read_text(encoding="utf-8"))
     assert progress["status"] == "finished"
     assert progress["total"] == progress["completed"] == progress["failed"] == 1

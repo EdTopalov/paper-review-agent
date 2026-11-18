@@ -1,146 +1,70 @@
 # Repeated paper-review comparison protocol
 
-The separate [evidence-assessment benchmark](benchmark-protocol.md) adds frozen
-externally labelled and controlled tasks with no new human annotation. Its
-offline preparation is complete; primary-model repetitions of the existing
-methods are running. It supplements
-this unchanged M2 comparison. The human assessment section below remains an
-optional, stronger evaluation path for complete generated reviews.
+The comparison keeps all 20 frozen papers in `data/eval/tasks.jsonl`, the
+`m2-v1` review rubric, and the M2 citation checker. The separate
+[evidence-assessment benchmark](benchmark-protocol.md) tests content judgments.
 
-Status: registered experiment plan. Full comparative runs and human annotation
-have not been completed for the deliberative variant. Its controller and
-scripted checks are implemented. Development smoke tests
-verify execution and are excluded from benchmark results. The deliberative
-implementation was committed as `10be7a3` before its development and test calls.
-The existing-method block uses an earlier isolated source snapshot; differences
-are confined to final deliberative-controller changes and phase report rendering.
-Historical M2 and
-PyAgent outcomes informed the hypotheses; this is not an unseen-dataset study.
+| Method | Mechanism and hypothesis | Source |
+|---|---|---|
+| `agent` | Native function-calling ReAct with full interaction history; reference condition. | [M2](M2.md), [ReAct](https://arxiv.org/abs/2210.03629). |
+| `pyagent_react` | Imported ReAct harness with text actions; preserve verified completion without increasing mean cost. Inspect action errors and citation repair. | [PyAgent hypothesis and source](../variants/pyagent_react/README.md). |
+| `deliberative_review` | Plan, investigate, draft, criticize in a fresh context, then revise; reduce missed counterevidence and scope errors. Inspect challenged claims and targeted reads. | [Hypothesis and sources](../variants/deliberative_review/README.md). |
+| `baseline` | One full-paper structured-output call; reference for content accuracy and cost. | [M2](M2.md). |
 
-Collection uses round-by-round M2, benchmark core, and selection stages. The
-primary model targets five repeats, with existing methods and deliberative review
-in separate launch blocks. The secondary model targets three repeats of all
-methods. Completed repetitions are retained if collection stops early; actual
-counts and source hashes accompany the results. The larger five-repeat,
-two-model design below remains the original target rather than a completed claim.
+All methods use common task contracts; the three agents share evidence tools and
+citation acceptance. PyAgent changes the harness and action encoding together.
+The deliberative controller reserves decisions for planning and criticism.
 
-## Mechanisms and predictions
+The existing-method snapshot is based on `def61ec`; the deliberative controller
+and hypothesis were committed in `10be7a3`, before their repeated test runs.
+Each stage preserves evaluated source bytes in `source.zip` and records source/
+input hashes and configuration. Subsequent fixes require a new comparison.
 
-Three agent variants and one baseline share the frozen `m2-v1` assessment rubric,
-text snapshots, citation checker, model settings, and execution limits.
+## Configuration and reproduction
 
-| Method | Mechanism | Prediction and trace evidence | Source |
-|---|---|---|---|
-| `agent` | M2 native function-calling ReAct with complete interaction history. | Reference condition; repeated T17 outcomes test whether its citation-repair failure is recurrent. | [M2](M2.md), [ReAct](https://arxiv.org/abs/2210.03629). |
-| `pyagent_react` | Imported ReAct harness plus a text-action protocol. | Preserve verified completion without increasing mean cost; malformed actions may instead consume decisions. Inspect protocol errors and repair trajectories. | [Registered PyAgent hypothesis](../variants/pyagent_react/README.md), MIT dependency. |
-| `deliberative_review` | Enforced planning, investigation, draft, fresh-context criticism, and targeted revision under the common budget. | Reduce unsupported conclusions, missed counterevidence, and scope errors. Inspect obligations, observed sources, critic challenges, requested reads, and final changes; extra stages may reduce coverage or increase cost. | [Mechanism and hypothesis](../variants/deliberative_review/README.md). |
-| `baseline` | Full frozen paper in one structured-output call. | Fast reference for assessment quality and cost. It accepts reviews even when quotations fail verification. | [M2 baseline](M2.md). |
+The model is `gpt-6-luna`. The target is five repetitions per paper and method:
+400 M2 attempts. Reading agents allow five reading actions and eight decisions.
+All requests allow 4,000 output tokens, low reasoning, a 90-second timeout and one retry.
+The saved launch blocks use six workers for existing methods and four for the
+deliberative agent; actual completed repetitions are recorded in the results.
 
-PyAgent changes harness and action encoding together; results cannot isolate the
-framework from the protocol. Deliberative review changes the decision schedule
-and role contexts, while preserving the rubric, source tools, shared resource
-caps, and acceptance rule. Planning and criticism consume decisions otherwise
-available for reading or repair. A model change is a
-crossed experiment factor, not an additional agent architecture.
-
-## Frozen design
-
-- Inputs: all 20 tasks in `data/eval/tasks.jsonl`, unchanged. Run `paper-review verify`.
-- Primary model: `gpt-6-luna`. Secondary block: `gpt-5.6-luna`. Both are available
-  through the configured provider and have documented token rates. Aliases can
-  drift; retain request/response model IDs, timestamps, source archive, and hashes.
-- Five independent attempts per task, method, and model: 400 reviews per model,
-  800 total. These are planned runs, not an instruction to start them automatically.
-- Five reading actions; eight decisions; 4,000 output tokens per request; low
-  reasoning; 90-second timeout; one retry; six workers. Per-attempt limits match
-  M2; deliberative review reserves stages within those limits.
-- Each model uses a separate output directory. Seeded job shuffling mixes methods,
-  tasks, and repetitions within a model block to reduce fixed-order confounding.
-  Model sampling remains stochastic; the scheduling seed does not seed the API.
-- Keep failures and their incurred costs. Preserve incomplete experiments; do not
-  delete failed outcomes or rerun only unsuccessful cells to improve scores.
-- Freeze the implementation before benchmark collection. A correctness fix after
-  inspecting outcomes requires a new revision and fresh complete comparison.
-
-Run the following only when starting the full experiment, with the installed
-`requirements-m3.txt` environment and a configured `.env`:
+After [installation](../README.md#installation), install `requirements-m3.txt`
+and configure `.env`. This command runs a fresh complete comparison with paid API calls:
 
 ```shell
 paper-review verify
 paper-review eval --variants agent pyagent_react deliberative_review baseline --model gpt-6-luna --repeats 5 --workers 6 --max-reads 5 --max-output-tokens 4000 --timeout 90 --retries 1 --reasoning-effort low --order-seed 20261118 --out runs/m3-luna6-r5
-paper-review eval --variants agent pyagent_react deliberative_review baseline --model gpt-5.6-luna --repeats 5 --workers 6 --max-reads 5 --max-output-tokens 4000 --timeout 90 --retries 1 --reasoning-effort low --order-seed 20261119 --out runs/m3-luna56-r5
 paper-review check runs/m3-luna6-r5
-paper-review check runs/m3-luna56-r5
 ```
 
-Expected outputs: one `experiment.json`, `source.zip`, combined `README.md`, and
-400 `<method>-r<repeat>/<task>/trace.jsonl` files per model. Every event identifies
-its variant. The report contains per-attempt links and per-repeat statistics.
-Printed completion counts are measurements, not prescribed expected values.
+Expected output: `experiment.json`, `source.zip`, `progress.json`, `summary.json`,
+a combined `README.md`, and 400 `<variant>-r<repeat>/<task>/trace.jsonl` files with
+readable task reports. Every trace event identifies its variant.
 
-T17's F05 diagnostic adds ten native-agent repetitions on the primary model:
+The separate T17 diagnostic uses ten attempts and the same per-attempt limits:
 
 ```shell
-paper-review eval --variants agent --task-ids T17 --model gpt-6-luna --repeats 10 --workers 6 --out runs/m3-t17-native-r10
+paper-review eval --variants agent --task-ids T17 --model gpt-6-luna --repeats 10 --workers 4 --max-reads 5 --max-output-tokens 4000 --timeout 90 --retries 1 --reasoning-effort low --order-seed 20261118 --out runs/m3-t17-native-r10
 paper-review check runs/m3-t17-native-r10
 ```
 
-Report failures out of ten for this diagnostic separately from the five T17
-attempts in the main comparison. Classify each failure by actual trace events:
-repeated citation rejection, API error, malformed action, or another cause. The
-archived repair loop is evidence of a symptom; PDF hyphen handling remains a
-possible contributor, not an established general root cause.
+It writes ten traces under `agent-r<repeat>/T17/`. Report its failure count
+separately from the main comparison; the [failure map](failure-map.md) interprets the traces.
 
-## Measures and comparisons
+## Measures
 
-**Completion**: accepted reviews / all attempts. **Verified success**: completed
-reviews with every quotation verified / all attempts. This is the common M2
-mechanical measure, not assessment quality; agents enforce it at acceptance.
-Quote-level matching uses all returned observations as its denominator.
+Completion is accepted reviews divided by all attempts. Verified success adds
+verification of every citation. Per-repeat and per-paper results include decisions,
+reading/tool/API calls, input/output tokens, estimated USD and latency per attempt.
+Failures and retries retain their costs; missing paper scores remain missing.
 
-Report each repeat before pooling: completion and verified-success rates; mean
-decisions, reading actions, tool calls, API calls, input/output/cached tokens,
-estimated USD, and elapsed seconds per attempt. Costs include failed attempts
-and retries; human annotation and optional evidence-audit costs are separate.
-Token rates estimate provider charges and are not an invoice.
+For a paper with s verified successes in n repetitions, `pass^k` is
+`C(s,k)/C(n,k)`, averaged over papers: success in every one of k independent attempts.
+Report k=1..n, within-method score variation, and paired method differences with
+95% bootstrap intervals over papers, keeping each paper's repetitions together.
 
-Per task, report successes out of five and score sample standard deviation on
-completed reviews, with the number of available scores. Never impute a missing
-paper score as zero. For task i with s_i successes in n attempts, estimate
-`pass^k = mean_i(C(s_i,k) / C(n,k))` for k=1..n: success in **every** one of k
-independent attempts. This differs from pass@k (at least one success). It assumes
-stationary, independent attempts; a shared API backend may violate that assumption.
-
-Compare methods using paired task means, with 95% bootstrap intervals that
-resample papers while retaining their repeated attempts. These intervals describe
-variation over this convenience sample; they do not capture all provider drift
-or sampling bias. Compare between-method mean-score differences to repeated
-within-method score differences. A score shift is not evidence of better reviews.
-Do not treat 100 attempts as 100 independent papers or pool the two model blocks.
-
-## Assessment quality and rational selection
-
-Use the [human-label protocol](../data/quality/README.md): support, central evidence
-coverage, calibration, and reading-club usefulness, plus critical factual errors
-and observation-level judgments. Two independent readers label the same blinded
-reviews against the source. Initial balanced subset: T01, T03, T08, T13, T17,
-repetitions 1 and 2, all four methods, separately within each model (40 attempts
-per model). These cases include known diagnostic material; findings are a targeted
-audit, not a population-wide quality estimate. Expand to the full sample before
-making broad quality claims if the targeted audit is inconclusive.
-
-If the M2 evidence judge is rerun, retain exactly its `gpt-6-luna` model and
-`AUDIT_PROMPT` rubric in `audit.py`, and report agreement with human claim labels
-only where label definitions match. Do not silently introduce a new judge and
-call its scores directly comparable to M2. Empty human templates are not labels.
-
-M1's performance measure is defensible research and discussion value, supported
-by paper evidence, at acceptable cost and repeatability. Its planned MAE against
-human reference scores remains unavailable. Select by substantive human evidence
-first: compare critical errors and all-attempt adequate-review rates (all four
-dimensions at least 1, no critical error). If quality differences remain unresolved,
-report a Pareto set of quality, reliability, cost, and latency. Prefer the cheaper
-method only when evidence supports comparable quality and reliability; a
-non-significant difference alone does not demonstrate equivalence. Give pass^k
-for the eventual winner and state whether differences exceed within-method
-variation. No winner is established by the current smoke tests.
+The [M2 appendix](M3-results/M2.md) contains these measurements. Rational selection
+uses M1's evidence-backed research and discussion value, repeatability and cost;
+the [M3 report](M3.md) gives the choice using the new benchmark's content evidence.
+The [human-label protocol](../data/quality/README.md) is optional for complete-review
+quality. Any new evidence audit must retain the M2 judge and rubric and report label agreement.

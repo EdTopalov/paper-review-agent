@@ -1,189 +1,57 @@
-# Evidence-grounded assessment benchmark design
+# Evidence-assessment benchmark design
 
-Status: the initial suite is implemented in [data/benchmark/v1](../data/benchmark/v1/README.md).
-The [execution and scoring protocol](benchmark-protocol.md) records the actual
-scope, counts, metrics, and prepared plans. Primary-model repetitions of the
-existing methods are in progress. The design below explains its rationale and possible extensions;
-shortcut model ablations, oracle-evidence ablations, and rolling cross-paper
-memory remain future work.
+The benchmark tests whether an agent interprets paper evidence correctly and
+changes its judgment when decisive evidence changes. It supplements the frozen
+20-paper M2 comparison, whose completion and citation checks do not independently
+measure assessment quality. The [protocol](benchmark-protocol.md) specifies the
+frozen cases, common interfaces, budgets, and scoring.
 
-The design assumes little or no new human annotation. It supplements the frozen
-M2 sample; no existing task, snapshot, result, or rubric is replaced.
+## Why four tracks
 
-## What should improve
+| Track | Ability tested | Independent reference |
+|---|---|---|
+| [QASPER](https://huggingface.co/datasets/allenai/qasper) | Answer a scientific question and locate supporting evidence. | Existing practitioner answers and evidence paragraphs. |
+| [ReviewCritique](https://github.com/jiangshdd/ReviewCritique) | Distinguish reliable criticism from a deficient review segment. | Existing expert segment labels. |
+| [Controlled appraisal](../data/benchmark/v1/controlled/README.md) | Revise a bounded scientific verdict when one decisive fact changes. | Conclusions calculated from hypothetical study records before rendering the text. |
+| [Explicit-brief selection](../data/benchmark/v1/selection/README.md) | Compare candidates against eligibility requirements and preferences. | A deterministic policy, including abstention when no candidate qualifies. |
 
-The existing 20-paper comparison measures execution, citation matching, cost, and
-variation. It lacks independent targets for whether an assessment interprets the
-paper correctly. Repeating that comparison cannot supply those targets.
+Scientific questions test evidence acquisition and interpretation. ReviewCritique
+adds substantive assessment targets beyond quotation matching. Controlled pairs
+isolate sensitivity to decisive evidence; both members must be correct to earn
+pair credit. Selection adds comparative reasoning, larger candidate lists, and
+order diagnostics under an explicit club brief.
 
-The new benchmark should test three separable abilities:
+## Labels and attribution
 
-1. Find and interpret the evidence needed to answer a scientific question.
-2. Distinguish justified criticism from a substantive review error.
-3. Use retained evidence to make a comparative decision under explicit requirements.
+No new manual annotation is required. QASPER preserves multiple human references
+and follows the [pinned evaluator's answer normalization](https://github.com/allenai/qasper-led-baseline/blob/afd0fb96bf78ce8cd8157639c6f6a6995e4f9089/scripts/evaluator.py).
+ReviewCritique preserves expert labels and supplies unannotated original-review
+context. Controlled and selection targets come from code rather than an LLM
+judging its own generated answers. All tracks separate public inputs from
+reference answers, expert explanations, and oracle facts.
 
-These are measurable parts of reviewing. None alone establishes overall research
-merit or what a particular reading club would enjoy most. Numerical paper scores,
-acceptance decisions, citations, and a model's preferred paper are not gold labels
-for those broader constructs.
+QASPER's [attribution and CC BY 4.0 notice](../data/benchmark/v1/qasper/LICENSE.md)
+and ReviewCritique's [preserved upstream licence](../data/benchmark/v1/reviewcritique/LICENSE)
+apply to their respective subsets. ReviewCritique permits research benchmarking
+and restricts training and redistribution. Original hypothetical reports are
+CC0; [source metadata](../data/benchmark/v1/README.md#inputs-and-references)
+records pinned revisions, hashes, filtering, and transformations.
 
-## Externally labelled core
+## Grouped development and test sets
 
-| Source | Task | Primary automatic measures | Boundary |
-|---|---|---|---|
-| [QASPER](https://huggingface.co/datasets/allenai/qasper) | Full paper plus a scientific question; return an answer, answerability, and supporting evidence. | Official-style answer F1 and unique-block evidence F1, with yes/no and unanswerable outcomes reported separately. | Practitioner-labelled scientific reading, not holistic review quality. |
-| [ReviewCritique](https://github.com/jiangshdd/ReviewCritique) | Paper plus an existing review segment; judge whether the segment is deficient and identify its deficiency. | Macro-F1 and per-class precision/recall against expert labels; separate factual contradiction/misunderstanding from vague or out-of-scope criticism. | Labels apply to supplied review segments, not arbitrary new reviews or an exhaustive list of a paper's flaws. |
+The [frozen corpus](../data/benchmark/v1/README.md) has 26 development and 76 test
+cases. Source-paper title groups, controlled scientific families, and selection
+candidate sets remain within one split. Counterfactual pairs and candidate-order
+variants stay together. Development supports debugging and adjustments; its
+outcomes are excluded from test statistics. Repetitions and reordered copies
+measure variation without creating additional independent papers or studies.
 
-QASPER separates question writers, who saw a title and abstract, from answerers,
-who read the paper and selected evidence. Its annotators are NLP practitioners;
-the dataset card explicitly distinguishes them from expert researchers. Use the
-[official evaluation conventions](https://github.com/allenai/qasper-led-baseline)
-and preserve multiple answers rather than inventing a single reference score.
-An initial text-only slice can use extractive, yes/no, and unanswerable questions;
-free-form answers remain a separately reported, harder slice. Answer F1 is lexical
-overlap and can undercount valid paraphrases.
+## Scope
 
-ReviewCritique includes paper text and expert annotations of human and generated
-review segments. Remove headings and generic administrative material using a
-rule fixed before running agents. An expert label of an unreliable segment can
-mean vague or irrelevant criticism rather than factual falsity. Preserve that
-distinction; raw accuracy over a majority-reliable set can be misleading.
-
-Start with an approximately 40-case held-out core: 20 QASPER questions and 20
-substantive ReviewCritique segments, with at most two cases per source paper.
-Use a separate small development slice to validate adapters and scoring. These
-are acquisition targets, subject to the available class balance and evidence;
-report actual counts rather than filling missing classes with generated labels.
-Expand the number of source papers before increasing repetitions extensively.
-Twenty questions from ten papers provide ten paper clusters, not twenty
-independent scientific documents.
-
-This requires a common assessment-task interface for every architecture, such as
-`question -> answer + evidence` and `review segment -> verdict + explanation`.
-The same task contract, tools, evidence limits, and output schema must apply to
-native ReAct, PyAgent, deliberative review, and the full-text baseline. A shared task
-adapter is not a new agent variant. Existing free-form M2 reviews remain unchanged.
-
-## Controlled evidence sensitivity
-
-Add a small diagnostic set of paired research reports. Generate a structured
-study record first, calculate the target facts and conclusions in code, and only
-then render the report. An unconstrained model-written paper and its own model-
-written answer key would not provide an independent reference.
-
-| Pair changes | What the task can establish |
-|---|---|
-| A confidence interval includes zero versus lies wholly above zero, under the stated analysis. | Whether the reported interval supports the particular positive-effect claim. A nonsignificant result is not proof of no effect. |
-| Evaluation examples are independent versus were used during prompt tuning. | Whether the claimed independent evaluation is actually independent. |
-| Lower inference expense with or without a disclosed preparation expense that reverses total cost. | Whether the total-cost claim follows from the reported accounting. |
-| Evidence is restricted to English versus includes the languages named in the conclusion. | Whether the conclusion exceeds the demonstrated scope. |
-| All seeds are reported versus the headline describes the best seed as a typical outcome. | Whether the stated aggregation matches the evidence. |
-| A quantitative appendix resolves an apparent omission versus the omission remains. | Whether criticism changes when relevant counterevidence exists. |
-
-The last family directly addresses the M2 coverage failure. Include sound
-controls, honest negative findings, and legitimate scope boundaries: criticizing
-everything must score poorly. Ask for the bounded scientific conclusion or
-critique verdict, not an invented gold score for overall paper quality.
-
-An initial diagnostic can contain 12 held-out pairs plus a small development set.
-Keep both versions of a pair in the same split, and hold out report templates or
-study families where feasible. Otherwise models can memorize the expected label
-from a development counterpart. Vary wording, numeric ranges, and evidence
-locations; no title, filename, or synthetic-status cue should predict a label.
-Disclose hypothetical provenance consistently at task level and in metadata.
-
-Score ordinary verdict accuracy and **pair accuracy**: the proportion of pairs
-where both versions are correct. A changed answer alone is insufficient because
-both answers can be wrong. Add meaning-preserving variants, such as reordered
-sections, where the answer should remain unchanged. Report these as synthetic
-diagnostics, separately from externally labelled real-paper cases.
-
-## Selection and memory
-
-With no new preference labels, universal reading-club selection accuracy is
-unknown. A controlled selection task can instead have explicit requirements and
-known candidate facts. For example, a club looking for a method to reproduce
-under a specified resource limit can require a matching task, sufficient disclosed
-resources, and independently evaluated results. Another brief can explicitly seek
-a methodological failure worth discussing. The same candidate need not win both.
-
-Specify hard requirements separately from preferences. Use an acceptable-choice
-set when candidates tie, and include cases with no eligible candidate. The
-current pilot always selects one candidate; an abstention result would need to
-be added for those cases. Ground-truth eligibility and controlled preferences
-come from the task contract, not an automatic claim about scientific merit.
-
-Test 3, 6, and 9 candidates, balanced candidate orders, and early versus late
-decisive evidence. Include an early candidate that remains best and a later one
-that changes the decision. Report requirement violations, correct acceptable-set
-selection, retained decisive facts, order sensitivity, cost, and latency.
-Synthetic candidate families and their order variants remain in one split.
-
-The deliberative controller keeps evidence obligations and observed sources
-within a task, with separate planning and critic contexts. The real-paper
-selection pilot reviews papers independently and then submits all final reviews
-in one call; it does not yet test rolling cross-paper memory. To isolate that
-mechanism, compare all-review context with an explicit bounded evidence table or
-shortlist using the same frozen candidate reviews. Evaluate the full review-plus-
-selection pipeline separately to measure error propagation and total cost.
-Longer candidate lists alone do not establish that a memory mechanism helps.
-
-## Free-form reviews and judging
-
-Continue collecting ordinary reviews of real papers. A judge can assess their
-support, coverage, calibration, and usefulness, but those scores remain an
-automated proxy when new human judgments are unavailable. Validate the judge on
-held-out ReviewCritique labels and report its per-category mistakes. Success at
-segment classification does not validate its entire review-level rubric.
-
-Retain the M2 judge and rubric for the historical comparison. A different judge
-or rubric on the new suite must be reported as a separate evaluation. Public
-peer reviews can help locate candidate issues, but their absence is not evidence
-that a novel criticism is wrong. Venue acceptance and reviewer ratings are noisy
-external assessments, not reading-club ground truth.
-
-## Acquisition and validity checks
-
-- Pin upstream revisions, data hashes, licences, and filtering rules. The QASPER
-  dataset card lists CC BY 4.0. ReviewCritique's
-  [custom licence](https://github.com/jiangshdd/ReviewCritique/blob/main/LICENSE)
-  permits research evaluation and benchmarking while prohibiting model training.
-  Preserve required notices and check the pinned terms before redistribution.
-- Split by source paper and study family before inspecting agent outputs. Keep
-  questions, review segments, revisions, and counterfactuals of one paper together.
-- Freeze exact supplied text and evidence identifiers. QASPER paragraphs are not
-  PDF pages. Preserve paragraph IDs or provide a verified mapping; do not silently
-  reinterpret paragraph numbers as PDF page numbers.
-- Exclude or separately report figure/table-dependent cases for text-only agents.
-  QASPER marks selected non-text evidence with `FLOAT SELECTED`. Preserve the
-  exclusion counts and sampling limitations.
-- Hide reference labels and expert explanations from agents. Keep input-derived
-  context memory local to a task; reset cross-run learned state between conditions.
-- Include cheap shortcut controls: question/comment without the paper, abstract
-  only, majority label, and always-criticize. Strong shortcut performance signals
-  that a task may not require the evidence-reading mechanism being compared.
-- Diagnose evidence acquisition separately from interpretation. For a small slice,
-  supply the labelled evidence to every method. Improvement there identifies a
-  reading bottleneck; persistent errors point to interpretation or output policy.
-- Keep failed attempts in success and cost denominators. A last rejected draft
-  can be inspected diagnostically but is not a successful final review.
-- Report each track separately. Cluster uncertainty by source paper or synthetic
-  family, and do not pool repeated attempts or reordered copies as new papers.
-
-## Recommended sequence
-
-1. Audit data availability and labels without model calls. Build a few examples
-   of each task, verify source mappings and scoring, and freeze development/test
-   splits. No large evaluation matrix is justified at this stage.
-2. Run a tiny correctness pilot on development cases. Check that majority-label,
-   source-free, and sound-control cases reveal expected benchmark weaknesses.
-3. Freeze adapters, hypotheses, and the held-out benchmark. Evaluate all four
-   methods on the same core with one model and repeated attempts. Retain the
-   frozen M2 repetitions as the separate milestone comparison.
-4. Report controlled pairs and the selection suite separately from externally
-   labelled tasks, then add the second model. Rolling cross-paper memory remains
-   a separate extension. No full matrix starts automatically from this proposal.
-
-This design supports claims about evidence reading, substantive critique
-judgments, and controlled selection reliability. Broader claims about human
-reading-club value remain open until suitable preference labels become available.
+These tracks measure scientific reading, expert-label agreement, controlled
+evidence sensitivity, and policy-based selection. Public material may occur in
+model pretraining; lexical answer F1 can miss valid paraphrases; expert segment
+labels can involve judgment. Synthetic cases and the small numbers of independent
+families constrain generalization. The selection task is one bounded reading
+episode, rather than rolling memory across separately reviewed papers. None of
+the targets establishes overall paper merit or human reading-club preference.

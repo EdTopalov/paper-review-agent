@@ -4,8 +4,8 @@
   "benchmark_root": "data/benchmark/v1",
   "manifest_sha256": "04d75e5b653230fb462a9832cc95861c5ba446bb4251c759cfa168363afee739",
   "benchmark_settings_sha256": "892f91b829ccfaaf8bbcf52b1dab2e041e62001e1877e52428899aef70e888b0",
-  "source_sha256": "55cc91e86060e1c139405eb3d725b227c4649e2a87201108d3cca7169c229bcc",
-  "git_revision": "def61ec456c2ace6c2a03e915c4fe4c7b5958625",
+  "source_sha256": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",
+  "git_revision": "fe1ef9f2ab17a140e15d7174960c6660f2c55e01",
   "split": "dev",
   "tracks": [
     "selection"
@@ -21,19 +21,22 @@
   ],
   "variant_metadata": {
     "agent": {
-      "prompt_version": "m2-v2",
-      "harness": "project-native"
+      "prompt_version": "m3-native-forced-final-v1",
+      "harness": "project-native",
+      "budget_policy": "double-decisions-forced-final-v1"
     },
     "pyagent_react": {
       "prompt_version": "m3-v2-pyagent-react-v2",
       "harness": "pyagent-patterns.ReAct",
       "harness_version": "0.3.0",
-      "protocol": "pyagent-text-action-v2"
+      "protocol": "pyagent-text-action-v2",
+      "budget_policy": "double-decisions-forced-final-v1"
     },
     "deliberative_review": {
-      "prompt_version": "m3-deliberative-review-v1",
+      "prompt_version": "m3-deliberative-review-v2",
       "harness": "project-deliberative",
-      "context_policy": "plan-investigate-draft-critic-resolve-v1"
+      "context_policy": "plan-investigate-draft-critic-resolve-doubled-cap-final-v2",
+      "budget_policy": "double-decisions-forced-final-v1"
     },
     "baseline": {
       "prompt_version": "m2-v2",

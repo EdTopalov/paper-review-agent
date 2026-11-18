@@ -11,12 +11,13 @@ import json
 import jsonschema
 
 from .agent_tools import PaperEvidence
+from .finalization import decision_cap, force_submit
 from .prompts import RUBRIC
 from .schema import REVIEW_SCHEMA, TOOLS, function
 
 
-DELIBERATIVE_PROMPT_VERSION = "m3-deliberative-review-v1"
-DELIBERATIVE_POLICY = "plan-investigate-draft-critic-resolve-v1"
+DELIBERATIVE_PROMPT_VERSION = "m3-deliberative-review-v2"
+DELIBERATIVE_POLICY = "plan-investigate-draft-critic-resolve-doubled-cap-final-v2"
 
 
 def object_schema(properties):
@@ -140,7 +141,7 @@ class DeliberativeSession:
                                            "changes": {"type": "string"}})
         self.archive = SourceArchive(paper)
         self.evidence = PaperEvidence(paper)
-        self.max_decisions = config.max_reads + 3
+        self.max_decisions = decision_cap(config)
         self.step = 0
         self.reads = 0
         self.checks = []
@@ -316,10 +317,10 @@ class DeliberativeSession:
         self.ledger = [{"check_id": row["check_id"], "status": "unknown",
                         "finding": "Not yet investigated.", "support": [], "counterevidence": [],
                         "unknown": row["question"]} for row in self.checks]
-        # Reserve draft, critic, targeted investigation, and final revision after
-        # planning. The default allows three exploratory decisions; larger
-        # configured budgets also allow more exploration, including selection.
-        exploration = min(self.config.max_reads - 1, max(0, self.max_decisions - 5))
+        # Preserve the original investigation schedule: three exploratory reads
+        # by default and eighteen for selection. The extra decisions extend
+        # repair capacity, rather than changing the architecture's reading plan.
+        exploration = max(0, self.config.max_reads - 2)
         for _ in range(exploration):
             if not self.read("investigate", allow_finish=True):
                 break
@@ -350,9 +351,12 @@ class DeliberativeSession:
                 accepted = self.submit()
                 if accepted:
                     return accepted
-        self.trace.write("deliberative_stop", step=self.step, accepted=False,
+        prediction, trajectory = force_submit(
+            self.paper, self.calls, self.config, self.trace, self.evidence, contract=self.contract)
+        self.trace.write("deliberative_stop", step=trajectory["decision_steps"],
+                         accepted=prediction is not None, forced=True,
                          coverage=self.archive.coverage(), ledger=self.ledger)
-        raise RuntimeError("model_decision_budget_exhausted")
+        return prediction, trajectory
 
 
 def run_deliberative(paper, calls, config, trace, *, contract=None):

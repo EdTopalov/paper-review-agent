@@ -9,7 +9,7 @@ import argparse
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 import json
-from math import isfinite, sqrt
+from math import comb, isfinite, sqrt
 from pathlib import Path
 import statistics
 
@@ -22,6 +22,10 @@ METHODS = {"agent": ("Native ReAct", "#0072B2"),
            "pyagent_react": ("PyAgent", "#E69F00"),
            "deliberative_review": ("Deliberative", "#009E73"),
            "baseline": ("Full-text baseline", "#6B7280")}
+DEFAULT_EXPERIMENTS = [Path("runs/m3-final-agent-20261118-luna6"),
+                       Path("runs/m3-final-pyagent_react-20261118-luna6"),
+                       Path("runs/m3-final-deliberative_review-20261118-luna6"),
+                       Path("runs/m3-final-baseline-20261118-luna6")]
 TRACKS = {"qasper": ("QASPER", "Exact-answer accuracy (%)", "Answer F1"),
           "reviewcritique": ("ReviewCritique", "Label accuracy (%)", "Binary macro-F1"),
           "controlled": ("Controlled appraisal", "Verdict accuracy (%)", "Pair accuracy"),
@@ -234,6 +238,9 @@ def summarize_pooled(tasks, collected):
     scored = score_predictions(tasks, records, variants=variants, repeats=rounds)
     methods = {}
     for variant in variants:
+        variant_rows = [row for row in scored["items"] if row["variant"] == variant]
+        by_task = {task["id"]: [row["content_correct"] for row in variant_rows
+                                if row["id"] == task["id"]] for task in tasks}
         values = []
         for number in rounds:
             rows = [row for row in scored["items"] if row["variant"] == variant and row["repeat"] == number]
@@ -245,7 +252,12 @@ def summarize_pooled(tasks, collected):
                            "unknown_cost_attempts": sum(value is None for value in costs),
                            "billing_uncertain_attempts": sum(bool(row["usage"].get("billing_uncertain")) for row in rows)})
         methods[variant] = {"attempts": sum(row["attempts"] for row in values),
+            "completed": sum(row["completed"] for row in variant_rows),
+            "failed": sum(not row["completed"] for row in variant_rows),
             "correct": sum(row["correct"] for row in values),
+            "pass_power_k": {str(k): statistics.mean(comb(sum(outcomes), k) / comb(len(outcomes), k)
+                                                     for outcomes in by_task.values())
+                             for k in range(1, len(rounds) + 1)},
             "accuracy_percent": mean_interval(row["accuracy_percent"] for row in values),
             "usd_per_attempt": mean_interval(row["usd_per_attempt"] for row in values),
             "unknown_cost_attempts": sum(row["unknown_cost_attempts"] for row in values),
@@ -380,7 +392,7 @@ def generate(experiments, out, *, root=DEFAULT_BENCHMARK, variants=None):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("experiments", type=Path, nargs="+")
+    parser.add_argument("experiments", type=Path, nargs="*", default=DEFAULT_EXPERIMENTS)
     parser.add_argument("--root", type=Path, default=DEFAULT_BENCHMARK)
     parser.add_argument("--out", type=Path, default=Path("milestones/M3-results"))
     parser.add_argument("--variants", nargs="+", choices=METHODS)

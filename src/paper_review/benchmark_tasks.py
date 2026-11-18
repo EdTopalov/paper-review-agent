@@ -146,7 +146,8 @@ source blocks. The catalog maps 1-based tool indices to document/block IDs.
 You have {config.max_reads} reading actions; errors and empty searches count.
 Use submit_review when ready, placing the structured prediction in its review
 argument. Citation errors are recoverable; copy exact observed text or drop an
-unresolved citation. Stop within {config.max_reads + 3} model decisions.
+unresolved citation. You have {2 * (config.max_reads + 3)} model decisions.
+At that limit, one final call must return your best answer or null, without tools.
 """
         self.tools = deepcopy(TOOLS)
         self.tools[1]["description"] = "Read 1 to 3 consecutive source blocks by their 1-based catalog indices. These are not PDF page numbers."

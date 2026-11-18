@@ -16,7 +16,7 @@ from zipfile import ZipFile, ZIP_DEFLATED
 import jsonschema
 
 from .paper import Paper, file_hash
-from .runner import run_review, variant_metadata
+from .runner import Config, run_review, variant_metadata
 from .citations import CHECKER_VERSION
 from .prompts import PROMPT_VERSION, RUBRIC_VERSION
 from .trace import read_events, read_result
@@ -315,16 +315,22 @@ def check_experiment(root):
                 e.get("variant") == events[0]["variant"]
                 and e.get("task_id") == events[0]["task_id"] for e in events)
         if result and result["variant"] == "pyagent_react":
+            from .finalization import BUDGET_POLICY, decision_cap
             accepted = [e for e in run if e["event"] == "tool_observation"
                         and e["observation"].get("accepted")]
             submissions = [e for e in run if e["event"] == "tool_call"
                            and e["name"] == "submit_review"]
-            flags["pyagent_accepted_review"] = result["status"] != "ok" or (
+            forced = result.get("forced_final_submission") is True
+            flags["pyagent_accepted_review"] = result["status"] != "ok" or (forced and
+                bool(decisions) and decisions[-1]["action"] == "final_answer") or (
                 bool(accepted) and bool(submissions)
                 and submissions[-1]["arguments"]["review"] == result["review"]
                 and all(c["citation_verified"] and c.get("observed", False)
                         for c in accepted[-1]["observation"]["citation_checks"]))
-            flags["pyagent_decision_budget"] = result["decision_steps"] <= events[0]["config"]["max_reads"] + 3
+            policy = events[0].get("harness", {}).get("budget_policy")
+            maximum = (decision_cap(Config(**events[0]["config"])) + 1
+                       if policy == BUDGET_POLICY else events[0]["config"]["max_reads"] + 3)
+            flags["pyagent_decision_budget"] = result["decision_steps"] <= maximum
         audit_starts = [i for i, e in enumerate(events) if e["event"] == "audit_start"]
         if audit_starts:
             audit_events = events[audit_starts[-1]:]

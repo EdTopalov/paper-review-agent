@@ -240,14 +240,14 @@ def test_structured_page_reads_keep_each_page_identity():
     assert "Limitations." in result["pages"][1]["text"]
 
 
-def test_repeated_bad_submissions_end_with_recorded_budget_failure(tmp_path):
+def test_repeated_bad_submissions_allow_one_nullable_final_answer(tmp_path):
     bad = deepcopy(OPENING_REVIEW)
     bad["observations"][0]["quote"] = "Invented quotation."
-    client = Client([finish(bad) for _ in range(3)])
+    client = Client([finish(bad) for _ in range(6)] + [Response(text='{"answer": null}')])
     result = run_review(FIXTURE, tmp_path / "run", Config(max_reads=0), "dev", client=client)
-    assert result["status"] == "error" and result["api_calls"] == 3
-    assert result["error"]["code"] == "model_decision_budget_exhausted"
-    assert result["rejected_submissions"] == 3
+    assert result["status"] == "error" and result["api_calls"] == 7
+    assert result["error"]["code"] == "final_answer_none"
+    assert result["rejected_submissions"] == 6
 
 
 def test_compact_trace_reconstructs_exact_requests_with_retry_and_tool_change(tmp_path, monkeypatch):

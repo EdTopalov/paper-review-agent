@@ -120,6 +120,9 @@ def test_failures_are_zero_and_partial_qa_f1_is_not_exact_accuracy(tmp_path):
     pooled = reporter.summarize_pooled(fixture, collected)
     assert pooled["methods"]["agent"]["attempts"] == 10
     assert pooled["methods"]["agent"]["correct"] == 7
+    assert pooled["methods"]["agent"]["completed"] == 8
+    assert pooled["methods"]["agent"]["failed"] == 2
+    assert pooled["methods"]["agent"]["pass_power_k"] == {"1": .7, "2": .6}
     assert pooled["methods"]["agent"]["accuracy_percent"]["mean"] == pytest.approx(70)
     assert pooled["methods"]["agent"]["usd_per_attempt"]["mean"] == pytest.approx(.03)
     assert pooled["methods"]["baseline"]["accuracy_percent"]["mean"] == 100

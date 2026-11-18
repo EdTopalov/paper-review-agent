@@ -24,7 +24,6 @@ VARIANTS = ("agent", "pyagent_react", "deliberative_review", "baseline")
 DEFAULT_EXPERIMENTS = (
     "runs/m3-existing-20261118-luna6",
     "runs/m3-deliberative-20261118-luna6",
-    "runs/m3-all-20261118-luna56",
 )
 MEANS = {"decision_steps": "mean_decision_steps", "reading_actions": "mean_reading_actions",
          "tool_calls": "mean_tool_calls", "api_calls": "mean_model_calls",

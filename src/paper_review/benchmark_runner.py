@@ -166,7 +166,7 @@ def run_one(public, out, config, task_id, variant, client=None, metadata=None, *
                 "model_decision_budget_exhausted", "paper_exceeds_documented_input_limit",
                 "paper_has_no_extractable_text", "pyagent_finished_without_accepted_review",
                 "duplicate_evidence", "invalid_selection_candidate",
-                "deliberative_infeasible_budget"}:
+                "deliberative_infeasible_budget", "final_answer_none"}:
             result["error"]["code"] = str(exc)
         trace.write("run_error", error=result["error"])
     finally:
@@ -364,6 +364,11 @@ def check_runs(out):
         path = out / expected[key]["job_id"] / "trace.jsonl"
         events = read_events(path)
         result = read_result(path)
+        from .finalization import BUDGET_POLICY, decision_cap
+        policy = plan.get("variant_metadata", {}).get(key[1], {}).get("budget_policy")
+        maximum_decisions = (1 if key[1] == "baseline" else
+                             decision_cap(Config(**plan["config"])) + 1
+                             if policy == BUDGET_POLICY else plan["config"]["max_reads"] + 3)
         flags = {"terminal_result": result is not None,
                  "sequence": [event["seq"] for event in events] == list(range(1, len(events) + 1)),
                  "identity": all(event.get("task_id") == key[0] and event.get("variant") == key[1]
@@ -371,7 +376,7 @@ def check_runs(out):
                  "call_accounting": sum(event["event"] == "model_request" for event in events) == record["api_calls"],
                  "response_accounting": sum(event["event"] == "model_response" for event in events) == record["successful_model_calls"],
                  "reading_budget": record["reading_actions"] <= plan["config"]["max_reads"],
-                 "decision_budget": record["decision_steps"] <= (1 if key[1] == "baseline" else plan["config"]["max_reads"] + 3),
+                 "decision_budget": record["decision_steps"] <= maximum_decisions,
                  "result_identity": bool(result and all(result.get(field) == record.get(field)
                                                         for field in result))}
         rows.append({"id": key[0], "variant": key[1], "repeat": key[2], "checks": flags,

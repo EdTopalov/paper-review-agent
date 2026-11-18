@@ -32,15 +32,11 @@ def prepare(root, out, *, workers=6):
          ["qasper", "reviewcritique", "controlled"], core_ids, 20261118),
         ("dev-selection-smoke-luna6", "dev", "gpt-6-luna", 1, 20,
          ["selection"], selection_ids, 20261118),
+        ("test-core-luna6-r3", "test", "gpt-6-luna", 3, 5,
+         ["qasper", "reviewcritique", "controlled"], None, 20261118),
+        ("test-selection-luna6-r3", "test", "gpt-6-luna", 3, 20,
+         ["selection"], None, 20261118),
     ]
-    for model, suffix, seed in (("gpt-6-luna", "luna6", 20261118),
-                                 ("gpt-5.6-luna", "luna56", 20261119)):
-        specifications.extend([
-            (f"test-core-{suffix}-r3", "test", model, 3, 5,
-             ["qasper", "reviewcritique", "controlled"], None, seed),
-            (f"test-selection-{suffix}-r3", "test", model, 3, 20,
-             ["selection"], None, seed),
-        ])
     plans = []
     for name, split, model, repeats, reads, tracks, task_ids, seed in specifications:
         plan = make_plan(root, split, tracks=tracks, variants=list(VARIANTS),
