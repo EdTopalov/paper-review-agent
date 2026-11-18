@@ -1,0 +1,22 @@
+{
+  "id": "QASPER-63bb2040fa10",
+  "answers": [
+    {
+      "answer_type": "free_form",
+      "answer": "Word clusters are extracted using k-means on word embeddings",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0009"
+        }
+      ]
+    }
+  ],
+  "label_origin": "qasper_practitioner",
+  "source_paper_id": "1705.01265",
+  "source_question_id": "63bb2040fa107c5296351c2b5f0312336dad2863",
+  "source_annotation_ids": [
+    "9c09cdf437df536bd26c3c52e6d896cf9d7cd93a"
+  ],
+  "source_member": "qasper-dev-v0.3.json"
+}

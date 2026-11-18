@@ -1,0 +1,22 @@
+{
+  "id": "QASPER-7fa3c2c0cf7f",
+  "answers": [
+    {
+      "answer_type": "yes_no",
+      "answer": "No",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0014"
+        }
+      ]
+    }
+  ],
+  "label_origin": "qasper_practitioner",
+  "source_paper_id": "1608.01884",
+  "source_question_id": "7fa3c2c0cf7f559d43e84076a9113a390c5ba03a",
+  "source_annotation_ids": [
+    "9b3ad7aeb8d0656c47d34a478b1547e174460b1a"
+  ],
+  "source_member": "qasper-dev-v0.3.json"
+}

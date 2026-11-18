@@ -1,0 +1,23 @@
+{
+  "id": "QASPER-6c96e910bd98",
+  "answers": [
+    {
+      "answer_type": "unanswerable",
+      "answer": "Unanswerable",
+      "evidence": []
+    },
+    {
+      "answer_type": "unanswerable",
+      "answer": "Unanswerable",
+      "evidence": []
+    }
+  ],
+  "label_origin": "qasper_practitioner",
+  "source_paper_id": "1703.04001",
+  "source_question_id": "6c96e910bd98c9fd58ba2050f99b9c9bac69840a",
+  "source_annotation_ids": [
+    "13c60f10a426d47f263d3fb95cdc3d07a2dfc4cf",
+    "70927a80e642382d26839ad90a251c0bbabd213d"
+  ],
+  "source_member": "qasper-dev-v0.3.json"
+}

@@ -1,0 +1,46 @@
+{
+  "dataset": "ReviewCritique",
+  "citation": "Du et al. (2024), LLMs Assist NLP Researchers: Critique Paper (Meta-)Reviewing, EMNLP.",
+  "repository": "https://github.com/jiangshdd/ReviewCritique",
+  "revision": "629932bcfa31879b1df1e011e3cd7188aa3b9b46",
+  "source_files": {
+    "data/ReviewCritique.jsonl": {
+      "url": "https://raw.githubusercontent.com/jiangshdd/ReviewCritique/629932bcfa31879b1df1e011e3cd7188aa3b9b46/data/ReviewCritique.jsonl",
+      "sha256": "adc097aa8405738969b61749b55078f5574490e9e2efb9f50955ed78cfe33353",
+      "bytes": 7444779
+    },
+    "README.md": {
+      "url": "https://raw.githubusercontent.com/jiangshdd/ReviewCritique/629932bcfa31879b1df1e011e3cd7188aa3b9b46/README.md",
+      "sha256": "cbd5a0a98f8f32727d6a1821b8136efa49efd23f0b70df7c383a2edaaa155942",
+      "bytes": 3645
+    },
+    "LICENSE": {
+      "url": "https://raw.githubusercontent.com/jiangshdd/ReviewCritique/629932bcfa31879b1df1e011e3cd7188aa3b9b46/LICENSE",
+      "sha256": "8b1b1ba55cd379dc5d77aea8f4297c87eba0292dd2efce451b0dbe9fc244a084",
+      "bytes": 9801
+    }
+  },
+  "selection_version": "reviewcritique-factual-v1",
+  "selection_counters": {
+    "duplicate_segment": 4,
+    "eligible_dev_papers": 14,
+    "eligible_test_papers": 67,
+    "external_or_review_context": 1,
+    "nonsubstantive_or_malformed": 5530,
+    "outside_factual_slice": 238,
+    "paper_without_balanced_pair": 19,
+    "papers_seen": 100,
+    "reliable_not_criticism": 3172,
+    "segments_seen": 11376
+  },
+  "selected_papers": 13,
+  "selected_cases": 26,
+  "split_cases": {
+    "dev": 6,
+    "test": 20
+  },
+  "split_policy": "Title normalized to lowercase ASCII alphanumerics separated by spaces. sha256 first8 hex modulo5 ==0 => dev, otherwise test. One reliable and one deficient criticism per paper.",
+  "label_policy": "Existing expert reliability preserved; deficient types limited to misunderstanding, neglect, inaccurate_summary, unstated_statement. No gold evidence spans are invented.",
+  "license": "Apache NON-AI License 2.0 plus upstream research-only evaluation/benchmarking restrictions; no model training.",
+  "modifications": "Deterministic subset, blank-line document blocks, stripped outer segment/title whitespace, normalized error type names, unannotated same-review context retained, labels and score metadata removed from agent inputs."
+}

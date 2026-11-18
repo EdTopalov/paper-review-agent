@@ -1,0 +1,20 @@
+{
+  "id": "RC-2518e6de7eb6",
+  "verdict": "reliable",
+  "error_types": [],
+  "expert_explanation": null,
+  "label_origin": "reviewcritique_expert",
+  "provenance": {
+    "repository": "https://github.com/jiangshdd/ReviewCritique",
+    "revision": "629932bcfa31879b1df1e011e3cd7188aa3b9b46",
+    "source_file": "data/ReviewCritique.jsonl",
+    "paper_line_1based": 36,
+    "review_key": "review#1",
+    "segment_index_0based": 25,
+    "topic_class_1": "Generalizability ",
+    "topic_class_2": "Question on experiment",
+    "paper_title": "LFPT5: A Unified Framework for Lifelong Few-shot Language Learning Based on Prompt Tuning of T5",
+    "body_text_sha256": "4e6131da4848d80dc6e9e1261347d79de196fd45c04e349faf9c5a5331617b27"
+  },
+  "modification_notice": "Original expert label preserved; selected segment and unannotated original-review text supplied as context; paper split into benchmark blocks; source metadata separated from agent input."
+}

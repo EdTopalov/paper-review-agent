@@ -1,0 +1,68 @@
+{
+  "dataset": "QASPER",
+  "version": "0.3",
+  "upstream_member": "qasper-dev-v0.3.json",
+  "archive_url": "https://qasper-dataset.s3.us-west-2.amazonaws.com/qasper-train-dev-v0.3.tgz",
+  "archive_sha256": "a28fdf966db827bcee3d873107d6b6669864fb7ca8fbf73a192f5e39191bdb5a",
+  "member_sha256": "2ae7ee62a65b1c4225791c70de80c2aad4e8998cf1fd4f09a53103db4f21af93",
+  "dataset_card_url": "https://huggingface.co/datasets/allenai/qasper/raw/fdc9d8214fbab5dd782958601db4d678e6934a54/README.md",
+  "dataset_card_sha256": "da348d3f8277f8a93ca397941f6a525433e282858b1c0562aed3f667d8e55b05",
+  "dataset_card_revision": "fdc9d8214fbab5dd782958601db4d678e6934a54",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "citation": "Dasigi, Lo, Beltagy, Cohan, Smith, and Gardner (2021), A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers, NAACL.",
+  "paper_url": "https://arxiv.org/abs/2105.03011",
+  "selection_version": "qasper-freeze-v1",
+  "official_evaluator_url": "https://github.com/allenai/qasper-led-baseline/blob/afd0fb96bf78ce8cd8157639c6f6a6995e4f9089/scripts/evaluator.py",
+  "official_evaluator_sha256": "781aba7cd8e524bef4f0a1b4bf3504e5b02cb1d8d5bf32a8f0a89dfa83e86bfe",
+  "label_origin": "qasper_practitioner",
+  "max_paper_characters": 150000,
+  "type_quotas": {
+    "dev": {
+      "extractive": 2,
+      "yes_no": 2,
+      "free_form": 1,
+      "unanswerable": 1
+    },
+    "test": {
+      "extractive": 8,
+      "yes_no": 4,
+      "free_form": 4,
+      "unanswerable": 4
+    }
+  },
+  "counts": {
+    "eligible_questions": 561,
+    "excluded_ambiguous_evidence": 6,
+    "excluded_answer_type_disagreement": 187,
+    "excluded_boolean_disagreement": 1,
+    "excluded_missing_evidence": 37,
+    "excluded_nontext_evidence": 160,
+    "excluded_placeholder_answer": 9,
+    "excluded_unmatched_evidence": 44,
+    "source_papers": 281,
+    "source_questions": 1005
+  },
+  "selected_cases": {
+    "dev": 6,
+    "test": 20
+  },
+  "selected_papers": {
+    "dev": 6,
+    "test": 20
+  },
+  "selected_answer_types": {
+    "dev": {
+      "unanswerable": 1,
+      "extractive": 2,
+      "free_form": 1,
+      "yes_no": 2
+    },
+    "test": {
+      "extractive": 8,
+      "free_form": 4,
+      "yes_no": 4,
+      "unanswerable": 4
+    }
+  }
+}

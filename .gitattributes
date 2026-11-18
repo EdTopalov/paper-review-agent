@@ -4,3 +4,5 @@
 *.jsonl -text whitespace=cr-at-eol
 runs/** -text -whitespace
 data/failures/** -text
+# Pinned upstream notices retain original bytes; generators write explicit LF.
+data/benchmark/** -text whitespace=cr-at-eol

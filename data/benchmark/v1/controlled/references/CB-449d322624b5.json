@@ -1,0 +1,24 @@
+{
+  "id": "CB-449d322624b5",
+  "verdict": "contradicted",
+  "evidence": [
+    {
+      "document_id": "P1",
+      "block_id": "b0004"
+    },
+    {
+      "document_id": "P1",
+      "block_id": "b0007"
+    }
+  ],
+  "pair_id": "PAIR-3bcd50e38ec1",
+  "family": "appendix_comparison",
+  "condition": "a",
+  "facts": {
+    "illustrative_examples": 2,
+    "additional_quantitative_problems": 20,
+    "method_correct": 12,
+    "baseline_correct": 11
+  },
+  "label_origin": "programmatic_oracle"
+}

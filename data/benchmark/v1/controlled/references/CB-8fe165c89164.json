@@ -1,0 +1,30 @@
+{
+  "id": "CB-8fe165c89164",
+  "verdict": "contradicted",
+  "evidence": [
+    {
+      "document_id": "P1",
+      "block_id": "b0003"
+    },
+    {
+      "document_id": "P1",
+      "block_id": "b0007"
+    }
+  ],
+  "pair_id": "PAIR-caa6d665c0bf",
+  "family": "independent_evaluation",
+  "condition": "b",
+  "facts": {
+    "tuning_ids": [
+      "Q011",
+      "Q012",
+      "Q013"
+    ],
+    "evaluation_ids": [
+      "Q021",
+      "Q012",
+      "Q023"
+    ]
+  },
+  "label_origin": "programmatic_oracle"
+}

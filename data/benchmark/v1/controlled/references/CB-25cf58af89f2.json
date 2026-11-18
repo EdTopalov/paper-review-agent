@@ -1,0 +1,28 @@
+{
+  "id": "CB-25cf58af89f2",
+  "verdict": "supported",
+  "evidence": [
+    {
+      "document_id": "P1",
+      "block_id": "b0004"
+    }
+  ],
+  "pair_id": "PAIR-92a87687866b",
+  "family": "language_scope",
+  "condition": "a",
+  "facts": {
+    "claimed_languages": [
+      "English",
+      "German",
+      "Spanish"
+    ],
+    "tested_languages": [
+      "English",
+      "German",
+      "Spanish"
+    ],
+    "baseline_accuracy": 68,
+    "new_accuracy": 72
+  },
+  "label_origin": "programmatic_oracle"
+}

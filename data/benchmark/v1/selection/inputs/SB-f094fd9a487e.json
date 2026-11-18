@@ -1,0 +1,332 @@
+{
+  "id": "SB-f094fd9a487e",
+  "kind": "selection",
+  "instructions": "The supplied documents are hypothetical research reports. Assess only their stated content. Document blocks are text locations, not PDF page numbers. Apply the club brief's explicit eligibility and preference rules. Return one selected candidate ID, or null when none is eligible; return every equally preferred candidate in tied_ids, including the selected candidate when tied. For a unique choice tied_ids may be empty or contain that candidate. Explain the decisive comparison and cite document/block IDs. These rules define this controlled task, not universal paper quality.",
+  "brief": "The club wants a documented seed-selection error for a discussion of experimental methodology. Eligible candidates must disclose at least five seed accuracies, call the headline their mean accuracy, but set that headline to the best seed rather than the actual arithmetic mean. Peak GPU memory must be no more than 24 GB. Among eligible candidates prefer the larger headline-minus-mean gap, then lower peak GPU memory. Equal quantities tie. Select null if no candidate qualifies. A flawed report is useful for this explicitly stated discussion goal; this is not a universal scientific-merit rating.",
+  "documents": [
+    {
+      "id": "P-f094fd9a487e",
+      "title": "Candidate report 9a487e",
+      "blocks": [
+        {
+          "id": "b0001",
+          "section": "Overview",
+          "text": "The study evaluates retrieval question answering. Its headline is described as mean accuracy: 70%."
+        },
+        {
+          "id": "b0002",
+          "section": "Evaluation scope",
+          "text": "The evaluated languages are exactly English, German. No other task or language is evaluated in this report."
+        },
+        {
+          "id": "b0003",
+          "section": "Resources",
+          "text": "Peak GPU memory is 12 GB. This is the peak memory needed for the reported procedure, rather than total device capacity."
+        },
+        {
+          "id": "b0004",
+          "section": "Seed results",
+          "text": "The plan called for 5 seeds and the report supplies 5. Reported accuracy percentages are 60, 62, 64, 66, 70. The 95% confidence interval for the effect is [1, 5] percentage points."
+        },
+        {
+          "id": "b0005",
+          "section": "Tuning",
+          "text": "Prompt tuning and model selection use exactly these identifiers: T11, T12, T13. The same identifier denotes the same example wherever it appears."
+        },
+        {
+          "id": "b0006",
+          "section": "Appendix: evaluation identities",
+          "text": "Final evaluation uses exactly these identifiers: E21, E22, E23. This completes the disclosure of study-specific selection facts."
+        }
+      ]
+    },
+    {
+      "id": "P-18f34443b4ea",
+      "title": "Candidate report 43b4ea",
+      "blocks": [
+        {
+          "id": "b0001",
+          "section": "Overview",
+          "text": "The study evaluates retrieval question answering. Its headline is described as mean accuracy: 74%."
+        },
+        {
+          "id": "b0002",
+          "section": "Evaluation scope",
+          "text": "The evaluated languages are exactly English, German. No other task or language is evaluated in this report."
+        },
+        {
+          "id": "b0003",
+          "section": "Resources",
+          "text": "Peak GPU memory is 14 GB. This is the peak memory needed for the reported procedure, rather than total device capacity."
+        },
+        {
+          "id": "b0004",
+          "section": "Seed results",
+          "text": "The plan called for 5 seeds and the report supplies 5. Reported accuracy percentages are 66, 68, 70, 72, 74. The 95% confidence interval for the effect is [2, 6] percentage points."
+        },
+        {
+          "id": "b0005",
+          "section": "Tuning",
+          "text": "Prompt tuning and model selection use exactly these identifiers: T11, T12, T13. The same identifier denotes the same example wherever it appears."
+        },
+        {
+          "id": "b0006",
+          "section": "Appendix: evaluation identities",
+          "text": "Final evaluation uses exactly these identifiers: E21, E22, E23. This completes the disclosure of study-specific selection facts."
+        }
+      ]
+    },
+    {
+      "id": "P-86910a1a2a2b",
+      "title": "Candidate report 1a2a2b",
+      "blocks": [
+        {
+          "id": "b0001",
+          "section": "Overview",
+          "text": "The study evaluates retrieval question answering. Its headline is described as mean accuracy: 74%."
+        },
+        {
+          "id": "b0002",
+          "section": "Evaluation scope",
+          "text": "The evaluated languages are exactly English, German. No other task or language is evaluated in this report."
+        },
+        {
+          "id": "b0003",
+          "section": "Resources",
+          "text": "Peak GPU memory is 16 GB. This is the peak memory needed for the reported procedure, rather than total device capacity."
+        },
+        {
+          "id": "b0004",
+          "section": "Seed results",
+          "text": "The plan called for 5 seeds and the report supplies 5. Reported accuracy percentages are 66, 68, 70, 72, 74. The 95% confidence interval for the effect is [3, 7] percentage points."
+        },
+        {
+          "id": "b0005",
+          "section": "Tuning",
+          "text": "Prompt tuning and model selection use exactly these identifiers: T11, T12, T13. The same identifier denotes the same example wherever it appears."
+        },
+        {
+          "id": "b0006",
+          "section": "Appendix: evaluation identities",
+          "text": "Final evaluation uses exactly these identifiers: E21, E22, E23. This completes the disclosure of study-specific selection facts."
+        }
+      ]
+    },
+    {
+      "id": "P-289a970f0414",
+      "title": "Candidate report 0f0414",
+      "blocks": [
+        {
+          "id": "b0001",
+          "section": "Overview",
+          "text": "The study evaluates retrieval question answering. Its headline is described as mean accuracy: 74%."
+        },
+        {
+          "id": "b0002",
+          "section": "Evaluation scope",
+          "text": "The evaluated languages are exactly English, German. No other task or language is evaluated in this report."
+        },
+        {
+          "id": "b0003",
+          "section": "Resources",
+          "text": "Peak GPU memory is 18 GB. This is the peak memory needed for the reported procedure, rather than total device capacity."
+        },
+        {
+          "id": "b0004",
+          "section": "Seed results",
+          "text": "The plan called for 5 seeds and the report supplies 5. Reported accuracy percentages are 66, 68, 70, 72, 74. The 95% confidence interval for the effect is [1, 5] percentage points."
+        },
+        {
+          "id": "b0005",
+          "section": "Tuning",
+          "text": "Prompt tuning and model selection use exactly these identifiers: T11, T12, T13. The same identifier denotes the same example wherever it appears."
+        },
+        {
+          "id": "b0006",
+          "section": "Appendix: evaluation identities",
+          "text": "Final evaluation uses exactly these identifiers: E21, E22, E23. This completes the disclosure of study-specific selection facts."
+        }
+      ]
+    },
+    {
+      "id": "P-203ceca32108",
+      "title": "Candidate report a32108",
+      "blocks": [
+        {
+          "id": "b0001",
+          "section": "Overview",
+          "text": "The study evaluates retrieval question answering. Its headline is described as mean accuracy: 74%."
+        },
+        {
+          "id": "b0002",
+          "section": "Evaluation scope",
+          "text": "The evaluated languages are exactly English, German. No other task or language is evaluated in this report."
+        },
+        {
+          "id": "b0003",
+          "section": "Resources",
+          "text": "Peak GPU memory is 12 GB. This is the peak memory needed for the reported procedure, rather than total device capacity."
+        },
+        {
+          "id": "b0004",
+          "section": "Seed results",
+          "text": "The plan called for 5 seeds and the report supplies 5. Reported accuracy percentages are 66, 68, 70, 72, 74. The 95% confidence interval for the effect is [2, 6] percentage points."
+        },
+        {
+          "id": "b0005",
+          "section": "Tuning",
+          "text": "Prompt tuning and model selection use exactly these identifiers: T11, T12, T13. The same identifier denotes the same example wherever it appears."
+        },
+        {
+          "id": "b0006",
+          "section": "Appendix: evaluation identities",
+          "text": "Final evaluation uses exactly these identifiers: E21, E22, E23. This completes the disclosure of study-specific selection facts."
+        }
+      ]
+    },
+    {
+      "id": "P-c7f2b593a8f9",
+      "title": "Candidate report 93a8f9",
+      "blocks": [
+        {
+          "id": "b0001",
+          "section": "Overview",
+          "text": "The study evaluates retrieval question answering. Its headline is described as mean accuracy: 74%."
+        },
+        {
+          "id": "b0002",
+          "section": "Evaluation scope",
+          "text": "The evaluated languages are exactly English, German. No other task or language is evaluated in this report."
+        },
+        {
+          "id": "b0003",
+          "section": "Resources",
+          "text": "Peak GPU memory is 14 GB. This is the peak memory needed for the reported procedure, rather than total device capacity."
+        },
+        {
+          "id": "b0004",
+          "section": "Seed results",
+          "text": "The plan called for 5 seeds and the report supplies 5. Reported accuracy percentages are 66, 68, 70, 72, 74. The 95% confidence interval for the effect is [3, 7] percentage points."
+        },
+        {
+          "id": "b0005",
+          "section": "Tuning",
+          "text": "Prompt tuning and model selection use exactly these identifiers: T11, T12, T13. The same identifier denotes the same example wherever it appears."
+        },
+        {
+          "id": "b0006",
+          "section": "Appendix: evaluation identities",
+          "text": "Final evaluation uses exactly these identifiers: E21, E22, E23. This completes the disclosure of study-specific selection facts."
+        }
+      ]
+    },
+    {
+      "id": "P-1bf078b5a86c",
+      "title": "Candidate report b5a86c",
+      "blocks": [
+        {
+          "id": "b0001",
+          "section": "Overview",
+          "text": "The study evaluates retrieval question answering. Its headline is described as mean accuracy: 74%."
+        },
+        {
+          "id": "b0002",
+          "section": "Evaluation scope",
+          "text": "The evaluated languages are exactly English, German. No other task or language is evaluated in this report."
+        },
+        {
+          "id": "b0003",
+          "section": "Resources",
+          "text": "Peak GPU memory is 16 GB. This is the peak memory needed for the reported procedure, rather than total device capacity."
+        },
+        {
+          "id": "b0004",
+          "section": "Seed results",
+          "text": "The plan called for 5 seeds and the report supplies 5. Reported accuracy percentages are 66, 68, 70, 72, 74. The 95% confidence interval for the effect is [1, 5] percentage points."
+        },
+        {
+          "id": "b0005",
+          "section": "Tuning",
+          "text": "Prompt tuning and model selection use exactly these identifiers: T11, T12, T13. The same identifier denotes the same example wherever it appears."
+        },
+        {
+          "id": "b0006",
+          "section": "Appendix: evaluation identities",
+          "text": "Final evaluation uses exactly these identifiers: E21, E22, E23. This completes the disclosure of study-specific selection facts."
+        }
+      ]
+    },
+    {
+      "id": "P-0be27a48e54c",
+      "title": "Candidate report 48e54c",
+      "blocks": [
+        {
+          "id": "b0001",
+          "section": "Overview",
+          "text": "The study evaluates retrieval question answering. Its headline is described as mean accuracy: 74%."
+        },
+        {
+          "id": "b0002",
+          "section": "Evaluation scope",
+          "text": "The evaluated languages are exactly English, German. No other task or language is evaluated in this report."
+        },
+        {
+          "id": "b0003",
+          "section": "Resources",
+          "text": "Peak GPU memory is 18 GB. This is the peak memory needed for the reported procedure, rather than total device capacity."
+        },
+        {
+          "id": "b0004",
+          "section": "Seed results",
+          "text": "The plan called for 5 seeds and the report supplies 5. Reported accuracy percentages are 66, 68, 70, 72, 74. The 95% confidence interval for the effect is [2, 6] percentage points."
+        },
+        {
+          "id": "b0005",
+          "section": "Tuning",
+          "text": "Prompt tuning and model selection use exactly these identifiers: T11, T12, T13. The same identifier denotes the same example wherever it appears."
+        },
+        {
+          "id": "b0006",
+          "section": "Appendix: evaluation identities",
+          "text": "Final evaluation uses exactly these identifiers: E21, E22, E23. This completes the disclosure of study-specific selection facts."
+        }
+      ]
+    },
+    {
+      "id": "P-e9b3fa8369c2",
+      "title": "Candidate report 8369c2",
+      "blocks": [
+        {
+          "id": "b0001",
+          "section": "Overview",
+          "text": "The study evaluates retrieval question answering. Its headline is described as mean accuracy: 70%."
+        },
+        {
+          "id": "b0002",
+          "section": "Evaluation scope",
+          "text": "The evaluated languages are exactly English, German. No other task or language is evaluated in this report."
+        },
+        {
+          "id": "b0003",
+          "section": "Resources",
+          "text": "Peak GPU memory is 12 GB. This is the peak memory needed for the reported procedure, rather than total device capacity."
+        },
+        {
+          "id": "b0004",
+          "section": "Seed results",
+          "text": "The plan called for 5 seeds and the report supplies 5. Reported accuracy percentages are 66, 68, 70, 72, 74. The 95% confidence interval for the effect is [3, 7] percentage points."
+        },
+        {
+          "id": "b0005",
+          "section": "Tuning",
+          "text": "Prompt tuning and model selection use exactly these identifiers: T11, T12, T13. The same identifier denotes the same example wherever it appears."
+        },
+        {
+          "id": "b0006",
+          "section": "Appendix: evaluation identities",
+          "text": "Final evaluation uses exactly these identifiers: E21, E22, E23. This completes the disclosure of study-specific selection facts."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "QASPER-41b706995147",
+  "answers": [
+    {
+      "answer_type": "extractive",
+      "answer": "divorce ",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0050"
+        }
+      ],
+      "extractive_spans": [
+        "divorce "
+      ]
+    },
+    {
+      "answer_type": "extractive",
+      "answer": "divorce",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0050"
+        }
+      ],
+      "extractive_spans": [
+        "divorce"
+      ]
+    }
+  ],
+  "label_origin": "qasper_practitioner",
+  "source_paper_id": "1809.06537",
+  "source_question_id": "41b70699514703820435b00efbc3aac4dd67560a",
+  "source_annotation_ids": [
+    "4db64df31608ee95f5c7deb00379bd91c2edd0fa",
+    "a5e7ee0a2216fe02bc5a0ccf784cdb856cee8e6e"
+  ],
+  "source_member": "qasper-dev-v0.3.json"
+}

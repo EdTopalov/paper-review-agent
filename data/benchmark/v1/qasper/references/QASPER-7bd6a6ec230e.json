@@ -1,0 +1,41 @@
+{
+  "id": "QASPER-7bd6a6ec230e",
+  "answers": [
+    {
+      "answer_type": "extractive",
+      "answer": " Penn Treebank, WikiText2",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0026"
+        }
+      ],
+      "extractive_spans": [
+        " Penn Treebank",
+        "WikiText2"
+      ]
+    },
+    {
+      "answer_type": "extractive",
+      "answer": "Penn Treebank (PTB) , WikiText2 (WT-2)",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0026"
+        }
+      ],
+      "extractive_spans": [
+        "Penn Treebank (PTB) ",
+        "WikiText2 (WT-2)"
+      ]
+    }
+  ],
+  "label_origin": "qasper_practitioner",
+  "source_paper_id": "1808.09029",
+  "source_question_id": "7bd6a6ec230e1efb27d691762cc0674237dc7967",
+  "source_annotation_ids": [
+    "bf1de0355349b3447e39b12d068a7f8b8aa3fd66",
+    "fbb7eb94ac1d40d596d26cbd31f1d95e42ddf56c"
+  ],
+  "source_member": "qasper-dev-v0.3.json"
+}

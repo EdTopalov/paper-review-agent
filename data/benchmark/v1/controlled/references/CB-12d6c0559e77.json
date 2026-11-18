@@ -1,0 +1,28 @@
+{
+  "id": "CB-12d6c0559e77",
+  "verdict": "supported",
+  "evidence": [
+    {
+      "document_id": "P1",
+      "block_id": "b0001"
+    },
+    {
+      "document_id": "P1",
+      "block_id": "b0007"
+    }
+  ],
+  "pair_id": "PAIR-1ae57eea289b",
+  "family": "seed_aggregation",
+  "condition": "a",
+  "facts": {
+    "seed_accuracies": [
+      68,
+      70,
+      72,
+      74,
+      76
+    ],
+    "headline_accuracy": 72
+  },
+  "label_origin": "programmatic_oracle"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "RC-97b4064e1659",
+  "verdict": "reliable",
+  "error_types": [],
+  "expert_explanation": null,
+  "label_origin": "reviewcritique_expert",
+  "provenance": {
+    "repository": "https://github.com/jiangshdd/ReviewCritique",
+    "revision": "629932bcfa31879b1df1e011e3cd7188aa3b9b46",
+    "source_file": "data/ReviewCritique.jsonl",
+    "paper_line_1based": 81,
+    "review_key": "review#1",
+    "segment_index_0based": 29,
+    "topic_class_1": "Method",
+    "topic_class_2": "Weakness ",
+    "paper_title": "Internet-augmented language models through few-shot prompting for open-domain question answering",
+    "body_text_sha256": "78e9ba3bbbebec3d480fa5e61ec3cbcea4d6c0b8203941919ab02d86015c7d5b"
+  },
+  "modification_notice": "Original expert label preserved; selected segment and unannotated original-review text supplied as context; paper split into benchmark blocks; source metadata separated from agent input."
+}

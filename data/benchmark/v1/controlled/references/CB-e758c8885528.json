@@ -1,0 +1,24 @@
+{
+  "id": "CB-e758c8885528",
+  "verdict": "supported",
+  "evidence": [
+    {
+      "document_id": "P1",
+      "block_id": "b0004"
+    },
+    {
+      "document_id": "P1",
+      "block_id": "b0007"
+    }
+  ],
+  "pair_id": "PAIR-82e7c0b82b0e",
+  "family": "appendix_comparison",
+  "condition": "b",
+  "facts": {
+    "illustrative_examples": 2,
+    "additional_quantitative_problems": 0,
+    "method_correct": 0,
+    "baseline_correct": 0
+  },
+  "label_origin": "programmatic_oracle"
+}

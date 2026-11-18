@@ -1,0 +1,20 @@
+{
+  "id": "RC-ae631d292d42",
+  "verdict": "reliable",
+  "error_types": [],
+  "expert_explanation": null,
+  "label_origin": "reviewcritique_expert",
+  "provenance": {
+    "repository": "https://github.com/jiangshdd/ReviewCritique",
+    "revision": "629932bcfa31879b1df1e011e3cd7188aa3b9b46",
+    "source_file": "data/ReviewCritique.jsonl",
+    "paper_line_1based": 43,
+    "review_key": "review#2",
+    "segment_index_0based": 39,
+    "topic_class_1": "Method details",
+    "topic_class_2": "Concerns on analysis",
+    "paper_title": "Pretrain Knowledge-Aware Language Models",
+    "body_text_sha256": "5e4c262cf9270525986dafff06cbac645cf32ba4ab906ab9a3e2971e4d21718d"
+  },
+  "modification_notice": "Original expert label preserved; selected segment and unannotated original-review text supplied as context; paper split into benchmark blocks; source metadata separated from agent input."
+}

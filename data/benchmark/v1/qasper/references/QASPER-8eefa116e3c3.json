@@ -1,0 +1,65 @@
+{
+  "id": "QASPER-8eefa116e3c3",
+  "answers": [
+    {
+      "answer_type": "extractive",
+      "answer": "The GENIA Corpus , CoNLL2003",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0023"
+        },
+        {
+          "document_id": "P1",
+          "block_id": "b0024"
+        }
+      ],
+      "extractive_spans": [
+        "The GENIA Corpus ",
+        "CoNLL2003"
+      ]
+    },
+    {
+      "answer_type": "extractive",
+      "answer": "GENIA Corpus BIBREF3, CoNLL2003 BIBREF14, KORE50 BIBREF21 , ACE2004 BIBREF22 and MSNBC",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0023"
+        },
+        {
+          "document_id": "P1",
+          "block_id": "b0024"
+        }
+      ],
+      "extractive_spans": [
+        "GENIA Corpus BIBREF3",
+        "CoNLL2003 BIBREF14",
+        "KORE50 BIBREF21 , ACE2004 BIBREF22 and MSNBC"
+      ]
+    },
+    {
+      "answer_type": "extractive",
+      "answer": "CoNLL2003-testA, GENIA",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0024"
+        }
+      ],
+      "extractive_spans": [
+        "CoNLL2003-testA",
+        "GENIA"
+      ]
+    }
+  ],
+  "label_origin": "qasper_practitioner",
+  "source_paper_id": "1608.06757",
+  "source_question_id": "8eefa116e3c3d3db751423cc4095d1c4153d3a5f",
+  "source_annotation_ids": [
+    "678059f1629d978b0591080db2427bda76af80ad",
+    "9c9d4eafa0686fec16fbfbd3a6e1b1e84296ae30",
+    "dc2bafa6bcd6e5fd56a7ea9a3df8db225a7ba2d4"
+  ],
+  "source_member": "qasper-dev-v0.3.json"
+}

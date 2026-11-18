@@ -1,0 +1,20 @@
+{
+  "id": "RC-88f98dcc0dee",
+  "verdict": "reliable",
+  "error_types": [],
+  "expert_explanation": null,
+  "label_origin": "reviewcritique_expert",
+  "provenance": {
+    "repository": "https://github.com/jiangshdd/ReviewCritique",
+    "revision": "629932bcfa31879b1df1e011e3cd7188aa3b9b46",
+    "source_file": "data/ReviewCritique.jsonl",
+    "paper_line_1based": 97,
+    "review_key": "review#5",
+    "segment_index_0based": 14,
+    "topic_class_1": "Limited evaluation",
+    "topic_class_2": "weakness",
+    "paper_title": "The Inductive Bias of In-Context Learning: Rethinking Pretraining Example Design",
+    "body_text_sha256": "3e815b607bf146bb86c433f6a6ee076d2f4c2a00cfe2cf40c69b1f071b970906"
+  },
+  "modification_notice": "Original expert label preserved; selected segment and unannotated original-review text supplied as context; paper split into benchmark blocks; source metadata separated from agent input."
+}

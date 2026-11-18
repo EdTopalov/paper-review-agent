@@ -1,0 +1,35 @@
+{
+  "version": "evidence-assessment-v1",
+  "tasks": 102,
+  "manifest_sha256": "04d75e5b653230fb462a9832cc95861c5ba446bb4251c759cfa168363afee739",
+  "source_files": {
+    "qasper/LICENSE.md": "b968c2299b5f00bcdfc56f1c8a9cfba970324ff3f19ea72529443883b0a94688",
+    "qasper/manifest.jsonl": "d53bb6b8f861936a257605ba7e6d2c1fa106a32c2275098dd244ab0077008a29",
+    "qasper/README.md": "3152df1d2d984b2b8e2721c6217d877f2cf86f88be8e36728a85b1e5d8e86abd",
+    "qasper/source.json": "dab42534e4ad4b670d8a28454b755611c9e379d85b9d47737b42e8722eab59df",
+    "qasper/UPSTREAM_DATASET_CARD.md": "da348d3f8277f8a93ca397941f6a525433e282858b1c0562aed3f667d8e55b05",
+    "qasper/UPSTREAM_README.md": "199ab78533b6155efd0af39614e61fb24c1d5ef6d907a5990dede570fd629b75",
+    "reviewcritique/LICENSE": "8b1b1ba55cd379dc5d77aea8f4297c87eba0292dd2efce451b0dbe9fc244a084",
+    "reviewcritique/manifest.jsonl": "ed97dbb2d6d95927d342f4edf650445faf38c450d6b31d1976d0f5345be1d14b",
+    "reviewcritique/README.md": "c93027e1af7894dad152d889bb476be08d1cdf064b85d1dbe5d9996ac9796a7e",
+    "reviewcritique/source.json": "006e823be7140887bbca65ae58612cd3a071616be871ae614615eea700e3546b",
+    "reviewcritique/UPSTREAM_README.md": "cbd5a0a98f8f32727d6a1821b8136efa49efd23f0b70df7c383a2edaaa155942",
+    "controlled/manifest.jsonl": "a907c6df173ad24d06bedbfc67f5d2730d727a7f17cb7af3b843aeea5abbea50",
+    "controlled/README.md": "2fad8cd4909f2df9a39bcd6479deb7984cd123b4c6487486aadde94e8fa730e2",
+    "controlled/source.json": "743a163fba5f550828431e16a12c00e98e909ce571e9eb161ac147ab3241d78e",
+    "selection/manifest.jsonl": "3d96bddad6fda7e7f60c92fb9127a822b8f6497261b23f1244f48283c7ebd89f",
+    "selection/README.md": "51660d401de6d9e9c5c4ab9d33c5ab40b1356a926636883361083a98c253085f",
+    "selection/source.json": "4aba55d7dbe97e490b9ffc08bd55029d565eafc35952ac1740b4ca838cf9aa7c"
+  },
+  "counts": {
+    "controlled/dev": 8,
+    "controlled/test": 24,
+    "qasper/dev": 6,
+    "qasper/test": 20,
+    "reviewcritique/dev": 6,
+    "reviewcritique/test": 20,
+    "selection/dev": 6,
+    "selection/test": 12
+  },
+  "status": "prepared_not_evaluated"
+}

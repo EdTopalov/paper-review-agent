@@ -306,7 +306,7 @@ def test_paired_evaluation_and_resume_need_no_duplicate_result_files(tmp_path, m
     assert summarize(out) == first
     assert evaluate(sample, out, Config(), workers=1) == first
     assert check_experiment(out)["passed"] == 2
-    assert {p.name for p in out.iterdir() if p.is_file()} == {"experiment.json", "source.zip", "README.md"}
+    assert {p.name for p in out.iterdir() if p.is_file()} == {"experiment.json", "source.zip", "README.md", "progress.json"}
     assert not list(out.rglob("result.json"))
     with ZipFile(out / "source.zip") as archive:
         assert "src/paper_review/runner.py" in archive.namelist()

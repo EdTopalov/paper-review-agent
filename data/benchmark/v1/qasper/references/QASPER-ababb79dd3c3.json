@@ -1,0 +1,39 @@
+{
+  "id": "QASPER-ababb79dd3c3",
+  "answers": [
+    {
+      "answer_type": "extractive",
+      "answer": "Intelligence Squared Debates",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0007"
+        }
+      ],
+      "extractive_spans": [
+        "Intelligence Squared Debates"
+      ]
+    },
+    {
+      "answer_type": "extractive",
+      "answer": "“Intelligence Squared Debates” (IQ2 for short)",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0007"
+        }
+      ],
+      "extractive_spans": [
+        "“Intelligence Squared Debates” (IQ2 for short)"
+      ]
+    }
+  ],
+  "label_origin": "qasper_practitioner",
+  "source_paper_id": "1604.03114",
+  "source_question_id": "ababb79dd3c301f4541beafa181f6a6726839a10",
+  "source_annotation_ids": [
+    "6561163ef127a9dc8a104d0c8063a0d63de1e8bf",
+    "eb0fc8495aa6c079ade8ae29e4a9a51140a65259"
+  ],
+  "source_member": "qasper-dev-v0.3.json"
+}

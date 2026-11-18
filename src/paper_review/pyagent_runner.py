@@ -60,13 +60,15 @@ class PaperReviewReAct(ReAct):
 
 
 class ReviewSession:
-    def __init__(self, paper, calls, config, trace):
+    def __init__(self, paper, calls, config, trace, *, contract=None):
         self.paper, self.calls, self.config, self.trace = paper, calls, config, trace
         self.evidence = PaperEvidence(paper)
         self.accepted_review = None
         self.accepted_checks = None
         self.step = 0
-        self.schemas = {tool["name"]: tool["parameters"] for tool in TOOLS}
+        self.contract = contract
+        self.tools = contract.tools if contract else TOOLS
+        self.schemas = {tool["name"]: tool["parameters"] for tool in self.tools}
 
     @property
     def call_id(self):
@@ -85,12 +87,13 @@ class ReviewSession:
             raise _ReviewAccepted
         self.step += 1
         self.calls.stats["decision_steps"] = self.step
-        available = TOOLS
+        available = self.tools
         if self.calls.stats["reading_actions"] >= self.config.max_reads:
-            available = [TOOLS[-1]]
+            available = [self.tools[-1]]
             self.trace.write("reading_budget_exhausted", step=self.step,
                              remaining_tools=["submit_review"])
-        instructions = (AGENT_INSTRUCTIONS.format(max_reads=self.config.max_reads)
+        instructions = ((self.contract.instructions if self.contract else
+                         AGENT_INSTRUCTIONS.format(max_reads=self.config.max_reads))
                         + PYAGENT_PROTOCOL + "\nAvailable tool contracts:\n"
                         + json.dumps(available, ensure_ascii=False))
         # Replace the library's generic Thought/FINISH system instruction with
@@ -124,9 +127,10 @@ class ReviewSession:
             arguments = json.loads(raw_arguments)
             jsonschema.validate(arguments, self.schemas[name])
             if name == "submit_review":
-                validate_review(arguments["review"])
+                (self.contract.validate if self.contract else validate_review)(arguments["review"])
                 self.calls.stats["submission_attempts"] += 1
-                checks = self.evidence.check(arguments["review"])
+                checks = (self.contract.check(self.evidence, arguments["review"]) if self.contract
+                          else self.evidence.check(arguments["review"]))
                 if self.calls.stats["first_submission_checks"] is None:
                     self.calls.stats["first_submission_checks"] = checks
                 self.trace.write("tool_call", step=self.step, name=name, arguments=arguments)
@@ -185,8 +189,8 @@ class ReviewSession:
         }
 
 
-def run_pyagent(paper, calls, config, trace):
-    session = ReviewSession(paper, calls, config, trace)
+def run_pyagent(paper, calls, config, trace, *, contract=None):
+    session = ReviewSession(paper, calls, config, trace, contract=contract)
     try:
         asyncio.get_running_loop()
     except RuntimeError:

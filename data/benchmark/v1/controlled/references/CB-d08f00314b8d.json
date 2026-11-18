@@ -1,0 +1,26 @@
+{
+  "id": "CB-d08f00314b8d",
+  "verdict": "insufficient",
+  "evidence": [
+    {
+      "document_id": "P1",
+      "block_id": "b0004"
+    }
+  ],
+  "pair_id": "PAIR-ef0117545dad",
+  "family": "language_scope",
+  "condition": "b",
+  "facts": {
+    "claimed_languages": [
+      "English",
+      "German",
+      "Spanish"
+    ],
+    "tested_languages": [
+      "English"
+    ],
+    "baseline_accuracy": 67,
+    "new_accuracy": 71
+  },
+  "label_origin": "programmatic_oracle"
+}

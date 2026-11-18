@@ -1,0 +1,22 @@
+{
+  "id": "QASPER-220d11a03897",
+  "answers": [
+    {
+      "answer_type": "free_form",
+      "answer": "Advanced neural architectures and contextualized embedding models learn how to handle spelling and morphology variations.",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0003"
+        }
+      ]
+    }
+  ],
+  "label_origin": "qasper_practitioner",
+  "source_paper_id": "1909.03135",
+  "source_question_id": "220d11a03897d85af91ec88a9b502815c7d2b6f3",
+  "source_annotation_ids": [
+    "d1a1ed60da633064be199f1f3274ec6969e74f78"
+  ],
+  "source_member": "qasper-dev-v0.3.json"
+}

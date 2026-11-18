@@ -1,0 +1,22 @@
+{
+  "id": "RC-17ae89b7e529",
+  "verdict": "deficient",
+  "error_types": [
+    "inaccurate_summary"
+  ],
+  "expert_explanation": "Authors never mentioned nor meant \"meaning representations\" in their work",
+  "label_origin": "reviewcritique_expert",
+  "provenance": {
+    "repository": "https://github.com/jiangshdd/ReviewCritique",
+    "revision": "629932bcfa31879b1df1e011e3cd7188aa3b9b46",
+    "source_file": "data/ReviewCritique.jsonl",
+    "paper_line_1based": 25,
+    "review_key": "review#2",
+    "segment_index_0based": 4,
+    "topic_class_1": "Summary",
+    "topic_class_2": "Strength",
+    "paper_title": "Representation and Bias in Multilingual NLP: Insights from Controlled Experiments on Conditional Language Modeling",
+    "body_text_sha256": "56baae251b7f7d4dae5dacdc1d7195fd6d61fff20bea7123f7ec2564fa5c4340"
+  },
+  "modification_notice": "Original expert label preserved; selected segment and unannotated original-review text supplied as context; paper split into benchmark blocks; source metadata separated from agent input."
+}

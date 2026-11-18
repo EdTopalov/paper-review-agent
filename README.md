@@ -69,8 +69,10 @@ rebuilds the readable pages from traces; `check` writes no additional files. Use
 ## Agent variants (M3)
 
 The three agents are `agent` (native ReAct), `pyagent_react` (the
-[PyAgent](https://pyagent.org/) harness with text actions), and `evidence_memory`
-(native tools with deduplicated evidence and no replay of old review drafts).
+[PyAgent](https://pyagent.org/) harness with text actions), and
+`deliberative_review` (enforced planning, evidence gathering, source-grounded
+criticism, and revision). Scripted checks cover phase order, budget limits,
+source provenance, and recovery through the shared entry point.
 The full-paper one-call `baseline` is a fourth comparison method.
 The [M3 report](milestones/M3.md) and [experiment protocol](milestones/M3-protocol.md)
 define hypotheses, repetitions, model blocks, human quality assessment, and limits.
@@ -82,14 +84,37 @@ Install V2 in the activated environment, then select it with `--variant`:
 python -m pip install -r requirements-m3.txt
 python -m pip install --no-deps -e .
 paper-review review data/dev/toy.json --variant pyagent_react --out runs/scratch/v2-dev
-paper-review review data/dev/toy.json --variant evidence_memory --out runs/scratch/memory-dev
+paper-review review data/dev/toy.json --variant deliberative_review --out runs/scratch/deliberative-dev
 ```
 
 The original `eval --variant both` still compares only M2 and baseline. Each
 variant's README contains its hypothesis and design. `eval --task-ids T17`
 selects a diagnostic case from the unchanged sample. Repeated-run reports include
 per-repeat variation, per-paper consistency, costs, and pass^k (success in every
-one of k attempts). Full benchmark commands are in the experiment protocol.
+one of k attempts). Full M2 comparison commands are in the experiment protocol.
+
+## Evidence-assessment benchmark
+
+The [frozen benchmark](data/benchmark/v1/README.md) adds 76 test and 26 development
+cases for scientific questions, expert-labelled review criticism, controlled
+claim appraisal, and paper selection under explicit requirements. Human labels
+come from QASPER and ReviewCritique; synthetic targets come from deterministic
+study records. All four methods use the same task contracts and source blocks.
+Content correctness, citation matching, completion, and cost are scored separately.
+
+Prepare and inspect a run without API calls:
+
+```shell
+paper-review benchmark-verify
+paper-review benchmark-plan --split test --tracks qasper reviewcritique controlled --model gpt-6-luna --repeats 3 --out runs/scratch/benchmark-plan.json
+paper-review benchmark-run --plan runs/scratch/benchmark-plan.json --out runs/benchmark-pending
+```
+
+`benchmark-run` validates only unless `--execute` is explicitly supplied. The
+[benchmark protocol](milestones/benchmark-protocol.md) defines separate reading
+budgets, repetitions, statistics, and saved plans. This suite supplements the
+unchanged M2 comparison. It has no model results yet and does not provide gold
+ratings for overall paper merit or human reading-club preference.
 
 ## Human assessment and paper selection
 
@@ -108,7 +133,7 @@ assessment quality, and completion have separate denominators.
 The separate selection pilot compares final candidate reviews against a club brief:
 
 ```shell
-paper-review select data/dev/toy.json data/dev/selection-negative-result.json --variant evidence_memory --brief "Discuss experimental evidence and uncertainty" --out runs/scratch/selection-dev
+paper-review select data/dev/toy.json data/dev/selection-negative-result.json --variant deliberative_review --brief "Discuss experimental evidence and uncertainty" --out runs/scratch/selection-dev
 ```
 
 This command makes paid API calls for each review and one comparative decision.
@@ -123,8 +148,9 @@ for scope and future evaluation; selection is separate from the frozen M2 task.
 | [Dataset freezer](scripts/freeze_sample.py) | Optional source download and snapshot preparation; existing evaluation inputs are already frozen. |
 | [M1](milestones/M1.md) | Original task, architecture, failure map, and evaluation plan. |
 | [M2](milestones/M2.md) | Implementation, plan changes, measured results, and failure analysis. |
-| [M3](milestones/M3.md), [PyAgent](variants/pyagent_react/README.md), [evidence memory](variants/evidence_memory/README.md) | Variant mechanisms, hypotheses, and experiment protocol. |
+| [M3](milestones/M3.md), [PyAgent](variants/pyagent_react/README.md), [deliberative review](variants/deliberative_review/README.md) | Variant mechanisms, hypotheses, and experiment protocol. |
 | [Failure map](milestones/failure-map.md), [human labels](data/quality/README.md) | Observed assessment failures, anticipated risks, and quality-evaluation instructions. |
 | [Evaluation data](data/eval/README.md) | Frozen paper versions, provenance, licenses, and sampling limits. |
+| [Assessment benchmark](data/benchmark/v1/README.md), [protocol](milestones/benchmark-protocol.md) | Frozen externally labelled and synthetic tasks, offline scoring, and prepared run plans. |
 | [Saved runs](runs/README.md), [failure cases](data/failures) | Readable results, model/tool traces, and annotated decisions. |
 | [Sources and licenses](THIRD_PARTY.md) | Attribution and dependency licenses. |

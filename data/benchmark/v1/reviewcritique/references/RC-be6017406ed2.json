@@ -1,0 +1,22 @@
+{
+  "id": "RC-be6017406ed2",
+  "verdict": "deficient",
+  "error_types": [
+    "neglect"
+  ],
+  "expert_explanation": "The results are in table 5 and table 7.",
+  "label_origin": "reviewcritique_expert",
+  "provenance": {
+    "repository": "https://github.com/jiangshdd/ReviewCritique",
+    "revision": "629932bcfa31879b1df1e011e3cd7188aa3b9b46",
+    "source_file": "data/ReviewCritique.jsonl",
+    "paper_line_1based": 17,
+    "review_key": "review#2",
+    "segment_index_0based": 19,
+    "topic_class_1": "weakness",
+    "topic_class_2": "Opinion",
+    "paper_title": "Evaluating Gender Bias in Natural Language Inference",
+    "body_text_sha256": "c9cde3ab2b7d0f00794673e91604810d1bee6a546b806289c6550b1084f9b957"
+  },
+  "modification_notice": "Original expert label preserved; selected segment and unannotated original-review text supplied as context; paper split into benchmark blocks; source metadata separated from agent input."
+}

@@ -1,0 +1,16 @@
+{
+  "version": "controlled-scientific-appraisal-v1",
+  "track": "controlled",
+  "label_origin": "programmatic_oracle",
+  "generator": "scripts/prepare_controlled_benchmark.py",
+  "randomness": "none; identifiers are SHA-256-derived",
+  "license": "CC0-1.0",
+  "source": "Original hypothetical study records and rendered reports",
+  "cases": 32,
+  "counts_by_split": {
+    "dev": 8,
+    "test": 24
+  },
+  "manifest_sha256": "a907c6df173ad24d06bedbfc67f5d2730d727a7f17cb7af3b843aeea5abbea50",
+  "split_unit": "scientific family"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "CB-bc5465d35ac1",
+  "verdict": "supported",
+  "evidence": [
+    {
+      "document_id": "P1",
+      "block_id": "b0003"
+    },
+    {
+      "document_id": "P1",
+      "block_id": "b0007"
+    }
+  ],
+  "pair_id": "PAIR-caa6d665c0bf",
+  "family": "independent_evaluation",
+  "condition": "a",
+  "facts": {
+    "tuning_ids": [
+      "Q011",
+      "Q012",
+      "Q013"
+    ],
+    "evaluation_ids": [
+      "Q021",
+      "Q022",
+      "Q023"
+    ]
+  },
+  "label_origin": "programmatic_oracle"
+}

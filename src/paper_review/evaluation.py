@@ -10,6 +10,7 @@ from pathlib import Path
 import random
 import statistics
 import subprocess
+import time
 from zipfile import ZipFile, ZIP_DEFLATED
 
 import jsonschema
@@ -394,29 +395,60 @@ def evaluate(sample_path, out, config, variant="both", workers=2, repeats=1, lim
                 if source.exists():
                     archive.write(source, source.name)
             for name in ("milestones/M3.md", "milestones/M3-protocol.md",
-                         "variants/pyagent_react/README.md", "variants/evidence_memory/README.md"):
+                         "variants/pyagent_react/README.md", "variants/deliberative_review/README.md"):
                 source = project.parent / name
                 if source.exists():
                     archive.write(source, name)
-    jobs = []
-    for repeat in range(1, repeats + 1):
-        for task in tasks:
-            for kind in variants:
-                folder = out / f"{kind}-r{repeat}" / task["id"]
-                if (folder / "trace.jsonl").exists() and read_result(folder / "trace.jsonl") is not None:
-                    print(f"Retaining existing result {folder}", flush=True)
-                    continue
-                if folder.exists():
-                    raise ValueError(f"Incomplete run exists at {folder}; preserve it and choose a new output directory")
-                jobs.append((task, kind, folder))
-    random.Random(order_seed).shuffle(jobs)
-    with ThreadPoolExecutor(max_workers=workers) as pool:
-        pending = {pool.submit(run_review, sample_path.parent / task["paper_path"], folder,
-                               config, task["id"], kind, metadata=experiment): (task, kind)
-                   for task, kind, folder in jobs}
-        for future in as_completed(pending):
-            task, kind = pending[future]
-            result = future.result()
-            print(f"{task['id']} {kind}: {result['status']}; calls={result['api_calls']}; "
-                  f"seconds={result['latency_seconds']:.1f}", flush=True)
-    return summarize(out)
+    from .benchmark_runner import write_progress
+
+    progress_plan = {"config": asdict(config), "variants": variants,
+                     "planned_runs": len(tasks) * len(variants) * repeats,
+                     "source_sha256": experiment["source_sha256"], "manifest_sha256": experiment["sample_sha256"]}
+    started = time.perf_counter()
+    started_at = None
+    previous_progress = out / "progress.json"
+    if previous_progress.exists():
+        saved = json.loads(previous_progress.read_text(encoding="utf-8"))
+        started -= saved["elapsed_seconds"]
+        started_at = saved.get("started_at")
+    records, jobs = [], []
+    try:
+        for repeat in range(1, repeats + 1):
+            for task in tasks:
+                for kind in variants:
+                    folder = out / f"{kind}-r{repeat}" / task["id"]
+                    if (folder / "trace.jsonl").exists():
+                        previous = read_result(folder / "trace.jsonl")
+                        if previous is not None:
+                            records.append(previous)
+                            print(f"Retaining existing result {folder}", flush=True)
+                            continue
+                    if folder.exists():
+                        raise ValueError(f"Incomplete run exists at {folder}; preserve it and choose a new output directory")
+                    jobs.append((task, kind, folder))
+        write_progress(out, progress_plan, records, started, "running", started_at=started_at)
+        random.Random(order_seed).shuffle(jobs)
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            pending = {pool.submit(run_review, sample_path.parent / task["paper_path"], folder,
+                                   config, task["id"], kind, metadata=experiment): (task, kind)
+                       for task, kind, folder in jobs}
+            try:
+                for future in as_completed(pending):
+                    task, kind = pending[future]
+                    result = future.result()
+                    if result is not None:
+                        records.append(result)
+                        print(f"{task['id']} {kind}: {result['status']}; calls={result['api_calls']}; "
+                              f"seconds={result['latency_seconds']:.1f}", flush=True)
+                    write_progress(out, progress_plan, records, started, "running", started_at=started_at)
+            except BaseException as exc:
+                for future in pending:
+                    future.cancel()
+                write_progress(out, progress_plan, records, started, "error", started_at=started_at, error=exc)
+                raise
+        summary = summarize(out)
+        write_progress(out, progress_plan, records, started, "finished", started_at=started_at)
+        return summary
+    except BaseException as exc:
+        write_progress(out, progress_plan, records, started, "error", started_at=started_at, error=exc)
+        raise

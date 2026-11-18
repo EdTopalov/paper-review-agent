@@ -13,6 +13,8 @@ from .evaluation import evaluate, load_sample, summarize, check_experiment
 from .runner import VARIANTS, Config, run_review, safe_error
 from .quality import export_quality_packets, score_quality_labels
 from .selection import run_selection
+from .benchmark_data import (DEFAULT_BENCHMARK, KINDS, benchmark_summary,
+                             export_inputs, load_benchmark, read_jsonl)
 
 
 def model_options(parser):
@@ -78,9 +80,80 @@ def main():
     audit.add_argument("--experiment", type=Path, required=True)
     audit.add_argument("--workers", type=int, default=2)
     model_options(audit)
+    benchmark_verify = commands.add_parser("benchmark-verify", help="Validate frozen benchmark inputs and references, offline")
+    benchmark_verify.add_argument("--root", type=Path, default=DEFAULT_BENCHMARK)
+    benchmark_export = commands.add_parser("benchmark-export", help="Export public benchmark inputs without gold labels")
+    benchmark_export.add_argument("--root", type=Path, default=DEFAULT_BENCHMARK)
+    benchmark_export.add_argument("--split", choices=["dev", "test"], default="test")
+    benchmark_export.add_argument("--tracks", nargs="+", choices=KINDS)
+    benchmark_export.add_argument("--out", type=Path, required=True)
+    benchmark_plan = commands.add_parser("benchmark-plan", help="Prepare a run plan without model calls")
+    benchmark_plan.add_argument("--root", type=Path, default=DEFAULT_BENCHMARK)
+    benchmark_plan.add_argument("--split", choices=["dev", "test"], default="test")
+    benchmark_plan.add_argument("--tracks", nargs="+", choices=KINDS)
+    benchmark_plan.add_argument("--task-ids", nargs="+")
+    benchmark_plan.add_argument("--variants", nargs="+", choices=VARIANTS, default=list(VARIANTS))
+    benchmark_plan.add_argument("--repeats", type=int, default=3)
+    benchmark_plan.add_argument("--workers", type=int, default=3)
+    benchmark_plan.add_argument("--seed", type=int, default=20261118)
+    benchmark_plan.add_argument("--out", type=Path, required=True)
+    model_options(benchmark_plan)
+    benchmark_run = commands.add_parser("benchmark-run", help="Validate a plan; --execute is required for model calls")
+    benchmark_run.add_argument("--plan", type=Path, required=True)
+    benchmark_run.add_argument("--root", type=Path, help="Optional dataset location override")
+    benchmark_run.add_argument("--out", type=Path, required=True)
+    benchmark_run.add_argument("--execute", action="store_true", help="Actually issue billed model requests")
+    benchmark_score = commands.add_parser("benchmark-score", help="Score benchmark prediction records, offline")
+    benchmark_score.add_argument("--root", type=Path, default=DEFAULT_BENCHMARK)
+    benchmark_score.add_argument("--split", choices=["dev", "test"], default="test")
+    benchmark_score.add_argument("--tracks", nargs="+", choices=KINDS)
+    benchmark_score.add_argument("--records", type=Path, required=True)
+    benchmark_score.add_argument("--plan", type=Path)
     commands.add_parser("models", help="Check authentication and list project-accessible model IDs")
     args = parser.parse_args()
     try:
+        if args.command == "benchmark-verify":
+            print(json.dumps(benchmark_summary(args.root), indent=2))
+            return 0
+        if args.command == "benchmark-export":
+            print(json.dumps(export_inputs(args.root, args.out, split=args.split, tracks=args.tracks), indent=2))
+            return 0
+        if args.command == "benchmark-plan":
+            from .benchmark_runner import make_plan
+            config = Config(model=args.model or os.environ.get("OPENAI_MODEL") or Config.model,
+                            max_reads=args.max_reads, max_output_tokens=args.max_output_tokens,
+                            timeout=args.timeout, retries=args.retries, reasoning_effort=args.reasoning_effort)
+            plan = make_plan(args.root, split=args.split, tracks=args.tracks, variants=args.variants,
+                             repeats=args.repeats, config=config, workers=args.workers,
+                             seed=args.seed, task_ids=args.task_ids)
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            with args.out.open("x", encoding="utf-8") as stream:
+                stream.write(json.dumps(plan, indent=2) + "\n")
+            print(json.dumps({"plan": str(args.out), "tasks": len(plan["task_ids"]),
+                              "planned_jobs": len(plan["jobs"]), "model_calls": 0}, indent=2))
+            return 0
+        if args.command == "benchmark-run":
+            from .benchmark_runner import run_plan
+            if args.execute and not os.environ.get("OPENAI_API_KEY"):
+                parser.error("Set OPENAI_API_KEY before explicitly executing a benchmark plan")
+            plan = json.loads(args.plan.read_text(encoding="utf-8"))
+            print(json.dumps(run_plan(plan, args.out, execute=args.execute, root_override=args.root), indent=2))
+            return 0
+        if args.command == "benchmark-score":
+            from .benchmark_scoring import score_predictions
+            tasks = load_benchmark(args.root, args.split, args.tracks)
+            options = {}
+            if args.plan:
+                from .paper import file_hash
+                plan = json.loads(args.plan.read_text(encoding="utf-8"))
+                if plan["manifest_sha256"] != file_hash(args.root / "manifest.jsonl"):
+                    raise ValueError("Scoring plan does not match the benchmark manifest")
+                tasks = [task for task in tasks if task["id"] in plan["task_ids"]]
+                if {task["id"] for task in tasks} != set(plan["task_ids"]):
+                    raise ValueError("Scoring split/tracks do not contain the planned task set")
+                options = {"variants": plan["variants"], "repeats": plan["repeats"]}
+            print(json.dumps(score_predictions(tasks, read_jsonl(args.records), **options), indent=2, allow_nan=False))
+            return 0
         if args.command == "verify":
             tasks = load_sample(args.sample)
             print(json.dumps({"verified_tasks": len(tasks), "distinct_papers": len({t['arxiv_id'] for t in tasks})}))

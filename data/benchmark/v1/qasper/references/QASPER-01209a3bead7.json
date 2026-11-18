@@ -1,0 +1,59 @@
+{
+  "id": "QASPER-01209a3bead7",
+  "answers": [
+    {
+      "answer_type": "extractive",
+      "answer": "SNLI BIBREF22 and MultiNLI BIBREF23, Quora Question Pairs dataset BIBREF24,  Stanford Sentiment Treebank (SST) BIBREF25",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0034"
+        },
+        {
+          "document_id": "P1",
+          "block_id": "b0037"
+        },
+        {
+          "document_id": "P1",
+          "block_id": "b0039"
+        }
+      ],
+      "extractive_spans": [
+        "SNLI BIBREF22 and MultiNLI BIBREF23",
+        "Quora Question Pairs dataset BIBREF24",
+        " Stanford Sentiment Treebank (SST) BIBREF25"
+      ]
+    },
+    {
+      "answer_type": "extractive",
+      "answer": "SNLI BIBREF22 and MultiNLI BIBREF23 datasets, Quora Question Pairs dataset BIBREF24, Stanford Sentiment Treebank (SST) BIBREF25",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0034"
+        },
+        {
+          "document_id": "P1",
+          "block_id": "b0037"
+        },
+        {
+          "document_id": "P1",
+          "block_id": "b0039"
+        }
+      ],
+      "extractive_spans": [
+        "SNLI BIBREF22 and MultiNLI BIBREF23 datasets",
+        "Quora Question Pairs dataset BIBREF24",
+        "Stanford Sentiment Treebank (SST) BIBREF25"
+      ]
+    }
+  ],
+  "label_origin": "qasper_practitioner",
+  "source_paper_id": "1809.02279",
+  "source_question_id": "01209a3bead7c87bcdc628be2a5a26b41abde9d1",
+  "source_annotation_ids": [
+    "3de37c703d5e0f2bd61af6769de4c82cea98a14e",
+    "d6ff2b75a23d2f78058223e1996e67575421e049"
+  ],
+  "source_member": "qasper-dev-v0.3.json"
+}

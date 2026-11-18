@@ -1,0 +1,49 @@
+{
+  "id": "CB-5501cd8dd300",
+  "kind": "claim",
+  "instructions": "The supplied documents are hypothetical research reports. Assess only their stated content. Document blocks are text locations, not PDF page numbers. Judge the statement as supported, contradicted, or insufficient. Supported means the report supplies the needed evidence at the stated scope; contradicted means the report supplies incompatible facts; insufficient means the supplied evidence does not establish the statement or its negation. Return the verdict, a short explanation, and the document/block IDs used. A valid quotation alone does not establish the inference.",
+  "statement": "The paper provides no numerical comparison on additional held-out problems beyond its two illustrative examples.",
+  "documents": [
+    {
+      "id": "P1",
+      "title": "Research report 8dd300",
+      "blocks": [
+        {
+          "id": "b0001",
+          "section": "Overview",
+          "text": "We investigate a small methodological change in a controlled research setting. The report presents the study protocol, measured results, and analysis details. Claims are limited to the reported experiment."
+        },
+        {
+          "id": "b0002",
+          "section": "Protocol",
+          "text": "The analysis plan specifies the reported comparison and records the relevant evaluation conditions. The reported numbers describe this experiment; no independent replication is claimed."
+        },
+        {
+          "id": "b0003",
+          "section": "Methods",
+          "text": "The baseline and new method receive the same input format. The comparison changes one methodological component while recording study-specific conditions below."
+        },
+        {
+          "id": "b0004",
+          "section": "Results",
+          "text": "The main text illustrates the method on two held-out problems and discusses their solution traces qualitatively. The examples demonstrate behavior but provide only a small illustrative comparison."
+        },
+        {
+          "id": "b0005",
+          "section": "Scope",
+          "text": "The experiment is intentionally narrow. Results are not evidence of performance on untested tasks or settings. An open question about generalization is different from a demonstrated implementation defect."
+        },
+        {
+          "id": "b0006",
+          "section": "Reproducibility",
+          "text": "All study-specific quantities needed for the supplied claim are disclosed in this report. The hypothetical study does not claim that a real experiment has been reproduced."
+        },
+        {
+          "id": "b0007",
+          "section": "Appendix",
+          "text": "The appendix supplies only the two main-text solution traces. The complete evaluation consists of those two illustrative problems; no additional held-out problems were evaluated quantitatively."
+        }
+      ]
+    }
+  ]
+}

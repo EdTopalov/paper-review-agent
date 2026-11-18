@@ -62,6 +62,62 @@ def observation_summary(observation):
     return "response recorded"
 
 
+def render_deliberative_phases(events):
+    """Summarize role decisions while keeping full drafts in the raw trace."""
+    starts = [index for index, event in enumerate(events) if event["event"] == "deliberative_phase"]
+    if not starts:
+        return ""
+    lines = ["## Deliberative phases", "",
+             "Plans and critic feedback are model judgments. Source evidence and full outputs remain in the linked trace events.", "",
+             "| Step | Role | Decision or outcome | Events |", "|---|---|---|---|"]
+    for position, start in enumerate(starts):
+        phase = events[start]
+        end = starts[position + 1] if position + 1 < len(starts) else len(events)
+        following = events[start + 1:end]
+        results = [event for event in following if event["event"] == "phase_result"]
+        errors = [event for event in following if event["event"] == "phase_error"]
+        observations = [event for event in following if event["event"] == "tool_observation"]
+        value = results[-1]["result"] if results else {}
+        role = phase["phase"]
+        details = []
+        linked = [phase]
+        if errors:
+            for event in errors:
+                diagnostic = "; ".join(str(event[key]) for key in ("error", "code", "type") if event.get(key))
+                details.append(diagnostic)
+            linked += errors
+        if role == "plan" and value:
+            details.append("Checks: " + "; ".join(value["checks"]))
+        elif role == "critic" and value:
+            details.append("Recommendation: " + value["recommendation"])
+            if value["issues"]:
+                details.append("Issues: " + "; ".join(value["issues"]))
+            if value["target"]:
+                details.append("Target: " + value["target"])
+        elif role in ("draft", "revise") and value:
+            details.append("Draft prepared" if role == "draft" else "Draft revised")
+            if value["changes"]:
+                details.append("Changes: " + value["changes"])
+        elif value.get("action") == "finish_reading":
+            details.append("Finished exploration: " + value.get("reason", ""))
+        elif role in ("investigate", "targeted_read") and observations:
+            observation = observations[-1]["observation"]
+            outcome = observation_summary(observation)
+            if observation.get("location_unit") == "source_block":
+                outcome = outcome.replace("pages", "source blocks")
+            details.append(outcome)
+            linked += observations
+        linked += results
+        if not details:
+            details.append("No validated phase output; inspect the trace")
+        summary = table_cell("; ".join(details))
+        if len(summary) > 600:
+            summary = summary[:600] + " …"
+        links = " · ".join(f"[event {event['seq']}](trace.jsonl#L{event['seq']})" for event in linked)
+        lines.append(f"| {phase['step']} | {role} | {summary} | {links} |")
+    return "\n".join(lines) + "\n"
+
+
 def render_run(path):
     path = Path(path)
     events = read_events(path)
@@ -98,11 +154,14 @@ def render_run(path):
         else:
             lines += [f"Audit error: `{json.dumps(audit.get('error'))}`"]
         lines += [""]
+    run_events = events[:next(i for i, e in enumerate(events) if e["event"] == "run_end") + 1]
+    phase_report = render_deliberative_phases(run_events)
+    if phase_report:
+        lines += [phase_report, ""]
     lines += ["## Decisions", "",
               "| Step | Action and key arguments | Purpose | Outcome | Event |",
               "|---|---|---|---|---|"]
     # Audit decisions are displayed above, separately from the review trajectory.
-    run_events = events[:next(i for i, e in enumerate(events) if e["event"] == "run_end") + 1]
     for event in run_events:
         if event["event"] in ("model_error", "retry", "run_error"):
             detail = json.dumps(event.get('error', event.get('next_attempt')))

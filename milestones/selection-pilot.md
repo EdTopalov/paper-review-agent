@@ -13,8 +13,9 @@ reviewer variant. It then makes one structured-output model call over the brief,
 final review objects, citation diagnostics, and failures. The selector receives
 no additional paper text and must not imply that it read unseen pages. Its
 cross-paper memory consists of final reviews; all candidates remain in context.
-`evidence_memory` changes context within each paper, not the selector's memory
-policy. There is no cross-run memory or learned user profile.
+`deliberative_review` adds planning, criticism, and revision within each paper;
+it does not change the selector's context policy. There is no cross-run memory
+or learned user profile.
 
 The controller requires distinct inputs and candidate IDs, at least two completed
 reviews, a valid selected ID, and a trade-off against every other completed
@@ -25,7 +26,7 @@ Selection ID checks validate the workflow; they do not validate the rationale.
 After [installation](../README.md#installation), run:
 
 ```shell
-paper-review select data/dev/toy.json data/dev/selection-negative-result.json --variant evidence_memory --model gpt-6-luna --brief "Discuss experimental design, uncertainty, and useful follow-up studies" --out runs/scratch/selection-dev
+paper-review select data/dev/toy.json data/dev/selection-negative-result.json --variant deliberative_review --model gpt-6-luna --brief "Discuss experimental design, uncertainty, and useful follow-up studies" --out runs/scratch/selection-dev
 ```
 
 These inputs are explicitly synthetic development fixtures, not a selection

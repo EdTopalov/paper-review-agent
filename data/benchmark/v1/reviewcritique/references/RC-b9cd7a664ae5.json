@@ -1,0 +1,20 @@
+{
+  "id": "RC-b9cd7a664ae5",
+  "verdict": "reliable",
+  "error_types": [],
+  "expert_explanation": null,
+  "label_origin": "reviewcritique_expert",
+  "provenance": {
+    "repository": "https://github.com/jiangshdd/ReviewCritique",
+    "revision": "629932bcfa31879b1df1e011e3cd7188aa3b9b46",
+    "source_file": "data/ReviewCritique.jsonl",
+    "paper_line_1based": 84,
+    "review_key": "review#3",
+    "segment_index_0based": 44,
+    "topic_class_1": "weakness and suggestion",
+    "topic_class_2": "revision advice",
+    "paper_title": "Out-of-Distribution Detection and Selective Generation for Conditional Language Models",
+    "body_text_sha256": "da61911019964d8e8b6f083b8219c20bf6e5ccbd38d8eaa3598f1dc3a2aee599"
+  },
+  "modification_notice": "Original expert label preserved; selected segment and unannotated original-review text supplied as context; paper split into benchmark blocks; source metadata separated from agent input."
+}

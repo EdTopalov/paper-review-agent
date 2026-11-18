@@ -1,0 +1,22 @@
+{
+  "id": "RC-39282147886f",
+  "verdict": "deficient",
+  "error_types": [
+    "misunderstanding"
+  ],
+  "expert_explanation": "In the experiment section, the author claimed that the experiments (the two tasks) are used to prove the in-context bias, that is, whether or not adding similar sentences when pretraining sentences highly depends on the different task situations.",
+  "label_origin": "reviewcritique_expert",
+  "provenance": {
+    "repository": "https://github.com/jiangshdd/ReviewCritique",
+    "revision": "629932bcfa31879b1df1e011e3cd7188aa3b9b46",
+    "source_file": "data/ReviewCritique.jsonl",
+    "paper_line_1based": 97,
+    "review_key": "review#3",
+    "segment_index_0based": 18,
+    "topic_class_1": "Weak connection",
+    "topic_class_2": "weakness",
+    "paper_title": "The Inductive Bias of In-Context Learning: Rethinking Pretraining Example Design",
+    "body_text_sha256": "3e815b607bf146bb86c433f6a6ee076d2f4c2a00cfe2cf40c69b1f071b970906"
+  },
+  "modification_notice": "Original expert label preserved; selected segment and unannotated original-review text supplied as context; paper split into benchmark blocks; source metadata separated from agent input."
+}

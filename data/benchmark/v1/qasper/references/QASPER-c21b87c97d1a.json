@@ -1,0 +1,39 @@
+{
+  "id": "QASPER-c21b87c97d1a",
+  "answers": [
+    {
+      "answer_type": "extractive",
+      "answer": "pointer networks with coverage mechanism (PG-net)",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0010"
+        }
+      ],
+      "extractive_spans": [
+        "pointer networks with coverage mechanism (PG-net)"
+      ]
+    },
+    {
+      "answer_type": "extractive",
+      "answer": " pointer networks with coverage mechanism (PG-net)BIBREF0",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0010"
+        }
+      ],
+      "extractive_spans": [
+        " pointer networks with coverage mechanism (PG-net)BIBREF0"
+      ]
+    }
+  ],
+  "label_origin": "qasper_practitioner",
+  "source_paper_id": "2002.03407",
+  "source_question_id": "c21b87c97d1afac85ece2450ee76d01c946de668",
+  "source_annotation_ids": [
+    "2ccb29603bb2bff2292bdd8f8cbbcabf1a826af2",
+    "3f6947c77d8a89f7737f4e64311bedce0574b918"
+  ],
+  "source_member": "qasper-dev-v0.3.json"
+}

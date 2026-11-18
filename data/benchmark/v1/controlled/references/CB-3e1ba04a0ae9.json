@@ -1,0 +1,22 @@
+{
+  "id": "CB-3e1ba04a0ae9",
+  "verdict": "supported",
+  "evidence": [
+    {
+      "document_id": "P1",
+      "block_id": "b0004"
+    }
+  ],
+  "pair_id": "PAIR-08768ded0bf8",
+  "family": "confidence_interval",
+  "condition": "a",
+  "facts": {
+    "interval95": [
+      0.9,
+      2.5
+    ],
+    "two_sided_alpha": 0.05,
+    "same_prespecified_test_and_interval": true
+  },
+  "label_origin": "programmatic_oracle"
+}

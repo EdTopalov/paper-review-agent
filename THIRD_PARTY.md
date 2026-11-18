@@ -20,12 +20,15 @@ mathematical notation, and ambiguous line-break hyphens. The shared package is
   adapter handles evidence validation, accepted-review stopping and API accounting.
   This is the [pyagent.org](https://pyagent.org/) project, distinct from the
   unrelated `pyagent-harness` package.
-- Evidence memory uses structured notes and context recitation as an architectural
-  idea, described in [Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents).
-  `context_memory.py` is an original implementation; no article or framework
-  source code is copied. The selection pilot composes the existing reviewers with
-  one independent structured comparison call.
+- Deliberative review uses planning and revision as architectural ideas from
+  [Plan-and-Solve Prompting](https://arxiv.org/abs/2305.04091) and
+  [Self-Refine](https://arxiv.org/abs/2303.17651). Its controller adds explicit
+  evidence obligations, a source-limited critic, and reserved decision capacity.
+  The implementation is original and does not reproduce or copy those systems.
+  The selection pilot composes the reviewers with one structured comparison call.
 - API integration follows the official [OpenAI function-calling documentation](https://developers.openai.com/api/docs/guides/function-calling).
+- Phase schemas use the API's [structured outputs](https://developers.openai.com/api/docs/guides/structured-outputs)
+  to constrain plan, draft, critic, and final-decision formats.
 - The OpenAI Python SDK is Apache-2.0 licensed; `pypdf` is BSD-3-Clause;
   `python-dotenv` is BSD-3-Clause; `requests` is Apache-2.0;
   `beautifulsoup4`, `jsonschema`, and `pytest` are MIT licensed.
@@ -38,6 +41,18 @@ mathematical notation, and ambiguous line-break hyphens. The shared package is
 - `data/dev/toy.json` is an original synthetic fixture, clearly marked as such.
 - Private reading-club pilot notes are ignored by Git and are not published with
   this implementation or treated as approved evaluation labels.
+- The [assessment benchmark](data/benchmark/v1/README.md) includes modified subsets
+  of [QASPER](https://huggingface.co/datasets/allenai/qasper), CC BY 4.0, and
+  [ReviewCritique](https://github.com/jiangshdd/ReviewCritique), under its custom
+  research-evaluation terms that prohibit model training. Each track retains
+  pinned source revisions, download hashes, original notices, attribution, and
+  transformation rules. The source papers retain their authors' rights.
+  QASPER answer scoring follows the published SQuAD-style normalization and
+  independent reference maxima; evidence scoring uses unique benchmark blocks.
+  No upstream evaluator code is vendored.
+- Controlled appraisal and candidate-selection reports in that benchmark are
+  original hypothetical records dedicated under CC0 1.0. Their reference targets
+  are calculated in code; they are not human review or preference labels.
 
 Luna token pricing was checked on 18 November 2026 against the official
 [GPT-6 Luna](https://developers.openai.com/api/docs/models/gpt-6-luna) model page:

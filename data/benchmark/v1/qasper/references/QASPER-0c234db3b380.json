@@ -1,0 +1,39 @@
+{
+  "id": "QASPER-0c234db3b380",
+  "answers": [
+    {
+      "answer_type": "extractive",
+      "answer": "LSTM",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0009"
+        }
+      ],
+      "extractive_spans": [
+        "LSTM"
+      ]
+    },
+    {
+      "answer_type": "extractive",
+      "answer": "LSTM",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0009"
+        }
+      ],
+      "extractive_spans": [
+        "LSTM"
+      ]
+    }
+  ],
+  "label_origin": "qasper_practitioner",
+  "source_paper_id": "1809.01541",
+  "source_question_id": "0c234db3b380c27c4c70579a5d6948e1e3b24ff1",
+  "source_annotation_ids": [
+    "367d92cf9ea6703b14dc1901c955ca66c061dab6",
+    "d186e529f7acf188b78ea1f147cea5e4b0c511c0"
+  ],
+  "source_member": "qasper-dev-v0.3.json"
+}

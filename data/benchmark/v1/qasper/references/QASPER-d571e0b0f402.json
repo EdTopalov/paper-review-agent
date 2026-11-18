@@ -1,0 +1,33 @@
+{
+  "id": "QASPER-d571e0b0f402",
+  "answers": [
+    {
+      "answer_type": "yes_no",
+      "answer": "Yes",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0021"
+        }
+      ]
+    },
+    {
+      "answer_type": "yes_no",
+      "answer": "Yes",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0021"
+        }
+      ]
+    }
+  ],
+  "label_origin": "qasper_practitioner",
+  "source_paper_id": "2002.07306",
+  "source_question_id": "d571e0b0f402a3d36fb30d70cdcd2911df883bc7",
+  "source_annotation_ids": [
+    "a3d3604691f4c6bb83b436a2db8b4ad2124a3ac2",
+    "e8eac861373de62f92bb8ccec47bd9efce254fa9"
+  ],
+  "source_member": "qasper-dev-v0.3.json"
+}

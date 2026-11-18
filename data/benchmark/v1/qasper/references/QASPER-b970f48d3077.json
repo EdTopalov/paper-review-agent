@@ -1,0 +1,32 @@
+{
+  "id": "QASPER-b970f48d3077",
+  "answers": [
+    {
+      "answer_type": "extractive",
+      "answer": "identifying the questions we wish to explore, Can text analysis provide a new perspective on a “big question” that has been attracting interest for years?, How can we explain what we observe?, hope to connect to multiple disciplines",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0008"
+        },
+        {
+          "document_id": "P1",
+          "block_id": "b0011"
+        }
+      ],
+      "extractive_spans": [
+        "identifying the questions we wish to explore",
+        "Can text analysis provide a new perspective on a “big question” that has been attracting interest for years?",
+        "How can we explain what we observe?",
+        "hope to connect to multiple disciplines"
+      ]
+    }
+  ],
+  "label_origin": "qasper_practitioner",
+  "source_paper_id": "1907.01468",
+  "source_question_id": "b970f48d30775d3468952795bc72976baab3438e",
+  "source_annotation_ids": [
+    "3b57b71b33f2cc8b0b430a3c3158c05bd8cac6e0"
+  ],
+  "source_member": "qasper-dev-v0.3.json"
+}

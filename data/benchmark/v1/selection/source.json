@@ -1,0 +1,16 @@
+{
+  "version": "controlled-scientific-appraisal-v1",
+  "track": "selection",
+  "label_origin": "programmatic_oracle",
+  "generator": "scripts/prepare_controlled_benchmark.py",
+  "randomness": "none; identifiers are SHA-256-derived",
+  "license": "CC0-1.0",
+  "source": "Original hypothetical study records and rendered reports",
+  "cases": 18,
+  "counts_by_split": {
+    "dev": 6,
+    "test": 12
+  },
+  "manifest_sha256": "3d96bddad6fda7e7f60c92fb9127a822b8f6497261b23f1244f48283c7ebd89f",
+  "split_unit": "candidate base set including all order permutations"
+}

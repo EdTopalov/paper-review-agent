@@ -1,0 +1,22 @@
+{
+  "id": "QASPER-dfca00be3284",
+  "answers": [
+    {
+      "answer_type": "free_form",
+      "answer": "30 terms, each term-sanse pair has around 15 samples for testing",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0022"
+        }
+      ]
+    }
+  ],
+  "label_origin": "qasper_practitioner",
+  "source_paper_id": "1910.14076",
+  "source_question_id": "dfca00be3284cc555a6a4eac4831471fb1f5875b",
+  "source_annotation_ids": [
+    "c3830d19ddf1d28c754e8cf952e2661c651b6c08"
+  ],
+  "source_member": "qasper-dev-v0.3.json"
+}

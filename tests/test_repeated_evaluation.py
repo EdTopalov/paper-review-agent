@@ -149,6 +149,56 @@ def test_task_selector_keeps_full_frozen_sample_and_seeded_job_order(tmp_path, m
     assert manifest["order_seed"] == 42
     assert manifest["sample_path"] == str(sample.resolve())
     assert sample.read_bytes() == original_sample
+    progress = json.loads((out / "progress.json").read_text(encoding="utf-8"))
+    assert progress["status"] == "finished"
+    assert progress["total"] == progress["completed"] == progress["succeeded"] == 6
+    assert progress["failed"] == progress["remaining"] == 0
+    assert progress["model"] == Config.model and progress["variants"] == ["agent", "baseline"]
+    assert progress["source_sha256"] == manifest["source_sha256"]
+
+
+def test_evaluation_progress_includes_retained_results_on_resume(tmp_path, monkeypatch):
+    import paper_review.evaluation as evaluation
+
+    sample = Path(__file__).resolve().parents[1] / "data/eval/tasks.jsonl"
+    out = tmp_path / "resumed"
+    calls = []
+
+    def fake_run(paper, folder, config, task_id, variant, metadata):
+        result = {"status": "ok", "api_calls": 1, "latency_seconds": 1.0}
+        folder.mkdir(parents=True)
+        (folder / "trace.jsonl").write_text(json.dumps({"event": "run_end", "result": result}) + "\n", encoding="utf-8")
+        calls.append(task_id)
+        return result
+
+    monkeypatch.setattr(evaluation, "run_review", fake_run)
+    monkeypatch.setattr(evaluation, "summarize", lambda out: "offline test")
+    options = {"workers": 1, "task_ids": ["T17"], "variants": ["agent"], "repeats": 2}
+    assert evaluate(sample, out, Config(), **options) == "offline test"
+    first = json.loads((out / "progress.json").read_text(encoding="utf-8"))
+    assert evaluate(sample, out, Config(), **options) == "offline test"
+    second = json.loads((out / "progress.json").read_text(encoding="utf-8"))
+    assert len(calls) == 2
+    assert second["status"] == "finished" and second["completed"] == second["total"] == 2
+    assert second["remaining"] == second["failed"] == 0
+    assert second["elapsed_seconds"] >= first["elapsed_seconds"]
+
+
+def test_evaluation_progress_records_failure_without_raw_exception_text(tmp_path, monkeypatch):
+    import paper_review.evaluation as evaluation
+
+    def fail_run(*args, **kwargs):
+        raise RuntimeError("Private API setup detail")
+
+    sample = Path(__file__).resolve().parents[1] / "data/eval/tasks.jsonl"
+    out = tmp_path / "failed"
+    monkeypatch.setattr(evaluation, "run_review", fail_run)
+    with pytest.raises(RuntimeError, match="Private API setup detail"):
+        evaluate(sample, out, Config(), workers=1, task_ids=["T17"], variants=["agent"])
+    progress = json.loads((out / "progress.json").read_text(encoding="utf-8"))
+    assert progress["status"] == "error" and progress["total"] == progress["remaining"] == 1
+    assert progress["completed"] == 0 and progress["error"]["type"] == "RuntimeError"
+    assert "Private API setup detail" not in (out / "progress.json").read_text(encoding="utf-8")
 
 
 @pytest.mark.parametrize("task_ids,limit,message", [

@@ -1,0 +1,87 @@
+{
+  "plan_version": "benchmark-plan-v1",
+  "benchmark_version": "evidence-assessment-v1",
+  "benchmark_root": "data/benchmark/v1",
+  "manifest_sha256": "04d75e5b653230fb462a9832cc95861c5ba446bb4251c759cfa168363afee739",
+  "benchmark_settings_sha256": "892f91b829ccfaaf8bbcf52b1dab2e041e62001e1877e52428899aef70e888b0",
+  "source_sha256": "55cc91e86060e1c139405eb3d725b227c4649e2a87201108d3cca7169c229bcc",
+  "git_revision": "def61ec456c2ace6c2a03e915c4fe4c7b5958625",
+  "split": "dev",
+  "tracks": [
+    "selection"
+  ],
+  "task_ids": [
+    "SB-6c9ae061e531"
+  ],
+  "variants": [
+    "agent",
+    "pyagent_react",
+    "deliberative_review",
+    "baseline"
+  ],
+  "variant_metadata": {
+    "agent": {
+      "prompt_version": "m2-v2",
+      "harness": "project-native"
+    },
+    "pyagent_react": {
+      "prompt_version": "m3-v2-pyagent-react-v2",
+      "harness": "pyagent-patterns.ReAct",
+      "harness_version": "0.3.0",
+      "protocol": "pyagent-text-action-v2"
+    },
+    "deliberative_review": {
+      "prompt_version": "m3-deliberative-review-v1",
+      "harness": "project-deliberative",
+      "context_policy": "plan-investigate-draft-critic-resolve-v1"
+    },
+    "baseline": {
+      "prompt_version": "m2-v2",
+      "harness": "one-shot"
+    }
+  },
+  "repeats": 1,
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 20,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "workers": 6,
+  "seed": 20261118,
+  "jobs": [
+    {
+      "id": "SB-6c9ae061e531",
+      "variant": "deliberative_review",
+      "repeat": 1,
+      "job_id": "deliberative_review-r1/SB-6c9ae061e531"
+    },
+    {
+      "id": "SB-6c9ae061e531",
+      "variant": "agent",
+      "repeat": 1,
+      "job_id": "agent-r1/SB-6c9ae061e531"
+    },
+    {
+      "id": "SB-6c9ae061e531",
+      "variant": "baseline",
+      "repeat": 1,
+      "job_id": "baseline-r1/SB-6c9ae061e531"
+    },
+    {
+      "id": "SB-6c9ae061e531",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/SB-6c9ae061e531"
+    }
+  ],
+  "tasks": 1,
+  "planned_runs": 4,
+  "track_tasks": {
+    "selection": 1
+  },
+  "status": "planned_not_executed"
+}

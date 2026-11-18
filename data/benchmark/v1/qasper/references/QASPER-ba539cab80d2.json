@@ -1,0 +1,80 @@
+{
+  "id": "QASPER-ba539cab80d2",
+  "answers": [
+    {
+      "answer_type": "free_form",
+      "answer": "In pass-through, the recognizer passes on the possibly misspelled word, backoff to neutral word backs off to a word with similar distribution across classes and backoff to background model backs off to a more generic word recognition model trained with larger and less specialized corpus.",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0016"
+        },
+        {
+          "document_id": "P1",
+          "block_id": "b0017"
+        },
+        {
+          "document_id": "P1",
+          "block_id": "b0018"
+        },
+        {
+          "document_id": "P1",
+          "block_id": "b0019"
+        }
+      ]
+    },
+    {
+      "answer_type": "free_form",
+      "answer": "Pass-through passes the possibly misspelled word as is, backoff to neutral word backs off to a word with similar distribution across classes and backoff to background model backs off to a more generic word recognition model trained with larger and less specialized corpus.",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0016"
+        },
+        {
+          "document_id": "P1",
+          "block_id": "b0017"
+        },
+        {
+          "document_id": "P1",
+          "block_id": "b0018"
+        },
+        {
+          "document_id": "P1",
+          "block_id": "b0019"
+        }
+      ]
+    },
+    {
+      "answer_type": "free_form",
+      "answer": "Backoff to \"a\" when an UNK-predicted word is encountered, backoff to a more generic word recognition model when the model predicts UNK",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0016"
+        },
+        {
+          "document_id": "P1",
+          "block_id": "b0017"
+        },
+        {
+          "document_id": "P1",
+          "block_id": "b0018"
+        },
+        {
+          "document_id": "P1",
+          "block_id": "b0019"
+        }
+      ]
+    }
+  ],
+  "label_origin": "qasper_practitioner",
+  "source_paper_id": "1905.11268",
+  "source_question_id": "ba539cab80d25c3e20f39644415ed48b9e4e4185",
+  "source_annotation_ids": [
+    "6b8bfc71d0cc8b871f78fbbfa807d626ddb10b33",
+    "80104d1334e2651bd32ad3e9a568b8c459359027",
+    "cb380adfc6c3f628bd361108352fe8fe82fb0894"
+  ],
+  "source_member": "qasper-dev-v0.3.json"
+}

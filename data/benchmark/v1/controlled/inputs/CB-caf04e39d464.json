@@ -1,0 +1,49 @@
+{
+  "id": "CB-caf04e39d464",
+  "kind": "claim",
+  "instructions": "The supplied documents are hypothetical research reports. Assess only their stated content. Document blocks are text locations, not PDF page numbers. Judge the statement as supported, contradicted, or insufficient. Supported means the report supplies the needed evidence at the stated scope; contradicted means the report supplies incompatible facts; insufficient means the supplied evidence does not establish the statement or its negation. Return the verdict, a short explanation, and the document/block IDs used. A valid quotation alone does not establish the inference.",
+  "statement": "The prespecified analysis supplies evidence of a positive effect at its two-sided 5% significance threshold.",
+  "documents": [
+    {
+      "id": "P1",
+      "title": "Research report 39d464",
+      "blocks": [
+        {
+          "id": "b0001",
+          "section": "Overview",
+          "text": "We investigate a small methodological change in a controlled research setting. The report presents the study protocol, measured results, and analysis details. Claims are limited to the reported experiment."
+        },
+        {
+          "id": "b0002",
+          "section": "Protocol",
+          "text": "The analysis plan specifies the reported comparison and records the relevant evaluation conditions. The reported numbers describe this experiment; no independent replication is claimed."
+        },
+        {
+          "id": "b0003",
+          "section": "Methods",
+          "text": "The baseline and new method receive the same input format. The comparison changes one methodological component while recording study-specific conditions below."
+        },
+        {
+          "id": "b0004",
+          "section": "Results",
+          "text": "The estimated effect is expressed in percentage points. The two-sided 95% confidence interval is [-2.4, -0.6]. The prespecified two-sided test uses alpha=0.05 and is the inversion of this confidence interval under the same analysis. A nonsignificant outcome is not an equivalence finding."
+        },
+        {
+          "id": "b0005",
+          "section": "Scope",
+          "text": "The experiment is intentionally narrow. Results are not evidence of performance on untested tasks or settings. An open question about generalization is different from a demonstrated implementation defect."
+        },
+        {
+          "id": "b0006",
+          "section": "Reproducibility",
+          "text": "All study-specific quantities needed for the supplied claim are disclosed in this report. The hypothetical study does not claim that a real experiment has been reproduced."
+        },
+        {
+          "id": "b0007",
+          "section": "Appendix",
+          "text": "The appendix supplies additional analysis details. It is part of the complete supplied report and should be considered when judging broad claims about missing evidence."
+        }
+      ]
+    }
+  ]
+}

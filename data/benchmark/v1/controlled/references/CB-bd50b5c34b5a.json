@@ -1,0 +1,28 @@
+{
+  "id": "CB-bd50b5c34b5a",
+  "verdict": "contradicted",
+  "evidence": [
+    {
+      "document_id": "P1",
+      "block_id": "b0001"
+    },
+    {
+      "document_id": "P1",
+      "block_id": "b0007"
+    }
+  ],
+  "pair_id": "PAIR-239e4221b740",
+  "family": "seed_aggregation",
+  "condition": "b",
+  "facts": {
+    "seed_accuracies": [
+      66,
+      68,
+      70,
+      72,
+      74
+    ],
+    "headline_accuracy": 74
+  },
+  "label_origin": "programmatic_oracle"
+}

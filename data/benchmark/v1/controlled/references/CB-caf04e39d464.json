@@ -1,0 +1,22 @@
+{
+  "id": "CB-caf04e39d464",
+  "verdict": "contradicted",
+  "evidence": [
+    {
+      "document_id": "P1",
+      "block_id": "b0004"
+    }
+  ],
+  "pair_id": "PAIR-08768ded0bf8",
+  "family": "confidence_interval",
+  "condition": "b",
+  "facts": {
+    "interval95": [
+      -2.4,
+      -0.6
+    ],
+    "two_sided_alpha": 0.05,
+    "same_prespecified_test_and_interval": true
+  },
+  "label_origin": "programmatic_oracle"
+}

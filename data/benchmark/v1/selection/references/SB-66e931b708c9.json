@@ -1,0 +1,95 @@
+{
+  "id": "SB-66e931b708c9",
+  "eligible_ids": [
+    "P-66e931b708c9"
+  ],
+  "acceptable_ids": [
+    "P-66e931b708c9"
+  ],
+  "facts": [
+    {
+      "id": "P-66e931b708c9",
+      "task": "retrieval question answering",
+      "languages": [
+        "English",
+        "German"
+      ],
+      "peak_gpu_gb": 12,
+      "independent_test": true,
+      "reported_seeds": 5,
+      "planned_seeds": 5,
+      "effect_interval95": [
+        6,
+        9
+      ],
+      "seed_accuracies": [
+        66,
+        68,
+        70,
+        72,
+        74
+      ],
+      "headline_accuracy": 70,
+      "headline_label": "mean accuracy"
+    },
+    {
+      "id": "P-e9e07484ab89",
+      "task": "retrieval question answering",
+      "languages": [
+        "English"
+      ],
+      "peak_gpu_gb": 14,
+      "independent_test": true,
+      "reported_seeds": 5,
+      "planned_seeds": 5,
+      "effect_interval95": [
+        10,
+        14
+      ],
+      "seed_accuracies": [
+        66,
+        68,
+        70,
+        72,
+        74
+      ],
+      "headline_accuracy": 70,
+      "headline_label": "mean accuracy"
+    },
+    {
+      "id": "P-7402e4ad7d74",
+      "task": "code repair",
+      "languages": [
+        "English",
+        "German"
+      ],
+      "peak_gpu_gb": 16,
+      "independent_test": true,
+      "reported_seeds": 5,
+      "planned_seeds": 5,
+      "effect_interval95": [
+        12,
+        16
+      ],
+      "seed_accuracies": [
+        66,
+        68,
+        70,
+        72,
+        74
+      ],
+      "headline_accuracy": 70,
+      "headline_label": "mean accuracy"
+    }
+  ],
+  "profile": "replication",
+  "family": "domain_boundaries",
+  "order_id": 0,
+  "base_set_id": "domain_boundaries",
+  "candidate_order": [
+    "P-66e931b708c9",
+    "P-e9e07484ab89",
+    "P-7402e4ad7d74"
+  ],
+  "label_origin": "programmatic_oracle"
+}

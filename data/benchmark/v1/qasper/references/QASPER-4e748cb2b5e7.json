@@ -1,0 +1,17 @@
+{
+  "id": "QASPER-4e748cb2b5e7",
+  "answers": [
+    {
+      "answer_type": "unanswerable",
+      "answer": "Unanswerable",
+      "evidence": []
+    }
+  ],
+  "label_origin": "qasper_practitioner",
+  "source_paper_id": "1701.05574",
+  "source_question_id": "4e748cb2b5e74d905d9b24b53be6cfdf326e8054",
+  "source_annotation_ids": [
+    "d14ff6f305a54342fd7cb1c945450b737f2c699e"
+  ],
+  "source_member": "qasper-dev-v0.3.json"
+}

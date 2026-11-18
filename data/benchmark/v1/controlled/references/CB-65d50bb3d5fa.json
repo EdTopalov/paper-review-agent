@@ -1,0 +1,25 @@
+{
+  "id": "CB-65d50bb3d5fa",
+  "verdict": "contradicted",
+  "evidence": [
+    {
+      "document_id": "P1",
+      "block_id": "b0004"
+    },
+    {
+      "document_id": "P1",
+      "block_id": "b0007"
+    }
+  ],
+  "pair_id": "PAIR-6dfc5a37f39d",
+  "family": "total_cost",
+  "condition": "b",
+  "facts": {
+    "evaluation_requests": 1500,
+    "baseline_preparation_usd": 20,
+    "baseline_inference_usd": 200,
+    "new_preparation_usd": 260,
+    "new_inference_usd": 90
+  },
+  "label_origin": "programmatic_oracle"
+}

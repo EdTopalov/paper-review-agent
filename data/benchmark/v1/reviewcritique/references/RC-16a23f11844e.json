@@ -1,0 +1,20 @@
+{
+  "id": "RC-16a23f11844e",
+  "verdict": "reliable",
+  "error_types": [],
+  "expert_explanation": null,
+  "label_origin": "reviewcritique_expert",
+  "provenance": {
+    "repository": "https://github.com/jiangshdd/ReviewCritique",
+    "revision": "629932bcfa31879b1df1e011e3cd7188aa3b9b46",
+    "source_file": "data/ReviewCritique.jsonl",
+    "paper_line_1based": 32,
+    "review_key": "review#2",
+    "segment_index_0based": 10,
+    "topic_class_1": "weakness",
+    "topic_class_2": "Summary of method",
+    "paper_title": "Exploring extreme parameter compression for pre-trained language models",
+    "body_text_sha256": "c9d3602afc0f83dc9fd6978d326694f900c3714a4af92f327132ddd53dee7085"
+  },
+  "modification_notice": "Original expert label preserved; selected segment and unannotated original-review text supplied as context; paper split into benchmark blocks; source metadata separated from agent input."
+}

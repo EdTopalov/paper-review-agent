@@ -1,0 +1,39 @@
+{
+  "id": "QASPER-b591853e9389",
+  "answers": [
+    {
+      "answer_type": "extractive",
+      "answer": "the IMDb movie review dataset BIBREF17",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0027"
+        }
+      ],
+      "extractive_spans": [
+        "the IMDb movie review dataset BIBREF17"
+      ]
+    },
+    {
+      "answer_type": "extractive",
+      "answer": "IMDb movie review",
+      "evidence": [
+        {
+          "document_id": "P1",
+          "block_id": "b0027"
+        }
+      ],
+      "extractive_spans": [
+        "IMDb movie review"
+      ]
+    }
+  ],
+  "label_origin": "qasper_practitioner",
+  "source_paper_id": "1611.01576",
+  "source_question_id": "b591853e938984e6069d738371500ebdec50d256",
+  "source_annotation_ids": [
+    "4d972608fb69e0177661d4b6ecc9e673148f0fa5",
+    "81770f7a834e3790f7c78daa84bab264a8e7ea2a"
+  ],
+  "source_member": "qasper-dev-v0.3.json"
+}

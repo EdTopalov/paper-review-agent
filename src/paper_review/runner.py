@@ -18,7 +18,6 @@ from openai import OpenAI, APIConnectionError, APIStatusError, APITimeoutError
 from .paper import Paper, file_hash
 from .citations import CHECKER_VERSION
 from .agent_tools import PaperEvidence
-from .context_memory import EvidenceMemory, MEMORY_POLICY, MEMORY_PROMPT_VERSION
 from .prompts import (AGENT_INSTRUCTIONS, PROMPT_VERSION, PYAGENT_PROMPT_VERSION,
                       PYAGENT_PROTOCOL_VERSION, RUBRIC, RUBRIC_VERSION)
 from .schema import REVIEW_SCHEMA, TOOLS
@@ -41,7 +40,7 @@ PRICES = {
     "gpt-4.1-mini": (0.4, 0.1, 1.6, 0.4),
 }
 
-VARIANTS = ("agent", "pyagent_react", "evidence_memory", "baseline")
+VARIANTS = ("agent", "pyagent_react", "deliberative_review", "baseline")
 
 
 def variant_metadata(variant):
@@ -56,8 +55,10 @@ def variant_metadata(variant):
         details.update(prompt_version=PYAGENT_PROMPT_VERSION,
                        harness="pyagent-patterns.ReAct", harness_version=version,
                        protocol=PYAGENT_PROTOCOL_VERSION)
-    elif variant == "evidence_memory":
-        details.update(prompt_version=MEMORY_PROMPT_VERSION, context_policy=MEMORY_POLICY)
+    elif variant == "deliberative_review":
+        from .deliberative_runner import DELIBERATIVE_POLICY, DELIBERATIVE_PROMPT_VERSION
+        details.update(prompt_version=DELIBERATIVE_PROMPT_VERSION, harness="project-deliberative",
+                       context_policy=DELIBERATIVE_POLICY)
     elif variant == "baseline":
         details["harness"] = "one-shot"
     return details
@@ -147,32 +148,25 @@ def validate_review(review):
         raise ValueError("invalid_review_content")
 
 
-def agent(paper, calls, config, trace, *, memory=None):
+def agent(paper, calls, config, trace, *, contract=None):
     history = [{"role": "user", "content": json.dumps(paper.introduction(), ensure_ascii=False)}]
     reads = 0
     tool_calls = 0
     evidence = PaperEvidence(paper)
-    instructions = AGENT_INSTRUCTIONS.format(max_reads=config.max_reads)
+    instructions = contract.instructions if contract else AGENT_INSTRUCTIONS.format(max_reads=config.max_reads)
+    task_tools = contract.tools if contract else TOOLS
     for step in range(1, config.max_reads + 4):
         calls.stats["decision_steps"] = step
-        available = TOOLS if reads < config.max_reads else [TOOLS[-1]]
+        available = task_tools if reads < config.max_reads else [task_tools[-1]]
         if reads == config.max_reads:
             trace.write("reading_budget_exhausted", step=step, remaining_tools=["submit_review"])
-        if memory is not None:
-            history = memory.messages(reads, config.max_reads)
-            trace.write("context_memory", step=step, **memory.statistics(),
-                        input_characters=len(history[0]["content"]))
         response = calls.call(instructions=instructions, input=history, tools=available,
                               parallel_tool_calls=False, tool_choice="required")
-        if memory is None:
-            history.extend(item.model_dump(mode="json") for item in response.output)
+        history.extend(item.model_dump(mode="json") for item in response.output)
         actions = [item for item in response.output if item.type == "function_call"]
         if not actions:
             trace.write("decision", step=step, action="no_tool_call", response_status=response.status)
-            if memory is None:
-                history.append({"role": "user", "content": "Choose a reading tool or submit_review."})
-            else:
-                memory.no_action(step)
+            history.append({"role": "user", "content": "Choose a reading tool or submit_review."})
             continue
         for action in actions:
             tool_calls += 1
@@ -188,9 +182,10 @@ def agent(paper, calls, config, trace, *, memory=None):
                 else:
                     jsonschema.validate(arguments, schema)
                     if action.name == "submit_review":
-                        validate_review(arguments["review"])
+                        (contract.validate if contract else validate_review)(arguments["review"])
                         calls.stats["submission_attempts"] += 1
-                        checks = evidence.check(arguments["review"])
+                        checks = (contract.check(evidence, arguments["review"]) if contract
+                                  else evidence.check(arguments["review"]))
                         if calls.stats["first_submission_checks"] is None:
                             calls.stats["first_submission_checks"] = checks
                         trace.write("tool_call", step=step, name=action.name, arguments=arguments)
@@ -217,24 +212,22 @@ def agent(paper, calls, config, trace, *, memory=None):
             except Exception as exc:
                 observation = {"error": "tool_exception", **safe_error(exc)}
             trace.write("tool_observation", step=step, call_id=action.call_id, observation=observation)
-            if memory is None:
-                history.append({"type": "function_call_output", "call_id": action.call_id,
-                                "output": json.dumps(observation, ensure_ascii=False)})
-            else:
-                memory.remember(step, action.name, arguments, observation)
+            history.append({"type": "function_call_output", "call_id": action.call_id,
+                            "output": json.dumps(observation, ensure_ascii=False)})
     raise RuntimeError("model_decision_budget_exhausted")
 
 
-def baseline(paper, calls, trace):
+def baseline(paper, calls, trace, *, contract=None):
     calls.stats["decision_steps"] = 1
-    response = calls.call(instructions=RUBRIC, input=[{"role": "user", "content": paper.full_text()}],
+    response = calls.call(instructions=contract.rubric if contract else RUBRIC,
+                          input=[{"role": "user", "content": paper.full_text()}],
                           text={"format": {"type": "json_schema", "name": "paper_review",
-                                           "schema": REVIEW_SCHEMA, "strict": True}})
+                                           "schema": contract.output_schema if contract else REVIEW_SCHEMA, "strict": True}})
     trace.write("decision", step=1, action="final_answer", content=response.output_text)
     review = json.loads(response.output_text)
-    validate_review(review)
+    (contract.validate if contract else validate_review)(review)
     calls.stats["submission_attempts"] = 1
-    calls.stats["first_submission_checks"] = paper.check_citations(review)
+    calls.stats["first_submission_checks"] = contract.source_checks(review) if contract else paper.check_citations(review)
     return review, {"reading_actions": 0, "tool_calls": 0, "decision_steps": 1}
 
 
@@ -265,9 +258,11 @@ def run_review(paper_path, out, config, task_id, variant="agent", client=None, m
                     paper_metadata={k: v for k, v in paper.snapshot.items() if k != "pages"})
         if len(paper.full_text()) > config.max_paper_chars:
             raise ValueError("paper_exceeds_documented_input_limit")
-        if variant in ("agent", "evidence_memory"):
-            memory = EvidenceMemory(paper) if variant == "evidence_memory" else None
-            review, trajectory = agent(paper, calls, config, trace, memory=memory)
+        if variant == "agent":
+            review, trajectory = agent(paper, calls, config, trace)
+        elif variant == "deliberative_review":
+            from .deliberative_runner import run_deliberative
+            review, trajectory = run_deliberative(paper, calls, config, trace)
         elif variant == "baseline":
             review, trajectory = baseline(paper, calls, trace)
         else:
@@ -288,6 +283,7 @@ def run_review(paper_path, out, config, task_id, variant="agent", client=None, m
             "paper_has_no_extractable_text", "paper_exceeds_documented_input_limit",
             "model_decision_budget_exhausted",
             "invalid_review_content",
+            "deliberative_infeasible_budget",
             "pyagent_dependency_missing", "pyagent_finished_without_accepted_review",
         }:
             result["error"]["code"] = str(exc)

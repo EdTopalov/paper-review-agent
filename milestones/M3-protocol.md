@@ -1,12 +1,15 @@
 # Repeated paper-review comparison protocol
 
-The [benchmark-design proposal](benchmark-design.md) adds an externally labelled
-quality track that assumes no new human annotation. It supplements this frozen
-M2 comparison and should be validated before launching a large experiment matrix.
-The human assessment section below remains an optional, stronger evaluation path.
+The separate [evidence-assessment benchmark](benchmark-protocol.md) adds frozen
+externally labelled and controlled tasks with no new human annotation. Its
+offline preparation is complete; primary-model repetitions of the existing
+methods are running. It supplements
+this unchanged M2 comparison. The human assessment section below remains an
+optional, stronger evaluation path for complete generated reviews.
 
 Status: registered experiment plan. Full comparative runs and human annotation
-have not been performed for the evidence-memory variant. Development smoke tests
+have not been completed for the deliberative variant. Its controller and
+scripted checks are implemented. Development smoke tests
 verify execution and are excluded from benchmark results. Commit this protocol
 and implementations before collecting new benchmark outcomes. Historical M2 and
 PyAgent outcomes informed the hypotheses; this is not an unseen-dataset study.
@@ -20,12 +23,14 @@ text snapshots, citation checker, model settings, and execution limits.
 |---|---|---|---|
 | `agent` | M2 native function-calling ReAct with complete interaction history. | Reference condition; repeated T17 outcomes test whether its citation-repair failure is recurrent. | [M2](M2.md), [ReAct](https://arxiv.org/abs/2210.03629). |
 | `pyagent_react` | Imported ReAct harness plus a text-action protocol. | Preserve verified completion without increasing mean cost; malformed actions may instead consume decisions. Inspect protocol errors and repair trajectories. | [Registered PyAgent hypothesis](../variants/pyagent_react/README.md), MIT dependency. |
-| `evidence_memory` | Native loop recites exact observed evidence, page provenance, compact action outcomes, and latest citation diagnostics; discards old drafts. | Reduce input tokens on multi-step repairs, particularly T17, without reducing verified completion. Inspect `context_memory` events and successive request inputs. Quality improvement is not presumed. | [Mechanism and hypothesis](../variants/evidence_memory/README.md). |
+| `deliberative_review` | Enforced planning, investigation, draft, fresh-context criticism, and targeted revision under the common budget. | Reduce unsupported conclusions, missed counterevidence, and scope errors. Inspect obligations, observed sources, critic challenges, requested reads, and final changes; extra stages may reduce coverage or increase cost. | [Mechanism and hypothesis](../variants/deliberative_review/README.md). |
 | `baseline` | Full frozen paper in one structured-output call. | Fast reference for assessment quality and cost. It accepts reviews even when quotations fail verification. | [M2 baseline](M2.md). |
 
 PyAgent changes harness and action encoding together; results cannot isolate the
-framework from the protocol. Evidence memory changes context construction, not
-the rubric, tool schema, reading budget, or acceptance rule. A model change is a
+framework from the protocol. Deliberative review changes the decision schedule
+and role contexts, while preserving the rubric, source tools, shared resource
+caps, and acceptance rule. Planning and criticism consume decisions otherwise
+available for reading or repair. A model change is a
 crossed experiment factor, not an additional agent architecture.
 
 ## Frozen design
@@ -37,7 +42,8 @@ crossed experiment factor, not an additional agent architecture.
 - Five independent attempts per task, method, and model: 400 reviews per model,
   800 total. These are planned runs, not an instruction to start them automatically.
 - Five reading actions; eight decisions; 4,000 output tokens per request; low
-  reasoning; 90-second timeout; one retry; three workers. Defaults match M2.
+  reasoning; 90-second timeout; one retry; six workers. Per-attempt limits match
+  M2; deliberative review reserves stages within those limits.
 - Each model uses a separate output directory. Seeded job shuffling mixes methods,
   tasks, and repetitions within a model block to reduce fixed-order confounding.
   Model sampling remains stochastic; the scheduling seed does not seed the API.
@@ -51,8 +57,8 @@ Run the following only when starting the full experiment, with the installed
 
 ```shell
 paper-review verify
-paper-review eval --variants agent pyagent_react evidence_memory baseline --model gpt-6-luna --repeats 5 --workers 3 --max-reads 5 --max-output-tokens 4000 --timeout 90 --retries 1 --reasoning-effort low --order-seed 20261118 --out runs/m3-luna6-r5
-paper-review eval --variants agent pyagent_react evidence_memory baseline --model gpt-5.6-luna --repeats 5 --workers 3 --max-reads 5 --max-output-tokens 4000 --timeout 90 --retries 1 --reasoning-effort low --order-seed 20261119 --out runs/m3-luna56-r5
+paper-review eval --variants agent pyagent_react deliberative_review baseline --model gpt-6-luna --repeats 5 --workers 6 --max-reads 5 --max-output-tokens 4000 --timeout 90 --retries 1 --reasoning-effort low --order-seed 20261118 --out runs/m3-luna6-r5
+paper-review eval --variants agent pyagent_react deliberative_review baseline --model gpt-5.6-luna --repeats 5 --workers 6 --max-reads 5 --max-output-tokens 4000 --timeout 90 --retries 1 --reasoning-effort low --order-seed 20261119 --out runs/m3-luna56-r5
 paper-review check runs/m3-luna6-r5
 paper-review check runs/m3-luna56-r5
 ```
@@ -65,7 +71,7 @@ Printed completion counts are measurements, not prescribed expected values.
 T17's F05 diagnostic adds ten native-agent repetitions on the primary model:
 
 ```shell
-paper-review eval --variants agent --task-ids T17 --model gpt-6-luna --repeats 10 --workers 3 --out runs/m3-t17-native-r10
+paper-review eval --variants agent --task-ids T17 --model gpt-6-luna --repeats 10 --workers 6 --out runs/m3-t17-native-r10
 paper-review check runs/m3-t17-native-r10
 ```
 

@@ -1,0 +1,20 @@
+{
+  "id": "RC-f5097b168055",
+  "verdict": "reliable",
+  "error_types": [],
+  "expert_explanation": null,
+  "label_origin": "reviewcritique_expert",
+  "provenance": {
+    "repository": "https://github.com/jiangshdd/ReviewCritique",
+    "revision": "629932bcfa31879b1df1e011e3cd7188aa3b9b46",
+    "source_file": "data/ReviewCritique.jsonl",
+    "paper_line_1based": 99,
+    "review_key": "review#2",
+    "segment_index_0based": 9,
+    "topic_class_1": "Concerns on analysis",
+    "topic_class_2": "weakness",
+    "paper_title": "Does Entity Abstraction Help Generative Transformers Reason?",
+    "body_text_sha256": "bcfe409383e6af9160367d8a896223c28a4c8af498d6bb82b7ef7ccb86547172"
+  },
+  "modification_notice": "Original expert label preserved; selected segment and unannotated original-review text supplied as context; paper split into benchmark blocks; source metadata separated from agent input."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "CB-75fa33afc24a",
+  "verdict": "insufficient",
+  "evidence": [
+    {
+      "document_id": "P1",
+      "block_id": "b0004"
+    }
+  ],
+  "pair_id": "PAIR-b11c87f53310",
+  "family": "confidence_interval",
+  "condition": "b",
+  "facts": {
+    "interval95": [
+      -1.0,
+      1.4
+    ],
+    "two_sided_alpha": 0.05,
+    "same_prespecified_test_and_interval": true
+  },
+  "label_origin": "programmatic_oracle"
+}

@@ -30,7 +30,7 @@ def candidates(tmp_path, count=2):
 def test_pilot_reviews_each_candidate_then_accounts_for_choice(tmp_path):
     client = Client([finish(), finish(), Response(text=json.dumps(CHOICE))])
     result = run_selection(candidates(tmp_path), tmp_path / "pilot", Config(),
-                           variant="evidence_memory", brief="Discuss experimental design.", client=client)
+                           variant="agent", brief="Discuss experimental design.", client=client)
     assert result["status"] == "ok" and result["choice"]["selected_id"] == "a"
     assert result["total_api_calls"] == 3
     assert result["selection_usage"]["api_calls"] == 1
@@ -46,7 +46,7 @@ def test_pilot_reviews_each_candidate_then_accounts_for_choice(tmp_path):
     assert (tmp_path / "pilot/README.md").is_file()
     events = read_events(tmp_path / "pilot/selection-trace.jsonl")
     assert events[-1]["event"] == "selection_end"
-    assert all(row["variant"] == "evidence_memory" for row in events)
+    assert all(row["variant"] == "agent" for row in events)
 
 
 def test_unavailable_candidates_stay_visible_and_costed(tmp_path):

@@ -1,8 +1,14 @@
-# Proposal: evidence-grounded assessment benchmark
+# Evidence-grounded assessment benchmark design
 
-Status: design proposal, not an implemented dataset or completed experiment.
-The initial design assumes little or no new human annotation. It supplements the
-frozen M2 sample; no existing task, snapshot, result, or rubric is replaced.
+Status: the initial suite is implemented in [data/benchmark/v1](../data/benchmark/v1/README.md).
+The [execution and scoring protocol](benchmark-protocol.md) records the actual
+scope, counts, metrics, and prepared plans. Primary-model repetitions of the
+existing methods are in progress. The design below explains its rationale and possible extensions;
+shortcut model ablations, oracle-evidence ablations, and rolling cross-paper
+memory remain future work.
+
+The design assumes little or no new human annotation. It supplements the frozen
+M2 sample; no existing task, snapshot, result, or rubric is replaced.
 
 ## What should improve
 
@@ -25,7 +31,7 @@ for those broader constructs.
 
 | Source | Task | Primary automatic measures | Boundary |
 |---|---|---|---|
-| [QASPER](https://huggingface.co/datasets/allenai/qasper) | Full paper plus a scientific question; return an answer, answerability, and supporting evidence. | Official answer F1 and evidence F1, with yes/no and unanswerable outcomes reported separately. | Practitioner-labelled scientific reading, not holistic review quality. |
+| [QASPER](https://huggingface.co/datasets/allenai/qasper) | Full paper plus a scientific question; return an answer, answerability, and supporting evidence. | Official-style answer F1 and unique-block evidence F1, with yes/no and unanswerable outcomes reported separately. | Practitioner-labelled scientific reading, not holistic review quality. |
 | [ReviewCritique](https://github.com/jiangshdd/ReviewCritique) | Paper plus an existing review segment; judge whether the segment is deficient and identify its deficiency. | Macro-F1 and per-class precision/recall against expert labels; separate factual contradiction/misunderstanding from vague or out-of-scope criticism. | Labels apply to supplied review segments, not arbitrary new reviews or an exhaustive list of a paper's flaws. |
 
 QASPER separates question writers, who saw a title and abstract, from answerers,
@@ -55,7 +61,7 @@ independent scientific documents.
 This requires a common assessment-task interface for every architecture, such as
 `question -> answer + evidence` and `review segment -> verdict + explanation`.
 The same task contract, tools, evidence limits, and output schema must apply to
-native ReAct, PyAgent, evidence memory, and the full-text baseline. A shared task
+native ReAct, PyAgent, deliberative review, and the full-text baseline. A shared task
 adapter is not a new agent variant. Existing free-form M2 reviews remain unchanged.
 
 ## Controlled evidence sensitivity
@@ -113,7 +119,8 @@ that changes the decision. Report requirement violations, correct acceptable-set
 selection, retained decisive facts, order sensitivity, cost, and latency.
 Synthetic candidate families and their order variants remain in one split.
 
-The current `evidence_memory` variant curates history within one paper. The
+The deliberative controller keeps evidence obligations and observed sources
+within a task, with separate planning and critic contexts. The real-paper
 selection pilot reviews papers independently and then submits all final reviews
 in one call; it does not yet test rolling cross-paper memory. To isolate that
 mechanism, compare all-review context with an explicit bounded evidence table or
@@ -173,9 +180,9 @@ external assessments, not reading-club ground truth.
 3. Freeze adapters, hypotheses, and the held-out benchmark. Evaluate all four
    methods on the same core with one model and repeated attempts. Retain the
    frozen M2 repetitions as the separate milestone comparison.
-4. Add the controlled pairs, then the second model. Add cross-paper memory and
-   the selection stress suite once that mechanism is implemented. No full matrix
-   is started automatically by this proposal.
+4. Report controlled pairs and the selection suite separately from externally
+   labelled tasks, then add the second model. Rolling cross-paper memory remains
+   a separate extension. No full matrix starts automatically from this proposal.
 
 This design supports claims about evidence reading, substantive critique
 judgments, and controlled selection reliability. Broader claims about human
