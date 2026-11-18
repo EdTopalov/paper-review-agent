@@ -1,0 +1,17 @@
+{
+  "status": "running",
+  "global_round": 4,
+  "completed_rounds": 3,
+  "stage": "core",
+  "stage_status": "starting",
+  "completed_attempts": 924,
+  "planned_attempts": 1440,
+  "benchmark_completed_attempts": 684,
+  "benchmark_planned_attempts": 1140,
+  "m2_completed_attempts": 240,
+  "m2_planned_attempts": 300,
+  "stage_planned_attempts": 192,
+  "active_progress_path": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-existing-20261118-luna6\\r4\\core\\progress.json",
+  "active_records_path": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-existing-20261118-luna6\\r4\\core\\records.jsonl",
+  "updated_at": "2026-11-18T22:00:22.489515+00:00"
+}

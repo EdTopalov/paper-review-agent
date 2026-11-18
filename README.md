@@ -123,8 +123,9 @@ paper-review benchmark-run --plan runs/scratch/benchmark-plan.json --out runs/be
 `benchmark-run` validates only unless `--execute` is explicitly supplied. The
 [benchmark protocol](milestones/benchmark-protocol.md) defines separate reading
 budgets, repetitions, statistics, and saved plans. This suite supplements the
-unchanged M2 comparison. The final comparison uses `gpt-6-luna`, three repetitions,
-and eight workers per method. These targets do not provide gold ratings for overall paper merit
+unchanged M2 comparison. The final comparison uses `gpt-6-luna` and targets up to
+five repetitions, including only complete repetitions shared by all methods.
+These targets do not provide gold ratings for overall paper merit
 or human reading-club preference.
 
 ## Human assessment and paper selection

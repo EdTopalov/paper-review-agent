@@ -1,0 +1,29 @@
+{
+  "schema_version": "benchmark-progress-v1",
+  "status": "error",
+  "started_at": "2026-11-18T22:14:45.767890+00:00",
+  "updated_at": "2026-11-18T22:15:38.906369+00:00",
+  "model": "gpt-6-luna",
+  "variants": [
+    "baseline"
+  ],
+  "source_sha256": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",
+  "manifest_sha256": "04d75e5b653230fb462a9832cc95861c5ba446bb4251c759cfa168363afee739",
+  "total": 64,
+  "completed": 60,
+  "succeeded": 60,
+  "failed": 0,
+  "remaining": 4,
+  "elapsed_seconds": 53.13797209993936,
+  "recent_attempts": 20,
+  "recent_mean_attempt_seconds": 3.558340369997313,
+  "recent_p50_attempt_seconds": 3.6341449500177987,
+  "wall_throughput_attempts_per_second": 1.1291360514690862,
+  "eta_remaining_seconds": 3.5425314733292907,
+  "eta_finish_at": "2026-11-18T22:15:42.448900+00:00",
+  "infrastructure_errors": 0,
+  "error": {
+    "type": "PermissionError",
+    "status_code": null
+  }
+}

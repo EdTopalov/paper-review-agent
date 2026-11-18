@@ -1,0 +1,35 @@
+{
+  "status": "inspect_failures",
+  "completed": 6,
+  "attempts": 7,
+  "outcomes": {
+    "original-review": {
+      "attempts": 1,
+      "completed": 1,
+      "operational_checks": {
+        "runs": 1,
+        "passed": 1,
+        "failures": []
+      }
+    },
+    "core": {
+      "attempts": 5,
+      "completed": 5,
+      "operational_checks": {
+        "runs": 5,
+        "passed": 5,
+        "failures": []
+      }
+    },
+    "selection": {
+      "attempts": 1,
+      "completed": 0,
+      "operational_checks": {
+        "runs": 1,
+        "passed": 1,
+        "failures": []
+      }
+    }
+  },
+  "scope": "Development execution check; content accuracy is reported separately."
+}

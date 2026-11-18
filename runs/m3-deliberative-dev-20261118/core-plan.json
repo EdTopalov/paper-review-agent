@@ -1,0 +1,84 @@
+{
+  "plan_version": "benchmark-plan-v1",
+  "benchmark_version": "evidence-assessment-v1",
+  "benchmark_root": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\data\\benchmark\\v1",
+  "manifest_sha256": "04d75e5b653230fb462a9832cc95861c5ba446bb4251c759cfa168363afee739",
+  "benchmark_settings_sha256": "892f91b829ccfaaf8bbcf52b1dab2e041e62001e1877e52428899aef70e888b0",
+  "source_sha256": "55cc91e86060e1c139405eb3d725b227c4649e2a87201108d3cca7169c229bcc",
+  "git_revision": "10be7a32d23f09f181b5eb2c54e6fc5cd4aa3098",
+  "split": "dev",
+  "tracks": [
+    "controlled",
+    "qasper",
+    "reviewcritique"
+  ],
+  "task_ids": [
+    "CB-1459e1c65b75",
+    "CB-d052e074ba2d",
+    "QASPER-312e9cc11b90",
+    "RC-31d344c750b5",
+    "RC-be6017406ed2"
+  ],
+  "variants": [
+    "deliberative_review"
+  ],
+  "variant_metadata": {
+    "deliberative_review": {
+      "prompt_version": "m3-deliberative-review-v1",
+      "harness": "project-deliberative",
+      "context_policy": "plan-investigate-draft-critic-resolve-v1"
+    }
+  },
+  "repeats": 1,
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "workers": 4,
+  "seed": 20261118,
+  "jobs": [
+    {
+      "id": "RC-be6017406ed2",
+      "variant": "deliberative_review",
+      "repeat": 1,
+      "job_id": "deliberative_review-r1/RC-be6017406ed2"
+    },
+    {
+      "id": "RC-31d344c750b5",
+      "variant": "deliberative_review",
+      "repeat": 1,
+      "job_id": "deliberative_review-r1/RC-31d344c750b5"
+    },
+    {
+      "id": "CB-1459e1c65b75",
+      "variant": "deliberative_review",
+      "repeat": 1,
+      "job_id": "deliberative_review-r1/CB-1459e1c65b75"
+    },
+    {
+      "id": "QASPER-312e9cc11b90",
+      "variant": "deliberative_review",
+      "repeat": 1,
+      "job_id": "deliberative_review-r1/QASPER-312e9cc11b90"
+    },
+    {
+      "id": "CB-d052e074ba2d",
+      "variant": "deliberative_review",
+      "repeat": 1,
+      "job_id": "deliberative_review-r1/CB-d052e074ba2d"
+    }
+  ],
+  "tasks": 5,
+  "planned_runs": 5,
+  "track_tasks": {
+    "controlled": 2,
+    "qasper": 1,
+    "reviewcritique": 2
+  },
+  "status": "planned_not_executed"
+}

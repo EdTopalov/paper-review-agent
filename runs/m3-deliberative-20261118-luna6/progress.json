@@ -1,0 +1,17 @@
+{
+  "status": "running",
+  "global_round": 3,
+  "completed_rounds": 2,
+  "stage": "m2",
+  "stage_status": "starting",
+  "completed_attempts": 192,
+  "planned_attempts": 480,
+  "benchmark_completed_attempts": 152,
+  "benchmark_planned_attempts": 380,
+  "m2_completed_attempts": 40,
+  "m2_planned_attempts": 100,
+  "stage_planned_attempts": 20,
+  "active_progress_path": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-deliberative-20261118-luna6\\r3\\m2\\progress.json",
+  "active_records_path": null,
+  "updated_at": "2026-11-18T22:04:34.547390+00:00"
+}

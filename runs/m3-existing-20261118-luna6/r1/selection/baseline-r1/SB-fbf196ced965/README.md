@@ -1,0 +1,57 @@
+# SB-fbf196ced965
+
+baseline · repeat 1 · ok
+
+1 API calls · 3616 input tokens · 584 output tokens · estimated USD 0.000743925
+
+[Full trace](trace.jsonl). This output contains no reference labels.
+
+```json
+{
+  "evidence": [
+    {
+      "document_id": "P-ec3c7c9a1995",
+      "block_id": "b0003",
+      "quote": "Peak GPU memory is 12 GB."
+    },
+    {
+      "document_id": "P-ec3c7c9a1995",
+      "block_id": "b0005",
+      "quote": "Prompt tuning and model selection use exactly these identifiers: T11, T12, T13."
+    },
+    {
+      "document_id": "P-ec3c7c9a1995",
+      "block_id": "b0006",
+      "quote": "Final evaluation uses exactly these identifiers: E21, T12, E23."
+    },
+    {
+      "document_id": "P-a60c27fb6809",
+      "block_id": "b0006",
+      "quote": "Final evaluation uses exactly these identifiers: E21, T12, E23."
+    },
+    {
+      "document_id": "P-80e0d3dc1ce0",
+      "block_id": "b0004",
+      "quote": "The plan called for 5 seeds and the report supplies 1."
+    },
+    {
+      "document_id": "P-c1f2f58dcb21",
+      "block_id": "b0004",
+      "quote": "The plan called for 5 seeds and the report supplies 1."
+    },
+    {
+      "document_id": "P-fbf196ced965",
+      "block_id": "b0003",
+      "quote": "Peak GPU memory is 40 GB."
+    },
+    {
+      "document_id": "P-5a901da53a11",
+      "block_id": "b0003",
+      "quote": "Peak GPU memory is 40 GB."
+    }
+  ],
+  "explanation": "No candidate meets every eligibility rule. The two reports with 12 GB or 14 GB memory and five reported seeds reuse T12 in final evaluation after using it for tuning/model selection. Two other candidates report only 1 of 5 planned seeds, while the remaining candidates exceed the 24 GB memory limit. Therefore, no candidate is eligible.",
+  "selected_id": null,
+  "tied_ids": []
+}
+```

@@ -1,0 +1,129 @@
+{
+  "plan_version": "benchmark-plan-v1",
+  "benchmark_version": "evidence-assessment-v1",
+  "benchmark_root": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\scratch\\deliberative-source-20261118-2240\\data\\benchmark\\v1",
+  "manifest_sha256": "04d75e5b653230fb462a9832cc95861c5ba446bb4251c759cfa168363afee739",
+  "benchmark_settings_sha256": "892f91b829ccfaaf8bbcf52b1dab2e041e62001e1877e52428899aef70e888b0",
+  "source_sha256": "55cc91e86060e1c139405eb3d725b227c4649e2a87201108d3cca7169c229bcc",
+  "git_revision": "10be7a32d23f09f181b5eb2c54e6fc5cd4aa3098",
+  "split": "test",
+  "tracks": [
+    "selection"
+  ],
+  "task_ids": [
+    "SB-18f34443b4ea",
+    "SB-3f2caf640d8b",
+    "SB-4dd14ec2ecf0",
+    "SB-66e931b708c9",
+    "SB-7402e4ad7d74",
+    "SB-80e0d3dc1ce0",
+    "SB-86910a1a2a2b",
+    "SB-a60c27fb6809",
+    "SB-e9e07484ab89",
+    "SB-f094fd9a487e",
+    "SB-f8e22c0984b8",
+    "SB-fbf196ced965"
+  ],
+  "variants": [
+    "deliberative_review"
+  ],
+  "variant_metadata": {
+    "deliberative_review": {
+      "prompt_version": "m3-deliberative-review-v1",
+      "harness": "project-deliberative",
+      "context_policy": "plan-investigate-draft-critic-resolve-v1"
+    }
+  },
+  "repeats": 1,
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 20,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "workers": 4,
+  "seed": 20261120,
+  "jobs": [
+    {
+      "id": "SB-4dd14ec2ecf0",
+      "variant": "deliberative_review",
+      "repeat": 1,
+      "job_id": "deliberative_review-r1/SB-4dd14ec2ecf0"
+    },
+    {
+      "id": "SB-fbf196ced965",
+      "variant": "deliberative_review",
+      "repeat": 1,
+      "job_id": "deliberative_review-r1/SB-fbf196ced965"
+    },
+    {
+      "id": "SB-18f34443b4ea",
+      "variant": "deliberative_review",
+      "repeat": 1,
+      "job_id": "deliberative_review-r1/SB-18f34443b4ea"
+    },
+    {
+      "id": "SB-66e931b708c9",
+      "variant": "deliberative_review",
+      "repeat": 1,
+      "job_id": "deliberative_review-r1/SB-66e931b708c9"
+    },
+    {
+      "id": "SB-f8e22c0984b8",
+      "variant": "deliberative_review",
+      "repeat": 1,
+      "job_id": "deliberative_review-r1/SB-f8e22c0984b8"
+    },
+    {
+      "id": "SB-3f2caf640d8b",
+      "variant": "deliberative_review",
+      "repeat": 1,
+      "job_id": "deliberative_review-r1/SB-3f2caf640d8b"
+    },
+    {
+      "id": "SB-80e0d3dc1ce0",
+      "variant": "deliberative_review",
+      "repeat": 1,
+      "job_id": "deliberative_review-r1/SB-80e0d3dc1ce0"
+    },
+    {
+      "id": "SB-7402e4ad7d74",
+      "variant": "deliberative_review",
+      "repeat": 1,
+      "job_id": "deliberative_review-r1/SB-7402e4ad7d74"
+    },
+    {
+      "id": "SB-86910a1a2a2b",
+      "variant": "deliberative_review",
+      "repeat": 1,
+      "job_id": "deliberative_review-r1/SB-86910a1a2a2b"
+    },
+    {
+      "id": "SB-e9e07484ab89",
+      "variant": "deliberative_review",
+      "repeat": 1,
+      "job_id": "deliberative_review-r1/SB-e9e07484ab89"
+    },
+    {
+      "id": "SB-f094fd9a487e",
+      "variant": "deliberative_review",
+      "repeat": 1,
+      "job_id": "deliberative_review-r1/SB-f094fd9a487e"
+    },
+    {
+      "id": "SB-a60c27fb6809",
+      "variant": "deliberative_review",
+      "repeat": 1,
+      "job_id": "deliberative_review-r1/SB-a60c27fb6809"
+    }
+  ],
+  "tasks": 12,
+  "planned_runs": 12,
+  "track_tasks": {
+    "selection": 12
+  },
+  "status": "planned_not_executed"
+}

@@ -1,0 +1,17 @@
+{
+  "status": "complete",
+  "global_round": 3,
+  "completed_rounds": 3,
+  "stage": null,
+  "stage_status": null,
+  "completed_attempts": 288,
+  "planned_attempts": 288,
+  "benchmark_completed_attempts": 228,
+  "benchmark_planned_attempts": 228,
+  "m2_completed_attempts": 60,
+  "m2_planned_attempts": 60,
+  "stage_planned_attempts": 0,
+  "active_progress_path": null,
+  "active_records_path": null,
+  "updated_at": "2026-11-18T22:19:46.263277+00:00"
+}

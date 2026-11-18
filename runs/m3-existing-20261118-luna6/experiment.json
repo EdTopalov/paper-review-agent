@@ -1,0 +1,125 @@
+{
+  "model": "gpt-6-luna",
+  "variants": [
+    "agent",
+    "pyagent_react",
+    "baseline"
+  ],
+  "rounds": 5,
+  "workers": 6,
+  "seed": 20261118,
+  "tasks_per_round": 76,
+  "planned_attempts": 1440,
+  "benchmark_planned_attempts": 1140,
+  "m2_planned_attempts": 300,
+  "m2_sample": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\scratch\\existing-source-20261118-2134\\data\\eval\\tasks.jsonl",
+  "m2_sample_sha256": "6b592e24024a5cca0722c8546cd01fc8fffab7cfeae6482dc0875c015b7caa1c",
+  "repeat_policy": "Stage traces retain local repeat=1; aggregate copies use global round and retain source_repeat/source_round.",
+  "stages": [
+    {
+      "round": 1,
+      "stage": "m2",
+      "path": "r1/m2",
+      "planned_attempts": 60,
+      "max_reads": 5
+    },
+    {
+      "round": 1,
+      "stage": "core",
+      "path": "r1/core",
+      "planned_attempts": 192,
+      "max_reads": 5
+    },
+    {
+      "round": 1,
+      "stage": "selection",
+      "path": "r1/selection",
+      "planned_attempts": 36,
+      "max_reads": 20
+    },
+    {
+      "round": 2,
+      "stage": "m2",
+      "path": "r2/m2",
+      "planned_attempts": 60,
+      "max_reads": 5
+    },
+    {
+      "round": 2,
+      "stage": "core",
+      "path": "r2/core",
+      "planned_attempts": 192,
+      "max_reads": 5
+    },
+    {
+      "round": 2,
+      "stage": "selection",
+      "path": "r2/selection",
+      "planned_attempts": 36,
+      "max_reads": 20
+    },
+    {
+      "round": 3,
+      "stage": "m2",
+      "path": "r3/m2",
+      "planned_attempts": 60,
+      "max_reads": 5
+    },
+    {
+      "round": 3,
+      "stage": "core",
+      "path": "r3/core",
+      "planned_attempts": 192,
+      "max_reads": 5
+    },
+    {
+      "round": 3,
+      "stage": "selection",
+      "path": "r3/selection",
+      "planned_attempts": 36,
+      "max_reads": 20
+    },
+    {
+      "round": 4,
+      "stage": "m2",
+      "path": "r4/m2",
+      "planned_attempts": 60,
+      "max_reads": 5
+    },
+    {
+      "round": 4,
+      "stage": "core",
+      "path": "r4/core",
+      "planned_attempts": 192,
+      "max_reads": 5
+    },
+    {
+      "round": 4,
+      "stage": "selection",
+      "path": "r4/selection",
+      "planned_attempts": 36,
+      "max_reads": 20
+    },
+    {
+      "round": 5,
+      "stage": "m2",
+      "path": "r5/m2",
+      "planned_attempts": 60,
+      "max_reads": 5
+    },
+    {
+      "round": 5,
+      "stage": "core",
+      "path": "r5/core",
+      "planned_attempts": 192,
+      "max_reads": 5
+    },
+    {
+      "round": 5,
+      "stage": "selection",
+      "path": "r5/selection",
+      "planned_attempts": 36,
+      "max_reads": 20
+    }
+  ]
+}

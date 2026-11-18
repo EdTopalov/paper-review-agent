@@ -1,0 +1,21 @@
+{
+  "status": "error",
+  "global_round": 2,
+  "completed_rounds": 1,
+  "stage": "core",
+  "stage_status": null,
+  "completed_attempts": 116,
+  "planned_attempts": 288,
+  "benchmark_completed_attempts": 76,
+  "benchmark_planned_attempts": 228,
+  "m2_completed_attempts": 40,
+  "m2_planned_attempts": 60,
+  "stage_planned_attempts": 64,
+  "active_progress_path": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-baseline-20261118-luna6\\r2\\core\\progress.json",
+  "active_records_path": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\m3-final-baseline-20261118-luna6\\r2\\core\\records.jsonl",
+  "error": {
+    "type": "PermissionError",
+    "status_code": null
+  },
+  "updated_at": "2026-11-18T22:15:38.910156+00:00"
+}
