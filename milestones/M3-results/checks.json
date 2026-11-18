@@ -1,6 +1,6 @@
 {
   "schema_version": "m3-final-trace-checks-v1",
-  "generated_at": "2026-11-18T22:27:06.160858+00:00",
+  "generated_at": "2026-11-18T22:30:22.410285+00:00",
   "scope": "Completed final-policy stages only; original failed baseline block and earlier-policy runs excluded.",
   "roots": [
     "runs/m3-final-agent-20261118-luna6",
@@ -11,8 +11,8 @@
     "runs/m3-final-extra-r5-20261118-luna6"
   ],
   "summary": {
-    "runs": 1652,
-    "passed": 1618,
+    "runs": 1664,
+    "passed": 1630,
     "intermediate_argument_only_flags": 34,
     "other_failures": 0
   },
@@ -1031,13 +1031,22 @@
         "passed": 48,
         "failures": []
       }
+    },
+    "runs/m3-final-deliberative_review-20261118-luna6/r2/selection": {
+      "kind": "selection",
+      "checked_at": "2026-11-18T22:28:23.704999+00:00",
+      "runs": 12,
+      "passed": 12,
+      "intermediate_argument_only_flags": 0,
+      "other_failures": 0,
+      "validator_result": {
+        "runs": 12,
+        "passed": 12,
+        "failures": []
+      }
     }
   },
   "pending_stages": [
-    {
-      "stage": "runs/m3-final-deliberative_review-20261118-luna6/r2/selection",
-      "reason": "full terminal attempt grid not available"
-    },
     {
       "stage": "runs/m3-final-deliberative_review-20261118-luna6/r3/m2",
       "reason": "full terminal attempt grid not available"

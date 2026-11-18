@@ -1,0 +1,11 @@
+{"timestamp": "2026-11-18T22:14:05.145975+00:00", "event": "watchdog_started", "deadline": "2026-11-18T22:30:00+00:00", "pids": [39580, 29144, 20644, 34568], "dry_run": false}
+{"timestamp": "2026-11-18T22:14:05.802376+00:00", "event": "registered", "pid": 39580, "launcher": "run_existing_benchmark.py", "created_at": "2026-11-18T22:12:06.1539440Z", "command_sha256": "f6b226040e036b0269ae396e0d5ee6f465725193a3080f486796f45034d8a244"}
+{"timestamp": "2026-11-18T22:14:05.807377+00:00", "event": "registered", "pid": 29144, "launcher": "run_existing_benchmark.py", "created_at": "2026-11-18T22:12:06.1766180Z", "command_sha256": "f4c2b3ae5a0e04ab7b17b73484f3752b4f20ab6e182bcdfd649487a9cb65d4a6"}
+{"timestamp": "2026-11-18T22:14:05.810376+00:00", "event": "registered", "pid": 20644, "launcher": "run_existing_benchmark.py", "created_at": "2026-11-18T22:12:06.1951530Z", "command_sha256": "4450a3ad261978b50385faf78d794368dc42a1f74ca92c5ab3a72aac06e0b7ec"}
+{"timestamp": "2026-11-18T22:14:05.812374+00:00", "event": "registered", "pid": 34568, "launcher": "run_existing_benchmark.py", "created_at": "2026-11-18T22:12:06.2195150Z", "command_sha256": "a86b1641f45570897625f87ebbaed69b8a79b13be3ae378a953c543dbc29ce66"}
+{"timestamp": "2026-11-18T22:15:44.789864+00:00", "event": "natural_finished", "pid": 34568}
+{"timestamp": "2026-11-18T22:19:47.564812+00:00", "event": "natural_finished", "pid": 39580}
+{"timestamp": "2026-11-18T22:26:31.725939+00:00", "event": "natural_finished", "pid": 29144}
+{"timestamp": "2026-11-18T22:30:01.420222+00:00", "event": "cutoff_requested", "pid": 20644, "created_at": "2026-11-18T22:12:06.1951530Z", "command_sha256": "4450a3ad261978b50385faf78d794368dc42a1f74ca92c5ab3a72aac06e0b7ec"}
+{"timestamp": "2026-11-18T22:30:01.936981+00:00", "event": "stopped", "pid": 20644, "returncode": 0}
+{"timestamp": "2026-11-18T22:30:01.948270+00:00", "event": "watchdog_finished", "status": "complete"}
