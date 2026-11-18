@@ -11,50 +11,53 @@ The comparison keeps all 20 frozen papers in `data/eval/tasks.jsonl`, the
 | `deliberative_review` | Plan, investigate, draft, criticize in a fresh context, then revise; reduce missed counterevidence and scope errors. Inspect challenged claims and targeted reads. | [Hypothesis and sources](../variants/deliberative_review/README.md). |
 | `baseline` | One full-paper structured-output call; reference for content accuracy and cost. | [M2](M2.md). |
 
-All methods use common task contracts; the three agents share evidence tools and
-citation acceptance. PyAgent changes the harness and action encoding together.
-The deliberative controller reserves decisions for planning and criticism.
+Methods use common task contracts. Ordinary agent submissions require matching,
+observed citations. At the decision cap, one final call requests a nullable public
+answer without tools or retries: a valid non-null answer completes regardless of
+citation checks, which remain separate diagnostics. Null, missing/invalid output,
+and transport errors remain failures. Internal deliberative ledgers cannot block
+this final public answer. Baseline uses its ordinary single full-paper call.
 
-The existing-method snapshot is based on `def61ec`; the deliberative controller
-and hypothesis were committed in `10be7a3`, before their repeated test runs.
-Each stage preserves evaluated source bytes in `source.zip` and records source/
-input hashes and configuration. Subsequent fixes require a new comparison.
+Hypotheses are preserved in `def61ec` (PyAgent) and `10be7a3` (deliberative).
+The implementation is frozen before final collection. Each stage archives evaluated
+source bytes in `source.zip` and records source/input hashes and configuration.
 
 ## Configuration and reproduction
 
-The model is `gpt-6-luna`. The target is five repetitions per paper and method:
-400 M2 attempts. Reading agents allow five reading actions and eight decisions.
-All requests allow 4,000 output tokens, low reasoning, a 90-second timeout and one retry.
-The saved launch blocks use six workers for existing methods and four for the
-deliberative agent; actual completed repetitions are recorded in the results.
+The model is `gpt-6-luna`; three repetitions per paper and method plan 240 M2 attempts.
+Reading agents allow five reading actions and 16 ordinary decisions, plus one
+forced final call if needed (17 decisions maximum). Requests allow 4,000 output
+tokens, low reasoning, a 90-second timeout and one transport retry; the final call
+has no retry. Separate collection blocks use eight workers per agent and four for baseline.
 
-After [installation](../README.md#installation), install `requirements-m3.txt`
-and configure `.env`. This command runs a fresh complete comparison with paid API calls:
+After [installation](../README.md#installation) with `requirements-m3.txt` and
+`.env`, this public-entry-point command runs a fresh paid M2 comparison:
 
 ```shell
 paper-review verify
-paper-review eval --variants agent pyagent_react deliberative_review baseline --model gpt-6-luna --repeats 5 --workers 6 --max-reads 5 --max-output-tokens 4000 --timeout 90 --retries 1 --reasoning-effort low --order-seed 20261118 --out runs/m3-luna6-r5
-paper-review check runs/m3-luna6-r5
+paper-review eval --variants agent pyagent_react deliberative_review baseline --model gpt-6-luna --repeats 3 --workers 8 --max-reads 5 --max-output-tokens 4000 --timeout 90 --retries 1 --reasoning-effort low --order-seed 20261118 --out runs/m3-m2-final-r3
+paper-review check runs/m3-m2-final-r3
 ```
 
 Expected output: `experiment.json`, `source.zip`, `progress.json`, `summary.json`,
-a combined `README.md`, and 400 `<variant>-r<repeat>/<task>/trace.jsonl` files with
-readable task reports. Every trace event identifies its variant.
+a combined `README.md`, and 240 `<variant>-r<repeat>/<task>/trace.jsonl` files with
+readable task reports. Every trace event identifies its variant. The benchmark
+protocol gives the exact separate method-block commands used for combined collection.
 
-The separate T17 diagnostic uses ten attempts and the same per-attempt limits:
+A separate ten-attempt T17 diagnostic under this policy uses a fresh directory:
 
 ```shell
-paper-review eval --variants agent --task-ids T17 --model gpt-6-luna --repeats 10 --workers 4 --max-reads 5 --max-output-tokens 4000 --timeout 90 --retries 1 --reasoning-effort low --order-seed 20261118 --out runs/m3-t17-native-r10
-paper-review check runs/m3-t17-native-r10
+paper-review eval --variants agent --task-ids T17 --model gpt-6-luna --repeats 10 --workers 4 --max-reads 5 --max-output-tokens 4000 --timeout 90 --retries 1 --reasoning-effort low --order-seed 20261118 --out runs/m3-t17-final-r10
+paper-review check runs/m3-t17-final-r10
 ```
 
-It writes ten traces under `agent-r<repeat>/T17/`. Report its failure count
+It writes ten traces under `agent-r<repeat>/T17/`. Keep diagnostic frequencies
 separately from the main comparison; the [failure map](failure-map.md) interprets the traces.
 
 ## Measures
 
-Completion is accepted reviews divided by all attempts. Verified success adds
-verification of every citation. Per-repeat and per-paper results include decisions,
+Completion is non-null accepted reviews divided by all attempts. Verified success
+additionally requires every citation verified. Per-repeat and per-paper results include decisions,
 reading/tool/API calls, input/output tokens, estimated USD and latency per attempt.
 Failures and retries retain their costs; missing paper scores remain missing.
 

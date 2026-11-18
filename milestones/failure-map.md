@@ -120,15 +120,19 @@ the frozen comparison grid.
 
 **API history replay failures.** The
 [offline API audit](../runs/m3-existing-20261118-luna6/api-400-analysis.md)
-finds four native HTTP 400 failures in primary-model core round 1, each on the
+finds four native HTTP 400 failures in `gpt-6-luna` core round 1, each on the
 first request replaying a returned reasoning item. The audit verifies matched
-tool-call/output pairs, unique IDs, and unchanged replay order. Fourteen native
-failures in secondary-model M2 round 1 show the same trigger. Provider
+tool-call/output pairs, unique IDs, and unchanged replay order. Provider
 compatibility with the returned reasoning representation is a hypothesis; the
 redacted errors do not establish which field caused rejection. These attempts
 remain failures in completion and content denominators, with incurred usage
 retained. They measure operational reliability, not the substantive quality of
 an assessment that was never returned.
+
+The [deliberative mechanism audit](M3-results/deliberative-audit.md) documents a
+successful critic-directed evidence read and a separate ledger-contract failure
+that prevents submission despite a correct raw answer. Internal draft changes
+and final benchmark correctness are measured separately.
 
 The [human quality protocol](../data/quality/README.md) defines independent labels
 for the substantive failures. It does not supply or imply completed annotation.

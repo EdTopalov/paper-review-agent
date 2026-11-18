@@ -1,0 +1,3553 @@
+{
+  "schema_version": "m3-original-m2-results-v1",
+  "generated_at": "2026-11-18T22:19:02.277255+00:00",
+  "sample_sha256": "6b592e24024a5cca0722c8546cd01fc8fffab7cfeae6482dc0875c015b7caa1c",
+  "task_ids": [
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T06",
+    "T07",
+    "T08",
+    "T09",
+    "T10",
+    "T11",
+    "T12",
+    "T13",
+    "T14",
+    "T15",
+    "T16",
+    "T17",
+    "T18",
+    "T19",
+    "T20"
+  ],
+  "experiments": [
+    "runs/m3-final-agent-20261118-luna6",
+    "runs/m3-final-pyagent_react-20261118-luna6",
+    "runs/m3-final-deliberative_review-20261118-luna6",
+    "runs/m3-final-baseline-20261118-luna6"
+  ],
+  "models": {
+    "gpt-6-luna": {
+      "model": "gpt-6-luna",
+      "common_rounds": [
+        1
+      ],
+      "complete_rounds_by_method": {
+        "agent": [
+          1,
+          2,
+          3
+        ],
+        "pyagent_react": [
+          1,
+          2
+        ],
+        "deliberative_review": [
+          1
+        ],
+        "baseline": [
+          1,
+          2
+        ]
+      },
+      "provenance": [
+        {
+          "experiment": "runs/m3-final-agent-20261118-luna6",
+          "global_round": 1,
+          "plan_path": "runs/m3-final-agent-20261118-luna6/r1/m2/experiment.json",
+          "source_archive": "runs/m3-final-agent-20261118-luna6/r1/m2/source.zip",
+          "source_sha256": "c2a6326456da4792f50790a1f32d5b2bb6e7aa5638f6ff0d25432dd7b90c5ca2",
+          "git_revision": "85050fcd4d478ac1ede53de5187d1f3216cd0867",
+          "sample_sha256": "6b592e24024a5cca0722c8546cd01fc8fffab7cfeae6482dc0875c015b7caa1c",
+          "config": {
+            "model": "gpt-6-luna",
+            "max_reads": 5,
+            "max_output_tokens": 4000,
+            "timeout": 90,
+            "retries": 1,
+            "reasoning_effort": "low",
+            "max_paper_chars": 600000
+          },
+          "variants": [
+            "agent"
+          ],
+          "variant_metadata": {
+            "agent": {
+              "prompt_version": "m3-native-forced-final-v1",
+              "harness": "project-native",
+              "budget_policy": "double-decisions-forced-final-v1"
+            }
+          },
+          "workers": 8,
+          "order_seed": 20261119,
+          "started_at": "2026-11-18T22:12:14.192745+00:00",
+          "updated_at": "2026-11-18T22:12:55.070762+00:00"
+        },
+        {
+          "experiment": "runs/m3-final-agent-20261118-luna6",
+          "global_round": 2,
+          "plan_path": "runs/m3-final-agent-20261118-luna6/r2/m2/experiment.json",
+          "source_archive": "runs/m3-final-agent-20261118-luna6/r2/m2/source.zip",
+          "source_sha256": "c2a6326456da4792f50790a1f32d5b2bb6e7aa5638f6ff0d25432dd7b90c5ca2",
+          "git_revision": "85050fcd4d478ac1ede53de5187d1f3216cd0867",
+          "sample_sha256": "6b592e24024a5cca0722c8546cd01fc8fffab7cfeae6482dc0875c015b7caa1c",
+          "config": {
+            "model": "gpt-6-luna",
+            "max_reads": 5,
+            "max_output_tokens": 4000,
+            "timeout": 90,
+            "retries": 1,
+            "reasoning_effort": "low",
+            "max_paper_chars": 600000
+          },
+          "variants": [
+            "agent"
+          ],
+          "variant_metadata": {
+            "agent": {
+              "prompt_version": "m3-native-forced-final-v1",
+              "harness": "project-native",
+              "budget_policy": "double-decisions-forced-final-v1"
+            }
+          },
+          "workers": 8,
+          "order_seed": 20261120,
+          "started_at": "2026-11-18T22:14:36.092575+00:00",
+          "updated_at": "2026-11-18T22:15:39.489153+00:00"
+        },
+        {
+          "experiment": "runs/m3-final-agent-20261118-luna6",
+          "global_round": 3,
+          "plan_path": "runs/m3-final-agent-20261118-luna6/r3/m2/experiment.json",
+          "source_archive": "runs/m3-final-agent-20261118-luna6/r3/m2/source.zip",
+          "source_sha256": "c2a6326456da4792f50790a1f32d5b2bb6e7aa5638f6ff0d25432dd7b90c5ca2",
+          "git_revision": "85050fcd4d478ac1ede53de5187d1f3216cd0867",
+          "sample_sha256": "6b592e24024a5cca0722c8546cd01fc8fffab7cfeae6482dc0875c015b7caa1c",
+          "config": {
+            "model": "gpt-6-luna",
+            "max_reads": 5,
+            "max_output_tokens": 4000,
+            "timeout": 90,
+            "retries": 1,
+            "reasoning_effort": "low",
+            "max_paper_chars": 600000
+          },
+          "variants": [
+            "agent"
+          ],
+          "variant_metadata": {
+            "agent": {
+              "prompt_version": "m3-native-forced-final-v1",
+              "harness": "project-native",
+              "budget_policy": "double-decisions-forced-final-v1"
+            }
+          },
+          "workers": 8,
+          "order_seed": 20261121,
+          "started_at": "2026-11-18T22:17:23.619786+00:00",
+          "updated_at": "2026-11-18T22:18:06.769544+00:00"
+        },
+        {
+          "experiment": "runs/m3-final-pyagent_react-20261118-luna6",
+          "global_round": 1,
+          "plan_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/experiment.json",
+          "source_archive": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/source.zip",
+          "source_sha256": "c2a6326456da4792f50790a1f32d5b2bb6e7aa5638f6ff0d25432dd7b90c5ca2",
+          "git_revision": "85050fcd4d478ac1ede53de5187d1f3216cd0867",
+          "sample_sha256": "6b592e24024a5cca0722c8546cd01fc8fffab7cfeae6482dc0875c015b7caa1c",
+          "config": {
+            "model": "gpt-6-luna",
+            "max_reads": 5,
+            "max_output_tokens": 4000,
+            "timeout": 90,
+            "retries": 1,
+            "reasoning_effort": "low",
+            "max_paper_chars": 600000
+          },
+          "variants": [
+            "pyagent_react"
+          ],
+          "variant_metadata": {
+            "pyagent_react": {
+              "prompt_version": "m3-v2-pyagent-react-v2",
+              "harness": "pyagent-patterns.ReAct",
+              "harness_version": "0.3.0",
+              "protocol": "pyagent-text-action-v2",
+              "budget_policy": "double-decisions-forced-final-v1"
+            }
+          },
+          "workers": 8,
+          "order_seed": 20261119,
+          "started_at": "2026-11-18T22:12:14.412259+00:00",
+          "updated_at": "2026-11-18T22:13:10.832313+00:00"
+        },
+        {
+          "experiment": "runs/m3-final-pyagent_react-20261118-luna6",
+          "global_round": 2,
+          "plan_path": "runs/m3-final-pyagent_react-20261118-luna6/r2/m2/experiment.json",
+          "source_archive": "runs/m3-final-pyagent_react-20261118-luna6/r2/m2/source.zip",
+          "source_sha256": "c2a6326456da4792f50790a1f32d5b2bb6e7aa5638f6ff0d25432dd7b90c5ca2",
+          "git_revision": "85050fcd4d478ac1ede53de5187d1f3216cd0867",
+          "sample_sha256": "6b592e24024a5cca0722c8546cd01fc8fffab7cfeae6482dc0875c015b7caa1c",
+          "config": {
+            "model": "gpt-6-luna",
+            "max_reads": 5,
+            "max_output_tokens": 4000,
+            "timeout": 90,
+            "retries": 1,
+            "reasoning_effort": "low",
+            "max_paper_chars": 600000
+          },
+          "variants": [
+            "pyagent_react"
+          ],
+          "variant_metadata": {
+            "pyagent_react": {
+              "prompt_version": "m3-v2-pyagent-react-v2",
+              "harness": "pyagent-patterns.ReAct",
+              "harness_version": "0.3.0",
+              "protocol": "pyagent-text-action-v2",
+              "budget_policy": "double-decisions-forced-final-v1"
+            }
+          },
+          "workers": 8,
+          "order_seed": 20261120,
+          "started_at": "2026-11-18T22:16:44.215475+00:00",
+          "updated_at": "2026-11-18T22:17:54.984166+00:00"
+        },
+        {
+          "experiment": "runs/m3-final-deliberative_review-20261118-luna6",
+          "global_round": 1,
+          "plan_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/experiment.json",
+          "source_archive": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/source.zip",
+          "source_sha256": "c2a6326456da4792f50790a1f32d5b2bb6e7aa5638f6ff0d25432dd7b90c5ca2",
+          "git_revision": "85050fcd4d478ac1ede53de5187d1f3216cd0867",
+          "sample_sha256": "6b592e24024a5cca0722c8546cd01fc8fffab7cfeae6482dc0875c015b7caa1c",
+          "config": {
+            "model": "gpt-6-luna",
+            "max_reads": 5,
+            "max_output_tokens": 4000,
+            "timeout": 90,
+            "retries": 1,
+            "reasoning_effort": "low",
+            "max_paper_chars": 600000
+          },
+          "variants": [
+            "deliberative_review"
+          ],
+          "variant_metadata": {
+            "deliberative_review": {
+              "prompt_version": "m3-deliberative-review-v2",
+              "harness": "project-deliberative",
+              "context_policy": "plan-investigate-draft-critic-resolve-doubled-cap-final-v2",
+              "budget_policy": "double-decisions-forced-final-v1"
+            }
+          },
+          "workers": 8,
+          "order_seed": 20261119,
+          "started_at": "2026-11-18T22:12:14.209813+00:00",
+          "updated_at": "2026-11-18T22:15:02.067034+00:00"
+        },
+        {
+          "experiment": "runs/m3-final-baseline-20261118-luna6",
+          "global_round": 1,
+          "plan_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/experiment.json",
+          "source_archive": "runs/m3-final-baseline-20261118-luna6/r1/m2/source.zip",
+          "source_sha256": "c2a6326456da4792f50790a1f32d5b2bb6e7aa5638f6ff0d25432dd7b90c5ca2",
+          "git_revision": "85050fcd4d478ac1ede53de5187d1f3216cd0867",
+          "sample_sha256": "6b592e24024a5cca0722c8546cd01fc8fffab7cfeae6482dc0875c015b7caa1c",
+          "config": {
+            "model": "gpt-6-luna",
+            "max_reads": 5,
+            "max_output_tokens": 4000,
+            "timeout": 90,
+            "retries": 1,
+            "reasoning_effort": "low",
+            "max_paper_chars": 600000
+          },
+          "variants": [
+            "baseline"
+          ],
+          "variant_metadata": {
+            "baseline": {
+              "prompt_version": "m2-v2",
+              "harness": "one-shot"
+            }
+          },
+          "workers": 4,
+          "order_seed": 20261119,
+          "started_at": "2026-11-18T22:12:14.185872+00:00",
+          "updated_at": "2026-11-18T22:12:57.277133+00:00"
+        },
+        {
+          "experiment": "runs/m3-final-baseline-20261118-luna6",
+          "global_round": 2,
+          "plan_path": "runs/m3-final-baseline-20261118-luna6/r2/m2/experiment.json",
+          "source_archive": "runs/m3-final-baseline-20261118-luna6/r2/m2/source.zip",
+          "source_sha256": "c2a6326456da4792f50790a1f32d5b2bb6e7aa5638f6ff0d25432dd7b90c5ca2",
+          "git_revision": "85050fcd4d478ac1ede53de5187d1f3216cd0867",
+          "sample_sha256": "6b592e24024a5cca0722c8546cd01fc8fffab7cfeae6482dc0875c015b7caa1c",
+          "config": {
+            "model": "gpt-6-luna",
+            "max_reads": 5,
+            "max_output_tokens": 4000,
+            "timeout": 90,
+            "retries": 1,
+            "reasoning_effort": "low",
+            "max_paper_chars": 600000
+          },
+          "variants": [
+            "baseline"
+          ],
+          "variant_metadata": {
+            "baseline": {
+              "prompt_version": "m2-v2",
+              "harness": "one-shot"
+            }
+          },
+          "workers": 4,
+          "order_seed": 20261120,
+          "started_at": "2026-11-18T22:14:08.793749+00:00",
+          "updated_at": "2026-11-18T22:14:45.448032+00:00"
+        }
+      ],
+      "notes": [],
+      "source_sha256_by_method": {
+        "agent": "c2a6326456da4792f50790a1f32d5b2bb6e7aa5638f6ff0d25432dd7b90c5ca2",
+        "pyagent_react": "c2a6326456da4792f50790a1f32d5b2bb6e7aa5638f6ff0d25432dd7b90c5ca2",
+        "deliberative_review": "c2a6326456da4792f50790a1f32d5b2bb6e7aa5638f6ff0d25432dd7b90c5ca2",
+        "baseline": "c2a6326456da4792f50790a1f32d5b2bb6e7aa5638f6ff0d25432dd7b90c5ca2"
+      },
+      "analysis_repeat_to_global_round": {
+        "1": 1
+      },
+      "methods": {
+        "agent": {
+          "attempts": 20,
+          "completed": 18,
+          "verified_successes": 18,
+          "completion_rate": 0.9,
+          "verified_success_rate": 0.9,
+          "mean_cost_usd": 0.002174328,
+          "unknown_cost_attempts": 0,
+          "billing_uncertain_attempts": 0,
+          "error_counts": {
+            "{\"status_code\": 400, \"type\": \"BadRequestError\"}": 2
+          },
+          "mean_decision_steps": 5.8,
+          "mean_reading_actions": 4.25,
+          "mean_tool_calls": 5.7,
+          "mean_model_calls": 5.8,
+          "mean_input_tokens": 31103.85,
+          "mean_output_tokens": 819.8,
+          "mean_latency_seconds": 14.326090805022977,
+          "per_repeat": [
+            {
+              "global_round": 1,
+              "attempts": 20,
+              "completed": 18,
+              "verified_successes": 18,
+              "completion_rate": 0.9,
+              "verified_success_rate": 0.9,
+              "mean_cost_usd": 0.002174328,
+              "unknown_cost_attempts": 0,
+              "billing_uncertain_attempts": 0,
+              "error_counts": {
+                "{\"status_code\": 400, \"type\": \"BadRequestError\"}": 2
+              },
+              "mean_decision_steps": 5.8,
+              "mean_reading_actions": 4.25,
+              "mean_tool_calls": 5.7,
+              "mean_model_calls": 5.8,
+              "mean_input_tokens": 31103.85,
+              "mean_output_tokens": 819.8,
+              "mean_latency_seconds": 14.326090805022977
+            }
+          ],
+          "repetition_statistics": {
+            "model": "gpt-6-luna",
+            "repeats": 1,
+            "per_repeat": [
+              {
+                "repeat": 1,
+                "attempts": 20,
+                "completed": 18,
+                "verified_successes": 18,
+                "completion_rate": 0.9,
+                "verified_success_rate": 0.9,
+                "mean_model_calls": 5.8,
+                "mean_input_tokens": 31103.85,
+                "mean_output_tokens": 819.8,
+                "mean_cost_usd": 0.002174328,
+                "mean_latency_seconds": 14.326090805022977
+              }
+            ],
+            "per_task": {
+              "T01": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.78,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.78,
+                  0.78
+                ]
+              },
+              "T02": {
+                "attempts": 1,
+                "completed": 0,
+                "verified_successes": 0,
+                "score_count": 0,
+                "mean_score": null,
+                "score_sample_sd": null,
+                "score_range": null
+              },
+              "T03": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.69,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.69,
+                  0.69
+                ]
+              },
+              "T04": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.72,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.72,
+                  0.72
+                ]
+              },
+              "T05": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.78,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.78,
+                  0.78
+                ]
+              },
+              "T06": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.79,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.79,
+                  0.79
+                ]
+              },
+              "T07": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.78,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.78,
+                  0.78
+                ]
+              },
+              "T08": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.78,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.78,
+                  0.78
+                ]
+              },
+              "T09": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.73,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.73,
+                  0.73
+                ]
+              },
+              "T10": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.74,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.74,
+                  0.74
+                ]
+              },
+              "T11": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.75,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.75,
+                  0.75
+                ]
+              },
+              "T12": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.74,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.74,
+                  0.74
+                ]
+              },
+              "T13": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.77,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.77,
+                  0.77
+                ]
+              },
+              "T14": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.76,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.76,
+                  0.76
+                ]
+              },
+              "T15": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.72,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.72,
+                  0.72
+                ]
+              },
+              "T16": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.64,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.64,
+                  0.64
+                ]
+              },
+              "T17": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.68,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.68,
+                  0.68
+                ]
+              },
+              "T18": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.68,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.68,
+                  0.68
+                ]
+              },
+              "T19": {
+                "attempts": 1,
+                "completed": 0,
+                "verified_successes": 0,
+                "score_count": 0,
+                "mean_score": null,
+                "score_sample_sd": null,
+                "score_range": null
+              },
+              "T20": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.72,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.72,
+                  0.72
+                ]
+              }
+            },
+            "pass_power_k": {
+              "1": 0.9
+            },
+            "tasks_always_verified": 18,
+            "tasks_sometimes_verified": 0,
+            "tasks_never_verified": 2,
+            "within_task_mean_absolute_score_difference": null,
+            "within_task_score_pairs": 0,
+            "paired_comparisons": {
+              "baseline": {
+                "direction": "agent minus baseline",
+                "verified_success_rate": {
+                  "tasks": 20,
+                  "mean_difference": 0.35,
+                  "ci95": [
+                    0.1,
+                    0.6
+                  ]
+                },
+                "mean_score": {
+                  "tasks": 18,
+                  "mean_difference": 0.02666666666666668,
+                  "ci95": [
+                    0.014444444444444458,
+                    0.038888888888888896
+                  ]
+                },
+                "mean_absolute_task_score_difference": 0.02888888888888889,
+                "mean_cost_usd": {
+                  "tasks": 20,
+                  "mean_difference": 0.0016200225,
+                  "ci95": [
+                    0.00127654725,
+                    0.00199693775
+                  ]
+                },
+                "mean_latency_seconds": {
+                  "tasks": 20,
+                  "mean_difference": 6.063360405043932,
+                  "ci95": [
+                    3.933560455031693,
+                    8.605483585043112
+                  ]
+                }
+              },
+              "deliberative_review": {
+                "direction": "agent minus deliberative_review",
+                "verified_success_rate": {
+                  "tasks": 20,
+                  "mean_difference": -0.1,
+                  "ci95": [
+                    -0.25,
+                    0
+                  ]
+                },
+                "mean_score": {
+                  "tasks": 18,
+                  "mean_difference": 0.03722222222222222,
+                  "ci95": [
+                    0.018888888888888875,
+                    0.05722222222222221
+                  ]
+                },
+                "mean_absolute_task_score_difference": 0.04166666666666666,
+                "mean_cost_usd": {
+                  "tasks": 20,
+                  "mean_difference": -0.00542952575,
+                  "ci95": [
+                    -0.0075054675,
+                    -0.00401225275
+                  ]
+                },
+                "mean_latency_seconds": {
+                  "tasks": 20,
+                  "mean_difference": -27.77171587998746,
+                  "ci95": [
+                    -40.548932509985754,
+                    -17.757991329976356
+                  ]
+                }
+              },
+              "pyagent_react": {
+                "direction": "agent minus pyagent_react",
+                "verified_success_rate": {
+                  "tasks": 20,
+                  "mean_difference": -0.1,
+                  "ci95": [
+                    -0.25,
+                    0
+                  ]
+                },
+                "mean_score": {
+                  "tasks": 18,
+                  "mean_difference": 0.02277777777777778,
+                  "ci95": [
+                    0.009444444444444453,
+                    0.037222222222222205
+                  ]
+                },
+                "mean_absolute_task_score_difference": 0.02833333333333333,
+                "mean_cost_usd": {
+                  "tasks": 20,
+                  "mean_difference": -0.00011916850000000011,
+                  "ci95": [
+                    -0.0005069930000000002,
+                    0.0003188679999999999
+                  ]
+                },
+                "mean_latency_seconds": {
+                  "tasks": 20,
+                  "mean_difference": -4.328637734986842,
+                  "ci95": [
+                    -6.252628574974369,
+                    -2.2343173049681355
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "pyagent_react": {
+          "attempts": 20,
+          "completed": 20,
+          "verified_successes": 20,
+          "completion_rate": 1,
+          "verified_success_rate": 1,
+          "mean_cost_usd": 0.0022934965,
+          "unknown_cost_attempts": 0,
+          "billing_uncertain_attempts": 0,
+          "error_counts": {},
+          "mean_decision_steps": 5.6,
+          "mean_reading_actions": 3.65,
+          "mean_tool_calls": 5.25,
+          "mean_model_calls": 5.6,
+          "mean_input_tokens": 40279.7,
+          "mean_output_tokens": 1165,
+          "mean_latency_seconds": 18.65472854000982,
+          "per_repeat": [
+            {
+              "global_round": 1,
+              "attempts": 20,
+              "completed": 20,
+              "verified_successes": 20,
+              "completion_rate": 1,
+              "verified_success_rate": 1,
+              "mean_cost_usd": 0.0022934965,
+              "unknown_cost_attempts": 0,
+              "billing_uncertain_attempts": 0,
+              "error_counts": {},
+              "mean_decision_steps": 5.6,
+              "mean_reading_actions": 3.65,
+              "mean_tool_calls": 5.25,
+              "mean_model_calls": 5.6,
+              "mean_input_tokens": 40279.7,
+              "mean_output_tokens": 1165,
+              "mean_latency_seconds": 18.65472854000982
+            }
+          ],
+          "repetition_statistics": {
+            "model": "gpt-6-luna",
+            "repeats": 1,
+            "per_repeat": [
+              {
+                "repeat": 1,
+                "attempts": 20,
+                "completed": 20,
+                "verified_successes": 20,
+                "completion_rate": 1.0,
+                "verified_success_rate": 1.0,
+                "mean_model_calls": 5.6,
+                "mean_input_tokens": 40279.7,
+                "mean_output_tokens": 1165,
+                "mean_cost_usd": 0.0022934965,
+                "mean_latency_seconds": 18.65472854000982
+              }
+            ],
+            "per_task": {
+              "T01": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.76,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.76,
+                  0.76
+                ]
+              },
+              "T02": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.68,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.68,
+                  0.68
+                ]
+              },
+              "T03": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.68,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.68,
+                  0.68
+                ]
+              },
+              "T04": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.72,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.72,
+                  0.72
+                ]
+              },
+              "T05": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.72,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.72,
+                  0.72
+                ]
+              },
+              "T06": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.78,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.78,
+                  0.78
+                ]
+              },
+              "T07": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.75,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.75,
+                  0.75
+                ]
+              },
+              "T08": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.73,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.73,
+                  0.73
+                ]
+              },
+              "T09": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.69,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.69,
+                  0.69
+                ]
+              },
+              "T10": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.75,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.75,
+                  0.75
+                ]
+              },
+              "T11": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.74,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.74,
+                  0.74
+                ]
+              },
+              "T12": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.74,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.74,
+                  0.74
+                ]
+              },
+              "T13": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.68,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.68,
+                  0.68
+                ]
+              },
+              "T14": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.76,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.76,
+                  0.76
+                ]
+              },
+              "T15": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.68,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.68,
+                  0.68
+                ]
+              },
+              "T16": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.62,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.62,
+                  0.62
+                ]
+              },
+              "T17": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.72,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.72,
+                  0.72
+                ]
+              },
+              "T18": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.66,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.66,
+                  0.66
+                ]
+              },
+              "T19": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.72,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.72,
+                  0.72
+                ]
+              },
+              "T20": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.66,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.66,
+                  0.66
+                ]
+              }
+            },
+            "pass_power_k": {
+              "1": 1.0
+            },
+            "tasks_always_verified": 20,
+            "tasks_sometimes_verified": 0,
+            "tasks_never_verified": 0,
+            "within_task_mean_absolute_score_difference": null,
+            "within_task_score_pairs": 0,
+            "paired_comparisons": {}
+          }
+        },
+        "deliberative_review": {
+          "attempts": 20,
+          "completed": 20,
+          "verified_successes": 20,
+          "completion_rate": 1,
+          "verified_success_rate": 1,
+          "mean_cost_usd": 0.007603853749999999,
+          "unknown_cost_attempts": 0,
+          "billing_uncertain_attempts": 0,
+          "error_counts": {},
+          "mean_decision_steps": 7.5,
+          "mean_reading_actions": 3.2,
+          "mean_tool_calls": 4.65,
+          "mean_model_calls": 7.5,
+          "mean_input_tokens": 48172.05,
+          "mean_output_tokens": 3185.5,
+          "mean_latency_seconds": 42.09780668501044,
+          "per_repeat": [
+            {
+              "global_round": 1,
+              "attempts": 20,
+              "completed": 20,
+              "verified_successes": 20,
+              "completion_rate": 1,
+              "verified_success_rate": 1,
+              "mean_cost_usd": 0.007603853749999999,
+              "unknown_cost_attempts": 0,
+              "billing_uncertain_attempts": 0,
+              "error_counts": {},
+              "mean_decision_steps": 7.5,
+              "mean_reading_actions": 3.2,
+              "mean_tool_calls": 4.65,
+              "mean_model_calls": 7.5,
+              "mean_input_tokens": 48172.05,
+              "mean_output_tokens": 3185.5,
+              "mean_latency_seconds": 42.09780668501044
+            }
+          ],
+          "repetition_statistics": {
+            "model": "gpt-6-luna",
+            "repeats": 1,
+            "per_repeat": [
+              {
+                "repeat": 1,
+                "attempts": 20,
+                "completed": 20,
+                "verified_successes": 20,
+                "completion_rate": 1.0,
+                "verified_success_rate": 1.0,
+                "mean_model_calls": 7.5,
+                "mean_input_tokens": 48172.05,
+                "mean_output_tokens": 3185.5,
+                "mean_cost_usd": 0.007603853749999999,
+                "mean_latency_seconds": 42.09780668501044
+              }
+            ],
+            "per_task": {
+              "T01": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.66,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.66,
+                  0.66
+                ]
+              },
+              "T02": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.65,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.65,
+                  0.65
+                ]
+              },
+              "T03": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.68,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.68,
+                  0.68
+                ]
+              },
+              "T04": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.71,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.71,
+                  0.71
+                ]
+              },
+              "T05": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.67,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.67,
+                  0.67
+                ]
+              },
+              "T06": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.73,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.73,
+                  0.73
+                ]
+              },
+              "T07": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.68,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.68,
+                  0.68
+                ]
+              },
+              "T08": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.72,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.72,
+                  0.72
+                ]
+              },
+              "T09": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.68,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.68,
+                  0.68
+                ]
+              },
+              "T10": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.76,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.76,
+                  0.76
+                ]
+              },
+              "T11": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.72,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.72,
+                  0.72
+                ]
+              },
+              "T12": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.73,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.73,
+                  0.73
+                ]
+              },
+              "T13": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.75,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.75,
+                  0.75
+                ]
+              },
+              "T14": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.75,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.75,
+                  0.75
+                ]
+              },
+              "T15": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.68,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.68,
+                  0.68
+                ]
+              },
+              "T16": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.56,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.56,
+                  0.56
+                ]
+              },
+              "T17": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.7,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.7,
+                  0.7
+                ]
+              },
+              "T18": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.68,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.68,
+                  0.68
+                ]
+              },
+              "T19": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.72,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.72,
+                  0.72
+                ]
+              },
+              "T20": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.72,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.72,
+                  0.72
+                ]
+              }
+            },
+            "pass_power_k": {
+              "1": 1.0
+            },
+            "tasks_always_verified": 20,
+            "tasks_sometimes_verified": 0,
+            "tasks_never_verified": 0,
+            "within_task_mean_absolute_score_difference": null,
+            "within_task_score_pairs": 0,
+            "paired_comparisons": {
+              "pyagent_react": {
+                "direction": "deliberative_review minus pyagent_react",
+                "verified_success_rate": {
+                  "tasks": 20,
+                  "mean_difference": 0,
+                  "ci95": [
+                    0,
+                    0
+                  ]
+                },
+                "mean_score": {
+                  "tasks": 20,
+                  "mean_difference": -0.014499999999999996,
+                  "ci95": [
+                    -0.031,
+                    0.002999999999999986
+                  ]
+                },
+                "mean_absolute_task_score_difference": 0.03049999999999999,
+                "mean_cost_usd": {
+                  "tasks": 20,
+                  "mean_difference": 0.00531035725,
+                  "ci95": [
+                    0.0037930837499999997,
+                    0.007352003
+                  ]
+                },
+                "mean_latency_seconds": {
+                  "tasks": 20,
+                  "mean_difference": 23.44307814500062,
+                  "ci95": [
+                    13.304169520008145,
+                    36.23337337999256
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "baseline": {
+          "attempts": 20,
+          "completed": 20,
+          "verified_successes": 11,
+          "completion_rate": 1,
+          "verified_success_rate": 0.55,
+          "mean_cost_usd": 0.0005543055,
+          "unknown_cost_attempts": 0,
+          "billing_uncertain_attempts": 0,
+          "error_counts": {},
+          "mean_decision_steps": 1,
+          "mean_reading_actions": 0,
+          "mean_tool_calls": 0,
+          "mean_model_calls": 1,
+          "mean_input_tokens": 24778.55,
+          "mean_output_tokens": 612.5,
+          "mean_latency_seconds": 8.262730399979045,
+          "per_repeat": [
+            {
+              "global_round": 1,
+              "attempts": 20,
+              "completed": 20,
+              "verified_successes": 11,
+              "completion_rate": 1,
+              "verified_success_rate": 0.55,
+              "mean_cost_usd": 0.0005543055,
+              "unknown_cost_attempts": 0,
+              "billing_uncertain_attempts": 0,
+              "error_counts": {},
+              "mean_decision_steps": 1,
+              "mean_reading_actions": 0,
+              "mean_tool_calls": 0,
+              "mean_model_calls": 1,
+              "mean_input_tokens": 24778.55,
+              "mean_output_tokens": 612.5,
+              "mean_latency_seconds": 8.262730399979045
+            }
+          ],
+          "repetition_statistics": {
+            "model": "gpt-6-luna",
+            "repeats": 1,
+            "per_repeat": [
+              {
+                "repeat": 1,
+                "attempts": 20,
+                "completed": 20,
+                "verified_successes": 11,
+                "completion_rate": 1.0,
+                "verified_success_rate": 0.55,
+                "mean_model_calls": 1,
+                "mean_input_tokens": 24778.55,
+                "mean_output_tokens": 612.5,
+                "mean_cost_usd": 0.0005543055,
+                "mean_latency_seconds": 8.262730399979045
+              }
+            ],
+            "per_task": {
+              "T01": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.77,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.77,
+                  0.77
+                ]
+              },
+              "T02": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 0,
+                "score_count": 1,
+                "mean_score": 0.62,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.62,
+                  0.62
+                ]
+              },
+              "T03": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 0,
+                "score_count": 1,
+                "mean_score": 0.62,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.62,
+                  0.62
+                ]
+              },
+              "T04": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.72,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.72,
+                  0.72
+                ]
+              },
+              "T05": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.74,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.74,
+                  0.74
+                ]
+              },
+              "T06": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 0,
+                "score_count": 1,
+                "mean_score": 0.73,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.73,
+                  0.73
+                ]
+              },
+              "T07": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 0,
+                "score_count": 1,
+                "mean_score": 0.78,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.78,
+                  0.78
+                ]
+              },
+              "T08": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.74,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.74,
+                  0.74
+                ]
+              },
+              "T09": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.72,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.72,
+                  0.72
+                ]
+              },
+              "T10": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.74,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.74,
+                  0.74
+                ]
+              },
+              "T11": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.72,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.72,
+                  0.72
+                ]
+              },
+              "T12": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 0,
+                "score_count": 1,
+                "mean_score": 0.73,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.73,
+                  0.73
+                ]
+              },
+              "T13": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.78,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.78,
+                  0.78
+                ]
+              },
+              "T14": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.72,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.72,
+                  0.72
+                ]
+              },
+              "T15": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 0,
+                "score_count": 1,
+                "mean_score": 0.66,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.66,
+                  0.66
+                ]
+              },
+              "T16": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 0,
+                "score_count": 1,
+                "mean_score": 0.58,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.58,
+                  0.58
+                ]
+              },
+              "T17": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 0,
+                "score_count": 1,
+                "mean_score": 0.69,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.69,
+                  0.69
+                ]
+              },
+              "T18": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.66,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.66,
+                  0.66
+                ]
+              },
+              "T19": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 1,
+                "score_count": 1,
+                "mean_score": 0.68,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.68,
+                  0.68
+                ]
+              },
+              "T20": {
+                "attempts": 1,
+                "completed": 1,
+                "verified_successes": 0,
+                "score_count": 1,
+                "mean_score": 0.67,
+                "score_sample_sd": null,
+                "score_range": [
+                  0.67,
+                  0.67
+                ]
+              }
+            },
+            "pass_power_k": {
+              "1": 0.55
+            },
+            "tasks_always_verified": 11,
+            "tasks_sometimes_verified": 0,
+            "tasks_never_verified": 9,
+            "within_task_mean_absolute_score_difference": null,
+            "within_task_score_pairs": 0,
+            "paired_comparisons": {
+              "deliberative_review": {
+                "direction": "baseline minus deliberative_review",
+                "verified_success_rate": {
+                  "tasks": 20,
+                  "mean_difference": -0.45,
+                  "ci95": [
+                    -0.65,
+                    -0.25
+                  ]
+                },
+                "mean_score": {
+                  "tasks": 20,
+                  "mean_difference": 0.005999999999999989,
+                  "ci95": [
+                    -0.013500000000000002,
+                    0.02699999999999997
+                  ]
+                },
+                "mean_absolute_task_score_difference": 0.03399999999999999,
+                "mean_cost_usd": {
+                  "tasks": 20,
+                  "mean_difference": -0.00704954825,
+                  "ci95": [
+                    -0.009042208749999999,
+                    -0.00557930375
+                  ]
+                },
+                "mean_latency_seconds": {
+                  "tasks": 20,
+                  "mean_difference": -33.83507628503139,
+                  "ci95": [
+                    -45.79338068003417,
+                    -24.270320820016785
+                  ]
+                }
+              },
+              "pyagent_react": {
+                "direction": "baseline minus pyagent_react",
+                "verified_success_rate": {
+                  "tasks": 20,
+                  "mean_difference": -0.45,
+                  "ci95": [
+                    -0.65,
+                    -0.25
+                  ]
+                },
+                "mean_score": {
+                  "tasks": 20,
+                  "mean_difference": -0.008500000000000008,
+                  "ci95": [
+                    -0.024000000000000014,
+                    0.00899999999999999
+                  ]
+                },
+                "mean_absolute_task_score_difference": 0.029500000000000016,
+                "mean_cost_usd": {
+                  "tasks": 20,
+                  "mean_difference": -0.001739191,
+                  "ci95": [
+                    -0.0020366095,
+                    -0.00149156
+                  ]
+                },
+                "mean_latency_seconds": {
+                  "tasks": 20,
+                  "mean_difference": -10.391998140030774,
+                  "ci95": [
+                    -12.360562875063625,
+                    -8.57989397001802
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "attempts": [
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T01",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T01/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T01/trace.jsonl",
+          "trace_sha256": "17911e94705597a24b711b5278f1b616263c73ba525313fb8ae91368ba3e67a3",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.78,
+          "decision_steps": 4,
+          "reading_actions": 3,
+          "tool_calls": 4,
+          "api_calls": 4,
+          "input_tokens": 23000,
+          "output_tokens": 594,
+          "latency_seconds": 10.816700700088404,
+          "estimated_cost_usd": 0.0019140650000000002,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T02",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T02/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T02/trace.jsonl",
+          "trace_sha256": "e5b9dd962ebd85e5691406eca618e6ba27e118617041e902fe74b84a30525aa8",
+          "status": "error",
+          "verified_success": false,
+          "score": null,
+          "decision_steps": 5,
+          "reading_actions": 4,
+          "tool_calls": 4,
+          "api_calls": 5,
+          "input_tokens": 13209,
+          "output_tokens": 147,
+          "latency_seconds": 9.145716700004414,
+          "estimated_cost_usd": 0.000863785,
+          "error": {
+            "type": "BadRequestError",
+            "status_code": 400
+          }
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T03",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T03/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T03/trace.jsonl",
+          "trace_sha256": "35afa661420dcfc18803bde9b10fc799a0d6fdfdbb2729544eabb3a736de80d2",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.69,
+          "decision_steps": 5,
+          "reading_actions": 4,
+          "tool_calls": 5,
+          "api_calls": 5,
+          "input_tokens": 23393,
+          "output_tokens": 632,
+          "latency_seconds": 13.587422200012952,
+          "estimated_cost_usd": 0.00159471,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T04",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T04/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T04/trace.jsonl",
+          "trace_sha256": "4a1a8b2a125147351a3bb542c824c956a87bd286b7692bfe4d3a61c41c532224",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.72,
+          "decision_steps": 7,
+          "reading_actions": 5,
+          "tool_calls": 7,
+          "api_calls": 7,
+          "input_tokens": 48086,
+          "output_tokens": 1059,
+          "latency_seconds": 20.782645200029947,
+          "estimated_cost_usd": 0.0035122149999999995,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T05",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T05/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T05/trace.jsonl",
+          "trace_sha256": "7107a0f887398d5d3d8723f6058c7bbe8a8021ef7c89dacf15e36c2a454ed59a",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.78,
+          "decision_steps": 6,
+          "reading_actions": 5,
+          "tool_calls": 6,
+          "api_calls": 6,
+          "input_tokens": 20333,
+          "output_tokens": 531,
+          "latency_seconds": 10.861219799960963,
+          "estimated_cost_usd": 0.001744715,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T06",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T06/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T06/trace.jsonl",
+          "trace_sha256": "6ff6a55db9ea3298e7668acb94ce2e3cb08aee1b2fa16807f9b13651a7e4fa9b",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.79,
+          "decision_steps": 5,
+          "reading_actions": 4,
+          "tool_calls": 5,
+          "api_calls": 5,
+          "input_tokens": 23612,
+          "output_tokens": 650,
+          "latency_seconds": 10.228910200065002,
+          "estimated_cost_usd": 0.0014783650000000001,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T07",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T07/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T07/trace.jsonl",
+          "trace_sha256": "bee9edf2d912c4314e8dedfd25a8dd12693d48dae936262945fbe26beee54432",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.78,
+          "decision_steps": 6,
+          "reading_actions": 5,
+          "tool_calls": 6,
+          "api_calls": 6,
+          "input_tokens": 30121,
+          "output_tokens": 653,
+          "latency_seconds": 13.356228400021791,
+          "estimated_cost_usd": 0.00260889,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T08",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T08/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T08/trace.jsonl",
+          "trace_sha256": "9005fb0d01c75cd55edcfcce55f371dbb4d4508f9dd390e03756fdea3b85ef3a",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.78,
+          "decision_steps": 8,
+          "reading_actions": 5,
+          "tool_calls": 8,
+          "api_calls": 8,
+          "input_tokens": 58666,
+          "output_tokens": 1511,
+          "latency_seconds": 18.79048690001946,
+          "estimated_cost_usd": 0.003958395,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T09",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T09/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T09/trace.jsonl",
+          "trace_sha256": "702bad605892f7be660f3a98ebd1e20494fbeb7138d12c4984854a2114835369",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.73,
+          "decision_steps": 5,
+          "reading_actions": 4,
+          "tool_calls": 5,
+          "api_calls": 5,
+          "input_tokens": 23096,
+          "output_tokens": 616,
+          "latency_seconds": 11.76956699998118,
+          "estimated_cost_usd": 0.0015786799999999998,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T10",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T10/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T10/trace.jsonl",
+          "trace_sha256": "d69a9093d64de9ea27c562425f6fd009c19fcbca1e0ac803ad8197d5c5d9ffac",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.74,
+          "decision_steps": 6,
+          "reading_actions": 4,
+          "tool_calls": 6,
+          "api_calls": 6,
+          "input_tokens": 28925,
+          "output_tokens": 1238,
+          "latency_seconds": 16.29096779995598,
+          "estimated_cost_usd": 0.0019437849999999997,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T11",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T11/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T11/trace.jsonl",
+          "trace_sha256": "a7f9f0eb8b555c351aa0accbfb233db2812d08cbecac4627ae2de6c7fb354808",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.75,
+          "decision_steps": 6,
+          "reading_actions": 5,
+          "tool_calls": 6,
+          "api_calls": 6,
+          "input_tokens": 22938,
+          "output_tokens": 636,
+          "latency_seconds": 11.927713299985044,
+          "estimated_cost_usd": 0.00186616,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T12",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T12/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T12/trace.jsonl",
+          "trace_sha256": "b8f08a20d84b7255e4bf574403bdee262335dd0b3308e0991bec69e80d5afab6",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.74,
+          "decision_steps": 6,
+          "reading_actions": 5,
+          "tool_calls": 6,
+          "api_calls": 6,
+          "input_tokens": 34860,
+          "output_tokens": 596,
+          "latency_seconds": 11.683497100020759,
+          "estimated_cost_usd": 0.00290608,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T13",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T13/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T13/trace.jsonl",
+          "trace_sha256": "70e9b7ae8222e156ca438b65534887dbbaa425cefe3f52500f51d45f39a7da4e",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.77,
+          "decision_steps": 6,
+          "reading_actions": 5,
+          "tool_calls": 6,
+          "api_calls": 6,
+          "input_tokens": 30443,
+          "output_tokens": 712,
+          "latency_seconds": 15.288156200083904,
+          "estimated_cost_usd": 0.00262367,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T14",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T14/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T14/trace.jsonl",
+          "trace_sha256": "d7e5081d32092faaf162e8963cfc3c40c1898c837778870964ee63bee1b7d002",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.76,
+          "decision_steps": 5,
+          "reading_actions": 4,
+          "tool_calls": 5,
+          "api_calls": 5,
+          "input_tokens": 28453,
+          "output_tokens": 559,
+          "latency_seconds": 14.016691300086677,
+          "estimated_cost_usd": 0.0019375949999999999,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T15",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T15/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T15/trace.jsonl",
+          "trace_sha256": "a01d184a5cc25baa5641b866391122d710cb329695295655b1a6c04cc3ec2df4",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.72,
+          "decision_steps": 7,
+          "reading_actions": 3,
+          "tool_calls": 7,
+          "api_calls": 7,
+          "input_tokens": 46123,
+          "output_tokens": 1840,
+          "latency_seconds": 22.627164100063965,
+          "estimated_cost_usd": 0.0025667949999999998,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T16",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T16/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T16/trace.jsonl",
+          "trace_sha256": "1e329810b6b8c24c09f7c55085b43d1cf059026eb48f6535d28afa56de0ebb59",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.64,
+          "decision_steps": 5,
+          "reading_actions": 4,
+          "tool_calls": 5,
+          "api_calls": 5,
+          "input_tokens": 26262,
+          "output_tokens": 557,
+          "latency_seconds": 9.996338100056164,
+          "estimated_cost_usd": 0.001724475,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T17",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T17/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T17/trace.jsonl",
+          "trace_sha256": "1c5673772c87ac434088db8630fd8b55e229c67ffe86785e125511c65ff907eb",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.68,
+          "decision_steps": 5,
+          "reading_actions": 3,
+          "tool_calls": 5,
+          "api_calls": 5,
+          "input_tokens": 25829,
+          "output_tokens": 1022,
+          "latency_seconds": 14.588952900026925,
+          "estimated_cost_usd": 0.0016224800000000001,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T18",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T18/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T18/trace.jsonl",
+          "trace_sha256": "4e5889090986124038ea36b10404c80cb49126ef3dafc416d4e80cabc3f08ec7",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.68,
+          "decision_steps": 5,
+          "reading_actions": 4,
+          "tool_calls": 5,
+          "api_calls": 5,
+          "input_tokens": 23478,
+          "output_tokens": 599,
+          "latency_seconds": 14.137584900017828,
+          "estimated_cost_usd": 0.00144014,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T19",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T19/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T19/trace.jsonl",
+          "trace_sha256": "c45daa935edb3fa9acf17e02a6d88a38b358c78d38612519f2b33e8c49f4bab3",
+          "status": "error",
+          "verified_success": false,
+          "score": null,
+          "decision_steps": 5,
+          "reading_actions": 4,
+          "tool_calls": 4,
+          "api_calls": 5,
+          "input_tokens": 22721,
+          "output_tokens": 210,
+          "latency_seconds": 5.9486598999938,
+          "estimated_cost_usd": 0.001515265,
+          "error": {
+            "type": "BadRequestError",
+            "status_code": 400
+          }
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "agent",
+          "task_id": "T20",
+          "trace_path": "runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T20/trace.jsonl",
+          "trace_link": "../../runs/m3-final-agent-20261118-luna6/r1/m2/agent-r1/T20/trace.jsonl",
+          "trace_sha256": "8dfba43cb79d437cec65f94f8f3114613395d6ab1617a02be624609aa6d33cfe",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.72,
+          "decision_steps": 9,
+          "reading_actions": 5,
+          "tool_calls": 9,
+          "api_calls": 9,
+          "input_tokens": 68529,
+          "output_tokens": 2034,
+          "latency_seconds": 30.67719339998439,
+          "estimated_cost_usd": 0.004086294999999999,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T01",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T01/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T01/trace.jsonl",
+          "trace_sha256": "189dd2cab0cfb26d4477a8298a4035e941248b50fa6e05a6de202a0eda469b25",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.76,
+          "decision_steps": 6,
+          "reading_actions": 3,
+          "tool_calls": 6,
+          "api_calls": 6,
+          "input_tokens": 63234,
+          "output_tokens": 1501,
+          "latency_seconds": 18.61051380005665,
+          "estimated_cost_usd": 0.003379365,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T02",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T02/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T02/trace.jsonl",
+          "trace_sha256": "026129fb288acbbafecbaa9c3a5a6747ac0271876aef06f74ec1155c3ccbc473",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.68,
+          "decision_steps": 5,
+          "reading_actions": 4,
+          "tool_calls": 5,
+          "api_calls": 5,
+          "input_tokens": 34176,
+          "output_tokens": 838,
+          "latency_seconds": 17.798891499987803,
+          "estimated_cost_usd": 0.00175088,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T03",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T03/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T03/trace.jsonl",
+          "trace_sha256": "d3762eeed3f6f9b22aa1977dd9b95590699cc790bf2e9891d749f4ffe7d8661c",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.68,
+          "decision_steps": 6,
+          "reading_actions": 5,
+          "tool_calls": 6,
+          "api_calls": 6,
+          "input_tokens": 35705,
+          "output_tokens": 1155,
+          "latency_seconds": 21.95428369997535,
+          "estimated_cost_usd": 0.002765705,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T04",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T04/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T04/trace.jsonl",
+          "trace_sha256": "a1ec6caadfec01a1a0e97bea217a20d9944ee607ab877e733d640689d05b9ea4",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.72,
+          "decision_steps": 7,
+          "reading_actions": 5,
+          "tool_calls": 6,
+          "api_calls": 7,
+          "input_tokens": 57559,
+          "output_tokens": 973,
+          "latency_seconds": 20.945079699973576,
+          "estimated_cost_usd": 0.004460850000000001,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T05",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T05/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T05/trace.jsonl",
+          "trace_sha256": "9fd82ca00e20556441ba87f0e5392fb8472e4a7d4f150f26ecab74b67edd5054",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.72,
+          "decision_steps": 5,
+          "reading_actions": 4,
+          "tool_calls": 5,
+          "api_calls": 5,
+          "input_tokens": 34681,
+          "output_tokens": 1032,
+          "latency_seconds": 17.616002599941567,
+          "estimated_cost_usd": 0.0018336099999999998,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T06",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T06/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T06/trace.jsonl",
+          "trace_sha256": "a70d1e77b435c7509c58c6a4f2368e9096873ff418cfc31254ec79a3ee854bb7",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.78,
+          "decision_steps": 6,
+          "reading_actions": 4,
+          "tool_calls": 6,
+          "api_calls": 6,
+          "input_tokens": 41905,
+          "output_tokens": 1176,
+          "latency_seconds": 16.87234380003065,
+          "estimated_cost_usd": 0.0019881250000000003,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T07",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T07/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T07/trace.jsonl",
+          "trace_sha256": "f4711c77c284fb1c5e469a15ea0c53c686be94b9b13530d7f3e11f246eb4178a",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.75,
+          "decision_steps": 5,
+          "reading_actions": 4,
+          "tool_calls": 5,
+          "api_calls": 5,
+          "input_tokens": 37776,
+          "output_tokens": 741,
+          "latency_seconds": 11.763887400040403,
+          "estimated_cost_usd": 0.00210017,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T08",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T08/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T08/trace.jsonl",
+          "trace_sha256": "8099021e5f5748dc2e995e009965d11768f424a240efaf7dcb1d59e14222c7d8",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.73,
+          "decision_steps": 6,
+          "reading_actions": 4,
+          "tool_calls": 6,
+          "api_calls": 6,
+          "input_tokens": 49741,
+          "output_tokens": 1192,
+          "latency_seconds": 19.981157700065523,
+          "estimated_cost_usd": 0.00230115,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T09",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T09/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T09/trace.jsonl",
+          "trace_sha256": "6e8de4fa2439a5eaaefd01a530c90d397163dc4cbefeb4335ce5f370943e9d95",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.69,
+          "decision_steps": 6,
+          "reading_actions": 4,
+          "tool_calls": 5,
+          "api_calls": 6,
+          "input_tokens": 42814,
+          "output_tokens": 846,
+          "latency_seconds": 14.696006800048053,
+          "estimated_cost_usd": 0.00218745,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T10",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T10/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T10/trace.jsonl",
+          "trace_sha256": "43556790ebbd16a1562ee1ba85052669a1f270e3940efb414e7769e4688de0d3",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.75,
+          "decision_steps": 6,
+          "reading_actions": 3,
+          "tool_calls": 5,
+          "api_calls": 6,
+          "input_tokens": 48552,
+          "output_tokens": 1166,
+          "latency_seconds": 15.231032299925573,
+          "estimated_cost_usd": 0.00255065,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T11",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T11/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T11/trace.jsonl",
+          "trace_sha256": "2cf793fcf48fefb9a0b8413903583e2d77868e23beeb08d95b355813187953ae",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.74,
+          "decision_steps": 4,
+          "reading_actions": 3,
+          "tool_calls": 4,
+          "api_calls": 4,
+          "input_tokens": 31939,
+          "output_tokens": 813,
+          "latency_seconds": 11.954109700047411,
+          "estimated_cost_usd": 0.00217091,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T12",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T12/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T12/trace.jsonl",
+          "trace_sha256": "51b60efcb9ad6c8a4ef1ea5fe70bca51cf211444cb0b9eb921740c2df51790c3",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.74,
+          "decision_steps": 5,
+          "reading_actions": 4,
+          "tool_calls": 5,
+          "api_calls": 5,
+          "input_tokens": 32516,
+          "output_tokens": 957,
+          "latency_seconds": 15.901715800049715,
+          "estimated_cost_usd": 0.001948685,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T13",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T13/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T13/trace.jsonl",
+          "trace_sha256": "cdd01ce957462f4c92f967c441d1e3f8e0e4c2a3659107cc6b64d129bb9a5887",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.68,
+          "decision_steps": 3,
+          "reading_actions": 1,
+          "tool_calls": 3,
+          "api_calls": 3,
+          "input_tokens": 13095,
+          "output_tokens": 1981,
+          "latency_seconds": 27.356135200010613,
+          "estimated_cost_usd": 0.00154201,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T14",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T14/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T14/trace.jsonl",
+          "trace_sha256": "5a1517b6b273713a4896777e6f33264242c027bef40901971b7e032a1cd8d1e6",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.76,
+          "decision_steps": 5,
+          "reading_actions": 3,
+          "tool_calls": 5,
+          "api_calls": 5,
+          "input_tokens": 30201,
+          "output_tokens": 763,
+          "latency_seconds": 17.025273800012656,
+          "estimated_cost_usd": 0.00181968,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T15",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T15/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T15/trace.jsonl",
+          "trace_sha256": "4ae5606fd4b58dac672bc8ca5551faa9aef5dff771c1699542533e121345c0db",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.68,
+          "decision_steps": 7,
+          "reading_actions": 3,
+          "tool_calls": 6,
+          "api_calls": 7,
+          "input_tokens": 49353,
+          "output_tokens": 1914,
+          "latency_seconds": 28.541600099997595,
+          "estimated_cost_usd": 0.00249938,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T16",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T16/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T16/trace.jsonl",
+          "trace_sha256": "993cf04833e2ef791ba3138381caf115e8737aff5bb9bfe180fbd39682f03274",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.62,
+          "decision_steps": 7,
+          "reading_actions": 4,
+          "tool_calls": 6,
+          "api_calls": 7,
+          "input_tokens": 52423,
+          "output_tokens": 1324,
+          "latency_seconds": 18.18637739995029,
+          "estimated_cost_usd": 0.00249935,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T17",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T17/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T17/trace.jsonl",
+          "trace_sha256": "194c553aef62d9de07adda362ca237e65a2a8418e7308178fe5c72ac5df6aa7d",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.72,
+          "decision_steps": 5,
+          "reading_actions": 3,
+          "tool_calls": 5,
+          "api_calls": 5,
+          "input_tokens": 42654,
+          "output_tokens": 1444,
+          "latency_seconds": 16.817783100064844,
+          "estimated_cost_usd": 0.00244019,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T18",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T18/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T18/trace.jsonl",
+          "trace_sha256": "b621aae966a5ddd94e3eb7f0e3e45b8428b8c338e80b599901b4ffb2e32880c0",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.66,
+          "decision_steps": 6,
+          "reading_actions": 4,
+          "tool_calls": 5,
+          "api_calls": 6,
+          "input_tokens": 37523,
+          "output_tokens": 850,
+          "latency_seconds": 19.759385799989104,
+          "estimated_cost_usd": 0.0018741099999999998,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T19",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T19/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T19/trace.jsonl",
+          "trace_sha256": "5e6c393e37f19113c05e0d7f9f833996ae0fc9b37a97ddecd5650d38b1044990",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.72,
+          "decision_steps": 5,
+          "reading_actions": 4,
+          "tool_calls": 5,
+          "api_calls": 5,
+          "input_tokens": 28665,
+          "output_tokens": 1261,
+          "latency_seconds": 17.61767010006588,
+          "estimated_cost_usd": 0.0019158950000000001,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "pyagent_react",
+          "task_id": "T20",
+          "trace_path": "runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T20/trace.jsonl",
+          "trace_link": "../../runs/m3-final-pyagent_react-20261118-luna6/r1/m2/pyagent_react-r1/T20/trace.jsonl",
+          "trace_sha256": "d4932f14ab87588ca3ef4d84a971706a6d5084ccd58fa8e5ecfa13392d05b6ec",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.66,
+          "decision_steps": 7,
+          "reading_actions": 4,
+          "tool_calls": 6,
+          "api_calls": 7,
+          "input_tokens": 41082,
+          "output_tokens": 1373,
+          "latency_seconds": 24.465320499963127,
+          "estimated_cost_usd": 0.0018417650000000002,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T01",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T01/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T01/trace.jsonl",
+          "trace_sha256": "57effafe947a283926cc7e58bc9b4b7fb2ad1aa594313459b74e69ae6ccff130",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.66,
+          "decision_steps": 8,
+          "reading_actions": 4,
+          "tool_calls": 5,
+          "api_calls": 8,
+          "input_tokens": 24171,
+          "output_tokens": 2794,
+          "latency_seconds": 31.584300699993037,
+          "estimated_cost_usd": 0.004405475,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T02",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T02/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T02/trace.jsonl",
+          "trace_sha256": "baad35e49a76127b8824b7766c0fb4ab97f639477141a801c1ada9d286e4860b",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.65,
+          "decision_steps": 7,
+          "reading_actions": 3,
+          "tool_calls": 4,
+          "api_calls": 7,
+          "input_tokens": 25548,
+          "output_tokens": 2701,
+          "latency_seconds": 33.02398529998027,
+          "estimated_cost_usd": 0.00453425,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T03",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T03/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T03/trace.jsonl",
+          "trace_sha256": "0d29a98aeb4e44b6ec1db7f9c1f6f9889a1c2585c93826fa246c1a21b9708010",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.68,
+          "decision_steps": 7,
+          "reading_actions": 3,
+          "tool_calls": 4,
+          "api_calls": 7,
+          "input_tokens": 39367,
+          "output_tokens": 3081,
+          "latency_seconds": 36.112724900012836,
+          "estimated_cost_usd": 0.006451624999999999,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T04",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T04/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T04/trace.jsonl",
+          "trace_sha256": "bee9eb9892fee2760661a6a56e1df0bc55de3a681a9f006fc647869c663a51f6",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.71,
+          "decision_steps": 8,
+          "reading_actions": 4,
+          "tool_calls": 5,
+          "api_calls": 8,
+          "input_tokens": 35691,
+          "output_tokens": 2765,
+          "latency_seconds": 37.44067659997381,
+          "estimated_cost_usd": 0.005830975,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T05",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T05/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T05/trace.jsonl",
+          "trace_sha256": "0381300c5a4a885117489fcd13115ca0dd44708bad9a5f3fd8d97a61c46fd4d7",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.67,
+          "decision_steps": 7,
+          "reading_actions": 3,
+          "tool_calls": 4,
+          "api_calls": 7,
+          "input_tokens": 26979,
+          "output_tokens": 2838,
+          "latency_seconds": 29.697359800105914,
+          "estimated_cost_usd": 0.004781625,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T06",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T06/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T06/trace.jsonl",
+          "trace_sha256": "9fb4fbd2da4f505de5bde9553a8d5a7a18fc0c594a765bcd16ca1f6d588d9107",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.73,
+          "decision_steps": 7,
+          "reading_actions": 3,
+          "tool_calls": 4,
+          "api_calls": 7,
+          "input_tokens": 40941,
+          "output_tokens": 3188,
+          "latency_seconds": 68.48673160001636,
+          "estimated_cost_usd": 0.0067018749999999995,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T07",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T07/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T07/trace.jsonl",
+          "trace_sha256": "ca3638468443fa15fc5e92bc22749d1326f89280474aa28d7a4975f327653a39",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.68,
+          "decision_steps": 7,
+          "reading_actions": 3,
+          "tool_calls": 4,
+          "api_calls": 7,
+          "input_tokens": 34941,
+          "output_tokens": 2776,
+          "latency_seconds": 30.238047700026073,
+          "estimated_cost_usd": 0.005745875,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T08",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T08/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T08/trace.jsonl",
+          "trace_sha256": "538b8cae8a81b8a43204c8ebe1372b9eec754f8fdc32658072958d9b1f7166a0",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.72,
+          "decision_steps": 7,
+          "reading_actions": 3,
+          "tool_calls": 4,
+          "api_calls": 7,
+          "input_tokens": 53270,
+          "output_tokens": 3133,
+          "latency_seconds": 33.15170709998347,
+          "estimated_cost_usd": 0.008215499999999999,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T09",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T09/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T09/trace.jsonl",
+          "trace_sha256": "7714b13305e25b4dcd3ca598cadbdcfefc3a57450e59145d3cd3f32de0620fde",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.68,
+          "decision_steps": 6,
+          "reading_actions": 3,
+          "tool_calls": 4,
+          "api_calls": 6,
+          "input_tokens": 32100,
+          "output_tokens": 1851,
+          "latency_seconds": 41.325633300002664,
+          "estimated_cost_usd": 0.004928325,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T10",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T10/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T10/trace.jsonl",
+          "trace_sha256": "4d16a711a5137728d425441439ce7c0dfd51619fb004ee3468659ce71d35e4f0",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.76,
+          "decision_steps": 8,
+          "reading_actions": 4,
+          "tool_calls": 5,
+          "api_calls": 8,
+          "input_tokens": 52028,
+          "output_tokens": 3301,
+          "latency_seconds": 36.363309699925594,
+          "estimated_cost_usd": 0.0081411,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T11",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T11/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T11/trace.jsonl",
+          "trace_sha256": "cbee923027c444d7c14cc0255397959dc30e0d23b49f714105197c0c2f944838",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.72,
+          "decision_steps": 7,
+          "reading_actions": 3,
+          "tool_calls": 4,
+          "api_calls": 7,
+          "input_tokens": 75914,
+          "output_tokens": 2916,
+          "latency_seconds": 32.37093380000442,
+          "estimated_cost_usd": 0.010937500000000001,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T12",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T12/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T12/trace.jsonl",
+          "trace_sha256": "77082387901c3a15f762b66fed68e454ad23e28a1d645589e19dded96461968a",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.73,
+          "decision_steps": 7,
+          "reading_actions": 3,
+          "tool_calls": 4,
+          "api_calls": 7,
+          "input_tokens": 51971,
+          "output_tokens": 2900,
+          "latency_seconds": 115.50180140009616,
+          "estimated_cost_usd": 0.007936625,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T13",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T13/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T13/trace.jsonl",
+          "trace_sha256": "60e60a3da0d35b525fcc3e8ee3fab374ab7cab4e4364a7753381f8a0e00069fd",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.75,
+          "decision_steps": 6,
+          "reading_actions": 3,
+          "tool_calls": 4,
+          "api_calls": 6,
+          "input_tokens": 43399,
+          "output_tokens": 1885,
+          "latency_seconds": 24.958529700059444,
+          "estimated_cost_usd": 0.006357699999999999,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T14",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T14/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T14/trace.jsonl",
+          "trace_sha256": "b76d59f9feb61f8b7b32458e752ce174ea7907b3262122a77095991c6824fec5",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.75,
+          "decision_steps": 6,
+          "reading_actions": 3,
+          "tool_calls": 4,
+          "api_calls": 6,
+          "input_tokens": 41390,
+          "output_tokens": 1718,
+          "latency_seconds": 24.27530320000369,
+          "estimated_cost_usd": 0.006023075000000001,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T15",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T15/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T15/trace.jsonl",
+          "trace_sha256": "f598cc571338734904f2615cfe63d7761b0d680feebea08912045fe9a4608471",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.68,
+          "decision_steps": 7,
+          "reading_actions": 3,
+          "tool_calls": 4,
+          "api_calls": 7,
+          "input_tokens": 54170,
+          "output_tokens": 3029,
+          "latency_seconds": 35.45319789997302,
+          "estimated_cost_usd": 0.008275999999999999,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T16",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T16/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T16/trace.jsonl",
+          "trace_sha256": "557380439443f081ad4693badcfe327a9421891f9ef88461c49692aeb0167487",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.56,
+          "decision_steps": 8,
+          "reading_actions": 4,
+          "tool_calls": 5,
+          "api_calls": 8,
+          "input_tokens": 46472,
+          "output_tokens": 2599,
+          "latency_seconds": 29.419418100034818,
+          "estimated_cost_usd": 0.0070956000000000005,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T17",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T17/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T17/trace.jsonl",
+          "trace_sha256": "9348c4f409c521436003ee0979467fcc2572b4b30ded248d5967caeaa7bb6c10",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.7,
+          "decision_steps": 17,
+          "reading_actions": 3,
+          "tool_calls": 13,
+          "api_calls": 17,
+          "input_tokens": 142616,
+          "output_tokens": 12175,
+          "latency_seconds": 107.2852022999432,
+          "estimated_cost_usd": 0.023903999999999998,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T18",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T18/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T18/trace.jsonl",
+          "trace_sha256": "1c103a318b74cb1d31278b88607a14fe04bd1288f16a33142ba9d67949b837ea",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.68,
+          "decision_steps": 6,
+          "reading_actions": 3,
+          "tool_calls": 4,
+          "api_calls": 6,
+          "input_tokens": 28145,
+          "output_tokens": 1885,
+          "latency_seconds": 25.622086000046693,
+          "estimated_cost_usd": 0.0044509499999999995,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T19",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T19/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T19/trace.jsonl",
+          "trace_sha256": "8db94b466e8daea3a4fa989f09ea1ec33d032f7145a09fcfe8da4dec9a1c1fb6",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.72,
+          "decision_steps": 7,
+          "reading_actions": 3,
+          "tool_calls": 4,
+          "api_calls": 7,
+          "input_tokens": 43781,
+          "output_tokens": 3235,
+          "latency_seconds": 34.591703700018115,
+          "estimated_cost_usd": 0.007080375,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "deliberative_review",
+          "task_id": "T20",
+          "trace_path": "runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T20/trace.jsonl",
+          "trace_link": "../../runs/m3-final-deliberative_review-20261118-luna6/r1/m2/deliberative_review-r1/T20/trace.jsonl",
+          "trace_sha256": "3602bd0555fcc620d4b9a049ea448d3b64e2c739cb0a3d93483e676742c7ed13",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.72,
+          "decision_steps": 7,
+          "reading_actions": 3,
+          "tool_calls": 4,
+          "api_calls": 7,
+          "input_tokens": 70547,
+          "output_tokens": 2940,
+          "latency_seconds": 35.05348090000916,
+          "estimated_cost_usd": 0.010278625000000001,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T01",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T01/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T01/trace.jsonl",
+          "trace_sha256": "6363c7fe384b9ae770b1c0a9d304759cbe11b7473c8719b5057fb3a4bed7364d",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.77,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 30789,
+          "output_tokens": 482,
+          "latency_seconds": 5.551699599949643,
+          "estimated_cost_usd": 0.00054916,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T02",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T02/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T02/trace.jsonl",
+          "trace_sha256": "97aa13b8eaeaa64a560e88e51f638a4aa2865d719cef9281b57573f5f27a259f",
+          "status": "ok",
+          "verified_success": false,
+          "score": 0.62,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 14416,
+          "output_tokens": 697,
+          "latency_seconds": 11.624202999984846,
+          "estimated_cost_usd": 0.00049293,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T03",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T03/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T03/trace.jsonl",
+          "trace_sha256": "3a65f18643cb8fc9054f27c1ebf69b2e34592a054fc83facbda93992401007d2",
+          "status": "ok",
+          "verified_success": false,
+          "score": 0.62,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 23878,
+          "output_tokens": 556,
+          "latency_seconds": 6.961378199979663,
+          "estimated_cost_usd": 0.0005170499999999999,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T04",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T04/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T04/trace.jsonl",
+          "trace_sha256": "f61663c731866f93c07733558d85999cc9889ab6d9b589dabdf4cd170a7a7f1c",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.72,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 36072,
+          "output_tokens": 686,
+          "latency_seconds": 11.926159499911591,
+          "estimated_cost_usd": 0.00070399,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T05",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T05/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T05/trace.jsonl",
+          "trace_sha256": "93967c84e72f9028c17b58a0bc336bb04bc26c3254c509cf75a2dabe46edd48d",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.74,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 16657,
+          "output_tokens": 569,
+          "latency_seconds": 7.136728200013749,
+          "estimated_cost_usd": 0.00045134000000000005,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T06",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T06/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T06/trace.jsonl",
+          "trace_sha256": "e304fc54de5efddd14646a8e3f45236a6a80c0e4f1b32287cfd196d11531d623",
+          "status": "ok",
+          "verified_success": false,
+          "score": 0.73,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 35056,
+          "output_tokens": 557,
+          "latency_seconds": 7.496081999968737,
+          "estimated_cost_usd": 0.00062933,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T07",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T07/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T07/trace.jsonl",
+          "trace_sha256": "4b2fb0148b832c6f2fbd7bc07a4bb215f421fb0cb545b0d35103089d1d279736",
+          "status": "ok",
+          "verified_success": false,
+          "score": 0.78,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 38684,
+          "output_tokens": 653,
+          "latency_seconds": 8.292735800030641,
+          "estimated_cost_usd": 0.00071361,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T08",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T08/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T08/trace.jsonl",
+          "trace_sha256": "2b93903768124c31e7f95f9745ce1027dedb930cae01443c1b35181f7b537959",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.74,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 36934,
+          "output_tokens": 594,
+          "latency_seconds": 8.336218800046481,
+          "estimated_cost_usd": 0.00066661,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T09",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T09/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T09/trace.jsonl",
+          "trace_sha256": "68b85a6ad73c51bee10375a2b8c0af63f3fa56eeaaaa5db9fdc9d728388b4642",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.72,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 16572,
+          "output_tokens": 710,
+          "latency_seconds": 7.848783600027673,
+          "estimated_cost_usd": 0.00052099,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T10",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T10/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T10/trace.jsonl",
+          "trace_sha256": "eaa0d58b807e060d78dd8b900a907f181014b8e6e2eaf667cac155d13e05bbd9",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.74,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 23863,
+          "output_tokens": 656,
+          "latency_seconds": 7.853011599974707,
+          "estimated_cost_usd": 0.0005669,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T11",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T11/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T11/trace.jsonl",
+          "trace_sha256": "3b6f3927638df2852f9dbde17082067d57d11d868435c0f4ab1b1079d8c4eaa7",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.72,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 30099,
+          "output_tokens": 463,
+          "latency_seconds": 5.557796799927019,
+          "estimated_cost_usd": 0.00053276,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T12",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T12/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T12/trace.jsonl",
+          "trace_sha256": "c3b3f9019395dedca6f256c7c75ab9aa7158ea9d00bf05c1aedd70a7775ed9f7",
+          "status": "ok",
+          "verified_success": false,
+          "score": 0.73,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 26994,
+          "output_tokens": 653,
+          "latency_seconds": 8.628008099971339,
+          "estimated_cost_usd": 0.0005967100000000001,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T13",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T13/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T13/trace.jsonl",
+          "trace_sha256": "98134c310104d30d5e4b66ba671cc459b89a394c31f6768ba75850bb5f8ac93f",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.78,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 27075,
+          "output_tokens": 498,
+          "latency_seconds": 6.386669599916786,
+          "estimated_cost_usd": 0.0005200199999999999,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T14",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T14/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T14/trace.jsonl",
+          "trace_sha256": "171307f871aa155bd2957a98c295f9c78fa674e2c806e2c74111f6c8c83a8dc7",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.72,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 24226,
+          "output_tokens": 598,
+          "latency_seconds": 7.157754100044258,
+          "estimated_cost_usd": 0.0005415299999999999,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T15",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T15/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T15/trace.jsonl",
+          "trace_sha256": "a797729310d0db89111143833d12f994dd1743ce71234c2d473a49c428993a5e",
+          "status": "ok",
+          "verified_success": false,
+          "score": 0.66,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 8838,
+          "output_tokens": 625,
+          "latency_seconds": 10.764837999944575,
+          "estimated_cost_usd": 0.00040114999999999997,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T16",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T16/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T16/trace.jsonl",
+          "trace_sha256": "1e0fc72ce2508db83b06ac3206e5f3169b2e23db85696ea5e8cd278059782e15",
+          "status": "ok",
+          "verified_success": false,
+          "score": 0.58,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 23392,
+          "output_tokens": 528,
+          "latency_seconds": 6.898674999945797,
+          "estimated_cost_usd": 0.00049819,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T17",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T17/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T17/trace.jsonl",
+          "trace_sha256": "4c84a27de6c7e160de056c773624803e935d5e799fe1e92eace8d8d10ddbed79",
+          "status": "ok",
+          "verified_success": false,
+          "score": 0.69,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 18064,
+          "output_tokens": 673,
+          "latency_seconds": 8.182291700039059,
+          "estimated_cost_usd": 0.00051741,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T18",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T18/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T18/trace.jsonl",
+          "trace_sha256": "1cb2eb889c493ce81b522bc69da9d57e73737bad63a1f0265281d1a98171faba",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.66,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 17424,
+          "output_tokens": 693,
+          "latency_seconds": 11.684693099930882,
+          "estimated_cost_usd": 0.00052101,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T19",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T19/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T19/trace.jsonl",
+          "trace_sha256": "281dc287c6a27342e1b50a2c92d2150aa7d90a4bdbdced07933afe033d0e83bd",
+          "status": "ok",
+          "verified_success": true,
+          "score": 0.68,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 33041,
+          "output_tokens": 645,
+          "latency_seconds": 8.62891500000842,
+          "estimated_cost_usd": 0.0006531800000000001,
+          "error": null
+        },
+        {
+          "global_round": 1,
+          "analysis_repeat": 1,
+          "source_repeat": 1,
+          "variant": "baseline",
+          "task_id": "T20",
+          "trace_path": "runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T20/trace.jsonl",
+          "trace_link": "../../runs/m3-final-baseline-20261118-luna6/r1/m2/baseline-r1/T20/trace.jsonl",
+          "trace_sha256": "50a7164330c2b652e7b188868f40d5c9070d65773e05ef6482c6dbf60ec23805",
+          "status": "ok",
+          "verified_success": false,
+          "score": 0.67,
+          "decision_steps": 1,
+          "reading_actions": 0,
+          "tool_calls": 0,
+          "api_calls": 1,
+          "input_tokens": 13497,
+          "output_tokens": 714,
+          "latency_seconds": 8.337966299965046,
+          "estimated_cost_usd": 0.00049224,
+          "error": null
+        }
+      ]
+    }
+  }
+}

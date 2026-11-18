@@ -97,11 +97,13 @@ def render_report(out, records, scores, completed_rounds, planned_rounds, planne
     (out / "README.md").write_text("\n".join(lines), encoding="utf-8", newline="\n")
 
 
-def prepare_plans(root, repeats, workers, model, seed, variants):
+def prepare_plans(root, repeats, workers, model, seed, variants, start_round=1):
     if type(repeats) is not int or repeats < 1:
         raise ValueError("Repetitions must be positive")
+    if type(start_round) is not int or start_round < 1:
+        raise ValueError("Start round must be a positive integer")
     plans = []
-    for round_number in range(1, repeats + 1):
+    for round_number in range(start_round, start_round + repeats):
         for stage, tracks, reads in STAGES:
             plan = make_plan(root, "test", tracks=tracks, variants=variants, repeats=1,
                              config=Config(model=model, max_reads=reads), workers=workers,
@@ -112,14 +114,14 @@ def prepare_plans(root, repeats, workers, model, seed, variants):
 
 def run(root, out, *, model="gpt-6-luna", repeats=5, workers=6, seed=20261118,
         execute=False, m2_sample=Path("data/eval/tasks.jsonl"), skip_m2=False,
-        variants=None):
+        variants=None, start_round=1):
     if type(execute) is not bool:
         raise ValueError("Execution requires an explicit boolean opt-in")
     variants = list(DEFAULT_VARIANTS if variants is None else variants)
     if not variants or len(variants) != len(set(variants)) or set(variants) - set(AVAILABLE_VARIANTS):
         raise ValueError("Choose a nonempty list of distinct known variants")
     root, out = Path(root).resolve(), Path(out).resolve()
-    plans = prepare_plans(root, repeats, workers, model, seed, variants)
+    plans = prepare_plans(root, repeats, workers, model, seed, variants, start_round)
     m2_sample = Path(m2_sample).resolve()
     m2_tasks = [] if skip_m2 else load_sample(m2_sample)
     if not skip_m2 and len(m2_tasks) != 20:
@@ -139,6 +141,7 @@ def run(root, out, *, model="gpt-6-luna", repeats=5, workers=6, seed=20261118,
             raise RuntimeError("Dry validation must not call models")
     if not execute:
         return {"status": "dry_run", "model_calls": 0, "rounds": repeats,
+                "start_round": start_round,
                 "tasks_per_round": len(tasks), "variants": variants,
                 "planned_attempts": total, "benchmark_planned_attempts": benchmark_total,
                 "m2_planned_attempts": m2_total, "workers": workers, "out": str(out)}
@@ -146,12 +149,13 @@ def run(root, out, *, model="gpt-6-luna", repeats=5, workers=6, seed=20261118,
     out.mkdir(parents=True, exist_ok=False)
     (out / "launcher.py").write_bytes(Path(__file__).read_bytes())
     stages = []
-    for round_number in range(1, repeats + 1):
+    for round_number in range(start_round, start_round + repeats):
         if not skip_m2:
             stages.append((round_number, "m2", None))
         stages.extend(item for item in plans if item[0] == round_number)
     write_json(out / "experiment.json", {
         "model": model, "variants": variants, "rounds": repeats, "workers": workers,
+        "start_round": start_round,
         "seed": seed, "tasks_per_round": len(tasks), "planned_attempts": total,
         "benchmark_planned_attempts": benchmark_total, "m2_planned_attempts": m2_total,
         "m2_sample": str(m2_sample) if not skip_m2 else None,
@@ -217,9 +221,10 @@ def run(root, out, *, model="gpt-6-luna", repeats=5, workers=6, seed=20261118,
                     aggregate.write(json.dumps(copied, ensure_ascii=False, allow_nan=False) + "\n")
                 aggregate.flush()
                 if stage == STAGES[-1][0]:
-                    scores = score_predictions(tasks, records, variants=variants, repeats=round_number)
+                    scores = score_predictions(tasks, records, variants=variants,
+                                               repeats=list(range(start_round, round_number + 1)))
                     write_json(out / "scores.json", scores)
-                    completed_rounds = round_number
+                    completed_rounds = round_number - start_round + 1
                 render_report(out, records, scores, completed_rounds, repeats, total, m2_rounds, m2_total, variants)
                 publish("running", "complete")
     except Exception as exc:
@@ -245,6 +250,7 @@ def main():
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--model", default="gpt-6-luna")
     parser.add_argument("--repeats", type=int, default=5)
+    parser.add_argument("--start-round", type=int, default=1)
     parser.add_argument("--workers", type=int, default=6)
     parser.add_argument("--seed", type=int, default=20261118)
     parser.add_argument("--variants", nargs="+", choices=AVAILABLE_VARIANTS,
@@ -258,7 +264,8 @@ def main():
     try:
         result = run(args.root, args.out, model=args.model, repeats=args.repeats,
                      workers=args.workers, seed=args.seed, execute=args.execute,
-                     m2_sample=args.m2_sample, skip_m2=args.skip_m2, variants=args.variants)
+                     m2_sample=args.m2_sample, skip_m2=args.skip_m2, variants=args.variants,
+                     start_round=args.start_round)
     except Exception as exc:
         print(json.dumps({"status": "error", "error": safe_error(exc)}))
         return 1

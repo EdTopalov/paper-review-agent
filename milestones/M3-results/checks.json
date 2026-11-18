@@ -1,0 +1,327 @@
+{
+  "runs/m3-existing-20261118-luna6/r1/core": {
+    "runs": 192,
+    "passed": 192,
+    "failures": []
+  },
+  "runs/m3-existing-20261118-luna6/r1/m2": {
+    "runs": 60,
+    "passed": 52,
+    "failures": [
+      {
+        "trace": "runs\\m3-existing-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T05\\trace.jsonl",
+        "checks": {
+          "sequence": true,
+          "terminal_result": true,
+          "reading_budget": true,
+          "valid_arguments": false,
+          "call_accounting": true,
+          "response_accounting": true,
+          "stop_recorded": true,
+          "variant_labels": true,
+          "pyagent_accepted_review": true,
+          "pyagent_decision_budget": true
+        },
+        "all_checks_pass": false
+      },
+      {
+        "trace": "runs\\m3-existing-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T06\\trace.jsonl",
+        "checks": {
+          "sequence": true,
+          "terminal_result": true,
+          "reading_budget": true,
+          "valid_arguments": false,
+          "call_accounting": true,
+          "response_accounting": true,
+          "stop_recorded": true,
+          "variant_labels": true,
+          "pyagent_accepted_review": true,
+          "pyagent_decision_budget": true
+        },
+        "all_checks_pass": false
+      },
+      {
+        "trace": "runs\\m3-existing-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T10\\trace.jsonl",
+        "checks": {
+          "sequence": true,
+          "terminal_result": true,
+          "reading_budget": true,
+          "valid_arguments": false,
+          "call_accounting": true,
+          "response_accounting": true,
+          "stop_recorded": true,
+          "variant_labels": true,
+          "pyagent_accepted_review": true,
+          "pyagent_decision_budget": true
+        },
+        "all_checks_pass": false
+      },
+      {
+        "trace": "runs\\m3-existing-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T11\\trace.jsonl",
+        "checks": {
+          "sequence": true,
+          "terminal_result": true,
+          "reading_budget": true,
+          "valid_arguments": false,
+          "call_accounting": true,
+          "response_accounting": true,
+          "stop_recorded": true,
+          "variant_labels": true,
+          "pyagent_accepted_review": true,
+          "pyagent_decision_budget": true
+        },
+        "all_checks_pass": false
+      },
+      {
+        "trace": "runs\\m3-existing-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T14\\trace.jsonl",
+        "checks": {
+          "sequence": true,
+          "terminal_result": true,
+          "reading_budget": true,
+          "valid_arguments": false,
+          "call_accounting": true,
+          "response_accounting": true,
+          "stop_recorded": true,
+          "variant_labels": true,
+          "pyagent_accepted_review": true,
+          "pyagent_decision_budget": true
+        },
+        "all_checks_pass": false
+      },
+      {
+        "trace": "runs\\m3-existing-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T15\\trace.jsonl",
+        "checks": {
+          "sequence": true,
+          "terminal_result": true,
+          "reading_budget": true,
+          "valid_arguments": false,
+          "call_accounting": true,
+          "response_accounting": true,
+          "stop_recorded": true,
+          "variant_labels": true,
+          "pyagent_accepted_review": true,
+          "pyagent_decision_budget": true
+        },
+        "all_checks_pass": false
+      },
+      {
+        "trace": "runs\\m3-existing-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T17\\trace.jsonl",
+        "checks": {
+          "sequence": true,
+          "terminal_result": true,
+          "reading_budget": true,
+          "valid_arguments": false,
+          "call_accounting": true,
+          "response_accounting": true,
+          "stop_recorded": true,
+          "variant_labels": true,
+          "pyagent_accepted_review": true,
+          "pyagent_decision_budget": true
+        },
+        "all_checks_pass": false
+      },
+      {
+        "trace": "runs\\m3-existing-20261118-luna6\\r1\\m2\\pyagent_react-r1\\T20\\trace.jsonl",
+        "checks": {
+          "sequence": true,
+          "terminal_result": true,
+          "reading_budget": true,
+          "valid_arguments": false,
+          "call_accounting": true,
+          "response_accounting": true,
+          "stop_recorded": true,
+          "variant_labels": true,
+          "pyagent_accepted_review": true,
+          "pyagent_decision_budget": true
+        },
+        "all_checks_pass": false
+      }
+    ]
+  },
+  "runs/m3-existing-20261118-luna6/r1/selection": {
+    "runs": 36,
+    "passed": 36,
+    "failures": []
+  },
+  "runs/m3-existing-20261118-luna6/r2/core": {
+    "runs": 192,
+    "passed": 192,
+    "failures": []
+  },
+  "runs/m3-existing-20261118-luna6/r2/m2": {
+    "runs": 60,
+    "passed": 50,
+    "failures": [
+      {
+        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T04\\trace.jsonl",
+        "checks": {
+          "sequence": true,
+          "terminal_result": true,
+          "reading_budget": true,
+          "valid_arguments": false,
+          "call_accounting": true,
+          "response_accounting": true,
+          "stop_recorded": true,
+          "variant_labels": true,
+          "pyagent_accepted_review": true,
+          "pyagent_decision_budget": true
+        },
+        "all_checks_pass": false
+      },
+      {
+        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T07\\trace.jsonl",
+        "checks": {
+          "sequence": true,
+          "terminal_result": true,
+          "reading_budget": true,
+          "valid_arguments": false,
+          "call_accounting": true,
+          "response_accounting": true,
+          "stop_recorded": true,
+          "variant_labels": true,
+          "pyagent_accepted_review": true,
+          "pyagent_decision_budget": true
+        },
+        "all_checks_pass": false
+      },
+      {
+        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T08\\trace.jsonl",
+        "checks": {
+          "sequence": true,
+          "terminal_result": true,
+          "reading_budget": true,
+          "valid_arguments": false,
+          "call_accounting": true,
+          "response_accounting": true,
+          "stop_recorded": true,
+          "variant_labels": true,
+          "pyagent_accepted_review": true,
+          "pyagent_decision_budget": true
+        },
+        "all_checks_pass": false
+      },
+      {
+        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T09\\trace.jsonl",
+        "checks": {
+          "sequence": true,
+          "terminal_result": true,
+          "reading_budget": true,
+          "valid_arguments": false,
+          "call_accounting": true,
+          "response_accounting": true,
+          "stop_recorded": true,
+          "variant_labels": true,
+          "pyagent_accepted_review": true,
+          "pyagent_decision_budget": true
+        },
+        "all_checks_pass": false
+      },
+      {
+        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T13\\trace.jsonl",
+        "checks": {
+          "sequence": true,
+          "terminal_result": true,
+          "reading_budget": true,
+          "valid_arguments": false,
+          "call_accounting": true,
+          "response_accounting": true,
+          "stop_recorded": true,
+          "variant_labels": true,
+          "pyagent_accepted_review": true,
+          "pyagent_decision_budget": true
+        },
+        "all_checks_pass": false
+      },
+      {
+        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T14\\trace.jsonl",
+        "checks": {
+          "sequence": true,
+          "terminal_result": true,
+          "reading_budget": true,
+          "valid_arguments": false,
+          "call_accounting": true,
+          "response_accounting": true,
+          "stop_recorded": true,
+          "variant_labels": true,
+          "pyagent_accepted_review": true,
+          "pyagent_decision_budget": true
+        },
+        "all_checks_pass": false
+      },
+      {
+        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T15\\trace.jsonl",
+        "checks": {
+          "sequence": true,
+          "terminal_result": true,
+          "reading_budget": true,
+          "valid_arguments": false,
+          "call_accounting": true,
+          "response_accounting": true,
+          "stop_recorded": true,
+          "variant_labels": true,
+          "pyagent_accepted_review": true,
+          "pyagent_decision_budget": true
+        },
+        "all_checks_pass": false
+      },
+      {
+        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T16\\trace.jsonl",
+        "checks": {
+          "sequence": true,
+          "terminal_result": true,
+          "reading_budget": true,
+          "valid_arguments": false,
+          "call_accounting": true,
+          "response_accounting": true,
+          "stop_recorded": true,
+          "variant_labels": true,
+          "pyagent_accepted_review": true,
+          "pyagent_decision_budget": true
+        },
+        "all_checks_pass": false
+      },
+      {
+        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T17\\trace.jsonl",
+        "checks": {
+          "sequence": true,
+          "terminal_result": true,
+          "reading_budget": true,
+          "valid_arguments": false,
+          "call_accounting": true,
+          "response_accounting": true,
+          "stop_recorded": true,
+          "variant_labels": true,
+          "pyagent_accepted_review": true,
+          "pyagent_decision_budget": true
+        },
+        "all_checks_pass": false
+      },
+      {
+        "trace": "runs\\m3-existing-20261118-luna6\\r2\\m2\\pyagent_react-r1\\T20\\trace.jsonl",
+        "checks": {
+          "sequence": true,
+          "terminal_result": true,
+          "reading_budget": true,
+          "valid_arguments": false,
+          "call_accounting": true,
+          "response_accounting": true,
+          "stop_recorded": true,
+          "variant_labels": true,
+          "pyagent_accepted_review": true,
+          "pyagent_decision_budget": true
+        },
+        "all_checks_pass": false
+      }
+    ]
+  },
+  "runs/m3-deliberative-20261118-luna6/r1/m2": {
+    "runs": 20,
+    "passed": 20,
+    "failures": []
+  },
+  "runs/m3-t17-native-r10": {
+    "runs": 10,
+    "passed": 10,
+    "failures": []
+  }
+}

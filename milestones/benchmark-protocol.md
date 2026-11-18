@@ -27,29 +27,33 @@ Separate `references/` hold answers, labels, explanations, and oracle facts, exc
 
 Methods share task instructions, structured predictions, and fresh context per attempt.
 Reading agents receive the task, block catalog, and first block, then use search/read tools.
-Baseline receives all blocks in one call. Agents require quotes to match observed text;
-baseline accepts schema-valid answers with mismatches. Task adapters are shared interfaces.
+Baseline receives all blocks in one call. Ordinary agent submissions require quotes
+matching observed text. At the cap, one final call requests a nullable public answer
+without tools or retries. A valid non-null answer completes with citation diagnostics;
+null, missing/invalid output and transport errors remain failures. Ledgers do not gate
+forced public answers. Content correctness is independent of completion and quotes.
 
 All blocks use `gpt-6-luna`, low reasoning, at most 4,000 output tokens per request,
-a 90-second timeout, and one retry. Traces record resolved model IDs/timestamps.
+a 90-second timeout and one transport retry, except the final call's zero retries.
+Traces record resolved model IDs/timestamps.
 Seeded job shuffling controls scheduling, not API sampling.
 
-| Stage | Tasks per method / round | Reading-action cap | Decision cap |
-|---|---:|---:|---:|
-| M2 and benchmark core | 20 and 64 | 5 | 8 |
-| Benchmark selection | 12 | 20 | 23 |
+| Stage | Tasks per method / round | Reading cap | Ordinary decisions | Maximum with final call |
+|---|---:|---:|---:|---:|
+| M2 / benchmark core | 20 / 64 | 5 | 16 | 17 |
+| Benchmark selection | 12 | 20 | 46 | 47 |
 
-Baseline has one decision. Deliberative roles share the decision budget, permitting at most
-four core reads; the critic sees observed sources only. Selection has up to 54 blocks.
+Baseline has one decision. Deliberative roles share the cap; initial exploration
+remains three core or 18 selection reads, with at most one critic-requested read.
+The critic sees observed sources only. Selection has up to 54 blocks.
 The [real-paper selection pilot](selection-pilot.md) is separate.
 
-The four [saved JSON examples](benchmark-plans/) have two one-repeat smoke plans and two
-**three-repeat** test plans. The scheduler targets **five repetitions**, each running M2, core, then selection.
-The frozen [existing-method block](../runs/m3-existing-20261118-luna6/experiment.json) uses six workers;
-the [deliberative block](../runs/m3-deliberative-20261118-luna6/experiment.json) uses four.
-Separate schedules prevent controlled latency comparisons. Traces retain local repeat 1;
-aggregate copies use global rounds with source provenance. Five rounds across four methods
-plan 1,520 benchmark attempts plus 400 M2 attempts.
+The [saved plans](benchmark-plans/) contain one-repeat smoke and three-repeat test examples.
+Final collection uses three repetitions and separate eight-worker blocks per agent;
+baseline uses four workers. Each round runs M2, core, then selection. Three rounds
+across four methods plan 912 benchmark attempts plus 240 M2 attempts. Traces retain
+local repeat 1; aggregates identify global rounds and original source provenance.
+Separate worker pools and start times prevent a controlled latency comparison.
 
 ## Preparation, collection, and artifacts
 
@@ -59,8 +63,10 @@ From the repository root with the [environment installed](../README.md):
 paper-review benchmark-verify
 python scripts/prepare_benchmark_plans.py --out runs/scratch/fresh-benchmark-plans
 paper-review benchmark-run --plan runs/scratch/fresh-benchmark-plans/dev-core-smoke-luna6.json --out runs/benchmark-dev-core
-python scripts/run_existing_benchmark.py --model gpt-6-luna --variants agent pyagent_react baseline --repeats 5 --workers 6 --out runs/benchmark-existing
-python scripts/run_existing_benchmark.py --model gpt-6-luna --variants deliberative_review --repeats 5 --workers 4 --out runs/benchmark-deliberative
+python scripts/run_existing_benchmark.py --model gpt-6-luna --variants agent --repeats 3 --workers 8 --out runs/m3-final-agent-20261118-luna6
+python scripts/run_existing_benchmark.py --model gpt-6-luna --variants pyagent_react --repeats 3 --workers 8 --out runs/m3-final-pyagent_react-20261118-luna6
+python scripts/run_existing_benchmark.py --model gpt-6-luna --variants deliberative_review --repeats 3 --workers 8 --out runs/m3-final-deliberative_review-20261118-luna6
+python scripts/run_existing_benchmark.py --model gpt-6-luna --variants baseline --repeats 3 --workers 4 --out runs/m3-final-baseline-20261118-luna6
 ```
 
 These commands make no model calls; append `--execute` to a runner to collect predictions.
@@ -73,8 +79,9 @@ uses pinned downloads and hash verification without model calls.
 
 ## Scoring and reporting
 
-Completion means a schema-valid returned prediction. Failures and invalid predictions score
-zero and remain in attempt denominators; missing cells reject scoring. Quote-matching rates
+Completion means a valid returned prediction, including non-null forced answers. Incorrect
+or failed predictions score zero on exact-content measures and remain in attempt denominators;
+missing cells reject scoring. Quote-matching rates
 use submitted quotes. Report tracks, repeats, and groups separately, with decisions,
 reading/tool/API calls, tokens, USD, and latency per attempt. Costs include retries;
 unknown usage stays unknown. Compare run variation before interpreting method differences.
@@ -87,9 +94,10 @@ across complete repetition means; one repetition has no bar. Its 76 equally weig
 outcomes are descriptive; track metrics remain separate. Rebuild offline:
 
 ```shell
-paper-review benchmark-score --tracks qasper reviewcritique controlled --records runs/benchmark-existing/r1/core/records.jsonl --plan runs/benchmark-existing/r1/core/plan.json
+paper-review benchmark-score --tracks qasper reviewcritique controlled --records runs/m3-final-agent-20261118-luna6/r1/core/records.jsonl --plan runs/m3-final-agent-20261118-luna6/r1/core/plan.json
 python -m pip install -r requirements-report.txt
-python scripts/report_m3_results.py runs/benchmark-existing runs/benchmark-deliberative --out runs/benchmark-report
+python scripts/report_m3_results.py runs/m3-final-agent-20261118-luna6 runs/m3-final-pyagent_react-20261118-luna6 runs/m3-final-deliberative_review-20261118-luna6 runs/m3-final-baseline-20261118-luna6 --out milestones/M3-results
+python scripts/report_m3_m2_results.py
 ```
 
 The report includes only complete comparable rounds and writes `README.md`,

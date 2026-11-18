@@ -22,8 +22,10 @@ from paper_review.paper import file_hash
 REPOSITORY = Path(__file__).resolve().parents[1]
 VARIANTS = ("agent", "pyagent_react", "deliberative_review", "baseline")
 DEFAULT_EXPERIMENTS = (
-    "runs/m3-existing-20261118-luna6",
-    "runs/m3-deliberative-20261118-luna6",
+    "runs/m3-final-agent-20261118-luna6",
+    "runs/m3-final-pyagent_react-20261118-luna6",
+    "runs/m3-final-deliberative_review-20261118-luna6",
+    "runs/m3-final-baseline-20261118-luna6",
 )
 MEANS = {"decision_steps": "mean_decision_steps", "reading_actions": "mean_reading_actions",
          "tool_calls": "mean_tool_calls", "api_calls": "mean_model_calls",
