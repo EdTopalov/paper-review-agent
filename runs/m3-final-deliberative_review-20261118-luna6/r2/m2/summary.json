@@ -1,0 +1,306 @@
+{
+  "deliberative_review": {
+    "runs": 20,
+    "distinct_tasks": 20,
+    "completed": 20,
+    "completion_rate": 1.0,
+    "all_quotes_match": 19,
+    "quote_match_rate": 0.9733333333333334,
+    "all_citations_verified": 20,
+    "citation_verification_rate": 1.0,
+    "first_submission_verified": 15,
+    "first_submission_observed": 15,
+    "mean_rejected_submissions": 0.4,
+    "recovered_citation_runs": 5,
+    "citation_status_counts": {
+      "exact": 32,
+      "whitespace": 41,
+      "normalized": 2,
+      "wrong_page": 0,
+      "hyphenation_ambiguous": 0,
+      "not_found": 0
+    },
+    "mean_reading_actions": 3.3,
+    "mean_decision_steps": 7.8,
+    "mean_tool_calls": 4.7,
+    "mean_model_calls": 7.8,
+    "mean_input_tokens": 42081.3,
+    "mean_output_tokens": 3404.65,
+    "mean_cached_input_tokens": 1324.3,
+    "mean_latency_seconds": 36.662571055005536,
+    "median_latency_seconds": 34.28149045002647,
+    "mean_cost_usd": 0.0067994605,
+    "total_cost_usd": 0.13598921,
+    "billing_uncertain_runs": 0,
+    "repetition_statistics": {
+      "model": "gpt-6-luna",
+      "repeats": 1,
+      "per_repeat": [
+        {
+          "repeat": 1,
+          "attempts": 20,
+          "completed": 20,
+          "verified_successes": 20,
+          "completion_rate": 1.0,
+          "verified_success_rate": 1.0,
+          "mean_model_calls": 7.8,
+          "mean_input_tokens": 42081.3,
+          "mean_output_tokens": 3404.65,
+          "mean_cost_usd": 0.0067994605,
+          "mean_latency_seconds": 36.662571055005536
+        }
+      ],
+      "per_task": {
+        "T01": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.72,
+          "score_sample_sd": null,
+          "score_range": [
+            0.72,
+            0.72
+          ]
+        },
+        "T02": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.68,
+          "score_sample_sd": null,
+          "score_range": [
+            0.68,
+            0.68
+          ]
+        },
+        "T03": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.65,
+          "score_sample_sd": null,
+          "score_range": [
+            0.65,
+            0.65
+          ]
+        },
+        "T04": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.48,
+          "score_sample_sd": null,
+          "score_range": [
+            0.48,
+            0.48
+          ]
+        },
+        "T05": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.72,
+          "score_sample_sd": null,
+          "score_range": [
+            0.72,
+            0.72
+          ]
+        },
+        "T06": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.72,
+          "score_sample_sd": null,
+          "score_range": [
+            0.72,
+            0.72
+          ]
+        },
+        "T07": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.71,
+          "score_sample_sd": null,
+          "score_range": [
+            0.71,
+            0.71
+          ]
+        },
+        "T08": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.74,
+          "score_sample_sd": null,
+          "score_range": [
+            0.74,
+            0.74
+          ]
+        },
+        "T09": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.68,
+          "score_sample_sd": null,
+          "score_range": [
+            0.68,
+            0.68
+          ]
+        },
+        "T10": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.74,
+          "score_sample_sd": null,
+          "score_range": [
+            0.74,
+            0.74
+          ]
+        },
+        "T11": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.68,
+          "score_sample_sd": null,
+          "score_range": [
+            0.68,
+            0.68
+          ]
+        },
+        "T12": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.72,
+          "score_sample_sd": null,
+          "score_range": [
+            0.72,
+            0.72
+          ]
+        },
+        "T13": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.78,
+          "score_sample_sd": null,
+          "score_range": [
+            0.78,
+            0.78
+          ]
+        },
+        "T14": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.58,
+          "score_sample_sd": null,
+          "score_range": [
+            0.58,
+            0.58
+          ]
+        },
+        "T15": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.73,
+          "score_sample_sd": null,
+          "score_range": [
+            0.73,
+            0.73
+          ]
+        },
+        "T16": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.5,
+          "score_sample_sd": null,
+          "score_range": [
+            0.5,
+            0.5
+          ]
+        },
+        "T17": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.62,
+          "score_sample_sd": null,
+          "score_range": [
+            0.62,
+            0.62
+          ]
+        },
+        "T18": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.68,
+          "score_sample_sd": null,
+          "score_range": [
+            0.68,
+            0.68
+          ]
+        },
+        "T19": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.66,
+          "score_sample_sd": null,
+          "score_range": [
+            0.66,
+            0.66
+          ]
+        },
+        "T20": {
+          "attempts": 1,
+          "completed": 1,
+          "verified_successes": 1,
+          "score_count": 1,
+          "mean_score": 0.73,
+          "score_sample_sd": null,
+          "score_range": [
+            0.73,
+            0.73
+          ]
+        }
+      },
+      "pass_power_k": {
+        "1": 1.0
+      },
+      "tasks_always_verified": 20,
+      "tasks_sometimes_verified": 0,
+      "tasks_never_verified": 0,
+      "within_task_mean_absolute_score_difference": null,
+      "within_task_score_pairs": 0,
+      "paired_comparisons": {}
+    }
+  }
+}

@@ -1,0 +1,26 @@
+# CB-72101445106e
+
+baseline · repeat 1 · ok
+
+1 API calls · 1051 input tokens · 274 output tokens · estimated USD 0.00014778
+
+[Full trace](trace.jsonl). This output contains no reference labels.
+
+```json
+{
+  "evidence": [
+    {
+      "document_id": "P1",
+      "block_id": "b0004",
+      "quote": "Evaluation languages are exactly: English. In each evaluated language, baseline accuracy is 66% and the new method's accuracy is 70%. No other language evaluation was conducted."
+    },
+    {
+      "document_id": "P1",
+      "block_id": "b0003",
+      "quote": "The report discusses possible use in English, German, and Spanish. Discussion of a language does not by itself constitute an experiment."
+    }
+  ],
+  "explanation": "The report shows higher accuracy for the new method only in English. It explicitly says German and Spanish were not evaluated, so the claim that the method had higher accuracy in each of the three languages is contradicted by the reported scope.",
+  "verdict": "contradicted"
+}
+```

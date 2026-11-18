@@ -1,0 +1,499 @@
+{
+  "plan_version": "benchmark-plan-v1",
+  "benchmark_version": "evidence-assessment-v1",
+  "benchmark_root": "C:\\Users\\artem\\Documents\\ChatGPT\\Paper-review-agent\\runs\\scratch\\final-source-20261118-2311\\data\\benchmark\\v1",
+  "manifest_sha256": "04d75e5b653230fb462a9832cc95861c5ba446bb4251c759cfa168363afee739",
+  "benchmark_settings_sha256": "892f91b829ccfaaf8bbcf52b1dab2e041e62001e1877e52428899aef70e888b0",
+  "source_sha256": "25b88d18eb56586a8420cc14d8725b9a2baf6e1331a911aca8ad5a77c99da59f",
+  "git_revision": "85050fcd4d478ac1ede53de5187d1f3216cd0867",
+  "split": "test",
+  "tracks": [
+    "controlled",
+    "qasper",
+    "reviewcritique"
+  ],
+  "task_ids": [
+    "CB-12d6c0559e77",
+    "CB-20fe26ed8a63",
+    "CB-25cf58af89f2",
+    "CB-40388578e13d",
+    "CB-449d322624b5",
+    "CB-527f16549e56",
+    "CB-54f05a314634",
+    "CB-5501cd8dd300",
+    "CB-6d1256f826e3",
+    "CB-72101445106e",
+    "CB-74e44d72cfb9",
+    "CB-7ad89dbcdedc",
+    "CB-80bd654cbc97",
+    "CB-8fe165c89164",
+    "CB-9445ca674aeb",
+    "CB-b36c4ba21009",
+    "CB-bc5465d35ac1",
+    "CB-bd50b5c34b5a",
+    "CB-c1f1e166dec3",
+    "CB-cedf9028d20e",
+    "CB-d08f00314b8d",
+    "CB-d2c80b428f6e",
+    "CB-e758c8885528",
+    "CB-fba8e76583d6",
+    "QASPER-01209a3bead7",
+    "QASPER-0c234db3b380",
+    "QASPER-220d11a03897",
+    "QASPER-25c1c4a91f5d",
+    "QASPER-2e37e681942e",
+    "QASPER-4e748cb2b5e7",
+    "QASPER-6c96e910bd98",
+    "QASPER-7bd6a6ec230e",
+    "QASPER-893ec40b678a",
+    "QASPER-8db6f8714bda",
+    "QASPER-8dc707a0daf7",
+    "QASPER-8eefa116e3c3",
+    "QASPER-ababb79dd3c3",
+    "QASPER-b21bc0919369",
+    "QASPER-b591853e9389",
+    "QASPER-b970f48d3077",
+    "QASPER-b9ea841b817b",
+    "QASPER-ba539cab80d2",
+    "QASPER-c59802881506",
+    "QASPER-dfca00be3284",
+    "RC-16a23f11844e",
+    "RC-17ae89b7e529",
+    "RC-196c24d86b88",
+    "RC-19e4af168032",
+    "RC-1d03f02eb4d7",
+    "RC-2518e6de7eb6",
+    "RC-357185295521",
+    "RC-39282147886f",
+    "RC-59408ce4ca25",
+    "RC-599e8dc3a69c",
+    "RC-81274ac167fc",
+    "RC-88f98dcc0dee",
+    "RC-97b4064e1659",
+    "RC-9813f9c2cf5d",
+    "RC-ae631d292d42",
+    "RC-cc398745c3c8",
+    "RC-d574e4d2099d",
+    "RC-f0e2b1a1f91a",
+    "RC-f5097b168055",
+    "RC-f94db276afa4"
+  ],
+  "variants": [
+    "pyagent_react"
+  ],
+  "variant_metadata": {
+    "pyagent_react": {
+      "prompt_version": "m3-v2-pyagent-react-v2",
+      "harness": "pyagent-patterns.ReAct",
+      "harness_version": "0.3.0",
+      "protocol": "pyagent-text-action-v2",
+      "budget_policy": "double-decisions-forced-final-v1"
+    }
+  },
+  "repeats": 1,
+  "config": {
+    "model": "gpt-6-luna",
+    "max_reads": 5,
+    "max_output_tokens": 4000,
+    "timeout": 90,
+    "retries": 1,
+    "reasoning_effort": "low",
+    "max_paper_chars": 600000
+  },
+  "workers": 8,
+  "seed": 20261120,
+  "jobs": [
+    {
+      "id": "CB-449d322624b5",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-449d322624b5"
+    },
+    {
+      "id": "QASPER-b591853e9389",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-b591853e9389"
+    },
+    {
+      "id": "RC-59408ce4ca25",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-59408ce4ca25"
+    },
+    {
+      "id": "RC-16a23f11844e",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-16a23f11844e"
+    },
+    {
+      "id": "RC-599e8dc3a69c",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-599e8dc3a69c"
+    },
+    {
+      "id": "CB-25cf58af89f2",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-25cf58af89f2"
+    },
+    {
+      "id": "QASPER-dfca00be3284",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-dfca00be3284"
+    },
+    {
+      "id": "CB-bc5465d35ac1",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-bc5465d35ac1"
+    },
+    {
+      "id": "CB-9445ca674aeb",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-9445ca674aeb"
+    },
+    {
+      "id": "RC-f94db276afa4",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-f94db276afa4"
+    },
+    {
+      "id": "QASPER-b970f48d3077",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-b970f48d3077"
+    },
+    {
+      "id": "CB-80bd654cbc97",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-80bd654cbc97"
+    },
+    {
+      "id": "RC-357185295521",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-357185295521"
+    },
+    {
+      "id": "QASPER-8dc707a0daf7",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-8dc707a0daf7"
+    },
+    {
+      "id": "CB-72101445106e",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-72101445106e"
+    },
+    {
+      "id": "RC-81274ac167fc",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-81274ac167fc"
+    },
+    {
+      "id": "QASPER-6c96e910bd98",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-6c96e910bd98"
+    },
+    {
+      "id": "QASPER-893ec40b678a",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-893ec40b678a"
+    },
+    {
+      "id": "CB-20fe26ed8a63",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-20fe26ed8a63"
+    },
+    {
+      "id": "CB-b36c4ba21009",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-b36c4ba21009"
+    },
+    {
+      "id": "RC-1d03f02eb4d7",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-1d03f02eb4d7"
+    },
+    {
+      "id": "RC-f0e2b1a1f91a",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-f0e2b1a1f91a"
+    },
+    {
+      "id": "QASPER-2e37e681942e",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-2e37e681942e"
+    },
+    {
+      "id": "QASPER-ababb79dd3c3",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-ababb79dd3c3"
+    },
+    {
+      "id": "RC-cc398745c3c8",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-cc398745c3c8"
+    },
+    {
+      "id": "CB-bd50b5c34b5a",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-bd50b5c34b5a"
+    },
+    {
+      "id": "QASPER-7bd6a6ec230e",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-7bd6a6ec230e"
+    },
+    {
+      "id": "CB-12d6c0559e77",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-12d6c0559e77"
+    },
+    {
+      "id": "RC-19e4af168032",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-19e4af168032"
+    },
+    {
+      "id": "CB-7ad89dbcdedc",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-7ad89dbcdedc"
+    },
+    {
+      "id": "QASPER-ba539cab80d2",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-ba539cab80d2"
+    },
+    {
+      "id": "RC-d574e4d2099d",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-d574e4d2099d"
+    },
+    {
+      "id": "CB-d08f00314b8d",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-d08f00314b8d"
+    },
+    {
+      "id": "RC-ae631d292d42",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-ae631d292d42"
+    },
+    {
+      "id": "QASPER-0c234db3b380",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-0c234db3b380"
+    },
+    {
+      "id": "CB-e758c8885528",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-e758c8885528"
+    },
+    {
+      "id": "CB-5501cd8dd300",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-5501cd8dd300"
+    },
+    {
+      "id": "CB-40388578e13d",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-40388578e13d"
+    },
+    {
+      "id": "QASPER-b9ea841b817b",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-b9ea841b817b"
+    },
+    {
+      "id": "CB-527f16549e56",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-527f16549e56"
+    },
+    {
+      "id": "RC-2518e6de7eb6",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-2518e6de7eb6"
+    },
+    {
+      "id": "QASPER-8eefa116e3c3",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-8eefa116e3c3"
+    },
+    {
+      "id": "QASPER-c59802881506",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-c59802881506"
+    },
+    {
+      "id": "RC-f5097b168055",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-f5097b168055"
+    },
+    {
+      "id": "CB-74e44d72cfb9",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-74e44d72cfb9"
+    },
+    {
+      "id": "CB-d2c80b428f6e",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-d2c80b428f6e"
+    },
+    {
+      "id": "CB-fba8e76583d6",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-fba8e76583d6"
+    },
+    {
+      "id": "QASPER-4e748cb2b5e7",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-4e748cb2b5e7"
+    },
+    {
+      "id": "RC-9813f9c2cf5d",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-9813f9c2cf5d"
+    },
+    {
+      "id": "CB-cedf9028d20e",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-cedf9028d20e"
+    },
+    {
+      "id": "RC-39282147886f",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-39282147886f"
+    },
+    {
+      "id": "RC-88f98dcc0dee",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-88f98dcc0dee"
+    },
+    {
+      "id": "QASPER-25c1c4a91f5d",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-25c1c4a91f5d"
+    },
+    {
+      "id": "CB-54f05a314634",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-54f05a314634"
+    },
+    {
+      "id": "QASPER-220d11a03897",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-220d11a03897"
+    },
+    {
+      "id": "CB-6d1256f826e3",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-6d1256f826e3"
+    },
+    {
+      "id": "RC-17ae89b7e529",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-17ae89b7e529"
+    },
+    {
+      "id": "CB-8fe165c89164",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-8fe165c89164"
+    },
+    {
+      "id": "RC-196c24d86b88",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-196c24d86b88"
+    },
+    {
+      "id": "CB-c1f1e166dec3",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/CB-c1f1e166dec3"
+    },
+    {
+      "id": "QASPER-01209a3bead7",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-01209a3bead7"
+    },
+    {
+      "id": "QASPER-8db6f8714bda",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-8db6f8714bda"
+    },
+    {
+      "id": "QASPER-b21bc0919369",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/QASPER-b21bc0919369"
+    },
+    {
+      "id": "RC-97b4064e1659",
+      "variant": "pyagent_react",
+      "repeat": 1,
+      "job_id": "pyagent_react-r1/RC-97b4064e1659"
+    }
+  ],
+  "tasks": 64,
+  "planned_runs": 64,
+  "track_tasks": {
+    "controlled": 24,
+    "qasper": 20,
+    "reviewcritique": 20
+  },
+  "status": "planned_not_executed"
+}

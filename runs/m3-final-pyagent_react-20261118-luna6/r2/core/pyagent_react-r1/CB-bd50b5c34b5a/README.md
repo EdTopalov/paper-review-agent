@@ -1,0 +1,26 @@
+# CB-bd50b5c34b5a
+
+pyagent_react · repeat 1 · ok
+
+3 API calls · 5560 input tokens · 1099 output tokens · estimated USD 0.00067859
+
+[Full trace](trace.jsonl). This output contains no reference labels.
+
+```json
+{
+  "evidence": [
+    {
+      "document_id": "P1",
+      "block_id": "b0001",
+      "quote": "We report a headline accuracy of 74%. The study repeats the procedure across several random seeds and supplies every seed-level result."
+    },
+    {
+      "document_id": "P1",
+      "block_id": "b0007",
+      "quote": "Accuracy percentages for all five random seeds are: 66, 68, 70, 72, 74. Every reported seed has equal weight in the arithmetic mean. No seed is excluded from that definition."
+    }
+  ],
+  "explanation": "The five seed accuracies have arithmetic mean 70%, whereas the report gives a headline accuracy of 74%. Thus the headline accuracy does not equal the mean.",
+  "verdict": "contradicted"
+}
+```

@@ -1,0 +1,36 @@
+{
+  "model": "gpt-6-luna",
+  "variants": [
+    "agent",
+    "pyagent_react",
+    "deliberative_review",
+    "baseline"
+  ],
+  "rounds": 1,
+  "workers": 8,
+  "start_round": 4,
+  "seed": 20261118,
+  "tasks_per_round": 76,
+  "planned_attempts": 304,
+  "benchmark_planned_attempts": 304,
+  "m2_planned_attempts": 0,
+  "m2_sample": null,
+  "m2_sample_sha256": null,
+  "repeat_policy": "Stage traces retain local repeat=1; aggregate copies use global round and retain source_repeat/source_round.",
+  "stages": [
+    {
+      "round": 4,
+      "stage": "core",
+      "path": "r4/core",
+      "planned_attempts": 256,
+      "max_reads": 5
+    },
+    {
+      "round": 4,
+      "stage": "selection",
+      "path": "r4/selection",
+      "planned_attempts": 48,
+      "max_reads": 20
+    }
+  ]
+}
