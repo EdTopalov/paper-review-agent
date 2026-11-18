@@ -113,8 +113,9 @@ paper-review benchmark-run --plan runs/scratch/benchmark-plan.json --out runs/be
 `benchmark-run` validates only unless `--execute` is explicitly supplied. The
 [benchmark protocol](milestones/benchmark-protocol.md) defines separate reading
 budgets, repetitions, statistics, and saved plans. This suite supplements the
-unchanged M2 comparison. It has no model results yet and does not provide gold
-ratings for overall paper merit or human reading-club preference.
+unchanged M2 comparison. Repeated comparisons are being collected in separate
+model blocks. These targets do not provide gold ratings for overall paper merit
+or human reading-club preference.
 
 ## Human assessment and paper selection
 

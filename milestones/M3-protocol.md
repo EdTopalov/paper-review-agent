@@ -10,9 +10,19 @@ optional, stronger evaluation path for complete generated reviews.
 Status: registered experiment plan. Full comparative runs and human annotation
 have not been completed for the deliberative variant. Its controller and
 scripted checks are implemented. Development smoke tests
-verify execution and are excluded from benchmark results. Commit this protocol
-and implementations before collecting new benchmark outcomes. Historical M2 and
+verify execution and are excluded from benchmark results. The deliberative
+implementation was committed as `10be7a3` before its development and test calls.
+The existing-method block uses an earlier isolated source snapshot; differences
+are confined to final deliberative-controller changes and phase report rendering.
+Historical M2 and
 PyAgent outcomes informed the hypotheses; this is not an unseen-dataset study.
+
+Collection uses round-by-round M2, benchmark core, and selection stages. The
+primary model targets five repeats, with existing methods and deliberative review
+in separate launch blocks. The secondary model targets three repeats of all
+methods. Completed repetitions are retained if collection stops early; actual
+counts and source hashes accompany the results. The larger five-repeat,
+two-model design below remains the original target rather than a completed claim.
 
 ## Mechanisms and predictions
 

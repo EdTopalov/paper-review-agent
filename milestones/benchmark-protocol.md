@@ -2,7 +2,9 @@
 
 Status: data, common task adapters, offline scoring, and run plans are prepared.
 Primary-model repetitions of the existing methods are
-[running](../runs/m3-existing-20261118-luna6/README.md). The original
+[running](../runs/m3-existing-20261118-luna6/README.md), alongside the
+[deliberative block](../runs/m3-deliberative-20261118-luna6/README.md) and a
+[secondary-model block](../runs/m3-all-20261118-luna56/README.md). The original
 [M2 repeated comparison](M3-protocol.md) remains a separate experiment on its
 unchanged 20 papers and rubric.
 
@@ -11,6 +13,10 @@ round, targeting five completed repetitions of each method. Each stage keeps its
 local repeat number and original trace; aggregate copies record the global round
 with explicit source provenance. Separate model blocks and task tracks remain
 separate statistics. `progress.json` links the active stage's live timing and ETA.
+The primary blocks target five repetitions and the secondary block three.
+Configured workers are six for existing primary methods, four for primary
+deliberative review, and eight for the secondary block. These concurrent blocks
+do not provide a controlled latency comparison.
 
 ## Reference targets and design
 
