@@ -1,0 +1,11 @@
+{
+  "title": "Synthetic controlled negative result for a reading-club pilot",
+  "authors": ["Project development fixture"],
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "notice": "Original synthetic fixture. All study descriptions and numbers are hypothetical; this is not a published paper or human-labelled benchmark.",
+  "pages": [
+    "DEVELOPMENT FIXTURE, NOT A REAL PAPER. We test whether a retrieval hint improves question answering on 400 held-out English questions. Across five independently shuffled runs, the mean accuracy difference is 0.2 percentage points. The paired 95% confidence interval is -1.5 to 1.9 percentage points. We find no clear evidence of an improvement in this setting. The negative result tests a concrete, reproducible hypothesis and motivates discussion of uncertainty.",
+    "Methods and results. Questions are disjoint from development examples. We use the same model, prompt, and token budget in both conditions; only the retrieval hint changes. We report all five runs. The measured interval includes zero and effects of practical interest. A failure to reject zero is not proof of equivalence. The study does not establish that retrieval hints never help. We publish the question sampling rule and paired analysis procedure as part of this hypothetical fixture.",
+    "Limitations and discussion. The experiment covers English questions only. We did not test specialist domains, different retrievers, or model families. The confidence interval allows modest gains and harms. The club could debate a stronger equivalence design, the choice of practical effect threshold, and conditions where retrieval should help. These are open questions, not demonstrated defects in all retrieval systems. All claims in this fixture are hypothetical."
+  ]
+}

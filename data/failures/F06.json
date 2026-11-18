@@ -1,0 +1,25 @@
+{
+  "id": "F06",
+  "task_id": "T03",
+  "category": "substantive_review_coverage",
+  "problem": "A valid quotation about a qualitative evaluation is generalized to the whole math comparison while a quantitative follow-up is omitted.",
+  "trace": "runs/m2-integrated-20261026/agent-r1/T03/trace.jsonl",
+  "decision_seq": 31,
+  "decision_step": 6,
+  "result_seq": 34,
+  "observation_index": 2,
+  "observed_claim": "The math comparison is very small and qualitative, so its results provide only weak grounds for broad claims of competitiveness.",
+  "source_snapshot": "data/eval/papers/T03.json",
+  "evidence_pages": [10, 11],
+  "source_evidence": [
+    {"page": 10, "quote": "We use two level-5 problems from the MATH dataset for the qualitative evaluation and test on each problem for 3 times."},
+    {"page": 11, "quote": "We sample 12 level-5 problems"},
+    {"page": 11, "quote": "With one trial, AutoGen scores 8/12 problems"}
+  ],
+  "observed_path": "Decision seq 10 reads pages 8-10; seq 15 then reads pages 15-17. The final observation cites page 10. The next-page quantitative follow-up is not incorporated in that criticism.",
+  "expected": "Distinguish the two-problem qualitative comparison from the twelve-problem quantitative follow-up. It remains reasonable to question sample size and single-trial uncertainty without claiming the entire comparison is qualitative.",
+  "root_cause": "The source and trace establish incomplete evidence coverage and an overbroad claim. Whether the omission arose from the reading policy, context use, or a model tendency is not isolated by this run.",
+  "certainty": "The discrepancy is directly visible in frozen page text. The existing model audit independently labels the observation overstated at seq 38; neither analysis is a human gold label or a frequency estimate.",
+  "label_origin": "source_checked_agent_analysis",
+  "m3_protocol": "Count the end-to-end incidence on repeated T03 runs and independently label review coverage and calibration. Keep this disclosed historical failure separate from a previously unseen quality test."
+}

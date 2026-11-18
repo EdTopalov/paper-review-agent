@@ -11,6 +11,8 @@ from dotenv import load_dotenv
 from .audit import audit_experiment
 from .evaluation import evaluate, load_sample, summarize, check_experiment
 from .runner import VARIANTS, Config, run_review, safe_error
+from .quality import export_quality_packets, score_quality_labels
+from .selection import run_selection
 
 
 def model_options(parser):
@@ -34,6 +36,12 @@ def main():
     review.add_argument("--task-id", default="single-paper")
     review.add_argument("--variant", choices=VARIANTS, default="agent")
     model_options(review)
+    select = commands.add_parser("select", help="Separate pilot: review candidates and choose a reading-club paper")
+    select.add_argument("papers", nargs="+", type=Path)
+    select.add_argument("--brief", required=True, help="Club interests and discussion goals")
+    select.add_argument("--out", type=Path, required=True)
+    select.add_argument("--variant", choices=VARIANTS, default="agent")
+    model_options(select)
     evaluation = commands.add_parser("eval", help="Run a paired frozen-sample comparison")
     evaluation.add_argument("--sample", type=Path, default=Path("data/eval/tasks.jsonl"))
     evaluation.add_argument("--out", type=Path, required=True)
@@ -45,6 +53,8 @@ def main():
     evaluation.add_argument("--workers", type=int, default=2)
     evaluation.add_argument("--repeats", type=int, default=1)
     evaluation.add_argument("--limit", type=int)
+    evaluation.add_argument("--task-ids", nargs="+", help="Select IDs from the original frozen sample, e.g. T17")
+    evaluation.add_argument("--order-seed", type=int, default=20261118)
     model_options(evaluation)
     verify = commands.add_parser("verify", help="Check frozen hashes and document identities, offline")
     verify.add_argument("--sample", type=Path, default=Path("data/eval/tasks.jsonl"))
@@ -52,6 +62,17 @@ def main():
     summary.add_argument("out", type=Path)
     check = commands.add_parser("check", help="Check trace decisions and accounting, offline")
     check.add_argument("out", type=Path)
+    quality_export = commands.add_parser("quality-export", help="Export blinded human-review packets, offline")
+    quality_export.add_argument("--experiment", type=Path, required=True)
+    quality_export.add_argument("--out", type=Path, required=True)
+    quality_export.add_argument("--sample", type=Path, default=Path("data/eval/tasks.jsonl"))
+    quality_export.add_argument("--task-ids", nargs="+")
+    quality_export.add_argument("--repeats", nargs="+", type=int)
+    quality_export.add_argument("--seed", type=int, default=20261118)
+    quality_score = commands.add_parser("quality-score", help="Validate and score human labels, offline")
+    quality_score.add_argument("--packets", type=Path, required=True)
+    quality_score.add_argument("--labels", nargs="+", type=Path, required=True)
+    quality_score.add_argument("--adjudication", type=Path)
     audit = commands.add_parser("audit", help="Run a separately billed, provisional model evidence audit")
     audit.add_argument("--sample", type=Path, default=Path("data/eval/tasks.jsonl"))
     audit.add_argument("--experiment", type=Path, required=True)
@@ -72,6 +93,15 @@ def main():
             result = check_experiment(args.out)
             print(json.dumps(result, indent=2))
             return 0 if result["passed"] == result["runs"] else 1
+        if args.command == "quality-export":
+            result = export_quality_packets(args.experiment, args.out, args.sample,
+                                            args.task_ids, args.repeats, args.seed)
+            print(json.dumps(result, indent=2))
+            return 0
+        if args.command == "quality-score":
+            result = score_quality_labels(args.packets, args.labels, adjudication_path=args.adjudication)
+            print(json.dumps(result, indent=2, allow_nan=False))
+            return 0
         if not os.environ.get("OPENAI_API_KEY"):
             parser.error("Set OPENAI_API_KEY in your environment or ignored .env file")
         if args.command == "models":
@@ -91,9 +121,14 @@ def main():
             result = run_review(args.paper, args.out, config, args.task_id, args.variant)
             print(json.dumps({"status": result["status"], "report": str(args.out / "README.md")}))
             return 0 if result["status"] == "ok" else 1
+        if args.command == "select":
+            result = run_selection(args.papers, args.out, config, variant=args.variant, brief=args.brief)
+            print(json.dumps({"status": result["status"], "report": str(args.out / "README.md")}))
+            return 0 if result["status"] == "ok" else 1
         if args.command == "eval":
             result = evaluate(args.sample, args.out, config, args.variant, args.workers,
-                              args.repeats, args.limit, variants=args.variants)
+                              args.repeats, args.limit, variants=args.variants,
+                              task_ids=args.task_ids, order_seed=args.order_seed)
         else:
             result = audit_experiment(args.sample, args.experiment, config, args.workers)
         out = args.out if args.command == "eval" else args.experiment

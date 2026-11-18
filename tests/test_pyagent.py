@@ -282,9 +282,16 @@ def test_three_variant_evaluation_archive_reports_and_resume(tmp_path, monkeypat
     sample.write_text(json.dumps({"id": "dev", "arxiv_id": paper["arxiv_id"],
                                   "paper_path": "paper.json", "snapshot_sha256": file_hash(snapshot),
                                   "instructions_version": "m2-v1"}))
-    clients = iter([Client([finish()]), Client([submit()]),
-                    Client([Response(text=json.dumps(OPENING_REVIEW))])])
-    monkeypatch.setattr("paper_review.runner.OpenAI", lambda **_: next(clients))
+    class ReviewClient(Client):
+        def create(self, **request):
+            self.requests.append(deepcopy(request))
+            if request.get("tools"):
+                return finish()
+            if request.get("text"):
+                return Response(text=json.dumps(OPENING_REVIEW))
+            return submit()
+
+    monkeypatch.setattr("paper_review.runner.OpenAI", lambda **_: ReviewClient([]))
     out = tmp_path / "comparison"
     variants = ["agent", "pyagent_react", "baseline"]
     summary = evaluate(sample, out, Config(), workers=1, variants=variants)

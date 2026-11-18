@@ -1,0 +1,21 @@
+{
+  "id": "F07",
+  "task_id": "T01",
+  "category": "model_judge_reasoning",
+  "problem": "The model evidence audit denies an improvement while citing numerical results that show it.",
+  "trace": "runs/m2-integrated-20261026/baseline-r1/T01/trace.jsonl",
+  "audit_result_seq": 12,
+  "observation_index": 1,
+  "observed_audit_excerpt": "But standalone ReAct does not improve success on WebShop over Act: WebShop success is 40.0% versus 30.1%",
+  "source_snapshot": "data/eval/papers/T01.json",
+  "evidence_pages": [8],
+  "source_evidence": [
+    {"page": 8, "table": "Table 4", "rows": {"Act": {"success_percent": 30.1}, "ReAct": {"success_percent": 40.0}}},
+    {"page": 8, "quote": "ReAct outperforms Act on both ALFWorld (Table 3) and Webshop (Table 4)."}
+  ],
+  "expected": "Recognize that 40.0 exceeds 30.1. Assess any separate concerns about trial aggregation or claim scope independently, without using this numerical contradiction to justify the verdict.",
+  "root_cause": "The judge explanation is internally contradictory and disagrees with the source table. One output does not establish whether arithmetic, extraction, or scope confusion caused the error.",
+  "certainty": "The numerical contradiction is directly checkable. This does not establish that every part of the baseline observation is supported or that its final audit verdict must be reversed.",
+  "label_origin": "source_checked_agent_analysis",
+  "m3_protocol": "Preserve the historical judge configuration for comparable audits; measure agreement against independent, compatible human claim labels and retain adjudication reasons."
+}

@@ -18,6 +18,7 @@ from openai import OpenAI, APIConnectionError, APIStatusError, APITimeoutError
 from .paper import Paper, file_hash
 from .citations import CHECKER_VERSION
 from .agent_tools import PaperEvidence
+from .context_memory import EvidenceMemory, MEMORY_POLICY, MEMORY_PROMPT_VERSION
 from .prompts import (AGENT_INSTRUCTIONS, PROMPT_VERSION, PYAGENT_PROMPT_VERSION,
                       PYAGENT_PROTOCOL_VERSION, RUBRIC, RUBRIC_VERSION)
 from .schema import REVIEW_SCHEMA, TOOLS
@@ -25,19 +26,22 @@ from .trace import Trace
 from .reporting import render_run
 
 
-# Standard text-token USD / 1M, checked 2026-10-26 against official model pages.
+# Standard text-token USD / 1M; current Luna rates checked 2026-11-18,
+# other listed rates checked 2026-10-26 against official model pages.
 # https://developers.openai.com/api/docs/models/gpt-5.4-mini
 # https://developers.openai.com/api/docs/models/gpt-4.1-mini
 # https://developers.openai.com/api/docs/models/gpt-6-luna
+# https://developers.openai.com/api/docs/models/gpt-5.6-luna
 PRICES = {
     "gpt-6-luna": (0.1, 0.01, 0.5, 0.125),
+    "gpt-5.6-luna": (0.2, 0.02, 1.2, 0.25),
     "gpt-5.4-mini-2026-03-17": (0.75, 0.075, 4.5, 0.9375),
     "gpt-5.4-mini": (0.75, 0.075, 4.5, 0.9375),
     "gpt-4.1-mini-2025-04-14": (0.4, 0.1, 1.6, 0.4),
     "gpt-4.1-mini": (0.4, 0.1, 1.6, 0.4),
 }
 
-VARIANTS = ("agent", "pyagent_react", "baseline")
+VARIANTS = ("agent", "pyagent_react", "evidence_memory", "baseline")
 
 
 def variant_metadata(variant):
@@ -52,6 +56,8 @@ def variant_metadata(variant):
         details.update(prompt_version=PYAGENT_PROMPT_VERSION,
                        harness="pyagent-patterns.ReAct", harness_version=version,
                        protocol=PYAGENT_PROTOCOL_VERSION)
+    elif variant == "evidence_memory":
+        details.update(prompt_version=MEMORY_PROMPT_VERSION, context_policy=MEMORY_POLICY)
     elif variant == "baseline":
         details["harness"] = "one-shot"
     return details
@@ -141,7 +147,7 @@ def validate_review(review):
         raise ValueError("invalid_review_content")
 
 
-def agent(paper, calls, config, trace):
+def agent(paper, calls, config, trace, *, memory=None):
     history = [{"role": "user", "content": json.dumps(paper.introduction(), ensure_ascii=False)}]
     reads = 0
     tool_calls = 0
@@ -152,19 +158,28 @@ def agent(paper, calls, config, trace):
         available = TOOLS if reads < config.max_reads else [TOOLS[-1]]
         if reads == config.max_reads:
             trace.write("reading_budget_exhausted", step=step, remaining_tools=["submit_review"])
+        if memory is not None:
+            history = memory.messages(reads, config.max_reads)
+            trace.write("context_memory", step=step, **memory.statistics(),
+                        input_characters=len(history[0]["content"]))
         response = calls.call(instructions=instructions, input=history, tools=available,
                               parallel_tool_calls=False, tool_choice="required")
-        history.extend(item.model_dump(mode="json") for item in response.output)
+        if memory is None:
+            history.extend(item.model_dump(mode="json") for item in response.output)
         actions = [item for item in response.output if item.type == "function_call"]
         if not actions:
             trace.write("decision", step=step, action="no_tool_call", response_status=response.status)
-            history.append({"role": "user", "content": "Choose a reading tool or submit_review."})
+            if memory is None:
+                history.append({"role": "user", "content": "Choose a reading tool or submit_review."})
+            else:
+                memory.no_action(step)
             continue
         for action in actions:
             tool_calls += 1
             calls.stats["tool_calls"] = tool_calls
             trace.write("decision", step=step, action=action.name, call_id=action.call_id,
                         arguments=action.arguments)
+            arguments = None
             try:
                 arguments = json.loads(action.arguments)
                 schema = next((tool["parameters"] for tool in available if tool["name"] == action.name), None)
@@ -202,8 +217,11 @@ def agent(paper, calls, config, trace):
             except Exception as exc:
                 observation = {"error": "tool_exception", **safe_error(exc)}
             trace.write("tool_observation", step=step, call_id=action.call_id, observation=observation)
-            history.append({"type": "function_call_output", "call_id": action.call_id,
-                            "output": json.dumps(observation, ensure_ascii=False)})
+            if memory is None:
+                history.append({"type": "function_call_output", "call_id": action.call_id,
+                                "output": json.dumps(observation, ensure_ascii=False)})
+            else:
+                memory.remember(step, action.name, arguments, observation)
     raise RuntimeError("model_decision_budget_exhausted")
 
 
@@ -232,7 +250,8 @@ def run_review(paper_path, out, config, task_id, variant="agent", client=None, m
                 prompt_version=details["prompt_version"], rubric_version=RUBRIC_VERSION,
                 checker_version=CHECKER_VERSION, paper_path=str(paper_path),
                 dependencies=versions, pricing_usd_per_million=PRICES.get(config.model),
-                pricing_checked="2026-10-26", metadata=metadata or {}, harness=details,
+                pricing_checked=("2026-11-18" if config.model in ("gpt-6-luna", "gpt-5.6-luna")
+                                 else "2026-10-26"), metadata=metadata or {}, harness=details,
                 trace_version=2)
     calls = ModelCalls(client or OpenAI(max_retries=0, timeout=config.timeout), config, trace)
     result = {"task_id": task_id, "variant": variant, "model": config.model,
@@ -246,8 +265,9 @@ def run_review(paper_path, out, config, task_id, variant="agent", client=None, m
                     paper_metadata={k: v for k, v in paper.snapshot.items() if k != "pages"})
         if len(paper.full_text()) > config.max_paper_chars:
             raise ValueError("paper_exceeds_documented_input_limit")
-        if variant == "agent":
-            review, trajectory = agent(paper, calls, config, trace)
+        if variant in ("agent", "evidence_memory"):
+            memory = EvidenceMemory(paper) if variant == "evidence_memory" else None
+            review, trajectory = agent(paper, calls, config, trace, memory=memory)
         elif variant == "baseline":
             review, trajectory = baseline(paper, calls, trace)
         else:

@@ -294,8 +294,12 @@ def test_paired_evaluation_and_resume_need_no_duplicate_result_files(tmp_path, m
     sample = tmp_path / "tasks.jsonl"
     sample.write_text(json.dumps({"id": "dev", "arxiv_id": paper["arxiv_id"], "paper_path": "paper.json",
                                   "snapshot_sha256": file_hash(snapshot), "instructions_version": "m2-v1"}), encoding="utf-8")
-    clients = iter([Client([finish()]), Client([Response(text=json.dumps(OPENING_REVIEW))])])
-    monkeypatch.setattr("paper_review.runner.OpenAI", lambda **_: next(clients))
+    class ReviewClient(Client):
+        def create(self, **request):
+            self.requests.append(deepcopy(request))
+            return finish() if request.get("tools") else Response(text=json.dumps(OPENING_REVIEW))
+
+    monkeypatch.setattr("paper_review.runner.OpenAI", lambda **_: ReviewClient([]))
     out = tmp_path / "comparison"
     first = evaluate(sample, out, Config(), workers=1)
     assert first["agent"]["completed"] == first["baseline"]["completed"] == 1

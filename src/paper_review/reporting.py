@@ -10,6 +10,18 @@ def money(value):
     return "unknown" if value is None else f"${value:.6f}"
 
 
+def decimal(value):
+    return "unavailable" if value is None else f"{value:.4f}"
+
+
+def interval_text(metric):
+    value, interval = metric["mean_difference"], metric["ci95"]
+    if value is None:
+        return "unavailable"
+    bounds = f" [{interval[0]:.4f}, {interval[1]:.4f}]" if interval else " [unavailable]"
+    return f"{value:.4f}{bounds}; n={metric['tasks']}"
+
+
 def paper_title(events):
     return next((e["paper_metadata"].get("title", "") for e in events if e["event"] == "environment"), "")
 
@@ -137,6 +149,66 @@ def render_experiment(root, summary, records, audits):
                   f"{row['mean_reading_actions']:.2f} | {row['mean_model_calls']:.2f} | "
                   f"{row['mean_input_tokens']:.1f} | {row['mean_output_tokens']:.1f} | "
                   f"{money(row['mean_cost_usd'])} | {row['mean_latency_seconds']:.2f} |"]
+    repeated = {name: row["repetition_statistics"] for name, row in summary.items()
+                if "repetition_statistics" in row}
+    if repeated:
+        lines += ["", "## Repetition variation", "",
+                  "Verified success requires both a completed review and all quotations verified. "
+                  "It measures citation compliance, not assessment quality. Every planned attempt, including "
+                  "a failed attempt, stays in the denominator. Model IDs are not pooled.", "",
+                  "| Method | Repeat | Completed | Verified success | Calls/task | Tokens/task (in/out) | USD/task | Seconds/task |",
+                  "|---|---:|---:|---:|---:|---|---:|---:|"]
+        for name, row in repeated.items():
+            for attempt in row["per_repeat"]:
+                verified = attempt["verified_successes"]
+                lines += [f"| {name} | {attempt['repeat']} | {attempt['completed']}/{attempt['attempts']} | "
+                          f"{verified if verified is not None else 'unavailable'}/{attempt['attempts']} | "
+                          f"{attempt['mean_model_calls']:.2f} | "
+                          f"{attempt['mean_input_tokens']:.1f}/{attempt['mean_output_tokens']:.1f} | "
+                          f"{money(attempt['mean_cost_usd'])} | {attempt['mean_latency_seconds']:.2f} |"]
+        lines += ["", "### Reliability across repetitions", "",
+                  "pass^k estimates success on every one of k independent attempts: "
+                  "mean over papers of C(s,k)/C(n,k), where s is the number of verified successes "
+                  "and n the number of attempts for that paper. It is not success at least once. "
+                  "Independence is an assumption; few repetitions give limited precision.", "",
+                  "| Method | Always / sometimes / never verified (papers) | pass^k | Mean absolute score difference within a paper | Score pairs |",
+                  "|---|---|---|---:|---:|"]
+        for name, row in repeated.items():
+            powers = "; ".join(f"k={k}: {value:.3f}" for k, value in (row["pass_power_k"] or {}).items()) or "unavailable"
+            consistency = (f"{row['tasks_always_verified']} / {row['tasks_sometimes_verified']} / {row['tasks_never_verified']}"
+                           if row["tasks_always_verified"] is not None else "unavailable")
+            difference = row["within_task_mean_absolute_score_difference"]
+            lines += [f"| {name} | {consistency} | {powers} | "
+                      f"{decimal(difference)} | {row['within_task_score_pairs']} |"]
+        lines += ["", "### Paired differences between methods", "",
+                  "Each paper contributes its mean over observed repetitions. Differences are left minus right. "
+                  "The 95% percentile bootstrap intervals resample papers 2,000 times, keeping each paper's "
+                  "repetitions together (seed 20261118). These exploratory intervals describe this convenience "
+                  "sample conditional on the observed repetitions; they do not capture future API model drift. "
+                  "A single paper has no interval. Scores use only completed reviews from papers completed by "
+                  "both methods and are not validated quality labels.", "",
+                  "| Pair | Verified success difference (95% interval) | Score difference (95% interval) | Mean absolute task score difference | USD/task difference | Seconds/task difference |",
+                  "|---|---|---|---:|---:|---:|"]
+        for name, row in repeated.items():
+            for other, comparison in row["paired_comparisons"].items():
+                absolute = comparison["mean_absolute_task_score_difference"]
+                lines += [f"| {name} − {other} | {interval_text(comparison['verified_success_rate'])} | "
+                          f"{interval_text(comparison['mean_score'])} | "
+                          f"{decimal(absolute)} | "
+                          f"{interval_text(comparison['mean_cost_usd'])} | "
+                          f"{interval_text(comparison['mean_latency_seconds'])} |"]
+        lines += ["", "### Per-paper consistency", "",
+                  "Score spread excludes failed attempts; completion counts retain them. "
+                  "Compare within-paper score variation above with between-method differences before interpreting small gaps.", "",
+                  "| Method | Task | Completed / attempts | Verified / attempts | Mean score | Score sample SD | Score range |",
+                  "|---|---|---:|---:|---:|---:|---|"]
+        for name, row in repeated.items():
+            for task_id, task in row["per_task"].items():
+                score = task["mean_score"]
+                spread = task["score_sample_sd"]
+                lines += [f"| {name} | {task_id} | {task['completed']}/{task['attempts']} | "
+                          f"{task['verified_successes'] if task['verified_successes'] is not None else 'unavailable'}/{task['attempts']} | "
+                          f"{decimal(score)} | {decimal(spread)} | {task['score_range'] or 'unavailable'} |"]
     for variant in sorted({r['variant'] for _, r in records}):
         lines += ["", f"## {variant}", "",
                   "Completed papers are ordered by absolute score, then task ID; errors follow.", "",
